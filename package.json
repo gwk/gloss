@@ -1,0 +1,22 @@
+{
+    "name": "theme-gloss-black",
+    "displayName": "theme-gloss-black",
+    "description": "A simple color theme on black background.",
+    "version": "1.0.0",
+    "publisher": "gwk",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "gloss-black",
+                "uiTheme": "vs-dark",
+                "path": "./themes/gloss-black.json"
+            }
+        ]
+    }
+}
