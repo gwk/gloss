@@ -11,7 +11,7 @@ from sys import argv
 
 
 def main():
-  theme = {
+  syntax = {
     'name': 'gloss-black',
     'settings' : make_settings()
   }

@@ -14,12 +14,15 @@ clean:
 
 build: themes/gloss-black.json
 
-install_dir = ~/.vscode/extensions/gloss-black
+install_dir = ~/.vscode-insiders/extensions/gloss-black
 
 install: build
 	rm -rf $(install_dir)
+	install -d $(install_dir)/syntaxes
 	install -d $(install_dir)/themes
 	install package.json $(install_dir)
+	install swift-gloss.configuration.json $(install_dir)
+	install syntaxes/swift-gloss.json $(install_dir)/syntaxes
 	install themes/* $(install_dir)/themes
 
 uninstall:

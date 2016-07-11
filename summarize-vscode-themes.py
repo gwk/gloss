@@ -7,11 +7,11 @@ from pithy import *
 from pithy.schema import *
 
 
-themes_dir = '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/theme-defaults/themes'
+themes_dir = '/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/extensions/theme-defaults/themes'
 
 themes = [] 
 
-for path in walk_files(themes_dir, file_exts=['.json']):
+for path in walk_files(themes_dir, file_exts=['.json', '.tmlanguage']):
   outL(path)
   if path.endswith('.json'):
     theme = read_json(open(path))

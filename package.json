@@ -1,22 +1,33 @@
 {
-    "name": "theme-gloss-black",
-    "displayName": "theme-gloss-black",
-    "description": "A simple color theme on black background.",
-    "version": "1.0.0",
-    "publisher": "gwk",
-    "engines": {
-        "vscode": "^1.0.0"
-    },
-    "categories": [
-        "Themes"
-    ],
-    "contributes": {
-        "themes": [
-            {
-                "label": "gloss-black",
-                "uiTheme": "vs-dark",
-                "path": "./themes/gloss-black.json"
-            }
-        ]
-    }
+  "name": "gloss",
+  "displayName": "gloss",
+  "description": "Aggressive configuration.",
+  "version": "1.0.0",
+  "publisher": "gwk",
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "swift",
+      "aliases": ["Swift","swift"],
+      "extensions": [".swift"],
+      "configuration": "./swift-gloss.configuration.json"
+    }],
+    "grammars": [{
+      "language": "swift",
+      "scopeName": "source.swift",
+      "path": "./syntaxes/swift-gloss.json"
+    }],
+    "themes": [
+      {
+        "label": "gloss-black",
+        "uiTheme": "vs-dark",
+        "path": "./themes/gloss-black.json"
+      }
+    ]
+  }
 }
