@@ -1,0 +1,87 @@
+# Copyright 2009-2016 George King. Permission to use this file is granted in license-gloss.txt.
+
+# convert terminal output to html, convert to rtf and copy to clipboard
+ansi-to-rtf-clip: ansi-to-html "$@" | textutil -stdin -convert rtf -stdout | pbcopy
+
+# python
+py: PYTHONSTARTUP=~/.py3_startup.py python3 -q "$@"
+py2: PYTHONSTARTUP=~/.py2_startup.py python2 "$@"
+pdb: python3 -m pdb "$@" # run a python file using pdb
+py-help: python3 -c "import $1; help($1);"
+py-dir: python3 -c "import $1; print(*sorted(dir($1.$2)), sep='\n');"
+py-dir-module: python3 -c "import $1; print(*sorted(dir($1)), sep='\n');"
+
+# clang
+clang-parse:  clang -fsyntax-only -Weverything "$@"
+clang-pp:     clang "$@" -o - -E
+clang-as:     clang "$@" -o - -S
+clang-ir:     clang "$@" -o - -S -emit-llvm
+clang-ast-dump: clang -cc1 -ast-dump "$@"
+clang-show-defines: echo | clang -dM -E "$@" -
+
+# diff files using git by lines and words, respectively.
+dl:   git diff --no-index --no-prefix --no-renames --exit-code "$@"
+dw:   git diff --no-index --no-prefix --no-renames --exit-code --color-words "$@"
+
+
+# git
+
+ga:   git add "$@"
+
+gca:    git commit --amend -m "$(git log -1 --pretty=%B)" "$@" && gsh --stat
+gcam:   git commit --amend -m "$@" && gsh --stat
+gcm:    git commit -m "$@" && gsh --stat
+
+gdl:    git diff "$@"
+gdls:   git diff --staged "$@"
+
+gdw:    git diff --color-words "$@"
+gdws:   git diff --color-words --staged "$@"
+
+# git log format notes
+# C: color function
+# h: abbreviated commit hash
+# cd: committer date
+# d: ref names
+# s: subject
+
+gl:   git log --color-words --format="%C(blue)%cd %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso "$@"
+gl1:  git log --color-words --format="%C(blue)%cd %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso -1 "$@"
+
+gls:    git log --color-words --decorate --name-status "$@"
+gls1:   git log --color-words --decorate --name-status -1 "$@"
+glv:    git log --color-words --decorate "$@"
+glv1:   git log --color-words --decorate -1 "$@"
+
+gpull:  git pull "$@"
+gpush:  git push "$@"
+
+gsh:    git show --color-words "$@"
+gshl:   git show "$@"
+gst:    git status --short --branch "$@"
+
+gssh:   git stash show --patch --color-words "$@"
+gsshl:  git stash show --patch "$@"
+
+
+# file hashes.
+sha1:   openssl dgst -sha1 "$@"
+sha224: openssl dgst -sha224 "$@"
+sha256: openssl dgst -sha256 "$@"
+sha384: openssl dgst -sha384 "$@"
+sha512: openssl dgst -sha512 "$@"
+
+# pf
+pfctl-f:  pfctl -F all -f /etc/pf.conf  # flush pf and reload the standard pf.conf
+pfctl-nf: pfctl -nf /etc/pf.conf        # test the standard pf.conf
+pfctl-s:  pfctl -s info | less          # get pf info
+
+# translate 
+tr-to-lc: tr '[:upper:]' '[:lower:]' # translate to lower case
+tr-to-uc: tr '[:lower:]' '[:upper:]' # translate to upper case
+
+# misc
+uuid4: python3 -c 'import uuid; print(uuid.uuid4())'
+env-sort: env | sort | text-search -lines -pattern '^\w+=[^{]+' -match-only
+ansi-to-html-view: ansi-to-html "$@" | html-view
+mtime: stat -f %Sm "$@"

@@ -1,0 +1,8 @@
+# Copyright 2009-2016 George King. Permission to use this file is granted in license-gloss.txt.
+
+st: open-with "Sublime Text" "$@"
+stw: "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" -w "$@"
+te: open-with TextEdit "$@"
+xc: open-with Xcode "$@"
+xcb: open-with Xcode-Beta "$@"
+ql: qlmanage -p "$@" 1>/dev/null 2>/dev/null
