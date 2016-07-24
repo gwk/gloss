@@ -5,28 +5,29 @@
 # $^: The names of all the prerequisites, with spaces between them. 
 
 
-.PHONY: clean build install uninstall
+.PHONY: clean build install-sys install-user install-vscode uninstall-vscode
 
-default: clean build install
+default: build
 
 clean:
-	rm -f themes/gloss-black.json
+	rm -rf _build/*
 
-build: themes/gloss-black.json
+build: _build/gloss-black.json _build/vscode-keys.json
 
-install_dir = ~/.vscode-insiders/extensions/gloss-black
+install-sys:
+	sudo install/gloss-install-sys.py
 
-install: build
-	rm -rf $(install_dir)
-	install -d $(install_dir)/syntaxes
-	install -d $(install_dir)/themes
-	install package.json $(install_dir)
-	install swift-gloss.configuration.json $(install_dir)
-	install syntaxes/swift-gloss.json $(install_dir)/syntaxes
-	install themes/* $(install_dir)/themes
+install-user:
+	sudo install/gloss-install-user.py
 
-uninstall:
-	rm -rf $(install_dir)
+install-vscode: _build/gloss-black.json _build/vscode-keys.json
+	install/gloss-install-vscode.sh
 
-themes/gloss-black.json: gloss-black.py
+uninstall-vscode:
+	rm -rf ~/.vscode-insiders/extensions/gloss
+
+_build/gloss-black.json: gloss-black.py
+	./$^ $@
+
+_build/vscode-keys.json: keybindings.py keys/vscode-keys-default.json keys/vscode-keys.txt
 	./$^ $@
