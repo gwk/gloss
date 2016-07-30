@@ -5,7 +5,7 @@
 # $^: The names of all the prerequisites, with spaces between them. 
 
 
-.PHONY: clean build install-sys install-user install-vscode uninstall-vscode
+.PHONY: clean build default install-sys install-user install-vscode uninstall-vscode
 
 default: build
 
@@ -27,6 +27,7 @@ uninstall-vscode:
 	rm -rf ~/.vscode-insiders/extensions/gloss
 
 _build/gloss-black.json: gloss-black.py
+	mkdir -p _build
 	./$^ $@
 
 _build/vscode-keys.json: keybindings.py keys/vscode-keys-default.json keys/vscode-keys.txt
