@@ -1,0 +1,3 @@
+# vscode yeoman extension generator.
+
+$ sudo npm install -g yo generator-code
