@@ -6,7 +6,7 @@ import signal
 from pithy.io import read_from_path
 from pithy.fs import is_dir, is_file 
 from pithy.task import dev_null, runC, runCO, runO
-from pithy.strings import strip_first_prefix
+from pithy.strings import clip_first_prefix
 
 
 # because a long prompt calculation is debilitating, set a single global timeout for the process.
@@ -79,7 +79,7 @@ try:
 
   branch_path_n, suffix = find_branch()
   branch_path = branch_path_n.strip()
-  branch_name = strip_first_prefix(branch_path, ['refs/heads/', 'remotes/'], req=False)
+  branch_name = clip_first_prefix(branch_path, ['refs/heads/', 'remotes/'], req=False)
 
   w = '' # working.
   i = '' # index (staged).
