@@ -1,0 +1,4 @@
+{
+  'cmd': ['$PROJ/bin/timesheet.py', 'test/bin/timesheet-test.txt'],
+  'links': {'test':'test'}
+}
