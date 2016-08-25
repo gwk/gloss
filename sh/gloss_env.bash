@@ -15,7 +15,7 @@ prepend_to_search_paths() {
   # Each subsequent element is a path to prepend.
   # This does not create leading or trailing colons,
   # which would cause '/' to become an implied member of the path.
-  
+
   # get the path name.
   local _path_name=$1
   shift
@@ -40,7 +40,7 @@ export_if_not_set() {
   local _new_val=$2
 
   eval local _existing_val=\$$_var_name
-  
+
   if [[ -z "$_existing_val" ]]; then
     eval export $_var_name=\"$_new_val\"
   fi
@@ -90,7 +90,7 @@ $GLOSS_PS_PREFIX_SUDO\
 \[$RST\] \
 \[$GLOSS_PS_PROMPT_STYLE\]$GLOSS_PS_SYMBOL \
 \[$RST\]"
-  
+
   # bash continuation prompt
   PS2="\[$RST\]\
 \[$GLOSS_PS_PROMPT_STYLE\]$GLOSS_PS_SYMBOL \
@@ -107,18 +107,18 @@ $GLOSS_PS_PREFIX_SUDO\
 
 # gloss environment not yet set; only set up once.
 if [[ -z "$GLOSS_ENV" ]]; then
-    
+
   set -o pipefail
   # TODO: set -u ? currently requires fixing usage VIRTUAL_ENV at least.
   # set -C: prevents output redirection from overwriting.
-  
+
   export GLOSS_ENV=True
-  
+
   # default to system-wide installation
   [[ -z "$GLOSS_DIR" ]] && export GLOSS_DIR=/usr/local/gloss
-  
+
   [[ -d "$GLOSS_DIR" ]] || echo "WARNING: bad GLOSS_DIR definition: $GLOSS_DIR" 1>&2
-  
+
   # calculate platform string
   GLOSS_PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
   if [[ "$GLOSS_PLATFORM" == "linux" ]]; then
@@ -140,52 +140,28 @@ if [[ -z "$GLOSS_ENV" ]]; then
   # prompt is set dynamically with PROMPT_COMMAND.
   export PROMPT_COMMAND="gloss_set_prompts"
 
-  # add paths for user, gloss, /usr/local/bin, /usr/local/git/bin.
-  # /usr/local/bin is included to reorder it ahead of existing PATH.
-  # /usr/local/git/bin is included to accommodate default installation location for git.
   prepend_to_search_paths PATH \
   "$GLOSS_DIR/bin" \
-  /usr/local/cmake/bin \
-  /usr/local/git/bin \
-  /usr/local/graphviz/bin \
-  /usr/local/heroku/bin \
+  /usr/local/{cmake,git,graphiz,heroku,nasm,py,ruby,rust,xctool}/bin \
   /usr/local/llvm/3.8.0/bin \
-  /usr/local/nasm/bin \
-  /usr/local/py/bin \
-  /usr/local/ruby/bin \
-  /usr/local/rust/bin \
-  /usr/local/turbojpeg/bin \
-  /usr/local/xctool/bin \
+  /opt/libjpeg-turbo/bin \
   /usr/local/bin \
   /Library/Frameworks/Python.framework/Versions/3.5/bin \
   /Library/Frameworks/Python.framework/Versions/2.7/bin \
-
-  #/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin 
+  /Developer/NVIDIA/CUDA-7.5/bin
 
   prepend_to_search_paths MANPATH \
-  /usr/local/cmake/share/man \
-  /usr/local/git/share/man \
-  /usr/local/graphviz/share/man \
-  /usr/local/heroku/share/man \
-  /usr/local/llvm/3.6.0/share/man \
-  /usr/local/nasm/share/man \
-  /usr/local/py/share/man \
-  /usr/local/ruby/share/man \
-  /usr/local/rust/share/man \
-  /usr/local/turbojpeg/share/man \
+  /usr/local/{cmake,git,graphiz,heroku,nasm,py,ruby,rust,xctool}/share/man \
+  /usr/local/llvm/3.8.0/share/man \
+  /opt/libjpeg-turbo/share/man \
   /usr/local/share/man \
-  /opt/local/share/man \
   /usr/share/man \
   /Library/Frameworks/Python.framework/Versions/2.7/share/man \
   /Library/Frameworks/Python.framework/Versions/3.5/share/man \
-  /Applications/Postgres.app/Contents/MacOS/share/man \
   /Applications/Xcode-beta.app/Contents/Developer/usr/share/man \
   /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man \
   /Applications/Xcode.app/Contents/Developer/usr/share/man \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man \
-  
-  prepend_to_search_paths LD_LIBRARY_PATH \
-  /Applications/Postgres.app/Contents/Versions/9.3/lib
 
   # append paths not owned by root to the back of the paths for safety.
   if [[ -n "$GLOSS_OCAML" ]]; then
