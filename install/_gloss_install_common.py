@@ -3,8 +3,10 @@
 'common code for the install scripts.'
 
 from os import uname as os_uname
+from sys import argv
 
-from pithy import *
+from pithy.io import check, errSL
+from pithy.fs import abs_path, copy_dir_tree, copy_file, is_dir, list_dir, make_dir, make_dirs, path_dir, path_exists, path_join, path_stem, remove_dir_tree
 
 
 supported_platforms = ['mac']
@@ -16,7 +18,7 @@ install_prefix = '/usr/local'
 
 # parse arguments.
 if len(argv) > 2:
-  error('usage: optionally specify a custom installation prefix.')
+  exit('usage: optionally specify a custom installation prefix.')
 if len(argv) == 2:
   install_prefix = argv[1]
 
