@@ -245,7 +245,7 @@
       ]
     },
     "whitespace": {
-      "match": "(?x) [ \\u0020 (?#           space) \\u000A (?#       line-feed) \\u000D (?# carriage-return) \\u0009 (?#  horizontal-tab) \\u000B (?#    vertical-tab) \\u000C (?#       form-feed) \\u0000 (?#            null) ]"
+      "match": "(?x) [ \\u0020 (?#space) \\u000A (?#line-feed) \\u000D (?#carriage-return) \\u0009 (?#horizontal-tab) \\u000B (?#vertical-tab) \\u000C (?#form-feed) \\u0000 (?#null) ]"
     },
     "attribute": {
       "name": "storage.type.attribute.swift",
