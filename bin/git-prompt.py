@@ -4,9 +4,9 @@
 import signal
 
 from pithy.io import read_from_path
-from pithy.fs import is_dir, is_file 
+from pithy.fs import is_dir, is_file
 from pithy.task import dev_null, runC, runCO, runO
-from pithy.strings import clip_first_prefix
+from pithy.string_utils import clip_first_prefix
 
 
 # because a long prompt calculation is debilitating, set a single global timeout for the process.
