@@ -14,10 +14,10 @@
 #  in this case don't print stats, so that the results can be piped to other utilities
 
 
+import collections
+import optparse
 import os
 import os.path
-import optparse
-import collections
 
 
 # optparse
