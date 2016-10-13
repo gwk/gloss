@@ -142,7 +142,7 @@ if [[ -z "$GLOSS_ENV" ]]; then
 
   prepend_to_search_paths PATH \
   "$GLOSS_DIR/bin" \
-  /usr/local/{cmake,git,graphiz,heroku,nasm,py,ruby,rust,xctool}/bin \
+  /usr/local/{cmake,git,graphviz,heroku,nasm,py,ruby,rust,xctool}/bin \
   /usr/local/llvm/3.8.0/bin \
   /opt/libjpeg-turbo/bin \
   /usr/local/bin \
@@ -151,7 +151,7 @@ if [[ -z "$GLOSS_ENV" ]]; then
   /Developer/NVIDIA/CUDA-7.5/bin
 
   prepend_to_search_paths MANPATH \
-  /usr/local/{cmake,git,graphiz,heroku,nasm,py,ruby,rust,xctool}/share/man \
+  /usr/local/{cmake,git,graphviz,heroku,nasm,py,ruby,rust,xctool}/share/man \
   /usr/local/llvm/3.8.0/share/man \
   /opt/libjpeg-turbo/share/man \
   /usr/local/share/man \
