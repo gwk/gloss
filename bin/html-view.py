@@ -5,10 +5,12 @@
 Serve stdin to a new browser window.
 '''
 
-import sys, subprocess
+import subprocess
 from http.server import HTTPServer, BaseHTTPRequestHandler
+from sys import argv, stdin
 
-args = sys.argv[1:]
+
+args = argv[1:]
 if len(args) > 1:
   exit('specify a single argument or pipe to stdin.')
 
@@ -17,7 +19,7 @@ path = args[0] if args else None
 if path:
   f = open(path, 'rb')
 else:
-  f = sys.stdin.detach()
+  f = stdin.detach()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -26,7 +28,7 @@ class Handler(BaseHTTPRequestHandler):
     self.send_response(200)
     self.send_header('Content-Type', 'text/html')
     self.end_headers()
-  
+
   def do_GET(self):
     self.send_response(200)
     self.send_header('Content-Type', 'text/html')
