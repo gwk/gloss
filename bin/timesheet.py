@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2009 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 # total hours in a timesheet.
 
@@ -49,10 +49,10 @@ total_expense = 0
 valid = True
 
 with open(path) as f:
-  for line in f: 
+  for line in f:
     outF('{:64}', line.rstrip('\n'))
     time_match = time_re.match(line)
-    
+
     if time_match:
       m = minutes(time_match)
       if start_minutes == None:   start_minutes = m
@@ -60,7 +60,7 @@ with open(path) as f:
       outF('|{:4} ', m)
 
     subtotal_match = subtotal_re.search(line)
-    
+
     if subtotal_match:
       assert start_minutes != None
       assert end_minutes != None
@@ -83,7 +83,7 @@ with open(path) as f:
       else:
         total_expense += i
       outF('               {: 10,.2f}', i)
-    
+
     outL()
 
 

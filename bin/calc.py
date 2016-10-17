@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-# Copyright 2010 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
-# print the results of evaluating each argument as a python expression
+# print the results of evaluating each argument as a python expression.
 
 import sys
 import math
 import random
 import pprint
+
 
 env = {}
 

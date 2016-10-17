@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Copyright 2009 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 # remove \r
-# requires that tr recognize '\r' correctly. 
+# requires that tr recognize '\r' correctly.
 
 error() { echo "error:" $*; exit 1; }
 

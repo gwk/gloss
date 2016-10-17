@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2014 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 [[ $# == 2 ]] || { echo "requires exactly two arguments (remote new-branch-name)." 1>&2; exit 1; };
 

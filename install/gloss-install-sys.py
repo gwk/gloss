@@ -1,5 +1,5 @@
 #!/usr/bin/env python3 -B
-# Copyright 2010 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 # usage: gloss_sys_install.py [custom_dst_dir]
 
@@ -26,34 +26,34 @@ try:
   make_dir(dst_bin_dir)
 
 
-  def install_bin_dir(bin_dir): 
+  def install_bin_dir(bin_dir):
     errSL('install_bin_dir:', bin_dir)
     contents = list_dir(bin_dir)
 
     for src in contents:
       src_path = path_join(bin_dir, src)
       name = path_stem(src)
-      
+
       if not name or name.startswith('.'):
         errSL('skipping', name)
         continue
-      
+
       dst_path = path_join(dst_bin_dir, name)
       status, existing = runCO(['which', name])
       if status == 0:
         errSL('notice:', name, 'already installed at:', existing, '\n  shadowed by:', dst_path)
-      
+
       copy_file(src_path, dst_path)
 
 
   # install cross-platform bin dir.
   install_bin_dir(path_join(src_dir, 'bin'))
-  
+
   # install platform-specific bin dir.
   os_bin_dir = path_join(src_dir, 'os', platform, 'bin')
   if is_dir(os_bin_dir):
     install_bin_dir(os_bin_dir) # platform-specific bin dir
-  
+
   errSL('generating additional scripts...')
 
   gen_dir       = path_join(src_dir, 'gen')

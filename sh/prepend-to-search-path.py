@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright 2011-2016 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 '''
 Print a colon delimited search path string.

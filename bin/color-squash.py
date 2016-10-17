@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-# Copyright 2011 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 import sys
+
 
 c = tuple(float(a) for a in sys.argv[1:4])
 

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-# Copyright 2009 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
-# ping multiple hosts simultaneously
-
+# ping multiple hosts simultaneously.
 
 import sys
 import subprocess

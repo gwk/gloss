@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-# Copyright 2010 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 import locale
+
 
 exit(0 if locale.getpreferredencoding() == 'UTF-8' else 1)

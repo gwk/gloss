@@ -1,4 +1,4 @@
-# Copyright 2009 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 # gloss shell environment setup.
 

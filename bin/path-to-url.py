@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# Copyright 2014 George King. Permission to use this file is granted in license-gloss.txt.
-
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 import sys
 import urllib.parse
 import urllib.request
+
 
 for line in sys.stdin:
   path = line.strip()

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3 -B
-# Copyright 2010 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 # usage: gloss_user_install.py [custom_dst_dir]
 
@@ -38,9 +38,9 @@ try:
 
   source_env_line   = 'source ' + path_join(dst_dir, 'sh/gloss_env.bash') + '\n' # bash_setup sources gloss_env.
   source_setup_line = 'source ' + bash_setup_path + '\n' # traditional bash files source bash_setup.
-  
+
   append_line_if_missing(bash_setup_path, source_env_line)
-  
+
   for p in [profile_path, rc_path]:
     append_line_if_missing(p, source_setup_line)
 

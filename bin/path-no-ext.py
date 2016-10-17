@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-# Copyright 2010 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
-# get the path minus the file extension
+# get the path minus the file extension.
 
 import sys
 import os.path
+
 
 if len(sys.argv) != 2:
   print('path_ext error: path_ext requires 1 argument', file=sys.stderr)

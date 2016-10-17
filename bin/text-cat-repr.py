@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2014 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 # cat text files, which will be decoded as utf8 one line at a time.
 # files that contain invalid utf8 will cause exceptions.
