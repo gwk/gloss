@@ -2,11 +2,40 @@
 # Copyright 2013 George King. Permission to use this file is granted in license-gloss.txt.
 
 import signal
+import shlex
 
-from pithy.io import read_from_path
-from pithy.fs import is_dir, is_file
-from pithy.task import dev_null, runC, runCO, runO
-from pithy.string_utils import clip_first_prefix
+from os.path import isdir as is_dir, isfile as is_file
+from subprocess import PIPE, Popen
+from sys import stderr
+
+
+def run(cmd, exp):
+  cmd = shlex.split(cmd)
+  proc = Popen(cmd, stdin=None, stdout=PIPE, stderr=PIPE, shell=False)
+  p_out, p_err = proc.communicate() # waits for process to complete.
+  code = proc.returncode
+  if exp is not None and code != exp:
+    raise ValueError('bad subprocess exit code', cmd, exp, code, p_err)
+  return code, p_out.decode('utf-8'), p_err.decode('utf-8')
+
+
+def runC(cmd):
+  'Run a command and return exit code.'
+  c, o, e = run(cmd=cmd, exp=None)
+  return c
+
+
+def runCO(cmd):
+  'Run a command and return exit code, std out; optional err.'
+  c, o, e = run(cmd=cmd, exp=None)
+  return c, o
+
+
+def runO(cmd, exp=0):
+  'Run a command and return exit code, std out; optional err.'
+  c, o, e = run(cmd=cmd, exp=exp)
+  return o
+
 
 
 # because a long prompt calculation is debilitating, set a single global timeout for the process.
@@ -17,14 +46,13 @@ def prompt(*items):
   exit(0)
 
 def alarm_handler(signum, current_stack_frame):
-  prompt('GIT TIMEOUT')
+  prompt('<TIMEOUT>')
 
 signal.signal(signal.SIGALRM, alarm_handler) # set handler.
 signal.alarm(time_limit) # set alarm.
 
 try:
-  null = dev_null()
-  c, gdo = runCO('git rev-parse --git-dir', err=null)
+  c, gdo = runCO('git rev-parse --git-dir')
   if c != 0: # not a git dir.
     exit(0)
 
@@ -33,9 +61,9 @@ try:
   # we currently do not respect svn-remotes; can be determined with this command.
   #git config -z --get-regexp '^(svn-remote\..*\.url)$'
 
-  if runO('git rev-parse --is-bare-repository', exp=0) == 'true\n':
+  if runO('git rev-parse --is-bare-repository') == 'true\n':
     bare_prefix = 'BARE:'
-  elif runO('git rev-parse --is-inside-git-dir', exp=0) == 'true\n':
+  elif runO('git rev-parse --is-inside-git-dir') == 'true\n':
     prompt('.GIT')
   else:
     bare_prefix = ''
@@ -44,9 +72,9 @@ try:
   def find_branch():
     'returns  a pair: branch string (needs to be stripped) and mode suffix.'
     if is_file(gd + '/rebase-merge/interactive'):
-      return read_from_path(gd + '/rebase-merge/head-name'), '|REBASE-i'
+      return open(gd + '/rebase-merge/head-name').read(), '|REBASE-i'
     if is_dir(gd + '/rebase-merge'):
-      return read_from_path(gd + '/rebase-merge/head-name'), '|REBASE-m'
+      return open(gd + '/rebase-merge/head-name').read(), '|REBASE-m'
 
     # determine suffix first.
     if is_dir(gd + '/rebase-apply'):
@@ -65,38 +93,44 @@ try:
     else:
       s = ''
 
-    c, b = runCO('git symbolic-ref HEAD', err=null)
+    c, b = runCO('git symbolic-ref HEAD')
     if c == 0:
       return b, s
     # detached.
-    c, b = runCO('git describe --contains --all HEAD', err=null)
+    c, b = runCO('git describe --contains --all HEAD')
     if c == 0:
       return b, s
     # last option.
-    head_sha = read_from_path(gd + '/HEAD', default='unknown')
-    return '({})'.format(head_sha[:8]), s
+    try: head_sha = open(gd + '/HEAD').read()[:8]
+    except FileNotFoundError: head_sha = 'unknown'
+    return '({})'.format(head_sha), s
 
 
   branch_path_n, suffix = find_branch()
   branch_path = branch_path_n.strip()
-  branch_name = clip_first_prefix(branch_path, ['refs/heads/', 'remotes/'], req=False)
+  branch_name = branch_path
+  for prefix in ['refs/heads/', 'remotes/']:
+    if  branch_name.startswith(prefix):
+      branch_name = branch_name[len(prefix):]
+      break
+
 
   w = '' # working.
   i = '' # index (staged).
   s = '' # stash.
   u = '' # unknown.
 
-  if runO('git rev-parse --is-inside-work-tree', exp=0) == 'true\n':
-    if runC('git diff --no-ext-diff --quiet --exit-code', out=null) != 0:
+  if runO('git rev-parse --is-inside-work-tree') == 'true\n':
+    if runC('git diff --no-ext-diff --quiet --exit-code') != 0:
       w = '*'
-    if runC('git rev-parse --quiet --verify HEAD', out=null) == 0: # verify that HEAD is valid.
-      if runC('git diff-index --cached --quiet HEAD', out=null):
+    if runC('git rev-parse --quiet --verify HEAD') == 0: # verify that HEAD is valid.
+      if runC('git diff-index --cached --quiet HEAD'):
         i ='+'
     else: # head is not valid.
       i = '#'
-  if runC('git rev-parse --verify refs/stash', out=null, err=null) == 0:
+  if runC('git rev-parse --verify refs/stash') == 0:
     s='$'
-  if runO('git ls-files --others --exclude-standard', exp=0):
+  if runO('git ls-files --others --exclude-standard'):
     u='%'
 
   # position.
