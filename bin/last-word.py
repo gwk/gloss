@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-# Copyright 2010 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
-# print the last word of the last argument
+# print the last word of the last argument.
 
-import sys
 
-if len(sys.argv) < 2:
-  print('last_word error: no arguments', file=sys.stderr)
-  sys.exit(1)
+from sys import argv
 
-print(sys.argv[-1].split()[-1])
+if len(argv) < 2:
+  exit('last_word error: no arguments')
+
+print(argv[-1].split()[-1])

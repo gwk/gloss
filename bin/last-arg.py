@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-# Copyright 2009 George King. Permission to use this file is granted in license-gloss.txt.
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
-# print the last argument
+# print the last argument.
 
-import sys
+from import sys import argv
 
-if len(sys.argv) < 2:
-  print('last_arg error: no arguments', file=sys.stderr)
-  sys.exit(1)
+
+if len(argv) < 2:
+  exit('last_arg error: no arguments')
 
 print(sys.argv[-1])
