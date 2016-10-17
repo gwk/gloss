@@ -1,16 +1,11 @@
 #!/usr/bin/env python3
 
 import re
-from pithy import (
-  append_path_stem_suffix,
-  argv,
-  checkF,
-  errFL, errL, errSL,
-  Immutable,
-  outFL,
-  parse_json, path_stem,
-  writeL, write_json
-)
+from sys import argv
+from pithy.fs import append_path_stem_suffix, path_stem
+from pithy.io import checkF, errFL, errL, errSL, outFL, parse_json, writeL, write_json
+from pithy.immutable import Immutable
+
 
 
 def main():
@@ -115,7 +110,7 @@ def parse_binding(ctx, line_num, line):
     whens = []
   else:
     keys = words[1:when_index]
-    whens= words[when_index+1:] 
+    whens= words[when_index+1:]
   ctx.bound_cmds.add(cmd)
   if not keys: return
   validate_keys(line_num, keys)
