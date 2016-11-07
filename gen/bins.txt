@@ -45,24 +45,20 @@ gdws:   git diff --color-words --staged "$@"
 # d: ref names
 # s: subject
 
-gl:   git log --color-words --format="%C(blue)%cd %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso "$@"
-gl1:  git log --color-words --format="%C(blue)%cd %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso -1 "$@"
+gl:   git log --format="%C(blue)%cd %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso "$@"
+gl1:  git log --format="%C(blue)%cd %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso -1 "$@"
 
-gls:    git log --color-words --decorate --name-status "$@"
-gls1:   git log --color-words --decorate --name-status -1 "$@"
-glv:    git log --color-words --decorate "$@"
-glv1:   git log --color-words --decorate -1 "$@"
+gls:    git log --decorate --name-status "$@"
+gls1:   git log --decorate --name-status -1 "$@"
+glv:    git log --decorate "$@"
+glv1:   git log --decorate -1 "$@"
 
 gpull:  git pull "$@"
 gpush:  git push "$@"
 
-gsh:    git show --color-words "$@"
-gshl:   git show "$@"
+gsh:    git show "$@"
+gshw:   git show --color-words "$@"
 gst:    git status --short --branch "$@"
-
-gssh:   git stash show --patch --color-words "$@"
-gsshl:  git stash show --patch "$@"
-
 
 # file hashes.
 sha1:   openssl dgst -sha1 "$@"
