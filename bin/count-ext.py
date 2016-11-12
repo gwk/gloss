@@ -14,31 +14,28 @@
 #  in this case don't print stats, so that the results can be piped to other utilities
 
 
-from argparse import ArgumentParser
-import collections
 import os
-import os.path
-
+from argparse import ArgumentParser
+from collections import defaultdict
+from pithy.fs import path_ext, walk_files
 
 def main():
-  arg_parser = ArgumentParser(description='Count lines of source code.')
-  arg_parser.add_argument('paths', nargs='+', help='Directories to explore.')
-  args = arg_parser.parse_args()
+  parser = ArgumentParser(description='Count lines of source code.')
+  parser.add_argument('paths', nargs='+', help='Directories to explore.')
+  args = parser.parse_args()
 
-  ext_counts = collections.defaultdict(int)
+  ext_counts = defaultdict(int)
 
-  for top in args.paths:
-    for root, dirs, files in os.walk(top):
-      for f in files:
-        name, ext = os.path.splitext(f)
-        ext_counts[ext] += 1
+  for path in walk_files(*args.paths):
+    ext = path_ext(path)
+    ext_counts[ext] += 1
 
-    empty_name = '[none]'
-    max_len = max(len(empty_name), max(len(k) for k in ext_counts))
+  empty_name = '[none]'
+  max_len = max(len(empty_name), max(len(k) for k in ext_counts))
 
-    for k in sorted(ext_counts.keys()):
-      v = ext_counts[k]
-      print('{0:{1}}: {2}'.format(k or empty_name, max_len, v))
+  for k in sorted(ext_counts.keys()):
+    v = ext_counts[k]
+    print('{0:{1}}: {2}'.format(k or empty_name, max_len, v))
 
 
 if __name__ == '__main__': main()
