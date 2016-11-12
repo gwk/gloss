@@ -4,6 +4,6 @@
 # return the number of CPUs on the host machine, as determined by python.
 
 
-import multiprocessing
+from multiprocessing import cpu_count
 
-print(multiprocessing.cpu_count())
+print(cpu_count())
