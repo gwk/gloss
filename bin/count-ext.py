@@ -9,40 +9,36 @@
 # stats should be printed for each directory when completed, then total stats when all done.
 
 # implement ext listing (-l)
-#  usage example: lsext -l "mp3 m4a"
+#  usage example: count-ext -l "mp3 m4a"
 #  this would cause the relative path of each file matching the given extensions to be listed
 #  in this case don't print stats, so that the results can be piped to other utilities
 
 
+from argparse import ArgumentParser
 import collections
-import optparse
 import os
 import os.path
 
 
-# optparse
-optparser = optparse.OptionParser(usage = 'usage: %prog')
-(options, args) = optparser.parse_args()
+def main():
+  arg_parser = ArgumentParser(description='Count lines of source code.')
+  arg_parser.add_argument('paths', nargs='+', help='Directories to explore.')
+  args = arg_parser.parse_args()
 
-if len(args) > 0:
-  optparser.error('arguments not yet implemented')
+  ext_counts = collections.defaultdict(int)
 
-path = "."
+  for top in args.paths:
+    for root, dirs, files in os.walk(top):
+      for f in files:
+        name, ext = os.path.splitext(f)
+        ext_counts[ext] += 1
 
-assert(os.path.isdir(path))
+    empty_name = '[none]'
+    max_len = max(len(empty_name), max(len(k) for k in ext_counts))
 
-ext_counts = collections.defaultdict(int)
+    for k in sorted(ext_counts.keys()):
+      v = ext_counts[k]
+      print('{0:{1}}: {2}'.format(k or empty_name, max_len, v))
 
-for root, dirs, files in os.walk(path):
-  #   if files: print(root + ':') # could have a verbose mode that does this
-  for f in files:
-    name, ext = os.path.splitext(f)
-    ext_counts[ext] += 1
 
-empty_name = '[none]'
-max_len = max(len(empty_name), max(len(k) for k in ext_counts))
-
-for k in sorted(ext_counts.keys()):
-  v = ext_counts[k]
-  if not k: k = empty_name
-  print('{0:{1}}: {2}'.format(k, max_len, v))
+if __name__ == '__main__': main()
