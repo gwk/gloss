@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 # Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
+from sys import stdin, stdout, stderr
+from argparse import ArgumentParser
 
-import sys
 
-flags = sys.argv[1:]
+parser = ArgumentParser(description='Write lines of stdin to both stdout and stderr.')
+parser.add_argument('-label', action='store_true', help="Prefix each line with 'out: ' and 'err: ' respectively.")
+args = parser.parse_args()
 
-label = ('-label' in flags)
+label = args.label
 
-for line in sys.stdin:
+for line in stdin:
   if label:
-    sys.stdout.write('out: ')
-  sys.stdout.write(line)
+    stdout.write('out: ')
+  stdout.write(line)
   if label:
-    sys.stderr.write('err: ')
-  sys.stderr.write(line)
+    stderr.write('err: ')
+  stderr.write(line)
