@@ -1,10 +1,13 @@
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
+
 # Finder.
 .DS_Store
 
 # Python.
-__pycache__
+__pycache__/
+*.egg-info/
 
-# gloss.
-_build
-_misc
-gh-pages
+# Project.
+_build/
+_misc/
+gh-pages/
