@@ -26,17 +26,17 @@ dw: git diff --no-index --no-prefix --no-renames --exit-code --color-words  "$@"
 
 # git
 
-ga:   git add "$@"
+ga: git add "$@"
 
-gca:    git commit --amend -m "$(git log -1 --pretty=%B)" "$@" && gsh --stat
-gcam:   git commit --amend -m "$@" && gsh --stat
-gcm:    git commit -m "$@" && gsh --stat
+gca:  git commit --amend -m "$(git log -1 --pretty=%B)" "$@" && gsh --stat
+gcam: git commit --amend -m "$@" && gsh --stat
+gcm:  git commit -m "$@" && gsh --stat
 
-gdl:    git diff "$@"
-gdls:   git diff --staged "$@"
+gdl:  git diff "$@"
+gdls: git diff --staged "$@"
 
-gdw:    git diff --color-words "$@"
-gdws:   git diff --color-words --staged "$@"
+gdw:  git diff --color-words "$@"
+gdws: git diff --color-words --staged "$@"
 
 # git log format notes
 # C: color function
