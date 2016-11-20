@@ -20,8 +20,8 @@ clang-ast-dump: clang -cc1 -ast-dump "$@"
 clang-show-defines: echo | clang -dM -E "$@" -
 
 # diff files using git by lines and words, respectively.
-dl:   git diff --no-index --no-prefix --no-renames --exit-code "$@"
-dw:   git diff --no-index --no-prefix --no-renames --exit-code --color-words "$@"
+dl: git diff --no-index --no-prefix --no-renames --exit-code --color        "$@" | git-diff-highlight
+dw: git diff --no-index --no-prefix --no-renames --exit-code --color-words  "$@" | git-diff-highlight
 
 
 # git
