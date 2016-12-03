@@ -142,12 +142,12 @@ if [[ -z "$GLOSS_ENV" ]]; then
 
   prepend_to_search_paths PATH \
   "$GLOSS_DIR/bin" \
-  /usr/local/{cmake,git,graphviz,heroku,nasm,py,ruby,rust,xctool}/bin \
+  /usr/local/{cmake,git,graphviz,heroku,nasm,ruby,rust,xctool}/bin \
+  /usr/local/py/Python.framework/Versions/3.6/bin \
   /usr/local/llvm/3.8.0/bin \
   /opt/libjpeg-turbo/bin \
   /usr/local/bin \
-  /Library/Frameworks/Python.framework/Versions/3.5/bin \
-  /Library/Frameworks/Python.framework/Versions/2.7/bin \
+  /Library/Frameworks/Python.framework/Versions/{2.7,3.5}/bin \
   /Developer/NVIDIA/CUDA-7.5/bin
 
   prepend_to_search_paths MANPATH \
@@ -156,12 +156,8 @@ if [[ -z "$GLOSS_ENV" ]]; then
   /opt/libjpeg-turbo/share/man \
   /usr/local/share/man \
   /usr/share/man \
-  /Library/Frameworks/Python.framework/Versions/2.7/share/man \
-  /Library/Frameworks/Python.framework/Versions/3.5/share/man \
-  /Applications/Xcode-beta.app/Contents/Developer/usr/share/man \
-  /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man \
-  /Applications/Xcode.app/Contents/Developer/usr/share/man \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man \
+  /Applications/Xcode{,-beta}.app/Contents/Developer/usr/share/man \
+  /Applications/Xcode{,-beta}.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man \
 
   # append paths not owned by root to the back of the paths for safety.
   if [[ -n "$GLOSS_OCAML" ]]; then
