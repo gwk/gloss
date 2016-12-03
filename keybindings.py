@@ -3,7 +3,8 @@
 import re
 from sys import argv
 from pithy.fs import append_path_stem_suffix, path_stem
-from pithy.io import checkF, errFL, errL, errSL, outFL, parse_json, writeL, write_json
+from pithy.io import checkF, errFL, errL, errSL, outFL, writeL
+from pithy.json_utils import parse_json, write_json
 from pithy.immutable import Immutable
 
 
