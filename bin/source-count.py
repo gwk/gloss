@@ -15,14 +15,15 @@ from sys import stderr
 ignored_dirs = {'_build', 'build', '.git', '.hg', '.svn'}
 ignored_exts = {'', '.pyc'}
 
-ext_groups = {
+groups = {
   'source' : {
     'exts' : [
-      '.ploy', '.iot',
+      '.ploy',
       '.swift', '.swiftdeps', '.inc', '.dep', '.gyb', '.sil', '.apinotes', # swift.
       '.pch', '.h', '.hh', '.hpp', '.def', '.c', '.cc', '.cpp', '.m', '.mm', # C.
       '.ll', '.map', '.modulemap', '.exports', # llvm.
       '.py', '.cfg', # python.
+      '.rs', '.rc', '.rust',
       '.sh', '.bash', '.cmd', # shell.
       '.js', '.coffee', '.ts', # javascript.
       '.vert', '.frag', '.geom', '.shader', # shaders.
@@ -32,11 +33,22 @@ ext_groups = {
       '.clj', '.elm', '.go', '.rb', '.pl', '.pm', '.php', '.vb', '.r', '.lua', '.bat', # others.
       '.el', '.vim', # editors.
       '.ini',
-      '.cmake',
+      '.cmake', '.mk', '.in', '.ac', '.am', '.m4',
       '.diff', '.pat',
+      '.awk',
+      '.l', '.y', '.g4',
     ],
     # skip parentheses, brackets, braces, backlslash, empty comments, and whitespace.
-    'blank_pattern' : r'^[\[\](){};\\#/*\t ]*$'
+    'blank_pattern' : r'[\[\](){};\\#/*\s]*'
+  },
+
+  'test' : {
+    'exts': [
+      '.iot',
+      '.err', '.out',
+      '.stderr', '.stdout',
+    ],
+    'blank_pattern' : r'\s*',
   },
 
   'text' : {
@@ -45,18 +57,20 @@ ext_groups = {
       '.md', '.rst',
       '.wu',
     ],
-    'blank_pattern' : r'^\s*$'
+    'blank_pattern' : r'\s*',
   },
 
   'data' : {
     'exts' : [
-      '.json', '.jsons', '.jsonl', '.cson', '.yaml', '.yml',
+      '.dot',
+      '.json', '.jsons', '.jsonl', '.cson', '.yaml', '.yml', '.toml',
       '.xml', '.plist', '.strings',
       '.html', '.css', '.header', '.footer', '.svg', '.less', '.scss',
       '.tmtheme', '.tmlanguage',
       '.sql',
+      '.1', '.2', '.3', '.4', '.5', '.6', '.7', '.8',
     ],
-    'blank_pattern' : r'^\s*$'
+    'blank_pattern' : r'\s*$',
   },
 }
 
@@ -66,24 +80,8 @@ opaque_source_dir_exts = [
 ]
 
 
-exts_to_re = {}
-for g in ext_groups.values():
-  p = g.get('blank_pattern')
-  r = re.compile(p) if p else None
-  for e in g['exts']:
-    assert e not in exts_to_re
-    exts_to_re[e] = r
-
 # print order.
-ext_group_keys = ['source', 'text', 'data']
-
-
-def path_ext(path):
-  return split_ext(path)[1].lower()
-
-def ignore_dir_name(name):
-  # note: takes name, not path.
-  return name != '.' and name.startswith('.') or path_ext(name) in opaque_source_dir_exts
+group_keys = ['source', 'test', 'text', 'data']
 
 
 def main():
@@ -111,25 +109,23 @@ def main():
           continue
         files[ext] += 1
         r = exts_to_re[ext]
-        if not r:
-          continue
         path = path_join(dirpath, name)
         try:
           with open(path) as f:
             for line in f:
-              if r.match(line):
+              if r.fullmatch(line):
                 blank[ext] += 1
               else:
                 lines[ext] += 1
         except (IOError, UnicodeDecodeError) as e:
           print('skipping ({}): {}'.format(e, path), file=stderr)
 
-  for k in ext_group_keys:
-    g = ext_groups[k]
+  for group_key in group_keys:
+    group = groups[group_key]
     non_zero = False
-    total_key = k.upper() + ' TOTAL'
+    total_key = group_key.upper() + ' TOTAL'
+    sorted_keys = sorted(group['exts'], key=lambda k: lines[k]) # sort by substantial line count.
     # tricky: count values for total_key as we go, then print values for total_key last.
-    sorted_keys = sorted(g['exts'], key=lambda k: lines[k])
     for e in sorted_keys + [total_key]:
       f = files[e]
       if f < 1:
@@ -152,6 +148,23 @@ def main():
   if other_exts:
     items = sorted(other_exts.items(), key=lambda i: (-i[1], i[0]))
     print('; '.join('{}: {}'.format(ext, count) for (ext, count) in items))
+
+
+def path_ext(path):
+  return split_ext(path)[1].lower()
+
+def ignore_dir_name(name):
+  # note: takes name, not path.
+  return name != '.' and name.startswith('.') or path_ext(name) in opaque_source_dir_exts
+
+
+exts_to_re = {}
+for g in groups.values():
+  pattern = g['blank_pattern']
+  r = re.compile(pattern)
+  for e in g['exts']:
+    if e in exts_to_re: raise ValueError(e)
+    exts_to_re[e] = r
 
 
 if __name__ == '__main__': main()
