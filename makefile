@@ -7,9 +7,9 @@
 
 .PHONY: _default build clean cov install-sys install-user install-vscode test uninstall-vscode
 
+# First target of a makefile is the default.
 _default: build
 
-# First target of a makefile is the default.
 build: _build/gloss-black.json _build/vscode-keys.json
 
 clean:
