@@ -342,7 +342,7 @@ workbench.action.replaceInFiles                                 shift+cmd+h
 workbench.action.search.toggleQueryDetails                      shift+cmd+j             when searchViewletVisible
 workbench.action.selectTheme
 workbench.action.showAllEditors                                 alt+cmd+tab
-workbench.action.showAllSymbols                                 cmd+t
+workbench.action.showAllSymbols
 workbench.action.showCommands                                   cmd+p
 workbench.action.showEditorsInCenterGroup
 workbench.action.showEditorsInLeftGroup
@@ -354,7 +354,7 @@ workbench.action.tasks.configureTaskRunner
 workbench.action.tasks.runTask
 workbench.action.tasks.showLog
 workbench.action.tasks.terminate
-workbench.action.tasks.test
+workbench.action.tasks.test                                     cmd+t
 workbench.action.terminal.copySelection
 workbench.action.terminal.focus
 workbench.action.terminal.focusNext
