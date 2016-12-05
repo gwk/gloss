@@ -142,8 +142,7 @@ if [[ -z "$GLOSS_ENV" ]]; then
 
   prepend_to_search_paths PATH \
   "$GLOSS_DIR/bin" \
-  /usr/local/{cmake,git,graphviz,heroku,nasm,ruby,rust,xctool}/bin \
-  /usr/local/py/Python.framework/Versions/3.6/bin \
+  /usr/local/{cmake,git,graphviz,heroku,nasm,py,ruby,rust,xctool}/bin \
   /usr/local/llvm/3.8.0/bin \
   /opt/libjpeg-turbo/bin \
   /usr/local/bin \
