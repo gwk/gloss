@@ -153,9 +153,15 @@ def main():
 def path_ext(path):
   return split_ext(path)[1].lower()
 
+ignored_dirs = { '__pycache__', '_build', '_misc' }
+
 def ignore_dir_name(name):
   # note: takes name, not path.
-  return name != '.' and name.startswith('.') or path_ext(name) in opaque_source_dir_exts
+  if name == '.': return False
+  if name.startswith('.'): return True
+  if name in ignored_dirs: return True
+  if path_ext(name) in opaque_source_dir_exts: return True
+  return False
 
 
 exts_to_re = {}
