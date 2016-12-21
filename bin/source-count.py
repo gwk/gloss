@@ -8,7 +8,7 @@ import re
 
 from argparse import ArgumentParser
 from collections import Counter
-from os.path import splitext as split_ext, basename as path_name, join as path_join
+from os.path import splitext as split_ext, basename as path_name, join as path_join, isfile as is_file
 from sys import stderr
 
 
@@ -96,29 +96,17 @@ def main():
 
   # iterate over all paths.
   for top in args.paths:
-    if ignore_dir_name(path_name(top)): continue
+    if is_file(top):
+      count_path(top, files, lines, blank, other_exts)
+      continue
+    if ignore_dir_name(path_name(top)):
+      continue
     for dirpath, dirnames, filenames in os.walk(top):
       # filter dirnames.
       dirnames[:] = [n for n in dirnames if not ignore_dir_name(n)]
       for name in filenames:
-        ext = path_ext(name)
-        if ext in ignored_exts:
-          continue
-        if ext not in exts_to_re:
-          other_exts[ext] += 1
-          continue
-        files[ext] += 1
-        r = exts_to_re[ext]
         path = path_join(dirpath, name)
-        try:
-          with open(path) as f:
-            for line in f:
-              if r.fullmatch(line):
-                blank[ext] += 1
-              else:
-                lines[ext] += 1
-        except (IOError, UnicodeDecodeError) as e:
-          print('skipping ({}): {}'.format(e, path), file=stderr)
+        count_path(path, files, lines, blank, other_exts)
 
   for group_key in group_keys:
     group = groups[group_key]
@@ -148,6 +136,28 @@ def main():
   if other_exts:
     items = sorted(other_exts.items(), key=lambda i: (-i[1], i[0]))
     print('; '.join('{}: {}'.format(ext, count) for (ext, count) in items))
+
+
+def count_path(path, files, lines, blank, other_exts):
+  name = path_name(path)
+  ext = path_ext(name)
+  if ext in ignored_exts:
+    return
+  if ext not in exts_to_re:
+    other_exts[ext] += 1
+    return
+  files[ext] += 1
+  r = exts_to_re[ext]
+  try:
+    with open(path) as f:
+      for line in f:
+        if r.fullmatch(line):
+          blank[ext] += 1
+        else:
+          lines[ext] += 1
+  except (IOError, UnicodeDecodeError) as e:
+    print('skipping ({}): {}'.format(e, path), file=stderr)
+
 
 
 def path_ext(path):
