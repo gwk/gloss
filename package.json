@@ -11,12 +11,25 @@
     "Themes"
   ],
   "contributes": {
-    "languages": [{
-      "id": "swift",
-      "aliases": ["Swift","swift"],
-      "extensions": [".swift"],
-      "configuration": "./swift-gloss.configuration.json"
-    }],
+    "languages": [
+      { "id": "javascript",
+        "aliases": [
+          "JavaScript",
+          "javascript",
+          "js"],
+        "extensions": [
+          ".js"],
+        "firstLine": "^#!.*\\bnode( -.+)?",
+        "mimetypes": [
+          "text/javascript"]
+      },
+      { "id": "swift",
+        "aliases": ["Swift","swift"],
+        "extensions": [".swift"],
+        "firstLine": "^#!.*\\bswift( -.+)?",
+        "configuration": "./swift-gloss.configuration.json"
+      }
+    ],
     "grammars": [{
       "language": "swift",
       "scopeName": "source.swift",
