@@ -6,6 +6,7 @@
 # install the user-specific portions (does not require root privileges):
 # - bash_profile, bashrc, and bash_setup scripts.
 
+from os.path import expanduser as expand_user, isfile as is_file
 from _gloss_install_common import * # parses arguments, etc.
 
 
@@ -14,7 +15,7 @@ def append_line_if_missing(path, line):
   if is_file(path):
     for l in open(path):
       if l == line:
-        errSL('skipping:', path)
+        errSL('already setup:', path)
         return
   errSL('modifying:', path)
   with open(path, 'a') as f:
@@ -31,17 +32,18 @@ if not is_dir(dst_dir):
 
 try:
 
-  bash_setup_path =expand_user('~/.bash_setup.bash')  # path to common bash setup file.
-  profile_path    =expand_user('~/.bash_profile')   # executed for login shells.
-  rc_path         =expand_user('~/.bashrc')         # executed for non-login shells.
+  common_path = '~/.bash_profile_and_rc' # path to common bash setup file.
+  profile_path = expand_user('~/.bash_profile') # executed for login shells.
+  rc_path = expand_user('~/.bashrc') # executed for non-login shells.
 
   source_env_line   = 'source ' + path_join(dst_dir, 'sh/gloss_env.bash') + '\n' # bash_setup sources gloss_env.
-  source_setup_line = 'source ' + bash_setup_path + '\n' # traditional bash files source bash_setup.
+  source_common_line = 'source ' + common_path + '\n' # traditional bash files source bash_setup.
 
-  append_line_if_missing(bash_setup_path, source_env_line)
+  errSL('setting up bash to use the gloss environment...')
+  append_line_if_missing(expand_user(common_path), source_env_line)
 
   for p in [profile_path, rc_path]:
-    append_line_if_missing(p, source_setup_line)
+    append_line_if_missing(p, source_common_line)
 
 except OSError as e: # usually permissions.
   exit(e)

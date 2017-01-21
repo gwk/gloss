@@ -10,7 +10,7 @@
 #     $BASH_ENV
 
 
-prepend_to_search_paths() {
+prepend_to_search_path() {
   # The first argument is the name of the path variable to prepend to (e.g. PATH or MANPATH).
   # Each subsequent element is a path to prepend.
   # This does not create leading or trailing colons,
@@ -27,7 +27,7 @@ prepend_to_search_paths() {
   # Therefore we also check that the output is not empty.
   # Without this check we would inadvertantly set PATH to blank, making the shell less usable.
   if [[ $? != 0 || -z $_path ]]; then
-    echo "prepend_to_search_paths failed" 1>&2
+    echo "prepend_to_search_path failed" 1>&2
     return
   fi
 
@@ -55,8 +55,6 @@ export_if_not_set() {
 # path.
 
 export GLOSS_PS_SYMBOL='$'
-
-export GLOSS_PROMPT_CMDS='' # can be modified in subshells.
 
 gloss_set_prompts() {
   local _exit_status=$?
@@ -107,12 +105,10 @@ $GLOSS_PS_PREFIX_SUDO\
 
 # gloss environment not yet set; only set up once.
 if [[ -z "$GLOSS_ENV" ]]; then
+  export GLOSS_ENV=True
 
   set -o pipefail
-  # TODO: set -u ? currently requires fixing usage VIRTUAL_ENV at least.
-  # set -C: prevents output redirection from overwriting.
-
-  export GLOSS_ENV=True
+  set -o noclobber
 
   # default to system-wide installation
   [[ -z "$GLOSS_DIR" ]] && export GLOSS_DIR=/usr/local/gloss
@@ -134,39 +130,13 @@ if [[ -z "$GLOSS_ENV" ]]; then
   # if this is an ssh session, define the prefix variable to be included in PS1.
   # export this from profile so that it is defined for all subshells.
   if [[ -n "$SSH_TTY" ]]; then
-      export GLOSS_PS_PREFIX_SSH='§ '
+    export GLOSS_PS_PREFIX_SSH='§ '
+  else
+    export GLOS_PS_PREFIX_SSH=''
   fi
 
   # prompt is set dynamically with PROMPT_COMMAND.
   export PROMPT_COMMAND="gloss_set_prompts"
-
-  prepend_to_search_paths PATH \
-  "$GLOSS_DIR/bin" \
-  /usr/local/{cmake,git,graphviz,heroku,nasm,py,ruby,rust,xctool}/bin \
-  /usr/local/llvm/3.8.0/bin \
-  /opt/libjpeg-turbo/bin \
-  /usr/local/bin \
-  /Library/Frameworks/Python.framework/Versions/{2.7,3.5}/bin \
-  /Developer/NVIDIA/CUDA-7.5/bin
-
-  prepend_to_search_paths MANPATH \
-  /usr/local/{cmake,git,graphviz,heroku,nasm,py,ruby,rust,xctool}/share/man \
-  /usr/local/llvm/3.8.0/share/man \
-  /opt/libjpeg-turbo/share/man \
-  /usr/local/share/man \
-  /usr/share/man \
-  /Applications/Xcode{,-beta}.app/Contents/Developer/usr/share/man \
-  /Applications/Xcode{,-beta}.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man \
-
-  # append paths not owned by root to the back of the paths for safety.
-  if [[ -n "$GLOSS_OCAML" ]]; then
-    export PATH=$PATH:~/.opam/$GLOSS_OCAML/bin
-    export MANPATH=$MANPATH:~/.opam/$GLOSS_OCAML/man
-    export CAML_LD_LIBRARY_PATH=~/.opam/$GLOSS_OCAML/lib/stublibs
-    export PERL5LIB=~/.opam/$GLOSS_OCAML/lib/perl5
-    export OCAML_TOPLEVEL_PATH=~/.opam/$GLOSS_OCAML/lib/toplevel
-    export OPAMUTF8MSGS=1
-  fi
 
   export PAGER=less
   export LESS=FRX
@@ -198,13 +168,13 @@ fi
 # set the following for every shell.
 
 # shell level prefix.
+export GLOSS_PS_PREFIX_LVL=''
 if [[ $SHLVL -gt $GLOSS_SHLVL ]]; then
   export GLOSS_PS_PREFIX_LVL="$(( SHLVL - GLOSS_SHLVL )) "
-else
-  export GLOSS_PS_PREFIX_LVL=""
 fi
 
 # sudo prefix.
+export GLOSS_PS_PREFIX_SUDO=''
 if [[ -n "$SUDO_USER" ]]; then
   export GLOSS_PS_PREFIX_SUDO="$SUDO_USER "
 fi
@@ -216,10 +186,11 @@ else
   export GLOSS_PS_USER_STYLE=$TXT_G
 fi
 
+export GLOSS_PROMPT_CMDS=''
 if [[ $(type -t update_terminal_cwd) == 'function' ]]; then
   # this is function is defined in mac 10.11 default /etc/bashrc_Apple_Terminal.
   # must be called as a suffix so that gloss-set-prompts sees the value of $? first.
-  GLOSS_PROMPT_CMDS='update_terminal_cwd'
+  export GLOSS_PROMPT_CMDS='update_terminal_cwd'
 fi
 
 # source alias definitions for every shell instance; apparently aliases cannot be exported.
