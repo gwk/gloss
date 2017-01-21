@@ -18,19 +18,18 @@ def append_line_if_missing(path, line):
         return
   errSL('modifying:', path)
   with open(path, 'a') as f:
-    writeF(f, '\n# automatically added by gloss-install-user.py\n{}', line)
+    f.write('\n# automatically added by gloss-install-user.py\n')
+    f.write(line)
 
 
 # make sure that gloss system is installed.
-check(
-  is_dir(dst_dir),
-  'bad gloss dst directory:', dst_dir,
-  '\nfirst run gloss-install-sys.py; if using a custom install directory,',
-  ' it must be the same for both sys and user installations.'
-)
+if not is_dir(dst_dir):
+  errSL('bad gloss directory:', dst_dir,
+    '\nfirst run gloss-install-sys.py; if using a custom install directory,',
+    ' it must be the same for both sys and user installations.')
+  exit(1)
 
 try:
-  errL('setting up .bash_setup.bash to use the gloss environment...')
 
   bash_setup_path =expand_user('~/.bash_setup.bash')  # path to common bash setup file.
   profile_path    =expand_user('~/.bash_profile')   # executed for login shells.
@@ -45,5 +44,5 @@ try:
     append_line_if_missing(p, source_setup_line)
 
 except OSError as e: # usually permissions.
-  errL(e)
+  exit(e)
 

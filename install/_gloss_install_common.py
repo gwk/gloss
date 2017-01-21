@@ -3,11 +3,12 @@
 'common code for the install scripts.'
 
 from os import uname as os_uname
-from sys import argv
+from sys import argv, stderr
 
-from pithy.io import check, errSL
 from pithy.fs import abs_path, copy_dir_tree, copy_file, is_dir, list_dir, make_dir, make_dirs, path_dir, path_exists, path_join, path_stem, remove_dir_tree
 
+
+def errSL(*items): print(*items, file=stderr)
 
 supported_platforms = ['mac']
 
@@ -22,11 +23,11 @@ if len(argv) > 2:
 if len(argv) == 2:
   install_prefix = argv[1]
 
-check(' ' not in install_prefix, "installation prefix contains space.")
+if ' ' in install_prefix: exit("installation prefix contains space.")
 
 # determine the gloss source directory.
 src_dir = abs_path(path_join(path_dir(argv[0]), '..'))
-check(is_dir(src_dir), 'bad source directory:', src_dir)
+if not is_dir(src_dir): exit('bad source directory: ' + src_dir)
 
 dst_dir = path_join(install_prefix, 'gloss')
 
