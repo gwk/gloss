@@ -22,7 +22,7 @@ install-sys:
 	sudo install/gloss-install-sys.py
 
 install-user:
-	sudo install/gloss-install-user.py
+	install/gloss-install-user.py
 
 install-vscode: _build/gloss-black.json _build/vscode-keys.json
 	install/gloss-install-vscode.sh
