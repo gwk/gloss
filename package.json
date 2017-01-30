@@ -27,7 +27,7 @@
         "aliases": ["Swift","swift"],
         "extensions": [".swift"],
         "firstLine": "^#!.*\\bswift( -.+)?",
-        "configuration": "./swift-gloss.configuration.json"
+        "configuration": "./configurations/swift-gloss.json"
       }
     ],
     "grammars": [{
