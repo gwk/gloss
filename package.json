@@ -7,9 +7,7 @@
   "engines": {
     "vscode": "^1.0.0"
   },
-  "categories": [
-    "Themes"
-  ],
+  "categories": ["Languages", "Themes"],
   "contributes": {
     "languages": [
       { "id": "javascript",
@@ -36,8 +34,7 @@
       "path": "./syntaxes/swift-gloss.json"
     }],
     "themes": [
-      {
-        "label": "gloss-black",
+      { "label": "gloss-black",
         "uiTheme": "vs-dark",
         "path": "./themes/gloss-black.json"
       }
