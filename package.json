@@ -10,6 +10,11 @@
   "categories": ["Languages", "Themes"],
   "contributes": {
     "languages": [
+      { "id": "m4",
+        "aliases": ["m4", "autoconf"],
+        "extensions": [".ac", ".m4"],
+        "filenames": ["configure.in"]
+      },
       { "id": "javascript",
         "firstLine": "^#!.*\\bnode( -.+)?"
       },
@@ -22,11 +27,16 @@
         "configuration": "./configurations/swift-gloss.json"
       }
     ],
-    "grammars": [{
-      "language": "swift",
-      "scopeName": "source.swift",
-      "path": "./syntaxes/swift-gloss.json"
-    }],
+    "grammars": [
+      { "language": "m4",
+        "scopeName": "source.m4",
+        "path": "./syntaxes/m4.json"
+      },
+      { "language": "swift",
+        "scopeName": "source.swift",
+        "path": "./syntaxes/swift-gloss.json"
+      }
+    ],
     "themes": [
       { "label": "gloss-black",
         "uiTheme": "vs-dark",
