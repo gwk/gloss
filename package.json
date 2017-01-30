@@ -11,15 +11,7 @@
   "contributes": {
     "languages": [
       { "id": "javascript",
-        "aliases": [
-          "JavaScript",
-          "javascript",
-          "js"],
-        "extensions": [
-          ".js"],
-        "firstLine": "^#!.*\\bnode( -.+)?",
-        "mimetypes": [
-          "text/javascript"]
+        "firstLine": "^#!.*\\bnode( -.+)?"
       },
       { "id": "swift",
         "aliases": ["Swift","swift"],
