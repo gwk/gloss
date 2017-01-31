@@ -147,6 +147,7 @@ editor.action.toggleRenderControlCharacter
 editor.action.toggleRenderWhitespace
 editor.action.toggleTabFocusMode                                ctrl+shift+m
 editor.action.toggleWordWrap
+editor.action.transposeLetters                                  ctrl+t
 editor.action.triggerParameterHints                             shift+cmd+space         when editorTextFocus
 editor.action.triggerSuggest                                    ctrl+space              when editorTextFocus
 editor.action.trimTrailingWhitespace
@@ -191,7 +192,6 @@ editor.unFoldRecursively                                        cmd+k cmd+]     
 editor.unfold                                                   shift+cmd+]             when editorFocus
 editor.unfoldAll                                                cmd+k cmd+j             when editorFocus
 expandLineSelection                                             cmd+i                   when editorTextFocus
-extension.transpose                                             ctrl+t
 hideSuggestWidget                                               escape                  when editorTextFocus && suggestWidgetVisible
 jumpToNextSnippetPlaceholder                                    tab                     when editorTextFocus && inSnippetMode
 jumpToPrevSnippetPlaceholder                                    shift+tab               when editorTextFocus && inSnippetMode
