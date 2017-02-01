@@ -48,10 +48,12 @@ gdws: git diff --color-words --staged "$@"
 gl:   git log --format="%C(blue)%cd %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso "$@"
 gl1:  git log --format="%C(blue)%cd %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso -1 "$@"
 
-gls:    git log --decorate --name-status "$@"
-gls1:   git log --decorate --name-status -1 "$@"
-glv:    git log --decorate "$@"
-glv1:   git log --decorate -1 "$@"
+glm:    git log --decorate "$@"
+glm1:   git log --decorate -1 "$@"
+glv:    git log --decorate --name-status "$@"
+glv1:   git log --decorate --name-status -1 "$@"
+
+gls: git ls-files "$@"
 
 gpull:  git pull "$@"
 gpush:  git push "$@"
