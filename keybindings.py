@@ -3,7 +3,7 @@
 import re
 from sys import argv
 from pithy.fs import append_path_stem_suffix, path_stem
-from pithy.io import checkF, errFL, errL, errSL, outFL, writeL
+from pithy.io import errL, errSL, outL, writeL
 from pithy.json_utils import parse_json, write_json
 from pithy.immutable import Immutable
 
@@ -103,7 +103,7 @@ def parse_binding(ctx, line_num, line):
   if not words: return
   cmd = words[0]
   if cmd not in ctx.all_cmds:
-    errFL('warning: {}: unknown command: {}', line_num, cmd)
+    errL(f'warning: {line_num}: unknown command: {cmd}')
   try:
     when_index = words.index('when')
   except ValueError:
@@ -142,11 +142,13 @@ key_validator = re.compile(r'''(?x)
 def validate_keys(line_num, keys):
   for word in keys:
     for el in word.split('+'):
-      checkF(key_validator.fullmatch(el), '{}: bad key: {!r}', line_num, el)
+      if not key_validator.fullmatch(el):
+        exit(f'{line_num}: bad key: {el!r}')
 
 def validate_whens(ctx, line_num, whens):
   for when in whens:
-    checkF(when.lstrip('!') in ctx.all_whens, '{}: bad when: {}', line_num, when)
+    if when.lstrip('!') not in ctx.all_whens:
+      exit(f'{line_num}: bad when: {when}')
 
 
 def warn_unbound_cmds(ctx):
