@@ -14,5 +14,5 @@ if ! git log -1 2> /dev/null; then
 fi
 
 hub create "$@"
-git remote rename origin github
-git push -u github master
+#git remote rename origin github
+git push -u origin master
