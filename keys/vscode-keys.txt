@@ -533,9 +533,9 @@ workbench.action.toggleSidebarVisibility
 workbench.action.toggleStatusbarVisibility
 workbench.action.toggleZenMode
 workbench.action.uninstallCommandLine
-workbench.action.zoomIn                                         cmd+]
-workbench.action.zoomOut                                        cmd+'
-workbench.action.zoomReset
+workbench.action.zoomIn                                         cmd+=
+workbench.action.zoomOut                                        cmd+-
+workbench.action.zoomReset                                      cmd+/
 workbench.actions.view.problems                                 shift+cmd+m
 workbench.customDebugRequest
 workbench.debug.action.focusRepl
