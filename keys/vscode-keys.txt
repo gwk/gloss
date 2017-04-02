@@ -156,7 +156,7 @@ editor.action.replaceAll                                        alt+cmd+enter   
 editor.action.replaceOne                                        cmd+r                   when editorFocus && findWidgetVisible
 editor.action.selectAll                                         cmd+a
 editor.action.selectAllMatches                                  alt+enter               when editorFocus && findWidgetVisible
-editor.action.selectHighlights                                  shift+cmd+l             when editorFocus
+editor.action.selectHighlights
 editor.action.showAccessibilityHelp
 editor.action.showContextMenu
 editor.action.showHover                                         cmd+k cmd+i             when editorTextFocus
@@ -355,7 +355,7 @@ workbench.action.closeFolder
 workbench.action.closeMessages                                  escape                  when globalMessageVisible
 workbench.action.closeOtherEditors
 workbench.action.closePanel
-workbench.action.closeQuickOpen
+workbench.action.closeQuickOpen                                 escape                  when inQuickOpen
 workbench.action.closeWindow                                    shift+cmd+w
 workbench.action.compareEditor.nextChange
 workbench.action.compareEditor.previousChange
@@ -466,8 +466,8 @@ workbench.action.quickOpenView
 workbench.action.quit                                           cmd+q
 workbench.action.reloadWindow
 workbench.action.removeFromEditorHistory
-workbench.action.reopenClosedEditor                             shift+cmd+t
-workbench.action.replaceInFiles                                 shift+cmd+h
+workbench.action.reopenClosedEditor
+workbench.action.replaceInFiles
 workbench.action.reportIssues
 workbench.action.reportPerformanceIssue
 workbench.action.revertAndCloseActiveEditor
@@ -520,7 +520,7 @@ workbench.action.terminal.scrollToBottom
 workbench.action.terminal.scrollToTop
 workbench.action.terminal.scrollUp
 workbench.action.terminal.scrollUpPage
-workbench.action.terminal.toggleTerminal                        ctrl+`
+workbench.action.terminal.toggleTerminal                        shift+cmd+t
 workbench.action.toggleActivityBarVisibility
 workbench.action.toggleDevTools
 workbench.action.toggleEditorGroupLayout
@@ -529,7 +529,7 @@ workbench.action.toggleMaximizedPanel
 workbench.action.togglePanel
 workbench.action.toggleSharedProcess
 workbench.action.toggleSidebarPosition
-workbench.action.toggleSidebarVisibility
+workbench.action.toggleSidebarVisibility                        shift+cmd+l
 workbench.action.toggleStatusbarVisibility
 workbench.action.toggleZenMode
 workbench.action.uninstallCommandLine
