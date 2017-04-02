@@ -83,8 +83,8 @@ def write_defaults_txt(path, dflt_triples):
   'generate keybindings.txt as starting point for customization.'
   f = open(path, 'w')
   for (cmd, key, when) in sorted(dflt_triples):
-    when_clause = 'when ' + when if when else ''
-    writeL(f, '{:<63} {:23} {}'.format(cmd, key, when_clause).strip())
+    when_clause = f'when {when}' if when else ''
+    writeL(f, f'{cmd:<63} {key:23} {when_clause}'.strip())
 
 
 def write_whens(path, all_whens):
@@ -111,20 +111,27 @@ def parse_binding(ctx, line_num, line):
     whens = []
   else:
     keys = words[1:when_index]
-    whens= words[when_index+1:]
+    whens = words[when_index+1:]
   ctx.bound_cmds.add(cmd)
   if not keys: return
   validate_keys(line_num, keys)
-  binding = {
-    'command': cmd,
-    'key': ' '.join(keys)
-  }
-  if whens:
-    validate_whens(ctx, line_num, whens)
-    binding['when'] = ' '.join(whens)
-  ctx.bindings.append(binding)
+  validate_whens(ctx, line_num, whens)
+
+  def add_binding(keys):
+    binding = {
+      'command': cmd,
+      'key': ' '.join(keys)
+    }
+    if whens:
+      binding['when'] = ' '.join(whens)
+    ctx.bindings.append(binding)
+
+  add_binding(keys)
+  if keys == ['escape']: add_binding(['ctrl+c'])
 
 
+
+# https://code.visualstudio.com/docs/getstarted/keybindings#_accepted-keys
 
 key_validator = re.compile(r'''(?x)
   alt
