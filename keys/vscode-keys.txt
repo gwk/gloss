@@ -460,8 +460,8 @@ workbench.action.previousEditorInGroup
 workbench.action.quickOpen                                      cmd+o
 workbench.action.quickOpenNavigateNext                          cmd+o                   when inQuickOpen
 workbench.action.quickOpenNavigatePrevious                      shift+cmd+o             when inQuickOpen
-workbench.action.quickOpenSelectNext
-workbench.action.quickOpenSelectPrevious
+workbench.action.quickOpenSelectNext                            ctrl+n                  when inQuickOpen
+workbench.action.quickOpenSelectPrevious                        ctrl+p                  when inQuickOpen
 workbench.action.quickOpenView
 workbench.action.quit                                           cmd+q
 workbench.action.reloadWindow
