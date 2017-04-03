@@ -290,7 +290,7 @@ list.select
 list.toggleExpand
 markdown.showPreview                                            shift+cmd+v
 markdown.showPreviewToSide                                      cmd+k v
-moveFileToTrash
+moveFileToTrash                                                 cmd+delete
 outdent                                                         shift+tab               when editorTextFocus && !editorTabMovesFocus
 paste
 problems.action.copy
