@@ -85,16 +85,16 @@ deleteRight                                                     ctrl+d          
 deleteRight                                                     delete                  when editorTextFocus
 deleteWordEndLeft
 deleteWordEndRight
-deleteWordLeft                                                  alt+backspace           when editorTextFocus
-deleteWordRight                                                 alt+delete              when editorTextFocus
+deleteWordLeft                                                  alt+backspace           when editorTextFocus && !editorReadonly
+deleteWordRight                                                 alt+delete              when editorTextFocus && !editorReadonly
 deleteWordStartLeft
 deleteWordStartRight
 disablescmpreview
-editor.action.addCommentLine                                    cmd+k cmd+c             when editorTextFocus
+editor.action.addCommentLine
 editor.action.addSelectionToNextFindMatch                       cmd+d                   when editorFocus
 editor.action.addSelectionToPreviousFindMatch
-editor.action.blockComment                                      shift+alt+a             when editorTextFocus
-editor.action.changeAll                                         cmd+f2                  when editorTextFocus
+editor.action.blockComment
+editor.action.changeAll
 editor.action.clearoutput
 editor.action.clipboardCopyAction                               cmd+c                   when editorTextFocus
 editor.action.clipboardCopyWithSyntaxHighlightingAction
@@ -133,8 +133,8 @@ editor.action.marker.next                                       f8              
 editor.action.marker.prev                                       shift+f8                when editorFocus
 editor.action.moveCarretLeftAction
 editor.action.moveCarretRightAction
-editor.action.moveLinesDownAction                               cmd+down                when editorTextFocus
-editor.action.moveLinesUpAction                                 cmd+up                  when editorTextFocus
+editor.action.moveLinesDownAction                               cmd+down                when editorTextFocus && !editorReadonly
+editor.action.moveLinesUpAction                                 cmd+up                  when editorTextFocus && !editorReadonly
 editor.action.moveSelectionToNextFindMatch                      cmd+k cmd+d             when editorFocus
 editor.action.moveSelectionToPreviousFindMatch
 editor.action.nextMatchFindAction                               cmd+g                   when editorFocus
@@ -273,8 +273,8 @@ keybindings.editor.copyKeybindingEntry
 keybindings.editor.defineKeybinding
 keybindings.editor.removeKeybinding
 keybindings.editor.resetKeybinding
-keybindings.editor.searchKeybindings
-leaveEditorMessage
+keybindings.editor.searchKeybindings                            cmd+f                   when inKeybindings && keybindingFocus
+leaveEditorMessage                                              escape                  when messageVisible
 leaveSnippet                                                    escape                  when editorTextFocus && inSnippetMode
 lineBreakInsert                                                 ctrl+o                  when editorTextFocus
 list.clear
@@ -293,8 +293,8 @@ markdown.showPreviewToSide                                      cmd+k v
 moveFileToTrash                                                 cmd+delete
 outdent                                                         shift+tab               when editorTextFocus && !editorTabMovesFocus
 paste
-problems.action.copy
-redo                                                            shift+cmd+z             when editorTextFocus
+problems.action.copy                                            cmd+c                   when problemFocus
+redo                                                            shift+cmd+z             when editorTextFocus && !editorReadonly
 removeSecondaryCursors                                          escape                  when editorHasMultipleSelections && editorTextFocus
 renameFile
 repl.action.acceptInput
