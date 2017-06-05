@@ -61,6 +61,7 @@ gpush:  git push "$@"
 gsh:    git show "$@"
 gshw:   git show --color-words "$@"
 gst:    git status --short --branch "$@"
+gtags:  git tag -l "$@"
 
 # file hashes.
 sha1:   openssl dgst -sha1 "$@"
