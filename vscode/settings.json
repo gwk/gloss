@@ -1,0 +1,65 @@
+{
+"css.lint.boxModel": "warning",
+"css.lint.important": "warning",
+"css.lint.float": "warning",
+
+"diffEditor.ignoreTrimWhitespace": false,
+"diffEditor.renderSideBySide": false,
+
+"editor.autoClosingBrackets": false,
+"editor.detectIndentation": true,
+"editor.fontFamily": "Source Code Pro, Menlo, monospace",
+"editor.fontSize": 12,
+"editor.formatOnType": false,
+"editor.formatOnPaste": false,
+"editor.formatOnSave": false,
+"editor.glyphMargin": false, // TODO: document what this is.
+"editor.insertSpaces": true,
+"editor.minimap.enabled": false,
+"editor.minimap.renderCharacters": true,
+"editor.minimap.maxColumn": 96,
+"editor.quickSuggestions": true,
+"editor.quickSuggestionsDelay": 10,
+"editor.renderControlCharacters": true,
+"editor.renderIndentGuides": true,
+"editor.renderWhitespace": "none",
+"editor.roundedSelection": false,
+"editor.rulers": [80, 96, 128],
+"editor.scrollBeyondLastLine": false,
+"editor.suggestOnTriggerCharacters": true,
+"editor.tabSize": 2,
+"editor.trimAutoWhitespace": true,
+"editor.wordWrap": "on",
+
+"files.exclude": {
+  "**/__pycache__": true,
+  "**/_build/debug": true,
+  "**/_build/release": true,
+  "**/.git": true,
+  "**/.svn": true,
+  "**/.DS_Store": true
+},
+
+"files.trimTrailingWhitespace": true,
+
+"git.autofetch": false,
+
+"html.format.wrapLineLength": 0,
+
+"telemetry.enableTelemetry": false,
+
+"terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
+"terminal.integrated.lineHeight": 1.2,
+
+"typescript.check.tscVersion": false,
+
+"window.reopenFolders": "none",
+"window.zoomLevel": 0,
+
+"workbench.welcome.enabled": false,
+"workbench.colorTheme": "gloss-black",
+"workbench.statusBar.visible": false,
+"workbench.activityBar.visible": false,
+"workbench.editor.showIcons": false,
+"workbench.sideBar.location": "left"
+}
