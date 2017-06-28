@@ -2,13 +2,28 @@
 
 'common code for the install scripts.'
 
-from os import uname as os_uname
+import os as _os
+import shutil as _shutil
+
+from os import listdir as list_dir, uname as os_uname
 from sys import argv, stderr
 
-from pithy.fs import abs_path, copy_dir_tree, copy_file, is_dir, list_dir, make_dir, make_dirs, path_dir, path_exists, path_join, path_stem, remove_dir_tree
+from os.path import abspath as abs_path, isdir as is_dir, dirname as path_dir, exists as path_exists, join as path_join
+from shutil import copy as copy_file
+from pithy.fs import make_dir, make_dirs, path_stem, remove_dir_tree # TODO: remove pithy dependency.
 
 
 def errSL(*items): print(*items, file=stderr)
+
+
+def copy_dir_tree(src: str, dst: str, follow_symlinks=True, preserve_metadata=True, ignore_dangling_symlinks=False) -> None:
+  'Copies a directory tree.'
+  _shutil.copytree(src, dst,
+    symlinks=(not follow_symlinks),
+    ignore=None,
+    copy_function=(_shutil.copy2 if preserve_metadata else _shutil.copy),
+    ignore_dangling_symlinks=ignore_dangling_symlinks)
+
 
 supported_platforms = ['mac']
 
