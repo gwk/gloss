@@ -138,6 +138,8 @@ if [[ -z "$GLOSS_ENV" ]]; then
   # prompt is set dynamically with PROMPT_COMMAND.
   export PROMPT_COMMAND="gloss_set_prompts"
 
+  prepend_to_search_path PATH "$GLOSS_DIR/bin"
+
   export PAGER=less
   export LESS=FRX
   export CLICOLOR=1 # enable colors in ls.
