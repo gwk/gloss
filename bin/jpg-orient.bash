@@ -4,7 +4,7 @@
 # fix orientation tags losslessly using jhead
 
 
-fail() { echo $*; exit 1; }
+fail() { echo $* 2>&1; exit 1; }
 
 [[ -r "$1" ]] || fail "usage: jpg-orient [search_root]"
 
