@@ -83,4 +83,3 @@ tr-to-uc: tr '[:lower:]' '[:upper:]' # translate to upper case
 uuid4: python3 -c 'import uuid; print(uuid.uuid4())'
 env-sort: env | sort | text-search -lines -pattern '^\w+=[^{]+' -match-only
 ansi-to-html-view: ansi-to-html "$@" | html-view
-mtime: stat -f %Sm "$@"
