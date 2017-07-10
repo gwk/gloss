@@ -17,7 +17,7 @@ def main():
   }
   with open(argv[1], 'w') as f:
     json.dump(theme, f, indent=2)
-  
+
 
 def make_settings():
   all_settings = []
@@ -47,7 +47,7 @@ def make_settings():
     selectionBorder=L5,
     tagsOptions=['stippled_underline'],
   )
-  
+
   scope('comment', foreground=N)
   scope('comment.punctuation', foreground=N)
 
@@ -71,7 +71,7 @@ def make_settings():
 
   scope('meta', foreground=W) # too broad.
   scope('meta.diff, meta.diff.header', foreground=R)
-  
+
   scope('punctuation', foreground=L2)
 
   scope('storage', foreground=Y)
@@ -151,7 +151,7 @@ def validate_value(v):
     words = v.split()
     for w in words:
       if not w in valid_words:
-        raise ValueError('validatebad word: {}'.format(w))
+        raise ValueError('validate encountered bad word: {}'.format(w))
   elif isinstance(v, list):
     for el in v:
       validate_value(el)
