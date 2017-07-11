@@ -18,12 +18,9 @@ mkdir -p \
 "$VSCODE_THEMES" \
 "$VSCODE_USER"
 
-cp \
-package.json \
-"$VSCODE_GLOSS"
+cp vscode/package.json          "$VSCODE_GLOSS"
+cp vscode/configurations/*.json "$VSCODE_CONFIGURATIONS"
+cp vscode/syntaxes/*.json       "$VSCODE_SYNTAXES"
 
-cp configurations/*.json    "$VSCODE_CONFIGURATIONS"
-cp syntaxes/*.json          "$VSCODE_SYNTAXES"
 cp _build/gloss-black.json  "$VSCODE_THEMES"
-
-cp _build/vscode-keys.json "$VSCODE_USER/keybindings.json"
+cp _build/vscode-keys.json  "$VSCODE_USER/keybindings.json"
