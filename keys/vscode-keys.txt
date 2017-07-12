@@ -508,7 +508,7 @@ workbench.action.terminal.focusAtIndex8
 workbench.action.terminal.focusAtIndex9
 workbench.action.terminal.focusNext
 workbench.action.terminal.focusPrevious
-workbench.action.terminal.kill
+workbench.action.terminal.kill                                  alt+cmd+t
 workbench.action.terminal.new                                   ctrl+shift+`
 workbench.action.terminal.openNativeConsole                     shift+cmd+c
 workbench.action.terminal.paste
