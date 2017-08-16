@@ -4,6 +4,7 @@ import re
 from sys import argv
 from pithy.fs import append_path_stem_suffix, path_stem
 from pithy.io import errL, errSL, outL, writeL
+from pithy.iterable import group_by_heads
 from pithy.json_utils import JSONDecodeError, parse_json, write_json
 from pithy.immutable import Immutable
 
@@ -19,7 +20,7 @@ def main():
   ctx = Immutable(
     defaults=defaults,
     other_cmds=other_cmds,
-    all_cmds=set(),
+    all_cmds=set(known_extension_cmds),
     all_whens=set(),
     dflt_triples=[], # used to generate keybindings.txt once.
     bindings=[],
@@ -97,11 +98,13 @@ def write_whens(path, all_whens):
 
 
 def parse_bindings(ctx, bindings_path):
-  for line_num, line in enumerate(open(bindings_path), 1):
-    parse_binding(ctx, line_num, line)
+  numbered_lines = enumerate(open(bindings_path), 1)
+  for binding in group_by_heads(numbered_lines, is_head=lambda p: not p[1].startswith(' ')):
+    parse_binding(ctx, binding)
 
 
-def parse_binding(ctx, line_num, line):
+def parse_binding(ctx, binding):
+  line_num, line = binding[0] # first line.
   words = line.split()
   if not words: return
   cmd = words[0]
@@ -120,6 +123,14 @@ def parse_binding(ctx, line_num, line):
   validate_keys(line_num, keys)
   validate_whens(ctx, line_num, whens)
 
+  if len(binding) == 1:
+    args = None
+  else:
+    args_str = ''.join(l for i, l in binding[1:])
+    try: args = parse_json(args_str)
+    except JSONDecodeError as e:
+      exit(f'args error: {line_num} {e}\n{args_str}')
+
   def add_binding(keys):
     binding = {
       'command': cmd,
@@ -127,27 +138,13 @@ def parse_binding(ctx, line_num, line):
     }
     if whens:
       binding['when'] = ' '.join(whens)
+    if args is not None:
+      binding['args'] = args
     ctx.bindings.append(binding)
 
   add_binding(keys)
   if keys == ['escape']: add_binding(['ctrl+c'])
 
-
-
-# https://code.visualstudio.com/docs/getstarted/keybindings#_accepted-keys
-
-key_validator = re.compile(r'''(?x)
-  alt
-| cmd
-| ctrl
-| escape
-| shift
-| space | backspace | delete | enter | tab
-| up | down | left | right
-| pageup| pagedown | home | end
-| f(?:\d{1,2})
-| \\?[][-zA-Z0-9\'"`.,;/\\=-]
-''')
 
 def validate_keys(line_num, keys):
   for word in keys:
@@ -167,5 +164,19 @@ def warn_unbound_cmds(ctx):
   errL('\nunbound commands:')
   for cmd in sorted(unbound):
     errL(cmd)
+
+# https://code.visualstudio.com/docs/getstarted/keybindings#_accepted-keys
+key_validator = re.compile(r'''(?x)
+  alt
+| cmd
+| ctrl
+| escape
+| shift
+| space | backspace | delete | enter | tab
+| up | down | left | right
+| pageup| pagedown | home | end
+| f(?:\d{1,2})
+| \\?[][-zA-Z0-9\'"`.,;/\\=-]
+''')
 
 main()
