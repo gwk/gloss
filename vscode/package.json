@@ -16,15 +16,20 @@
         "filenames": ["configure.in"]
       },
       { "id": "javascript",
-        "firstLine": "^#!.*\\bnode( -.+)?"
+        "firstLine": "^#!.*\\bnode( +-.+)?"
       },
       { "id": "makefile",
         "filenames": [ "makefile", "makefile.pre", "makefile.pre.in", "GNUmakefile", "OCamlMakefile" ]
       },
       { "id": "swift",
         "extensions": [".swift"],
-        "firstLine": "^#!.*\\bswift( -.+)?",
+        "firstLine": "^#!.*\\bswift( +-.+)?",
         "configuration": "./configurations/swift-gloss.json"
+      },
+      { "id": "xcode",
+        "extensions": [".pbxproj"],
+        "firstLine": "// !\\$\\*UTF8\\*\\$!",
+        "configuration": "./configurations/xcode.json"
       }
     ],
     "grammars": [
@@ -35,6 +40,10 @@
       { "language": "swift",
         "scopeName": "source.swift",
         "path": "./syntaxes/swift-gloss.json"
+      },
+      { "language": "xcode",
+        "scopeName": "source.xcode",
+        "path": "./syntaxes/xcode.json"
       }
     ],
     "themes": [

@@ -1,0 +1,12 @@
+{
+  "scopeName": "source.xcode",
+  "fileTypes": ["pbxproj"],
+  "name": "Xcode",
+  "firstLineMatch": "// !\\$\\*UTF8\\*\\$!",
+
+  "patterns": [
+    { "name": "comment.block.xcode",
+      "match": "/\\*([^\\*]|\\*[^/])*\\*/"
+    }
+  ]
+}
