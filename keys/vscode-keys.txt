@@ -1,3 +1,8 @@
+
+C_Cpp.GoToDeclaration
+C_Cpp.Navigate
+C_Cpp.PeekDeclaration
+C_Cpp.SwitchHeaderSource
 acceptRenameInput                                               enter                   when editorFocus && renameInputVisible
 acceptSelectedSuggestion                                        tab                     when editorTextFocus && suggestWidgetVisible
 acceptSelectedSuggestionOnEnter                                 enter                   when editorTextFocus && suggestWidgetVisible
@@ -13,9 +18,11 @@ closeParameterHints                                             escape          
 closeReferenceSearch                                            escape                  when referenceSearchVisible && !config.editor.stablePeek
 closeReferenceSearchEditor                                      escape                  when inReferenceSearchEditor && !config.editor.stablePeek
 closeReplaceInFilesWidget
+columnSelect
 compositionEnd
 compositionStart
 copyFilePath
+createCursor
 cursorBottom                                                    end                     when editorTextFocus
 cursorBottomSelect                                              shift+cmd+down          when editorTextFocus
 cursorColumnSelectDown                                          alt+down                when editorTextFocus
@@ -36,6 +43,8 @@ cursorHomeSelect                                                shift+home      
 cursorLeft                                                      ctrl+b                  when editorTextFocus
 cursorLeft                                                      left                    when editorTextFocus
 cursorLeftSelect                                                shift+left              when editorTextFocus
+cursorLineEnd
+cursorLineStart
 cursorPageDown                                                  pagedown                when editorTextFocus
 cursorPageDownSelect                                            shift+pagedown          when editorTextFocus
 cursorPageUp                                                    pageup                  when editorTextFocus
@@ -89,7 +98,6 @@ deleteWordLeft                                                  alt+backspace   
 deleteWordRight                                                 alt+delete              when editorTextFocus && !editorReadonly
 deleteWordStartLeft
 deleteWordStartRight
-disablescmpreview
 editor.action.addCommentLine
 editor.action.addSelectionToNextFindMatch                       cmd+d                   when editorFocus
 editor.action.addSelectionToPreviousFindMatch
@@ -106,6 +114,10 @@ editor.action.copyLinesUpAction
 editor.action.defineKeybinding
 editor.action.deleteLines
 editor.action.detectIndentation
+editor.action.diffReview.next
+editor.action.diffReview.prev
+editor.action.extensioneditor.hidefind
+editor.action.extensioneditor.showfind
 editor.action.findReferences
 editor.action.format                                            shift+alt+f             when editorTextFocus
 editor.action.formatDocument
@@ -177,6 +189,8 @@ editor.action.transposeLetters                                  ctrl+t
 editor.action.triggerParameterHints
 editor.action.triggerSuggest                                    ctrl+space              when editorTextFocus
 editor.action.trimTrailingWhitespace
+editor.action.webvieweditor.hideFind
+editor.action.webvieweditor.showFind
 editor.debug.action.conditionalBreakpoint
 editor.debug.action.runToCursor
 editor.debug.action.selectionToRepl
@@ -185,28 +199,29 @@ editor.debug.action.showDebugHover                              cmd+k cmd+i     
 editor.debug.action.toggleBreakpoint
 editor.debug.action.toggleColumnBreakpoint
 editor.debug.action.toggleColumnBreakpointContextMenu
-editor.emmet.action.balanceInward
-editor.emmet.action.balanceOutward
+editor.emmet.action.balanceIn
+editor.emmet.action.balanceOut
 editor.emmet.action.decrementNumberByOne
 editor.emmet.action.decrementNumberByOneTenth
 editor.emmet.action.decrementNumberByTen
-editor.emmet.action.evaluateMath
-editor.emmet.action.expandAbbreviation                          tab                     when config.emmet.triggerExpansionOnTab && editorTextFocus && !editorHasMultipleSelections && !editorHasSelection && !editorTabMovesFocus
+editor.emmet.action.evaluateMathExpression
+editor.emmet.action.expandAbbreviation                          tab                     when editorTextFocus && !editorHasMultipleSelections && !editorHasSelection && !editorTabMovesFocus
 editor.emmet.action.incrementNumberByOne
 editor.emmet.action.incrementNumberByOneTenth
 editor.emmet.action.incrementNumberByTen
-editor.emmet.action.matchingPair
+editor.emmet.action.matchTag
 editor.emmet.action.mergeLines
 editor.emmet.action.nextEditPoint
-editor.emmet.action.previousEditPoint
+editor.emmet.action.prevEditPoint
 editor.emmet.action.reflectCSSValue
 editor.emmet.action.removeTag
 editor.emmet.action.selectNextItem
-editor.emmet.action.selectPreviousItem
+editor.emmet.action.selectPrevItem
 editor.emmet.action.splitJoinTag
 editor.emmet.action.toggleComment
 editor.emmet.action.updateImageSize
 editor.emmet.action.updateTag
+editor.emmet.action.wrapIndividualLinesWithAbbreviation
 editor.emmet.action.wrapWithAbbreviation
 editor.fold                                                     shift+cmd+[             when editorFocus
 editor.foldAll                                                  cmd+k cmd+0             when editorFocus
@@ -223,10 +238,20 @@ editor.foldRecursively                                          cmd+k cmd+[     
 editor.unfold                                                   shift+cmd+]             when editorFocus
 editor.unfoldAll                                                cmd+k cmd+j             when editorFocus
 editor.unfoldRecursively
+emmet.expandAbbreviation
+eslint.createConfig
+eslint.disable
+eslint.enable
+eslint.executeAutofix
+eslint.showOutputChannel
 expandLineSelection
 explorer.newFile
 explorer.newFolder
 explorer.openToSide
+extension.dash.all
+extension.dash.customSyntax
+extension.dash.emptySyntax
+extension.dash.specific
 extension.node-debug.pickLoadedScript
 filesExplorer.copy
 filesExplorer.findInFolder
@@ -244,12 +269,17 @@ git.commitAllSigned
 git.commitStaged
 git.commitStagedSigned
 git.commitWithInput
+git.deleteBranch
+git.ignore
 git.init
+git.merge
 git.openChange
 git.openFile
+git.openHEADFile
 git.openResource
 git.publish
 git.pull
+git.pullFrom
 git.pullRebase
 git.push
 git.pushTo
@@ -264,6 +294,14 @@ git.undoCommit
 git.unstage
 git.unstageAll
 git.unstageSelectedRanges
+hexdump.editValue
+hexdump.exportToFile
+hexdump.gotoAddress
+hexdump.hexdumpFile
+hexdump.hexdumpPath
+hexdump.save
+hexdump.searchString
+hexdump.toggleEndian
 hideSuggestWidget                                               ctrl+space              when editorTextFocus && suggestWidgetVisible
 hideSuggestWidget                                               escape                  when editorTextFocus && suggestWidgetVisible
 insertSnippet
@@ -271,9 +309,14 @@ jumpToNextSnippetPlaceholder
 jumpToPrevSnippetPlaceholder
 keybindings.editor.copyKeybindingEntry
 keybindings.editor.defineKeybinding
+keybindings.editor.focusKeybindings
 keybindings.editor.removeKeybinding
 keybindings.editor.resetKeybinding
 keybindings.editor.searchKeybindings                            cmd+f                   when inKeybindings && keybindingFocus
+keybindings.editor.showConflicts
+lastCursorLineSelect
+lastCursorLineSelectDrag
+lastCursorWordSelect
 leaveEditorMessage                                              escape                  when messageVisible
 leaveSnippet                                                    escape                  when editorTextFocus && inSnippetMode
 lineBreakInsert                                                 ctrl+o                  when editorTextFocus
@@ -282,23 +325,38 @@ list.collapse
 list.expand
 list.focusDown
 list.focusFirst
+list.focusFirstChild
 list.focusLast
+list.focusLastChild
 list.focusPageDown
 list.focusPageUp
 list.focusUp
 list.select
 list.toggleExpand
+macros.inspect
 markdown.showPreview                                            shift+cmd+v
 markdown.showPreviewToSide                                      cmd+k v
+merge-conflict.accept.all-both
+merge-conflict.accept.all-current
+merge-conflict.accept.all-incoming
+merge-conflict.accept.both
+merge-conflict.accept.current
+merge-conflict.accept.incoming
+merge-conflict.accept.selection
+merge-conflict.compare
+merge-conflict.next
+merge-conflict.previous
 moveFileToTrash                                                 cmd+delete
 outdent                                                         shift+tab               when editorTextFocus && !editorTabMovesFocus
 paste
 problems.action.copy                                            cmd+c                   when problemFocus
+problems.action.openToSide
 redo                                                            shift+cmd+z             when editorTextFocus && !editorReadonly
 removeSecondaryCursors                                          escape                  when editorHasMultipleSelections && editorTextFocus
 renameFile
 repl.action.acceptInput
 repl.action.acceptSuggestion
+repl.action.copyAll
 repl.action.historyNext
 repl.action.historyPrevious
 replacePreviousChar
@@ -308,14 +366,27 @@ scrollLineDown                                                  ctrl+pagedown   
 scrollLineUp                                                    ctrl+pageup             when editorTextFocus
 scrollPageDown                                                  cmd+pagedown            when editorTextFocus
 scrollPageUp                                                    cmd+pageup              when editorTextFocus
+search.action.cancel
 search.action.focusActiveEditor
 search.action.focusNextSearchResult
 search.action.focusPreviousSearchResult
+search.action.focusSearchFromResults
+search.action.openResultToSide
+search.action.remove
+search.action.replace
 search.action.replaceAll                                        alt+cmd+enter           when replaceActive && searchViewletVisible && !findWidgetVisible
+search.action.replaceAllInFile
 search.focus.nextInputBox
 search.focus.previousInputBox
 search.history.showNext
+search.history.showNextExcludePattern
+search.history.showNextIncludePattern
 search.history.showPrevious
+search.history.showPreviousExcludePattern
+search.history.showPreviousIncludePattern
+selectAll
+selectFirstSuggestion
+selectLastSuggestion
 selectNextPageSuggestion
 selectNextSuggestion                                            ctrl+n                  when editorTextFocus && suggestWidgetMultipleSuggestions
 selectNextSuggestion                                            down                    when editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible
@@ -323,26 +394,31 @@ selectPrevPageSuggestion                                        pageup          
 selectPrevSuggestion                                            ctrl+p                  when editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible
 selectPrevSuggestion                                            up                      when editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible
 setContext
+settings.action.focusSettingsFile
 settings.action.search
+settings.cycle
 showNextParameterHint                                           ctrl+n                  when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showNextParameterHint                                           down                    when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           ctrl+p                  when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                      when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 sortLines.sortLines
 tab                                                             tab                     when editorTextFocus && !editorTabMovesFocus
-toggleExperimentalScreenReaderSupport
-toggleFindWholeWord                                             alt+cmd+w               when editorFocus
 toggleFindCaseSensitive                                         alt+cmd+c               when editorFocus
+toggleFindInSelection
 toggleFindRegex                                                 alt+cmd+r               when editorFocus
+toggleFindWholeWord                                             alt+cmd+w               when editorFocus
 toggleSearchCaseSensitive
 toggleSearchRegex
 toggleSearchWholeWord
 toggleSuggestionDetails
+toggleSuggestionFocus
 type
 undo                                                            cmd+z                   when editorTextFocus
 update.showCurrentReleaseNotes
 workbench.action.acceptSelectedQuickOpenItem
+workbench.action.addRootFolder
 workbench.action.appPerf
+workbench.action.clearCommandHistory
 workbench.action.clearEditorHistory
 workbench.action.clearRecentFiles
 workbench.action.closeActiveEditor                              cmd+w
@@ -356,6 +432,7 @@ workbench.action.closeMessages                                  escape          
 workbench.action.closeOtherEditors
 workbench.action.closePanel
 workbench.action.closeQuickOpen                                 escape                  when inQuickOpen
+workbench.action.closeUnmodifiedEditors
 workbench.action.closeWindow                                    shift+cmd+w
 workbench.action.compareEditor.nextChange
 workbench.action.compareEditor.previousChange
@@ -402,6 +479,7 @@ workbench.action.focusQuickOpen
 workbench.action.focusSecondEditorGroup                         cmd+2
 workbench.action.focusSideBar                                   cmd+0
 workbench.action.focusThirdEditorGroup                          cmd+3
+workbench.action.generateColorTheme
 workbench.action.gotoLine                                       ctrl+g
 workbench.action.gotoSymbol                                     ctrl+s
 workbench.action.hideInterfaceOverview
@@ -443,26 +521,46 @@ workbench.action.openEditorAtIndex6                             ctrl+6
 workbench.action.openEditorAtIndex7                             ctrl+7
 workbench.action.openEditorAtIndex8                             ctrl+8
 workbench.action.openEditorAtIndex9                             ctrl+9
+workbench.action.openFolderSettings
 workbench.action.openGlobalKeybindings
+workbench.action.openGlobalKeybindingsFile
 workbench.action.openGlobalSettings                             cmd+,
 workbench.action.openIntroductoryVideosUrl
 workbench.action.openLastEditorInGroup                          ctrl+0
+workbench.action.openNextRecentlyUsedEditor
 workbench.action.openNextRecentlyUsedEditorInGroup              ctrl+tab
 workbench.action.openPreviousEditorFromHistory
+workbench.action.openPreviousRecentlyUsedEditor
 workbench.action.openPreviousRecentlyUsedEditorInGroup          ctrl+shift+tab
 workbench.action.openRecent
 workbench.action.openSnippets
+workbench.action.openTipsAndTricksUrl
 workbench.action.openView
+workbench.action.openWorkspace
+workbench.action.openWorkspaceConfigFile
 workbench.action.openWorkspaceSettings
 workbench.action.output.toggleOutput                            shift+cmd+u
 workbench.action.previousEditor                                 shift+cmd+[
 workbench.action.previousEditorInGroup
 workbench.action.quickOpen                                      cmd+o
 workbench.action.quickOpenNavigateNext                          cmd+o                   when inQuickOpen
+workbench.action.quickOpenNavigateNextInEditorPicker
+workbench.action.quickOpenNavigateNextInFilePicker
+workbench.action.quickOpenNavigateNextInRecentFilesPicker
+workbench.action.quickOpenNavigateNextInTerminalPicker
+workbench.action.quickOpenNavigateNextInViewPicker
 workbench.action.quickOpenNavigatePrevious                      shift+cmd+o             when inQuickOpen
+workbench.action.quickOpenNavigatePreviousInEditorPicker
+workbench.action.quickOpenNavigatePreviousInFilePicker
+workbench.action.quickOpenNavigatePreviousInRecentFilesPicker
+workbench.action.quickOpenNavigatePreviousInTerminalPicker
+workbench.action.quickOpenNavigatePreviousInViewPicker
+workbench.action.quickOpenRecent
 workbench.action.quickOpenSelectNext                            ctrl+n                  when inQuickOpen
 workbench.action.quickOpenSelectPrevious                        ctrl+p                  when inQuickOpen
+workbench.action.quickOpenTerm
 workbench.action.quickOpenView
+workbench.action.quickSwitchWindow
 workbench.action.quit                                           cmd+q
 workbench.action.reloadWindow
 workbench.action.removeFromEditorHistory
@@ -471,6 +569,7 @@ workbench.action.replaceInFiles
 workbench.action.reportIssues
 workbench.action.reportPerformanceIssue
 workbench.action.revertAndCloseActiveEditor
+workbench.action.saveWorkspaceAs
 workbench.action.search.toggleQueryDetails                      shift+cmd+j             when searchViewletVisible
 workbench.action.selectIconTheme
 workbench.action.selectTheme
@@ -488,14 +587,21 @@ workbench.action.showWelcomePage
 workbench.action.splitEditor                                    cmd+\
 workbench.action.switchWindow
 workbench.action.tasks.build                                    cmd+b
+workbench.action.tasks.configureDefaultBuildTask
+workbench.action.tasks.configureDefaultTestTask
 workbench.action.tasks.configureTaskRunner
 workbench.action.tasks.restartTask
 workbench.action.tasks.runTask
 workbench.action.tasks.showLog
+workbench.action.tasks.showTasks
 workbench.action.tasks.terminate
 workbench.action.tasks.test                                     cmd+t
+workbench.action.terminal.allowWorkspaceShell
 workbench.action.terminal.clear
 workbench.action.terminal.copySelection
+workbench.action.terminal.deleteWordLeft
+workbench.action.terminal.deleteWordRight
+workbench.action.terminal.disallowWorkspaceShell
 workbench.action.terminal.focus
 workbench.action.terminal.focusAtIndex1
 workbench.action.terminal.focusAtIndex2
@@ -506,12 +612,15 @@ workbench.action.terminal.focusAtIndex6
 workbench.action.terminal.focusAtIndex7
 workbench.action.terminal.focusAtIndex8
 workbench.action.terminal.focusAtIndex9
+workbench.action.terminal.focusFindWidget
 workbench.action.terminal.focusNext
 workbench.action.terminal.focusPrevious
+workbench.action.terminal.hideFindWidget
 workbench.action.terminal.kill                                  alt+cmd+t
 workbench.action.terminal.new                                   ctrl+shift+`
 workbench.action.terminal.openNativeConsole                     shift+cmd+c
 workbench.action.terminal.paste
+workbench.action.terminal.rename
 workbench.action.terminal.runActiveFile
 workbench.action.terminal.runSelectedText
 workbench.action.terminal.scrollDown
@@ -520,12 +629,14 @@ workbench.action.terminal.scrollToBottom
 workbench.action.terminal.scrollToTop
 workbench.action.terminal.scrollUp
 workbench.action.terminal.scrollUpPage
+workbench.action.terminal.selectAll
 workbench.action.terminal.toggleTerminal                        shift+cmd+t
 workbench.action.toggleActivityBarVisibility
 workbench.action.toggleDevTools
 workbench.action.toggleEditorGroupLayout
 workbench.action.toggleFullScreen                               ctrl+cmd+f
 workbench.action.toggleMaximizedPanel
+workbench.action.toggleMultiCursorModifier
 workbench.action.togglePanel
 workbench.action.toggleSharedProcess
 workbench.action.toggleSidebarPosition
@@ -550,13 +661,16 @@ workbench.extensions.action.checkForUpdates
 workbench.extensions.action.configureWorkspaceRecommendedExtensions
 workbench.extensions.action.disableAll
 workbench.extensions.action.disableAllWorkspace
+workbench.extensions.action.disableAutoUpdate
 workbench.extensions.action.enableAll
 workbench.extensions.action.enableAllWorkspace
+workbench.extensions.action.enableAutoUpdate
 workbench.extensions.action.installExtensions
 workbench.extensions.action.installVSIX
 workbench.extensions.action.listOutdatedExtensions
 workbench.extensions.action.openExtensionsFolder
 workbench.extensions.action.showDisabledExtensions
+workbench.extensions.action.showEnabledExtensions
 workbench.extensions.action.showInstalledExtensions
 workbench.extensions.action.showLanguageExtensions
 workbench.extensions.action.showPopularExtensions
@@ -564,16 +678,18 @@ workbench.extensions.action.showRecommendedExtensions
 workbench.extensions.action.showRecommendedKeymapExtensions
 workbench.extensions.action.showWorkspaceRecommendedExtensions
 workbench.extensions.action.updateAllExtensions
+workbench.files.action.acceptLocalChanges
 workbench.files.action.collapseExplorerFolders
 workbench.files.action.compareFileWith
+workbench.files.action.compareWithSaved
 workbench.files.action.focusFilesExplorer
 workbench.files.action.focusOpenEditorsView                     cmd+k e
 workbench.files.action.refreshFilesExplorer
+workbench.files.action.revertLocalChanges
 workbench.files.action.showActiveFileInExplorer
 workbench.output.action.clearOutput
 workbench.view.debug                                            shift+cmd+d
 workbench.view.explorer                                         shift+cmd+e
 workbench.view.extensions                                       shift+cmd+x
-workbench.view.git                                              ctrl+shift+g
-workbench.view.scm
+workbench.view.scm                                              ctrl+shift+g
 workbench.view.search                                           shift+cmd+f

@@ -4,7 +4,7 @@ import re
 from sys import argv
 from pithy.fs import append_path_stem_suffix, path_stem
 from pithy.io import errL, errSL, outL, writeL
-from pithy.json_utils import parse_json, write_json
+from pithy.json_utils import JSONDecodeError, parse_json, write_json
 from pithy.immutable import Immutable
 
 
@@ -39,19 +39,23 @@ def main():
 def parse_defaults(defaults_path):
   json_lines = []
   other_cmds = []
-
+  comment_re = re.compile(r'\s*//\s*(-)?\s*(.*)')
   # the defaults file contains comments, which the json parser rejects.
   for line in open(defaults_path):
-    if line.startswith('//'):
-      _, _, cmd = line.partition('// - ') # distinguishes the 'other available commands'.
-      if cmd:
-        other_cmds.append(cmd.strip())
+    m = comment_re.match(line)
+    if m: # commented line.
+      if m[1]: # contains dash; assume one of the "other available commands."
+        cmd = m[2].strip()
+        assert cmd
+        other_cmds.append(cmd)
     else:
       json_lines.append(line)
 
   # parse the filtered json.
   json_str = ''.join(json_lines)
-  defaults = parse_json(json_str)
+  try: defaults = parse_json(json_str)
+  except JSONDecodeError as e:
+    exit(f'parse_defaults error: {defaults_path}: {e}\n{json_lines[e.lineno-1]}')
   return defaults, other_cmds
 
 
@@ -162,6 +166,6 @@ def warn_unbound_cmds(ctx):
   if not unbound: return
   errL('\nunbound commands:')
   for cmd in sorted(unbound):
-    errL('  ', cmd)
+    errL(cmd)
 
 main()
