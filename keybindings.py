@@ -8,7 +8,6 @@ from pithy.json_utils import parse_json, write_json
 from pithy.immutable import Immutable
 
 
-
 def main():
   # paths passed in by make.
   defaults_json_path, bindings_path, out_path = argv[1:]
