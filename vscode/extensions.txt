@@ -1,0 +1,4 @@
+change-case (wmaurer)
+hexdump (slevesque)
+settings cycler (cody hoover)
+sort lines (daniel imms)
