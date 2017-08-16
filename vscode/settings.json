@@ -37,7 +37,8 @@
   "**/_build/release": true,
   "**/.git": true,
   "**/.svn": true,
-  "**/.DS_Store": true
+  "**/.DS_Store": true,
+  "**/mypy_cache": true
 },
 
 "files.trimTrailingWhitespace": true,
@@ -51,15 +52,37 @@
 "terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
 "terminal.integrated.lineHeight": 1.2,
 
-"typescript.check.tscVersion": false,
-
-"window.reopenFolders": "none",
 "window.zoomLevel": 0,
 
-"workbench.welcome.enabled": false,
+"workbench.colorCustomizations": {
+  "terminal.background": "#000000",
+  "terminal.foreground": "#FFFFFF",
+  "terminal.ansiBlack": "#404040",
+  "terminal.ansiBrightBlack": "#404040",
+  "terminal.ansiWhite": "#C0C0C0",
+  "terminal.ansiBrightWhite": "#C0C0C0",
+  "terminal.ansiBlue": "#4444FF",
+  "terminal.ansiBrightBlue": "#4444FF",
+  "terminal.ansiCyan": "#00FFFF",
+  "terminal.ansiBrightCyan": "#00FFFF",
+  "terminal.ansiGreen": "#00FF00",
+  "terminal.ansiBrightGreen": "#00FF00",
+  "terminal.ansiMagenta": "#FF00FF",
+  "terminal.ansiBrightMagenta": "#FF00FF",
+  "terminal.ansiRed": "#FF2222",
+  "terminal.ansiBrightRed": "#FF2222",
+  "terminal.ansiBrightYellow": "#FFFF00",
+  "terminal.ansiYellow": "#FFFF00"
+},
+
 "workbench.colorTheme": "gloss-black",
 "workbench.statusBar.visible": false,
 "workbench.activityBar.visible": false,
 "workbench.editor.showIcons": false,
-"workbench.sideBar.location": "left"
+"workbench.sideBar.location": "left",
+"workbench.startupEditor": "newUntitledFile",
+
+"[xcode]": {
+  "editor.insertSpaces": false
+}
 }
