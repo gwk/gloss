@@ -47,6 +47,13 @@
 
 "html.format.wrapLineLength": 0,
 
+"settings.cycle": [
+  { "id": "trimTrailingWhitespace",
+    "overrideWorkspaceSettings": true,
+    "values": [
+      { "trimTrailingWhitespace": true },
+      { "trimTrailingWhitespace": false }]}
+],
 "telemetry.enableTelemetry": false,
 
 "terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",

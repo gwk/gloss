@@ -397,6 +397,7 @@ setContext
 settings.action.focusSettingsFile
 settings.action.search
 settings.cycle
+settings.cycle.trimTrailingWhitespace                           ctrl+cmd+w
 showNextParameterHint                                           ctrl+n                  when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showNextParameterHint                                           down                    when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           ctrl+p                  when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible

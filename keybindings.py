@@ -179,4 +179,8 @@ key_validator = re.compile(r'''(?x)
 | \\?[][-zA-Z0-9\'"`.,;/\\=-]
 ''')
 
+known_extension_cmds = {
+  'settings.cycle.trimTrailingWhitespace',
+}
+
 main()
