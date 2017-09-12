@@ -4,7 +4,7 @@
 import sys
 import json
 
-from pithy.io import errFL
+from pithy.io import errL
 
 
 for path in sys.argv[1:]:
@@ -15,4 +15,4 @@ for path in sys.argv[1:]:
       json.dump(o, f, sort_keys=True, indent=2)
       f.write('\n')
   except Exception as e:
-    io.errFL('exception: {}: {}', path, e)
+    io.errL(f'exception: {path}: {e}')
