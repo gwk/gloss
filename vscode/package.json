@@ -4,9 +4,7 @@
   "description": "Aggressive configuration.",
   "version": "1.0.0",
   "publisher": "gwk",
-  "engines": {
-    "vscode": "^1.0.0"
-  },
+  "engines": {"vscode": "^1.0.0"},
   "categories": ["Languages", "Themes"],
   "contributes": {
     "languages": [
