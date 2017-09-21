@@ -84,6 +84,32 @@ def make_settings():
 
   scope('variable', foreground=Ro)
 
+  scope('sym', foreground=G)
+
+  # legs.
+  scope('sym.legs', foreground=W)
+  scope('section.legs', foreground=L4)
+  scope('section_invalid.legs', foreground=L4, background='#800000')
+
+  scope('colon.legs', foreground=C)
+  scope('brckt_o', foreground=C)
+  scope('brckt_c', foreground=C)
+  scope('brace_o', foreground=C)
+  scope('brace_c', foreground=C)
+  scope('paren_o', foreground=C)
+  scope('paren_c', foreground=C)
+  scope('bar', foreground=C)
+  scope('qmark', foreground=C)
+  scope('star', foreground=C)
+  scope('plus', foreground=C)
+  scope('amp', foreground=C)
+  scope('dash', foreground=C)
+  scope('caret', foreground=C)
+  scope('ref', foreground=G)
+  scope('esc', foreground=B)
+  scope('char', foreground=W)
+
+
   return all_settings
 
 
