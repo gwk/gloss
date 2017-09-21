@@ -147,7 +147,7 @@ editor.action.moveCarretLeftAction
 editor.action.moveCarretRightAction
 editor.action.moveLinesDownAction                               cmd+down                when editorTextFocus && !editorReadonly
 editor.action.moveLinesUpAction                                 cmd+up                  when editorTextFocus && !editorReadonly
-editor.action.moveSelectionToNextFindMatch                      cmd+k cmd+d             when editorFocus
+editor.action.moveSelectionToNextFindMatch
 editor.action.moveSelectionToPreviousFindMatch
 editor.action.nextMatchFindAction                               cmd+g                   when editorFocus
 editor.action.nextSelectionMatchFindAction
@@ -171,7 +171,7 @@ editor.action.selectAllMatches                                  alt+enter       
 editor.action.selectHighlights
 editor.action.showAccessibilityHelp
 editor.action.showContextMenu
-editor.action.showHover                                         cmd+k cmd+i             when editorTextFocus
+editor.action.showHover
 editor.action.showSnippets
 editor.action.smartSelect.grow
 editor.action.smartSelect.shrink
@@ -195,7 +195,7 @@ editor.debug.action.conditionalBreakpoint
 editor.debug.action.runToCursor
 editor.debug.action.selectionToRepl
 editor.debug.action.selectionToWatch
-editor.debug.action.showDebugHover                              cmd+k cmd+i             when editorTextFocus && inDebugMode
+editor.debug.action.showDebugHover
 editor.debug.action.toggleBreakpoint
 editor.debug.action.toggleColumnBreakpoint
 editor.debug.action.toggleColumnBreakpointContextMenu
@@ -224,19 +224,19 @@ editor.emmet.action.updateTag
 editor.emmet.action.wrapIndividualLinesWithAbbreviation
 editor.emmet.action.wrapWithAbbreviation
 editor.fold                                                     shift+cmd+[             when editorFocus
-editor.foldAll                                                  cmd+k cmd+0             when editorFocus
-editor.foldLevel1                                               cmd+k cmd+1             when editorFocus
-editor.foldLevel2                                               cmd+k cmd+2             when editorFocus
-editor.foldLevel3                                               cmd+k cmd+3             when editorFocus
-editor.foldLevel4                                               cmd+k cmd+4             when editorFocus
-editor.foldLevel5                                               cmd+k cmd+5             when editorFocus
+editor.foldAll
+editor.foldLevel1
+editor.foldLevel2
+editor.foldLevel3
+editor.foldLevel4
+editor.foldLevel5
 editor.foldLevel6
 editor.foldLevel7
 editor.foldLevel8
 editor.foldLevel9
-editor.foldRecursively                                          cmd+k cmd+[             when editorFocus
+editor.foldRecursively
 editor.unfold                                                   shift+cmd+]             when editorFocus
-editor.unfoldAll                                                cmd+k cmd+j             when editorFocus
+editor.unfoldAll
 editor.unfoldRecursively
 emmet.expandAbbreviation
 eslint.createConfig
@@ -335,7 +335,7 @@ list.select
 list.toggleExpand
 macros.inspect
 markdown.showPreview                                            shift+cmd+v
-markdown.showPreviewToSide                                      cmd+k v
+markdown.showPreviewToSide
 merge-conflict.accept.all-both
 merge-conflict.accept.all-current
 merge-conflict.accept.all-incoming
@@ -454,28 +454,28 @@ workbench.action.debug.stop                                     shift+f5        
 workbench.action.decreaseViewSize
 workbench.action.editor.changeEOL
 workbench.action.editor.changeEncoding
-workbench.action.editor.changeLanguageMode                      cmd+k m
+workbench.action.editor.changeLanguageMode
 workbench.action.evenEditorWidths
 workbench.action.exitZenMode
-workbench.action.files.copyPathOfActiveFile                     cmd+k p
+workbench.action.files.copyPathOfActiveFile
 workbench.action.files.newFile
 workbench.action.files.newFolder
 workbench.action.files.newUntitledFile                          cmd+n
 workbench.action.files.openFileFolder                           shift+cmd+o
 workbench.action.files.openFileInNewWindow
-workbench.action.files.revealActiveFileInWindows                cmd+k r
+workbench.action.files.revealActiveFileInWindows
 workbench.action.files.revert
 workbench.action.files.save                                     cmd+s
 workbench.action.files.saveAll                                  alt+cmd+s
 workbench.action.files.saveAs                                   shift+cmd+s
 workbench.action.files.saveFiles
-workbench.action.files.showOpenedFileInNewWindow                cmd+k o
+workbench.action.files.showOpenedFileInNewWindow
 workbench.action.findInFiles
 workbench.action.focusActiveEditorGroup
 workbench.action.focusFirstEditorGroup                          cmd+1
-workbench.action.focusNextGroup                                 cmd+k cmd+right
+workbench.action.focusNextGroup
 workbench.action.focusPanel
-workbench.action.focusPreviousGroup                             cmd+k cmd+left
+workbench.action.focusPreviousGroup
 workbench.action.focusQuickOpen
 workbench.action.focusSecondEditorGroup                         cmd+2
 workbench.action.focusSideBar                                   cmd+0
@@ -492,12 +492,12 @@ workbench.action.interactivePlayground.arrowUp
 workbench.action.interactivePlayground.pageDown
 workbench.action.interactivePlayground.pageUp
 workbench.action.joinTwoGroups
-workbench.action.keepEditor                                     cmd+k enter
+workbench.action.keepEditor
 workbench.action.keybindingsReference
 workbench.action.maximizeEditor
 workbench.action.minimizeOtherEditors
-workbench.action.moveActiveEditorGroupLeft                      cmd+k left
-workbench.action.moveActiveEditorGroupRight                     cmd+k right
+workbench.action.moveActiveEditorGroupLeft
+workbench.action.moveActiveEditorGroupRight
 workbench.action.moveEditorLeftInGroup
 workbench.action.moveEditorRightInGroup
 workbench.action.moveEditorToNextGroup
@@ -563,7 +563,7 @@ workbench.action.quickOpenTerm
 workbench.action.quickOpenView
 workbench.action.quickSwitchWindow
 workbench.action.quit                                           cmd+q
-workbench.action.reloadWindow
+workbench.action.reloadWindow                                   ctrl+alt+cmd+r
 workbench.action.removeFromEditorHistory
 workbench.action.reopenClosedEditor
 workbench.action.replaceInFiles
@@ -598,7 +598,7 @@ workbench.action.tasks.showTasks
 workbench.action.tasks.terminate
 workbench.action.tasks.test                                     cmd+t
 workbench.action.terminal.allowWorkspaceShell
-workbench.action.terminal.clear
+workbench.action.terminal.clear                                 cmd+k
 workbench.action.terminal.copySelection
 workbench.action.terminal.deleteWordLeft
 workbench.action.terminal.deleteWordRight
@@ -684,7 +684,7 @@ workbench.files.action.collapseExplorerFolders
 workbench.files.action.compareFileWith
 workbench.files.action.compareWithSaved
 workbench.files.action.focusFilesExplorer
-workbench.files.action.focusOpenEditorsView                     cmd+k e
+workbench.files.action.focusOpenEditorsView
 workbench.files.action.refreshFilesExplorer
 workbench.files.action.revertLocalChanges
 workbench.files.action.showActiveFileInExplorer
