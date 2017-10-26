@@ -1,13 +1,12 @@
-
+acceptRenameInput                                               enter                   when editorFocus && renameInputVisible
+acceptSelectedSuggestion                                        tab                     when editorTextFocus && suggestWidgetVisible
+acceptSelectedSuggestionOnEnter
+acceptSnippet                                                   tab                     when editorTextFocus && inSnippetMode
+actions.find                                                    cmd+f
 C_Cpp.GoToDeclaration
 C_Cpp.Navigate
 C_Cpp.PeekDeclaration
 C_Cpp.SwitchHeaderSource
-acceptRenameInput                                               enter                   when editorFocus && renameInputVisible
-acceptSelectedSuggestion                                        tab                     when editorTextFocus && suggestWidgetVisible
-acceptSelectedSuggestionOnEnter                                 enter                   when editorTextFocus && suggestWidgetVisible
-acceptSnippet                                                   enter                   when editorTextFocus && inSnippetMode
-actions.find                                                    cmd+f
 cancelRenameInput                                               escape                  when editorFocus && renameInputVisible
 cancelSelection                                                 escape                  when editorHasSelection && editorTextFocus
 closeAccessibilityHelp                                          escape                  when accessibilityHelpWidgetVisible && editorFocus
@@ -118,6 +117,8 @@ editor.action.diffReview.next
 editor.action.diffReview.prev
 editor.action.extensioneditor.hidefind
 editor.action.extensioneditor.showfind
+editor.action.extensioneditor.showNextFindTerm
+editor.action.extensioneditor.showPreviousFindTerm
 editor.action.findReferences
 editor.action.format                                            shift+alt+f             when editorTextFocus
 editor.action.formatDocument
@@ -125,13 +126,13 @@ editor.action.formatSelection
 editor.action.goToDeclaration                                   f12                     when editorTextFocus
 editor.action.goToImplementation
 editor.action.goToTypeDefinition
-editor.action.inPlaceReplace.down
-editor.action.inPlaceReplace.up
+editor.action.indentationToSpaces
+editor.action.indentationToTabs
 editor.action.indentLines
 editor.action.indentUsingSpaces
 editor.action.indentUsingTabs
-editor.action.indentationToSpaces
-editor.action.indentationToTabs
+editor.action.inPlaceReplace.down
+editor.action.inPlaceReplace.up
 editor.action.insertCursorAbove                                 alt+cmd+up              when editorTextFocus
 editor.action.insertCursorAtEndOfEachLineSelected
 editor.action.insertCursorBelow                                 alt+cmd+down            when editorTextFocus
@@ -178,6 +179,7 @@ editor.action.smartSelect.shrink
 editor.action.sortLinesAscending                                shift+cmd+2             when editorTextFocus
 editor.action.sortLinesDescending                               shift+cmd+3             when editorTextFocus
 editor.action.startFindReplaceAction                            alt+cmd+f
+editor.action.toggleMinimap
 editor.action.toggleRenderControlCharacter
 editor.action.toggleRenderWhitespace
 editor.action.toggleTabFocusMode
@@ -191,6 +193,8 @@ editor.action.triggerSuggest                                    ctrl+space      
 editor.action.trimTrailingWhitespace
 editor.action.webvieweditor.hideFind
 editor.action.webvieweditor.showFind
+editor.action.webvieweditor.showNextFindTerm
+editor.action.webvieweditor.showPreviousFindTerm
 editor.debug.action.conditionalBreakpoint
 editor.debug.action.runToCursor
 editor.debug.action.selectionToRepl
@@ -205,7 +209,7 @@ editor.emmet.action.decrementNumberByOne
 editor.emmet.action.decrementNumberByOneTenth
 editor.emmet.action.decrementNumberByTen
 editor.emmet.action.evaluateMathExpression
-editor.emmet.action.expandAbbreviation                          tab                     when editorTextFocus && !editorHasMultipleSelections && !editorHasSelection && !editorTabMovesFocus
+editor.emmet.action.expandAbbreviation
 editor.emmet.action.incrementNumberByOne
 editor.emmet.action.incrementNumberByOneTenth
 editor.emmet.action.incrementNumberByTen
@@ -258,6 +262,7 @@ filesExplorer.findInFolder
 filesExplorer.paste
 find.history.showNext
 find.history.showPrevious
+git._syncAll
 git.branch
 git.checkout
 git.clean
@@ -265,10 +270,13 @@ git.cleanAll
 git.clone
 git.commit
 git.commitAll
+git.commitAllAmend
 git.commitAllSigned
 git.commitStaged
+git.commitStagedAmend
 git.commitStagedSigned
 git.commitWithInput
+git.createTag
 git.deleteBranch
 git.ignore
 git.init
@@ -283,12 +291,16 @@ git.pullFrom
 git.pullRebase
 git.push
 git.pushTo
+git.pushWithTags
 git.refresh
 git.revertSelectedRanges
 git.showOutput
 git.stage
 git.stageAll
 git.stageSelectedRanges
+git.stash
+git.stashPop
+git.stashPopLatest
 git.sync
 git.undoCommit
 git.unstage
@@ -302,7 +314,6 @@ hexdump.hexdumpPath
 hexdump.save
 hexdump.searchString
 hexdump.toggleEndian
-hideSuggestWidget                                               ctrl+space              when editorTextFocus && suggestWidgetVisible
 hideSuggestWidget                                               escape                  when editorTextFocus && suggestWidgetVisible
 insertSnippet
 jumpToNextSnippetPlaceholder
@@ -361,7 +372,6 @@ repl.action.historyNext
 repl.action.historyPrevious
 replacePreviousChar
 revealFileInOS
-scm.switch
 scrollLineDown                                                  ctrl+pagedown           when editorTextFocus
 scrollLineUp                                                    ctrl+pageup             when editorTextFocus
 scrollPageDown                                                  cmd+pagedown            when editorTextFocus
@@ -394,6 +404,7 @@ selectPrevPageSuggestion                                        pageup          
 selectPrevSuggestion                                            ctrl+p                  when editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible
 selectPrevSuggestion                                            up                      when editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible
 setContext
+setSelection
 settings.action.focusSettingsFile
 settings.action.search
 settings.cycle
@@ -403,7 +414,7 @@ showNextParameterHint                                           down            
 showPrevParameterHint                                           ctrl+p                  when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                      when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 sortLines.sortLines
-tab                                                             tab                     when editorTextFocus && !editorTabMovesFocus
+tab                                                             tab                     when editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible
 toggleFindCaseSensitive                                         alt+cmd+c               when editorFocus
 toggleFindInSelection
 toggleFindRegex                                                 alt+cmd+r               when editorFocus
@@ -452,8 +463,8 @@ workbench.action.debug.stepOut                                  shift+f11       
 workbench.action.debug.stepOver                                 f10                     when inDebugMode
 workbench.action.debug.stop                                     shift+f5                when inDebugMode
 workbench.action.decreaseViewSize
-workbench.action.editor.changeEOL
 workbench.action.editor.changeEncoding
+workbench.action.editor.changeEOL
 workbench.action.editor.changeLanguageMode
 workbench.action.evenEditorWidths
 workbench.action.exitZenMode
@@ -506,6 +517,7 @@ workbench.action.navigateBack                                   ctrl+-
 workbench.action.navigateDown
 workbench.action.navigateEditorGroups
 workbench.action.navigateForward                                ctrl+shift+-
+workbench.action.navigateLast
 workbench.action.navigateLeft
 workbench.action.navigateRight
 workbench.action.navigateUp
@@ -603,6 +615,8 @@ workbench.action.terminal.copySelection
 workbench.action.terminal.deleteWordLeft
 workbench.action.terminal.deleteWordRight
 workbench.action.terminal.disallowWorkspaceShell
+workbench.action.terminal.findWidget.history.showNext
+workbench.action.terminal.findWidget.history.showPrevious
 workbench.action.terminal.focus
 workbench.action.terminal.focusAtIndex1
 workbench.action.terminal.focusAtIndex2
@@ -670,8 +684,10 @@ workbench.extensions.action.installExtensions
 workbench.extensions.action.installVSIX
 workbench.extensions.action.listOutdatedExtensions
 workbench.extensions.action.openExtensionsFolder
+workbench.extensions.action.showAzureExtensions
 workbench.extensions.action.showDisabledExtensions
 workbench.extensions.action.showEnabledExtensions
+workbench.extensions.action.showExtensionsForLanguage
 workbench.extensions.action.showInstalledExtensions
 workbench.extensions.action.showLanguageExtensions
 workbench.extensions.action.showPopularExtensions

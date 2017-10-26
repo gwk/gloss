@@ -179,6 +179,10 @@
                                        "when": "isInDiffEditor" },
   { "key": "cmd+f",                 "command": "editor.action.extensioneditor.hidefind",
                                        "when": "extensionEditorWebviewFocus" },
+  { "key": "alt+down",              "command": "editor.action.extensioneditor.showNextFindTerm",
+                                       "when": "extensionEditorFindWidgetInputFocused" },
+  { "key": "alt+up",                "command": "editor.action.extensioneditor.showPreviousFindTerm",
+                                       "when": "extensionEditorFindWidgetInputFocused" },
   { "key": "cmd+f",                 "command": "editor.action.extensioneditor.showfind",
                                        "when": "extensionEditorWebviewFocus" },
   { "key": "shift+alt+f",           "command": "editor.action.formatDocument",
@@ -274,12 +278,18 @@
                                        "when": "webviewEditorFocus" },
   { "key": "cmd+f",                 "command": "editor.action.webvieweditor.showFind",
                                        "when": "webviewEditorFocus" },
+  { "key": "alt+down",              "command": "editor.action.webvieweditor.showNextFindTerm",
+                                       "when": "webviewEditorFindWidgetInputFocused" },
+  { "key": "alt+up",                "command": "editor.action.webvieweditor.showPreviousFindTerm",
+                                       "when": "webviewEditorFindWidgetInputFocused" },
   { "key": "cmd+k cmd+i",           "command": "editor.debug.action.showDebugHover",
                                        "when": "editorTextFocus && inDebugMode" },
   { "key": "f9",                    "command": "editor.debug.action.toggleBreakpoint",
                                        "when": "editorTextFocus" },
   { "key": "shift+f9",              "command": "editor.debug.action.toggleColumnBreakpoint",
                                        "when": "editorTextFocus" },
+  { "key": "tab",                   "command": "editor.emmet.action.expandAbbreviation",
+                                       "when": "config.emmet.triggerExpansionOnTab && editorTextFocus && !editorReadonly && !editorTabMovesFocus" },
   { "key": "alt+cmd+[",             "command": "editor.fold",
                                        "when": "editorTextFocus" },
   { "key": "cmd+k cmd+0",           "command": "editor.foldAll",
@@ -626,6 +636,10 @@
                                        "when": "terminalFocus" },
   { "key": "alt+delete",            "command": "workbench.action.terminal.deleteWordRight",
                                        "when": "terminalFocus" },
+  { "key": "alt+down",              "command": "workbench.action.terminal.findWidget.history.showNext",
+                                       "when": "terminalFindWidgetInputFocused && terminalFindWidgetVisible" },
+  { "key": "alt+up",                "command": "workbench.action.terminal.findWidget.history.showPrevious",
+                                       "when": "terminalFindWidgetInputFocused && terminalFindWidgetVisible" },
   { "key": "cmd+f",                 "command": "workbench.action.terminal.focusFindWidget",
                                        "when": "terminalFocus" },
   { "key": "end",                   "command": "workbench.action.terminal.hideFindWidget",
@@ -821,6 +835,7 @@
   // - editor.action.showSnippets
   // - editor.action.sortLinesAscending
   // - editor.action.sortLinesDescending
+  // - editor.action.toggleMinimap
   // - editor.action.toggleRenderControlCharacter
   // - editor.action.toggleRenderWhitespace
   // - editor.action.transformToLowercase
@@ -837,7 +852,6 @@
   // - editor.emmet.action.decrementNumberByOneTenth
   // - editor.emmet.action.decrementNumberByTen
   // - editor.emmet.action.evaluateMathExpression
-  // - editor.emmet.action.expandAbbreviation
   // - editor.emmet.action.incrementNumberByOne
   // - editor.emmet.action.incrementNumberByOneTenth
   // - editor.emmet.action.incrementNumberByTen
@@ -864,6 +878,7 @@
   // - explorer.newFile
   // - explorer.newFolder
   // - filesExplorer.findInFolder
+  // - git._syncAll
   // - git.branch
   // - git.checkout
   // - git.clean
@@ -871,10 +886,13 @@
   // - git.clone
   // - git.commit
   // - git.commitAll
+  // - git.commitAllAmend
   // - git.commitAllSigned
   // - git.commitStaged
+  // - git.commitStagedAmend
   // - git.commitStagedSigned
   // - git.commitWithInput
+  // - git.createTag
   // - git.deleteBranch
   // - git.ignore
   // - git.init
@@ -889,12 +907,16 @@
   // - git.pullRebase
   // - git.push
   // - git.pushTo
+  // - git.pushWithTags
   // - git.refresh
   // - git.revertSelectedRanges
   // - git.showOutput
   // - git.stage
   // - git.stageAll
   // - git.stageSelectedRanges
+  // - git.stash
+  // - git.stashPop
+  // - git.stashPopLatest
   // - git.sync
   // - git.undoCommit
   // - git.unstage
@@ -922,12 +944,12 @@
   // - paste
   // - repl.action.copyAll
   // - replacePreviousChar
-  // - scm.switch
   // - selectAll
   // - selectFirstSuggestion
   // - selectLastSuggestion
   // - setContext
   // - settings.cycle
+  // - setSelection
   // - type
   // - update.showCurrentReleaseNotes
   // - workbench.action.acceptSelectedQuickOpenItem
@@ -968,6 +990,7 @@
   // - workbench.action.minimizeOtherEditors
   // - workbench.action.navigateDown
   // - workbench.action.navigateEditorGroups
+  // - workbench.action.navigateLast
   // - workbench.action.navigateLeft
   // - workbench.action.navigateRight
   // - workbench.action.navigateUp
@@ -1064,8 +1087,10 @@
   // - workbench.extensions.action.installVSIX
   // - workbench.extensions.action.listOutdatedExtensions
   // - workbench.extensions.action.openExtensionsFolder
+  // - workbench.extensions.action.showAzureExtensions
   // - workbench.extensions.action.showDisabledExtensions
   // - workbench.extensions.action.showEnabledExtensions
+  // - workbench.extensions.action.showExtensionsForLanguage
   // - workbench.extensions.action.showInstalledExtensions
   // - workbench.extensions.action.showLanguageExtensions
   // - workbench.extensions.action.showPopularExtensions
