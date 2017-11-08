@@ -102,6 +102,8 @@ $GLOSS_PS_PREFIX_SUDO\
   $GLOSS_PROMPT_CMDS
 }
 
+PROMPT_COMMAND="gloss_set_prompts" # prompt is set dynamically with PROMPT_COMMAND.
+
 
 # gloss environment not yet set; only set up once.
 if [[ -z "$GLOSS_ENV" ]]; then
@@ -134,9 +136,6 @@ if [[ -z "$GLOSS_ENV" ]]; then
   else
     export GLOS_PS_PREFIX_SSH=''
   fi
-
-  # prompt is set dynamically with PROMPT_COMMAND.
-  export PROMPT_COMMAND="gloss_set_prompts"
 
   prepend_to_search_path PATH "$GLOSS_DIR/bin"
 
