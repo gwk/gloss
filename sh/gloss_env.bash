@@ -23,7 +23,7 @@ prepend_to_search_path() {
   local _path=$($GLOSS_DIR/sh/prepend-to-search-path.py $_path_name $@)
 
   # NOTE: during shell startup bash will fail to capture the exit code,
-  # either due to python3 not residing in existing PATH or script exit code.
+  # either due to python not residing in existing PATH or script exit code.
   # Therefore we also check that the output is not empty.
   # Without this check we would inadvertantly set PATH to blank, making the shell less usable.
   if [[ $? != 0 || -z $_path ]]; then
