@@ -72,7 +72,7 @@ def make_settings():
   scope('meta', foreground=W) # too broad.
   scope('meta.diff, meta.diff.header', foreground=R)
 
-  scope('punctuation', foreground=L2)
+  scope('punctuation', foreground=C)
 
   scope('storage', foreground=Y)
   scope('storage.type', fontStyle='italic')
@@ -135,8 +135,8 @@ L1 = '#F0F0F0'
 W = '#FFFFFF' # white.
 
 R = '#FF0000'
-G = '#00FF00'
-B = '#0000FF'
+G = '#20FF20'
+B = '#6060FF'
 
 Y = '#FFFF00'
 C = '#00FFFF'
