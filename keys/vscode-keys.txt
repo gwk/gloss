@@ -3,6 +3,7 @@ acceptSelectedSuggestion                                        tab             
 acceptSelectedSuggestionOnEnter
 acceptSnippet                                                   tab                     when editorTextFocus && inSnippetMode
 actions.find                                                    cmd+f
+actions.findWithSelection
 C_Cpp.GoToDeclaration
 C_Cpp.Navigate
 C_Cpp.PeekDeclaration
@@ -11,6 +12,7 @@ cancelRenameInput                                               escape          
 cancelSelection                                                 escape                  when editorHasSelection && editorTextFocus
 closeAccessibilityHelp                                          escape                  when accessibilityHelpWidgetVisible && editorFocus
 closeBreakpointWidget                                           escape                  when breakpointWidgetVisible && editorFocus
+closeDirtyDiff
 closeFindWidget                                                 escape                  when editorFocus && findWidgetVisible
 closeMarkersNavigation                                          escape                  when editorFocus && markersNavigationVisible
 closeParameterHints                                             escape                  when editorTextFocus && parameterHintsVisible
@@ -98,7 +100,7 @@ deleteWordRight                                                 alt+delete      
 deleteWordStartLeft
 deleteWordStartRight
 editor.action.addCommentLine
-editor.action.addSelectionToNextFindMatch                       cmd+d                   when editorFocus
+editor.action.addSelectionToNextFindMatch
 editor.action.addSelectionToPreviousFindMatch
 editor.action.blockComment
 editor.action.changeAll
@@ -115,7 +117,8 @@ editor.action.deleteLines
 editor.action.detectIndentation
 editor.action.diffReview.next
 editor.action.diffReview.prev
-editor.action.extensioneditor.hidefind
+editor.action.dirtydiff.next
+editor.action.dirtydiff.previous
 editor.action.extensioneditor.showfind
 editor.action.extensioneditor.showNextFindTerm
 editor.action.extensioneditor.showPreviousFindTerm
@@ -195,6 +198,8 @@ editor.action.webvieweditor.hideFind
 editor.action.webvieweditor.showFind
 editor.action.webvieweditor.showNextFindTerm
 editor.action.webvieweditor.showPreviousFindTerm
+editor.action.wordHighlight.next
+editor.action.wordHighlight.prev
 editor.debug.action.conditionalBreakpoint
 editor.debug.action.runToCursor
 editor.debug.action.selectionToRepl
@@ -229,6 +234,8 @@ editor.emmet.action.wrapIndividualLinesWithAbbreviation
 editor.emmet.action.wrapWithAbbreviation
 editor.fold                                                     shift+cmd+[             when editorFocus
 editor.foldAll
+editor.foldAllBlockComments
+editor.foldAllMarkerRegions
 editor.foldLevel1
 editor.foldLevel2
 editor.foldLevel3
@@ -236,11 +243,10 @@ editor.foldLevel4
 editor.foldLevel5
 editor.foldLevel6
 editor.foldLevel7
-editor.foldLevel8
-editor.foldLevel9
 editor.foldRecursively
 editor.unfold                                                   shift+cmd+]             when editorFocus
 editor.unfoldAll
+editor.unfoldAllMarkerRegions
 editor.unfoldRecursively
 emmet.expandAbbreviation
 eslint.createConfig
@@ -257,6 +263,7 @@ extension.dash.customSyntax
 extension.dash.emptySyntax
 extension.dash.specific
 extension.node-debug.pickLoadedScript
+exthost.profile.start
 filesExplorer.copy
 filesExplorer.findInFolder
 filesExplorer.paste
@@ -268,6 +275,7 @@ git.checkout
 git.clean
 git.cleanAll
 git.clone
+git.close
 git.commit
 git.commitAll
 git.commitAllAmend
@@ -278,6 +286,7 @@ git.commitStagedSigned
 git.commitWithInput
 git.createTag
 git.deleteBranch
+git.fetch
 git.ignore
 git.init
 git.merge
@@ -293,15 +302,20 @@ git.push
 git.pushTo
 git.pushWithTags
 git.refresh
+git.renameBranch
+git.revertChange
 git.revertSelectedRanges
 git.showOutput
 git.stage
 git.stageAll
+git.stageChange
 git.stageSelectedRanges
 git.stash
+git.stashIncludeUntracked
 git.stashPop
 git.stashPopLatest
 git.sync
+git.syncRebase
 git.undoCommit
 git.unstage
 git.unstageAll
@@ -310,6 +324,7 @@ hexdump.editValue
 hexdump.exportToFile
 hexdump.gotoAddress
 hexdump.hexdumpFile
+hexdump.hexdumpOpen
 hexdump.hexdumpPath
 hexdump.save
 hexdump.searchString
@@ -318,6 +333,7 @@ hideSuggestWidget                                               escape          
 insertSnippet
 jumpToNextSnippetPlaceholder
 jumpToPrevSnippetPlaceholder
+keybindings.editor.clearSearchResults
 keybindings.editor.copyKeybindingEntry
 keybindings.editor.defineKeybinding
 keybindings.editor.focusKeybindings
@@ -361,15 +377,16 @@ moveFileToTrash                                                 cmd+delete
 outdent                                                         shift+tab               when editorTextFocus && !editorTabMovesFocus
 paste
 problems.action.copy                                            cmd+c                   when problemFocus
+problems.action.copyMessage
 problems.action.openToSide
 redo                                                            shift+cmd+z             when editorTextFocus && !editorReadonly
 removeSecondaryCursors                                          escape                  when editorHasMultipleSelections && editorTextFocus
 renameFile
-repl.action.acceptInput
-repl.action.acceptSuggestion
+repl.action.acceptInput                                         enter                   when inDebugRepl
+repl.action.acceptSuggestion                                    tab                     when inDebugRepl
 repl.action.copyAll
-repl.action.historyNext
-repl.action.historyPrevious
+repl.action.historyNext                                         ctrl+n                  when inDebugRepl
+repl.action.historyPrevious                                     ctrl+p                  when inDebugRepl
 replacePreviousChar
 revealFileInOS
 scrollLineDown                                                  ctrl+pagedown           when editorTextFocus
@@ -386,6 +403,7 @@ search.action.remove
 search.action.replace
 search.action.replaceAll                                        alt+cmd+enter           when replaceActive && searchViewletVisible && !findWidgetVisible
 search.action.replaceAllInFile
+search.action.replaceAllInFolder
 search.focus.nextInputBox
 search.focus.previousInputBox
 search.history.showNext
@@ -405,15 +423,16 @@ selectPrevSuggestion                                            ctrl+p          
 selectPrevSuggestion                                            up                      when editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible
 setContext
 setSelection
+settings.action.clearSearchResults
+settings.action.focusNextSetting
+settings.action.focusPreviousSetting
 settings.action.focusSettingsFile
 settings.action.search
-settings.cycle
 settings.cycle.trimTrailingWhitespace                           ctrl+cmd+w
 showNextParameterHint                                           ctrl+n                  when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showNextParameterHint                                           down                    when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           ctrl+p                  when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                      when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
-sortLines.sortLines
 tab                                                             tab                     when editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible
 toggleFindCaseSensitive                                         alt+cmd+c               when editorFocus
 toggleFindInSelection
@@ -451,17 +470,17 @@ workbench.action.compareEditor.previousChange
 workbench.action.configureLanguageBasedSettings
 workbench.action.configureLocale
 workbench.action.debug.configure
-workbench.action.debug.continue                                 f5                      when inDebugMode
+workbench.action.debug.continue                                 shift+cmd+right         when inDebugMode
 workbench.action.debug.disconnect
 workbench.action.debug.pause
-workbench.action.debug.restart                                  shift+cmd+f5            when inDebugMode
-workbench.action.debug.run                                      cmd+f5                  when !inDebugMode
+workbench.action.debug.restart
+workbench.action.debug.run                                      cmd+d                   when !inDebugMode
 workbench.action.debug.selectandstart
-workbench.action.debug.start                                    f5                      when !inDebugMode
-workbench.action.debug.stepInto                                 f11                     when inDebugMode
-workbench.action.debug.stepOut                                  shift+f11               when inDebugMode
-workbench.action.debug.stepOver                                 f10                     when inDebugMode
-workbench.action.debug.stop                                     shift+f5                when inDebugMode
+workbench.action.debug.start
+workbench.action.debug.stepInto                                 cmd+up                  when inDebugMode
+workbench.action.debug.stepOut                                  cmd+down                when inDebugMode
+workbench.action.debug.stepOver                                 cmd+right               when inDebugMode
+workbench.action.debug.stop                                     cmd+d                   when inDebugMode
 workbench.action.decreaseViewSize
 workbench.action.editor.changeEncoding
 workbench.action.editor.changeEOL
@@ -473,7 +492,9 @@ workbench.action.files.newFile
 workbench.action.files.newFolder
 workbench.action.files.newUntitledFile                          cmd+n
 workbench.action.files.openFileFolder                           shift+cmd+o
+workbench.action.files.openFileFolderInNewWindow
 workbench.action.files.openFileInNewWindow
+workbench.action.files.openFolderInNewWindow
 workbench.action.files.revealActiveFileInWindows
 workbench.action.files.revert
 workbench.action.files.save                                     cmd+s
@@ -482,6 +503,7 @@ workbench.action.files.saveAs                                   shift+cmd+s
 workbench.action.files.saveFiles
 workbench.action.files.showOpenedFileInNewWindow
 workbench.action.findInFiles
+workbench.action.findInFilesWithSelectedText
 workbench.action.focusActiveEditorGroup
 workbench.action.focusFirstEditorGroup                          cmd+1
 workbench.action.focusNextGroup
@@ -505,6 +527,7 @@ workbench.action.interactivePlayground.pageUp
 workbench.action.joinTwoGroups
 workbench.action.keepEditor
 workbench.action.keybindingsReference
+workbench.action.lastEditorInGroup
 workbench.action.maximizeEditor
 workbench.action.minimizeOtherEditors
 workbench.action.moveActiveEditorGroupLeft
@@ -534,6 +557,7 @@ workbench.action.openEditorAtIndex6                             ctrl+6
 workbench.action.openEditorAtIndex7                             ctrl+7
 workbench.action.openEditorAtIndex8                             ctrl+8
 workbench.action.openEditorAtIndex9                             ctrl+9
+workbench.action.openFolderAsWorkspaceInNewWindow
 workbench.action.openFolderSettings
 workbench.action.openGlobalKeybindings
 workbench.action.openGlobalKeybindingsFile
@@ -545,16 +569,19 @@ workbench.action.openNextRecentlyUsedEditorInGroup              ctrl+tab
 workbench.action.openPreviousEditorFromHistory
 workbench.action.openPreviousRecentlyUsedEditor
 workbench.action.openPreviousRecentlyUsedEditorInGroup          ctrl+shift+tab
+workbench.action.openRawDefaultSettings
 workbench.action.openRecent
 workbench.action.openSnippets
 workbench.action.openTipsAndTricksUrl
 workbench.action.openView
 workbench.action.openWorkspace
 workbench.action.openWorkspaceConfigFile
+workbench.action.openWorkspaceInNewWindow
 workbench.action.openWorkspaceSettings
 workbench.action.output.toggleOutput                            shift+cmd+u
 workbench.action.previousEditor                                 shift+cmd+[
 workbench.action.previousEditorInGroup
+workbench.action.problems.focus
 workbench.action.quickOpen                                      cmd+o
 workbench.action.quickOpenNavigateNext                          cmd+o                   when inQuickOpen
 workbench.action.quickOpenNavigateNextInEditorPicker
@@ -568,6 +595,7 @@ workbench.action.quickOpenNavigatePreviousInFilePicker
 workbench.action.quickOpenNavigatePreviousInRecentFilesPicker
 workbench.action.quickOpenNavigatePreviousInTerminalPicker
 workbench.action.quickOpenNavigatePreviousInViewPicker
+workbench.action.quickOpenPreviousEditor
 workbench.action.quickOpenRecent
 workbench.action.quickOpenSelectNext                            ctrl+n                  when inQuickOpen
 workbench.action.quickOpenSelectPrevious                        ctrl+p                  when inQuickOpen
@@ -577,8 +605,10 @@ workbench.action.quickSwitchWindow
 workbench.action.quit                                           cmd+q
 workbench.action.reloadWindow                                   ctrl+alt+cmd+r
 workbench.action.removeFromEditorHistory
+workbench.action.removeRootFolder
 workbench.action.reopenClosedEditor
 workbench.action.replaceInFiles
+workbench.action.replaceInFilesWithSelectedText
 workbench.action.reportIssues
 workbench.action.reportPerformanceIssue
 workbench.action.revertAndCloseActiveEditor
@@ -596,6 +626,7 @@ workbench.action.showEmmetCommands
 workbench.action.showErrorsWarnings
 workbench.action.showInteractivePlayground
 workbench.action.showInterfaceOverview
+workbench.action.showRuntimeExtensions
 workbench.action.showWelcomePage
 workbench.action.splitEditor                                    cmd+\
 workbench.action.switchWindow
@@ -653,18 +684,23 @@ workbench.action.toggleFullScreen                               ctrl+cmd+f
 workbench.action.toggleMaximizedPanel
 workbench.action.toggleMultiCursorModifier
 workbench.action.togglePanel
+workbench.action.togglePanelPosition
 workbench.action.toggleSharedProcess
 workbench.action.toggleSidebarPosition
 workbench.action.toggleSidebarVisibility                        shift+cmd+l
 workbench.action.toggleStatusbarVisibility
+workbench.action.toggleTabsVisibility
 workbench.action.toggleZenMode
 workbench.action.uninstallCommandLine
 workbench.action.zoomIn                                         cmd+=
 workbench.action.zoomOut                                        cmd+-
 workbench.action.zoomReset                                      cmd+/
 workbench.actions.view.problems                                 shift+cmd+m
-workbench.customDebugRequest
+workbench.debug.action.focusBreakpointsView
+workbench.debug.action.focusCallStackView
 workbench.debug.action.focusRepl
+workbench.debug.action.focusVariablesView
+workbench.debug.action.focusWatchView
 workbench.debug.action.toggleRepl                               shift+cmd+y
 workbench.debug.panel.action.clearReplAction
 workbench.debug.viewlet.action.addFunctionBreakpointAction
@@ -673,6 +709,7 @@ workbench.debug.viewlet.action.enableAllBreakpoints
 workbench.debug.viewlet.action.reapplyBreakpointsAction
 workbench.debug.viewlet.action.removeAllBreakpoints
 workbench.extensions.action.checkForUpdates
+workbench.extensions.action.configureWorkspaceFolderRecommendedExtensions
 workbench.extensions.action.configureWorkspaceRecommendedExtensions
 workbench.extensions.action.disableAll
 workbench.extensions.action.disableAllWorkspace
@@ -693,11 +730,11 @@ workbench.extensions.action.showLanguageExtensions
 workbench.extensions.action.showPopularExtensions
 workbench.extensions.action.showRecommendedExtensions
 workbench.extensions.action.showRecommendedKeymapExtensions
-workbench.extensions.action.showWorkspaceRecommendedExtensions
 workbench.extensions.action.updateAllExtensions
 workbench.files.action.acceptLocalChanges
 workbench.files.action.collapseExplorerFolders
 workbench.files.action.compareFileWith
+workbench.files.action.compareWithClipboard
 workbench.files.action.compareWithSaved
 workbench.files.action.focusFilesExplorer
 workbench.files.action.focusOpenEditorsView
