@@ -17,6 +17,15 @@ def main():
   whens_out_path= "_build/vscode-whens.txt"
   defaults, other_cmds = parse_defaults(defaults_json_path)
 
+  def msg(line, *items):
+    errSL(f'{bindings_path}:{line}:', *items)
+
+  def warn(line, *items): msg(line, 'warning:', *items)
+
+  def error(line, *items):
+    msg(line, 'error:', *items)
+    exit(1)
+
   ctx = Immutable(
     defaults=defaults,
     other_cmds=other_cmds,
@@ -24,7 +33,9 @@ def main():
     all_whens=set(),
     dflt_triples=[], # used to generate keybindings.txt once.
     bindings=[],
-    bound_cmds = set())
+    bound_cmds = set(),
+    warn=warn,
+    error=error)
 
   prepare(ctx)
   write_defaults_txt(defaults_out_path, ctx.dflt_triples)
@@ -56,7 +67,8 @@ def parse_defaults(defaults_path):
   json_str = ''.join(json_lines)
   try: defaults = parse_json(json_str)
   except JSONDecodeError as e:
-    exit(f'parse_defaults error: {defaults_path}: {e}\n{json_lines[e.lineno-1]}')
+    line = e.lineno
+    exit(f'{defaults_path}:{line}: error: {e}\n{json_lines[line-1]}')
   return defaults, other_cmds
 
 
@@ -109,7 +121,7 @@ def parse_binding(ctx, binding):
   if not words: return
   cmd = words[0]
   if cmd not in ctx.all_cmds:
-    errL(f'warning: {line_num}: unknown command: {cmd}')
+    ctx.warn(line_num, 'unknown command:', cmd)
   try:
     when_index = words.index('when')
   except ValueError:
@@ -129,7 +141,7 @@ def parse_binding(ctx, binding):
     args_str = ''.join(l for i, l in binding[1:])
     try: args = parse_json(args_str)
     except JSONDecodeError as e:
-      exit(f'args error: {line_num} {e}\n{args_str}')
+      ctx.error(line_num, f'invalid args JSON: {e}\n{args_str}')
 
   def add_binding(keys):
     binding = {
@@ -150,12 +162,12 @@ def validate_keys(line_num, keys):
   for word in keys:
     for el in word.split('+'):
       if not key_validator.fullmatch(el):
-        exit(f'{line_num}: bad key: {el!r}')
+        ctx.error(line_num, f'bad key: {el!r}')
 
 def validate_whens(ctx, line_num, whens):
   for when in whens:
     if when.lstrip('!') not in ctx.all_whens:
-      exit(f'{line_num}: bad when: {when}')
+      ctx.error(line_num, f'bad when: {when}')
 
 
 def warn_unbound_cmds(ctx):
