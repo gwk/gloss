@@ -350,17 +350,19 @@ lineBreakInsert                                                 ctrl+o          
 list.clear
 list.collapse
 list.expand
-list.focusDown
+list.focusDown                                                  down                    when listFocus
 list.focusFirst
 list.focusFirstChild
 list.focusLast
 list.focusLastChild
 list.focusPageDown
 list.focusPageUp
-list.focusUp
-list.select
-list.toggleExpand
+list.focusUp                                                    up                      when listFocus
+list.select                                                     enter                   when listFocus
+list.toggleExpand                                               space                   when listFocus
 macros.inspect
+macros.callStackDown                                            shift+cmd+down          when inDebugMode
+macros.callStackUp                                              shift+cmd+up            when inDebugMode
 markdown.showPreview                                            shift+cmd+v
 markdown.showPreviewToSide
 merge-conflict.accept.all-both
