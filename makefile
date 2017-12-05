@@ -19,7 +19,7 @@ cov:
 	iotest -fail-fast -coverage
 
 install-sys:
-	sudo install/gloss-install-sys.py
+	install/gloss-install-sys.py
 
 install-user:
 	install/gloss-install-user.py

@@ -10,7 +10,7 @@ from sys import argv, stderr
 
 from os.path import abspath as abs_path, isdir as is_dir, dirname as path_dir, exists as path_exists, join as path_join
 from shutil import copy as copy_file
-from pithy.fs import make_dir, make_dirs, path_stem, remove_dir_tree # TODO: remove pithy dependency.
+from pithy.fs import make_dir, make_dirs, path_stem, remove_dir_contents # TODO: remove pithy dependency.
 
 
 def errSL(*items): print(*items, file=stderr)

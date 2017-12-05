@@ -11,7 +11,7 @@ def main():
   try:
     if is_dir(dst_dir):
       errSL('removing old dst_dir...')
-      remove_dir_tree(dst_dir)
+      remove_dir_contents(dst_dir)
     make_dirs(dst_dir)
 
     errSL('copying files to dst_dir...')
