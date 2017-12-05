@@ -24,3 +24,11 @@ cp vscode/syntaxes/*.json       "$VSCODE_SYNTAXES"
 
 cp _build/gloss-black.json  "$VSCODE_THEMES"
 cp _build/vscode-keys.json  "$VSCODE_USER/keybindings.json"
+
+set +x
+
+if ! dl vscode/settings.json "$VSCODE_USER/settings.json"; then
+  confirm 'copy user settings to this repo' \
+  && cp "$VSCODE_USER/settings.json" vscode/settings.json \
+  || echo 'NOTE: user settings are not in sync with repo.'
+fi
