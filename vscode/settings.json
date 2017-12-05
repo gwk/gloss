@@ -1,95 +1,112 @@
 {
-"css.lint.boxModel": "warning",
-"css.lint.important": "warning",
-"css.lint.float": "warning",
+  "css.lint.boxModel": "warning",
+  "css.lint.important": "warning",
+  "css.lint.float": "warning",
 
-"diffEditor.ignoreTrimWhitespace": false,
-"diffEditor.renderSideBySide": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": false,
 
-"editor.autoClosingBrackets": false,
-"editor.detectIndentation": true,
-"editor.fontFamily": "Source Code Pro, Menlo, monospace",
-"editor.fontSize": 12,
-"editor.formatOnType": false,
-"editor.formatOnPaste": false,
-"editor.formatOnSave": false,
-"editor.glyphMargin": false, // TODO: document what this is.
-"editor.insertSpaces": true,
-"editor.minimap.enabled": false,
-"editor.minimap.renderCharacters": true,
-"editor.minimap.maxColumn": 96,
-"editor.quickSuggestions": true,
-"editor.quickSuggestionsDelay": 10,
-"editor.renderControlCharacters": true,
-"editor.renderIndentGuides": true,
-"editor.renderWhitespace": "none",
-"editor.roundedSelection": false,
-"editor.rulers": [80, 96, 128],
-"editor.scrollBeyondLastLine": false,
-"editor.suggestOnTriggerCharacters": true,
-"editor.tabSize": 2,
-"editor.trimAutoWhitespace": true,
-"editor.wordWrap": "on",
+  "editor.autoClosingBrackets": false,
+  "editor.detectIndentation": true,
+  "editor.fontFamily": "Source Code Pro, Menlo, monospace",
+  "editor.fontSize": 12,
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false,
+  "editor.formatOnType": false,
+  "editor.insertSpaces": true,
+  "editor.minimap.enabled": false,
+  "editor.minimap.maxColumn": 96,
+  "editor.minimap.renderCharacters": true,
+  "editor.occurrencesHighlight": false,
+  "editor.quickSuggestions": true,
+  "editor.quickSuggestionsDelay": 10,
+  "editor.renderControlCharacters": true,
+  "editor.renderIndentGuides": true,
+  "editor.renderWhitespace": "none",
+  "editor.roundedSelection": false,
+  "editor.rulers": [80, 96, 128],
+  "editor.scrollBeyondLastLine": false,
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.tabSize": 2,
+  "editor.trimAutoWhitespace": true,
+  "editor.wordWrap": "on",
 
-"files.exclude": {
-  "**/__pycache__": true,
-  "**/_build/debug": true,
-  "**/_build/release": true,
-  "**/.git": true,
-  "**/.svn": true,
-  "**/.DS_Store": true,
-  "**/mypy_cache": true
-},
+  "extensions.ignoreRecommendations": true,
 
-"files.trimTrailingWhitespace": true,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/_build/debug": true,
+    "**/_build/release": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.DS_Store": true,
+    "**/mypy_cache": true
+  },
 
-"git.autofetch": false,
+  "files.trimTrailingWhitespace": true,
 
-"html.format.wrapLineLength": 0,
+  "git.autofetch": false,
 
-"settings.cycle": [
-  { "id": "trimTrailingWhitespace",
-    "overrideWorkspaceSettings": true,
-    "values": [
-      { "trimTrailingWhitespace": true },
-      { "trimTrailingWhitespace": false }]}
-],
-"telemetry.enableTelemetry": false,
+  "html.format.wrapLineLength": 0,
 
-"terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
-"terminal.integrated.lineHeight": 1.2,
+  "macros": {
+    "callStackUp": [
+      "workbench.debug.action.focusCallStackView",
+      "list.focusUp",
+      "list.select"],
+    "callStackDown": [
+      "workbench.debug.action.focusCallStackView",
+      "list.focusDown",
+      "list.select"]
+  },
 
-"window.zoomLevel": 0,
+  "settings.cycle": [
+    { "id": "trimTrailingWhitespace",
+      "overrideWorkspaceSettings": true,
+      "values": [
+        { "files.trimTrailingWhitespace": true },
+        { "files.trimTrailingWhitespace": false }]}
+  ],
 
-"workbench.colorCustomizations": {
-  "terminal.background": "#000000",
-  "terminal.foreground": "#FFFFFF",
-  "terminal.ansiBlack": "#404040",
-  "terminal.ansiBrightBlack": "#404040",
-  "terminal.ansiWhite": "#C0C0C0",
-  "terminal.ansiBrightWhite": "#C0C0C0",
-  "terminal.ansiBlue": "#4444FF",
-  "terminal.ansiBrightBlue": "#4444FF",
-  "terminal.ansiCyan": "#00FFFF",
-  "terminal.ansiBrightCyan": "#00FFFF",
-  "terminal.ansiGreen": "#00FF00",
-  "terminal.ansiBrightGreen": "#00FF00",
-  "terminal.ansiMagenta": "#FF00FF",
-  "terminal.ansiBrightMagenta": "#FF00FF",
-  "terminal.ansiRed": "#FF2222",
-  "terminal.ansiBrightRed": "#FF2222",
-  "terminal.ansiBrightYellow": "#FFFF00",
-  "terminal.ansiYellow": "#FFFF00"
-},
+  "settings.cycle.logLevel": "log",
 
-"workbench.colorTheme": "gloss-black",
-"workbench.statusBar.visible": false,
-"workbench.activityBar.visible": false,
-"workbench.editor.showIcons": false,
-"workbench.sideBar.location": "left",
-"workbench.startupEditor": "newUntitledFile",
+  "telemetry.enableTelemetry": false,
 
-"[xcode]": {
-  "editor.insertSpaces": false
-}
+  "terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
+  "terminal.integrated.lineHeight": 1.2,
+
+  "window.newWindowDimensions": "maximized",
+  "window.zoomLevel": 1,
+
+  "workbench.colorCustomizations": {
+    "terminal.background": "#000000",
+    "terminal.foreground": "#FFFFFF",
+    "terminal.ansiBlack": "#404040",
+    "terminal.ansiBrightBlack": "#404040",
+    "terminal.ansiWhite": "#C0C0C0",
+    "terminal.ansiBrightWhite": "#C0C0C0",
+    "terminal.ansiBlue": "#4444FF",
+    "terminal.ansiBrightBlue": "#4444FF",
+    "terminal.ansiCyan": "#00FFFF",
+    "terminal.ansiBrightCyan": "#00FFFF",
+    "terminal.ansiGreen": "#00FF00",
+    "terminal.ansiBrightGreen": "#00FF00",
+    "terminal.ansiMagenta": "#FF00FF",
+    "terminal.ansiBrightMagenta": "#FF00FF",
+    "terminal.ansiRed": "#FF2222",
+    "terminal.ansiBrightRed": "#FF2222",
+    "terminal.ansiBrightYellow": "#FFFF00",
+    "terminal.ansiYellow": "#FFFF00"
+  },
+
+  "workbench.colorTheme": "gloss-black",
+  "workbench.statusBar.visible": false,
+  "workbench.activityBar.visible": false,
+  "workbench.editor.showIcons": false,
+  "workbench.sideBar.location": "left",
+  "workbench.startupEditor": "newUntitledFile",
+
+  "[xcode]": {
+    "editor.insertSpaces": false
+  }
 }
