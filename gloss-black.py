@@ -3,6 +3,8 @@
 
 '''
 Generate the gloss-black theme.
+
+for settings color customizations, see https://code.visualstudio.com/docs/getstarted/theme-color-reference.
 '''
 
 import json
