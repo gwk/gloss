@@ -7,7 +7,7 @@ from sys import stderr
 
 
 def main():
-  parser = ArgumentParser('Read csv and output formatted columns.')
+  parser = ArgumentParser(description='Read csv and output formatted columns.')
   parser.add_argument('-number-lines', action='store_true', help='prefix output with row number')
   parser.add_argument('-encoding', default='utf8', help='Text encoding used to read file.')
   parser.add_argument('-limit', type=int, help='limit output to specified number of rows')

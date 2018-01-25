@@ -9,7 +9,7 @@ from os.path import dirname
 
 
 def main():
-  parser = ArgumentParser("Run a python script under Python's cProfile profiler.")
+  parser = ArgumentParser(description="Run a python script under Python's cProfile profiler.")
   parser.add_argument('-sort', nargs='+', default=['cumulative', 'filename', 'name'], help='sort keys')
   parser.add_argument('-filter', nargs='+', default=[], help='filtering clauses')
   parser.add_argument('cmd', nargs='+', help='the command to run')

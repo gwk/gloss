@@ -6,11 +6,11 @@ from argparse import ArgumentParser
 
 
 def main():
-  parser = ArgumentParser('Parse and print color channel values in a variety of representations.')
-  parser.add_argument('-decimal',      action='store_true', help='8 bit decimal values (0-255)'),
-  parser.add_argument('-hexadecimal',  action='store_true', help='8 bit hexadecimal values (00-FF'),
-  parser.add_argument('-normal',       action='store_true', help='normalized decimal values (0-1)'),
-  parser.add_argument('components', nargs='+', help='color components to convert'),
+  parser = ArgumentParser(description='Parse and print color channel values in a variety of representations.')
+  parser.add_argument('-decimal',      action='store_true', help='8 bit decimal values (0-255)')
+  parser.add_argument('-hexadecimal',  action='store_true', help='8 bit hexadecimal values (00-FF')
+  parser.add_argument('-normal',       action='store_true', help='normalized decimal values (0-1)')
+  parser.add_argument('components', nargs='+', help='color components to convert')
   args = parser.parse_args()
 
   pattern = r'\d+(?:\.\d*)?|\.\d+' # decimal parser
