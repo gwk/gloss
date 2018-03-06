@@ -66,7 +66,7 @@ def main():
       if '..' in p: return
       assert p.startswith('/')
       p = p[1:] # Remove leading slash. TODO: path_join should not use os.path.join, which behaves dangerously for absolute paths.
-      p = normalize_path(path_join(self.directory, p))
+      p = norm_path(path_join(self.directory, p))
       if has_trailing_slash: p += '/'
       self.local_path = p
       return True
