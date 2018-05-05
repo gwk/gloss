@@ -1,18 +1,18 @@
 [user]
+[branch]
+	autosetuprebase = always
+[core]
+	excludesfile = ~/gitignore
+[diff]
+	algorithm = histogram
+	compactionHeuristic = true
+	wordregex = [[:alnum:]&?_+-]+|[[:digit:]]*\\.[[:digit:]]*|[^[:space:]]
 [interactive]
 	singlekey = true
 	diffFilter = git-diff-highlight
-[branch]
-	autosetuprebase = always
-[pull]
-	rebase = true
-[core]
-	excludesfile = ~/gitignore
 [pager]
 	log = git-diff-highlight | less
 	show = git-diff-highlight | less
 	diff = git-diff-highlight | less
-[diff]
-	wordregex = [[:alnum:]&?_+-]+|[[:digit:]]*\\.[[:digit:]]*|[^[:space:]]
-	compactionHeuristic = true
-	algorithm = histogram
+[pull]
+	rebase = true
