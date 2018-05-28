@@ -1,18 +1,27 @@
 [user]
+[alias]
+  s = status
+  a = !git add . && git status
+  au = !git add -u . && git status
+  c = commit
+  cm = commit -m
+  ca = commit --amend
+  d = diff
+  master = checkout master
+  aliases = !git config --list | egrep '^alias\\.' | sort
 [branch]
   autosetuprebase = always
+[color]
+  ui = auto
 [core]
   excludesfile = ~/gitignore
-[diff]
-  algorithm = histogram
-  compactionHeuristic = true
-  wordregex = [[:alnum:]&?_+-]+|[[:digit:]]*\\.[[:digit:]]*|[^[:space:]]
+  pager = same-same | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
 [interactive]
+  diffFilter = same-same -interactive | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
   singlekey = true
-  diffFilter = git-diff-highlight
-[pager]
-  log = git-diff-highlight | less
-  show = git-diff-highlight | less
-  diff = git-diff-highlight | less
+[diff]
+  wordregex = [[:alnum:]&?_+-]+|[[:digit:]]*\\.[[:digit:]]*|[^[:space:]]
+  algorithm = histogram
+  interHunkContex = 0
 [pull]
   rebase = true
