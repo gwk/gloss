@@ -9,55 +9,43 @@
 # 18:30 change tasks
 # 24:00 end = 12:00
 
-import optparse
 import os
 import re
-
-from pithy.io import checkS, outF, outL, outFL
-
-
-def minutes(match):
-  return int(match.group(1)) * 60 + int(match.group(2))
+from argparse import ArgumentParser
+from pithy.io import *
 
 
-optparser = optparse.OptionParser(usage='usage: %prog root_path [hourly_rate]')
-(options, args) = optparser.parse_args()
+def main():
+  parser = ArgumentParser(description='Validate timesheets.')
+  parser.add_argument('timesheet', nargs='?', default='timesheet.txt')
+  parser.add_argument('-rate', type=int, default=0)
+  args = parser.parse_args()
 
-if len(args) < 1:
-  optparser.error('no arguments')
+  path = args.timesheet
+  hourly_rate = args.rate
 
-path = args[0]
 
-hourly_rate = float(args[1]) if len(args) > 1 else 0
+  start_minutes = None
+  end_minutes   = None
+  total_minutes = 0
+  total_payment = 0
+  total_expense = 0
 
-if len(args) > 2:
-  print(args)
-  optparser.error('too many arguments')
+  valid = True
 
-time_re     = re.compile(r'(\d{2}):(\d{2}) ')
-subtotal_re = re.compile(r'= (\d{1,2}):(\d{2})')
-money_re    = re.compile(r'([+-])\s*\$(\d+)(\.?\d*)')
+  try: f = open(path)
+  except FileNotFoundError: exit(f'bad path: {path}')
 
-checkS(os.path.isfile(path), Exception, 'bad path:', path)
-
-start_minutes = None
-end_minutes   = None
-total_minutes = 0
-total_payment = 0
-total_expense = 0
-
-valid = True
-
-with open(path) as f:
   for line in f:
-    outF('{:64}', line.rstrip('\n'))
+    l = line.rstrip('\n')
+    outZ(f'{l:64}')
     time_match = time_re.match(line)
 
     if time_match:
       m = minutes(time_match)
       if start_minutes == None:   start_minutes = m
       else:                       end_minutes = m
-      outF('|{:4} ', m)
+      outZ(f'|{m:4} ')
 
     subtotal_match = subtotal_re.search(line)
 
@@ -69,9 +57,9 @@ with open(path) as f:
       start_minutes = None
       end_minutes = None
       m = minutes(subtotal_match)
-      outF('= {:4}m', sub_minutes)
+      outZ(f'= {sub_minutes:4}m')
       if m != sub_minutes:
-        outF(' *** found: {}; calculated: {}',  m, sub_minutes)
+        outZ(f' *** found: {m}; calculated: {sub_minutes}')
         valid = False
 
     money_match = money_re.match(line)
@@ -82,25 +70,37 @@ with open(path) as f:
         total_payment += i
       else:
         total_expense += i
-      outF('               {: 10,.2f}', i)
+      outZ(f'               {i: 10,.2f}')
 
     outL()
 
 
-hours = total_minutes // 60
-rem_minutes = int(total_minutes) % 60
-time_expense = hourly_rate * total_minutes / 60
+  hours = total_minutes // 60
+  rem_minutes = int(total_minutes) % 60
+  time_expense = hourly_rate * total_minutes / 60
+  total = time_expense + total_payment + total_expense
+  if hourly_rate:
+    hourly_string = ' @ {:0.2f}/hr = ${:,.2f}'.format(hourly_rate, time_expense)
+  else:
+    hourly_string = ''
 
-if hourly_rate:
-  hourly_string = ' @ {:0.2f}/hr = ${:,.2f}'.format(hourly_rate, time_expense)
-else:
-  hourly_string = ''
+  outL()
+  outL(f'TOTAL HOURS:   {hours:2}:{rem_minutes:02}{hourly_string}')
+  outL(f'TOTAL EXPENSE: ${total_expense:,.2f}')
+  outL(f'TOTAL PAYMENT: ${total_payment:,.2f}')
+  outL(f'TOTAL:         ${total:,.2f}')
 
-outL()
-outFL('TOTAL HOURS:   {:2}:{:02}{}', hours, rem_minutes, hourly_string)
-outFL('TOTAL EXPENSE: ${:,.2f}', total_expense)
-outFL('TOTAL PAYMENT: ${:,.2f}', total_payment)
-outFL('TOTAL:         ${:,.2f}', time_expense + total_payment + total_expense)
+  if not valid:
+    outL('*** INVALID ***')
 
-if not valid:
-  outL('*** INVALID ***')
+
+def minutes(match):
+  return int(match.group(1)) * 60 + int(match.group(2))
+
+
+time_re     = re.compile(r'(\d{2}):(\d{2}) ')
+subtotal_re = re.compile(r'= (\d{1,2}):(\d{2})')
+money_re    = re.compile(r'([+-])\s*\$(\d+)(\.?\d*)')
+
+
+if __name__ == '__main__': main()
