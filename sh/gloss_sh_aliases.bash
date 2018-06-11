@@ -7,7 +7,8 @@ alias cp='cp -i' # confirm overwrites interactively.
 alias mv='mv -i' # confirm overwrites interactively.
 alias rm='rm -i' # confirm deletes interactively; encourages use of `del`.
 
-alias venv-activate='source venv/bin/activate' # venv activate.
+alias venv-create='python3 -m venv ./venv' # Create a virtual environment in the `./venv` folder.
+alias venv-activate='source ./venv/bin/activate' # Activate the `./venv` environment.
 
 
 # list all functions defined in this shell environment.
