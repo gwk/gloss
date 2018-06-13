@@ -19,7 +19,7 @@ from pithy.io import *
 def main():
   parser = ArgumentParser(description='Serve files from a directory.')
   parser.add_argument('root', default='.', nargs='?', help='Root directory to serve from')
-  parser.add_argument('-browser', help='Launch the specified browser')
+  parser.add_argument('-browse', action='store_true', help='Launch the default system browser')
   parser.add_argument('-safari',  action='store_true', help='Launch Safari')
   parser.add_argument('-chrome',  action='store_true', help='Launch Google Chrome')
   parser.add_argument('-firefox', action='store_true', help='Launch Firefox')
@@ -159,7 +159,7 @@ def main():
   # the `open` command returns and then we launch the web server,
   # relying on the fact that together the OS and the launched browser take more time to initiate the request
   # after the `open` process completes than the server does to initialize.
-  if args.browser:  run(['open', '-a', args.browser,    addr_str])
+  if args.browse:   run(['open', addr_str])
   if args.safari:   run(['open', '-a', 'safari',        addr_str])
   if args.chrome:   run(['open', '-a', 'google chrome', addr_str])
   if args.firefox:  run(['open', '-a', 'firefox',       addr_str])
