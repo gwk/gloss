@@ -132,7 +132,9 @@ def main():
       try:
         f = open(self.local_path, 'rb')
       except OSError:
-        self.send_error(HTTPStatus.NOT_FOUND, "File not found")
+        self.send_error(HTTPStatus.NOT_FOUND,
+          message=f'File not found: {self.local_path}',
+          explain=f'URI path: {self.path}')
         return None
       try:
         f_stat = os_fstat(f.fileno())
