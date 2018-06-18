@@ -5,7 +5,7 @@ from sys import argv
 from pithy.fs import append_path_stem_suffix, path_stem
 from pithy.io import errL, errSL, outL, writeL
 from pithy.iterable import group_by_heads
-from pithy.json_utils import JSONDecodeError, parse_json, write_json
+from pithy.json import JSONDecodeError, parse_json, write_json
 from pithy.immutable import Immutable
 
 
@@ -176,6 +176,7 @@ def warn_unbound_cmds(ctx):
   errL('\nunbound commands:')
   for cmd in sorted(unbound):
     errL(cmd)
+  errL()
 
 # https://code.visualstudio.com/docs/getstarted/keybindings#_accepted-keys
 key_validator = re.compile(r'''(?x)
