@@ -19,9 +19,8 @@ clang-ir:     clang "$@" -o - -S -emit-llvm
 clang-ast-dump: clang -cc1 -ast-dump "$@"
 clang-show-defines: echo | clang -dM -E "$@" -
 
-# diff files using git.
-d: git diff --no-index --no-prefix --no-renames --exit-code --color "$@" | same-same
-
+# diff files using git and same-same.
+d: git diff --no-index --no-prefix --no-renames --no-color --exit-code "$@" | same-same
 
 # git
 
