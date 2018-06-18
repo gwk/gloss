@@ -1,4 +1,12 @@
 {
+  "cSpell.allowCompoundWords": true,
+
+  "cSpell.checkLimit": 100,
+  "cSpell.diagnosticLevel": "Warning",
+
+  "cSpell.dictionaryDefinitions": [],
+  "cSpell.enabled": false,
+
   "css.lint.boxModel": "warning",
   "css.lint.important": "warning",
   "css.lint.float": "warning",
@@ -18,7 +26,12 @@
   "editor.minimap.maxColumn": 96,
   "editor.minimap.renderCharacters": true,
   "editor.occurrencesHighlight": false,
-  "editor.quickSuggestions": true,
+  "editor.parameterHints": false,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
   "editor.quickSuggestionsDelay": 10,
   "editor.renderControlCharacters": true,
   "editor.renderIndentGuides": true,
@@ -31,7 +44,13 @@
   "editor.trimAutoWhitespace": true,
   "editor.wordWrap": "on",
 
+  "eslint.enable": false,
+  "explorer.confirmDelete": false,
   "extensions.ignoreRecommendations": true,
+
+  "files.associations": {
+    "*.pyi": "python",
+  },
 
   "files.exclude": {
     "**/__pycache__": true,
@@ -47,6 +66,24 @@
 
   "git.autofetch": false,
 
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true,
+    "suppressResultsExplorerNotice": true,
+    "suppressShowKeyBindingsNotice": true,
+    "suppressUpdateNotice": true,
+    "suppressWelcomeNotice": true
+  },
+
+  "gitlens.advanced.quickPick.closeOnFocusOut": true,
+  "gitlens.advanced.telemetry.enabled": false,
+  "gitlens.blame.ignoreWhitespace": true,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": true,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.keymap": "none",
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.statusBar.format": "${ago}: ${message}",
+  "gitlens.statusBar.dateFormat": "YYYY-MM-DD HH:MM",
   "html.format.wrapLineLength": 0,
 
   "macros": {
@@ -70,6 +107,12 @@
 
   "settings.cycle.logLevel": "log",
 
+  "python.disableInstallationCheck": true,
+  "python.disablePromptForFeatures": ["pylint"],
+  "python.linting.pylintEnabled": false,
+  "python.linting.lintOnSave": false,
+  "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3",
+
   "telemetry.enableTelemetry": false,
 
   "terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
@@ -79,6 +122,10 @@
   "window.zoomLevel": 1,
 
   "workbench.colorCustomizations": {
+    "statusBar.background" : "#181818",
+    "statusBar.noFolderBackground" : "#212121",
+    "statusBar.debuggingBackground": "#263238",
+    "statusBar.foreground": "#707070",
     "terminal.background": "#000000",
     "terminal.foreground": "#FFFFFF",
     "terminal.ansiBlack": "#404040",
@@ -99,14 +146,23 @@
     "terminal.ansiYellow": "#FFFF00"
   },
 
-  "workbench.colorTheme": "gloss-black",
-  "workbench.statusBar.visible": false,
   "workbench.activityBar.visible": false,
+  "workbench.colorTheme": "gloss-black",
   "workbench.editor.showIcons": false,
+  "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "newUntitledFile",
-
+  "workbench.statusBar.feedback.visible": false,
+  "workbench.statusBar.visible": true,
   "[xcode]": {
     "editor.insertSpaces": false
-  }
+  },
+  "gitlens.blame.avatars": false,
+  "gitlens.hovers.enabled": false,
+  "gitlens.recentChanges.highlight.locations": [
+    "gutter",
+    "overview"
+  ],
+  "editor.multiCursorModifier": "ctrlCmd",
+  "gitlens.historyExplorer.enabled": true,
 }
