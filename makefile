@@ -27,7 +27,7 @@ install-user:
 install-vscode: _build/gloss-black.json _build/vscode-keys.json
 	install/gloss-install-vscode.sh
 
-xcode_keys_src := keys/gloss-xcode.idebindings
+xcode_keys_src := keybindings/gloss-xcode.idebindings
 xcode_keys_dst := ~/Library/Developer/Xcode/UserData/KeyBindings/gloss-xcode.idekeybindings
 install-xcode-keybindings:
 	[[ ! -f $(xcode_keys_dst) ]] || diff -u $(xcode_keys_src) $(xcode_keys_dst) || true
@@ -43,5 +43,5 @@ _build/gloss-black.json: gloss-black.py
 	mkdir -p _build
 	./$^ $@
 
-_build/vscode-keys.json: keybindings.py keys/vscode-keys-default.json keys/vscode-keys.txt
+_build/vscode-keys.json: keybindings.py keybindings/vscode-keys-default.json keybindings/vscode-keys.txt
 	./$^ $@
