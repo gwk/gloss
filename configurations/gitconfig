@@ -10,18 +10,21 @@
   master = checkout master
   aliases = !git config --list | egrep '^alias\\.' | sort
 [branch]
-  autosetuprebase = always
+  autoSetupRebase = always
 [color]
   ui = auto
 [core]
-  excludesfile = ~/gitignore
+  excludesFile = ~/gitignore
   pager = same-same | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
 [interactive]
   diffFilter = same-same -interactive | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
-  singlekey = true
+  singleKey = true
 [diff]
-  wordregex = [[:alnum:]&?_+-]+|[[:digit:]]*\\.[[:digit:]]*|[^[:space:]]
+  wordRegex = [[:alnum:]&?_+-]+|[[:digit:]]*\\.[[:digit:]]*|[^[:space:]]
   algorithm = histogram
   interHunkContex = 0
+  noprefix = true
 [pull]
   rebase = true
+[push]
+  default = simple
