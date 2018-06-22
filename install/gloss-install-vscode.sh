@@ -29,5 +29,6 @@ set +x
 if ! d vscode/settings.json "$VSCODE_USER/settings.json"; then
   confirm 'copy user settings to this repo' \
   && cp "$VSCODE_USER/settings.json" vscode/settings.json \
-  || echo 'NOTE: user settings are not in sync with repo.'
+  || echo "NOTE: user settings are not in sync with repo.
+To overwrite your settings: cp vscode/settings.json '$VSCODE_USER/settings.json'"
 fi
