@@ -45,8 +45,10 @@ gl1:  git log --format="%C(blue)%ad %C(yellow)%h %C(cyan)%an %C(green)%d %C(rese
 
 glm:    git log --decorate "$@"
 glm1:   git log --decorate -1 "$@"
-glv:    git log --decorate --name-status "$@"
-glv1:   git log --decorate --name-status -1 "$@"
+
+# Note: -m flag is documented in git-log "Diff Formatting".
+glv:    git log --decorate --name-status -m "$@"
+glv1:   git log --decorate --name-status -m -1 "$@"
 
 gls: git ls-files "$@"
 
