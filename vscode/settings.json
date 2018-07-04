@@ -106,6 +106,7 @@
   ],
 
   "settings.cycle.logLevel": "log",
+  "search.useIgnoreFiles": false,
 
   "python.disableInstallationCheck": true,
   "python.disablePromptForFeatures": ["pylint"],
