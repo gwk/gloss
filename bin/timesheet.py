@@ -43,15 +43,16 @@ def main():
 
     if time_match:
       m = minutes(time_match)
-      if start_minutes == None:   start_minutes = m
-      else:                       end_minutes = m
+      if start_minutes is None: start_minutes = m
+      else: end_minutes = m
       outZ(f'|{m:4} ')
 
     subtotal_match = subtotal_re.search(line)
 
     if subtotal_match:
-      assert start_minutes != None
-      assert end_minutes != None
+      if start_minutes is None or end_minutes is None:
+        outL()
+        exit(f'ERROR: subtotal line has invalid time.')
       sub_minutes = end_minutes - start_minutes
       total_minutes += sub_minutes
       start_minutes = None
