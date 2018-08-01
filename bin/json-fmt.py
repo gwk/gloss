@@ -20,5 +20,8 @@ dump(o, stdout, sort_keys=True, indent=2)
 stdout.write('\n')
 
 if end_index < len(s):
-  tail = '…' if end_index + 64 < len(s) else ''
-  exit(f'extraneous input beginning at offset {end_index}:\n', s[end_index:end_index + 64].encode('utf8'), tail)
+  extra = s[end_index:]
+  if not extra.isspace():
+    snippet = extra[:64]
+    tail = '…' if len(extra) > 64 else ''
+    exit(f'extraneous input beginning at offset {end_index}:\n{snippet!r}')
