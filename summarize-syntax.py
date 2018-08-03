@@ -4,16 +4,17 @@
 import plistlib
 import yaml
 
-from pithy import *
+from pithy.io import *
+from pithy.fs import *
 from pithy.schema import *
-
+from pithy.json import load_json
 
 syntaxes = []
 
 for path in walk_files(*argv[1:], file_exts=['.json', '.plist', '.yaml']):
   outL(path)
   if path.endswith('.json'):
-    syntax = read_json(open(path))
+    syntax = load_json(open(path))
   elif path.endswith('.plist'):
     syntax = plistlib.load(open(path, 'rb'))
   elif path.endswith('.yaml'):
@@ -24,7 +25,4 @@ for path in walk_files(*argv[1:], file_exts=['.json', '.plist', '.yaml']):
 schema = compile_schema(*syntaxes)
 
 outL()
-out_schema(schema)
-
-outL('\nschema summary:\n')
-out_schema(schema, summary=True)
+write_schema(stdout, schema)
