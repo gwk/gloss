@@ -5,6 +5,15 @@ acceptSnippet                                                   tab             
 actions.find                                                    cmd+f
 actions.findWithSelection
 addRootFolder
+breadcrumbs.focus
+breadcrumbs.focusAndSelect
+breadcrumbs.focusNext
+breadcrumbs.focusPrevious
+breadcrumbs.revealFocused
+breadcrumbs.revealFocusedFromTreeAside
+breadcrumbs.selectEditor
+breadcrumbs.selectFocused
+breadcrumbs.toggle
 breakpointWidget.action.acceptInput
 cancelRenameInput                                               escape                  when editorFocus && renameInputVisible
 cancelSelection                                                 escape                  when editorHasSelection && editorTextFocus
@@ -24,6 +33,7 @@ compareSelected
 compositionEnd
 compositionStart
 copyFilePath
+copyRelativeFilePath
 createCursor
 cSpell.addWordToDictionary
 cSpell.addWordToDictionarySilent
@@ -90,6 +100,10 @@ cursorWordEndRight                                              alt+right       
 cursorWordEndRightSelect                                        shift+alt+right         when editorTextFocus
 cursorWordLeft
 cursorWordLeftSelect
+cursorWordPartRight
+cursorWordPartRightSelect
+cursorWordPartStartLeft
+cursorWordPartStartLeftSelect
 cursorWordRight
 cursorWordRightSelect
 cursorWordStartLeft                                             alt+left                when editorTextFocus
@@ -124,6 +138,8 @@ deleteRight                                                     delete          
 deleteWordEndLeft
 deleteWordEndRight
 deleteWordLeft                                                  alt+backspace           when editorTextFocus && !editorReadonly
+deleteWordPartLeft
+deleteWordPartRight
 deleteWordRight                                                 alt+delete              when editorTextFocus && !editorReadonly
 deleteWordStartLeft
 deleteWordStartRight
@@ -186,6 +202,7 @@ editor.action.moveLinesDownAction                               cmd+down        
 editor.action.moveLinesUpAction                                 cmd+up                  when editorTextFocus && !editorReadonly
 editor.action.moveSelectionToNextFindMatch
 editor.action.moveSelectionToPreviousFindMatch
+editor.action.nextCommentThreadAction
 editor.action.nextMatchFindAction                               cmd+g                   when editorFocus
 editor.action.nextSelectionMatchFindAction
 editor.action.openDeclarationToTheSide
@@ -233,6 +250,7 @@ editor.action.triggerParameterHints
 editor.action.triggerSuggest                                    ctrl+space              when editorHasCompletionItemProvider && textInputFocus && !editorReadonly
 editor.action.trimTrailingWhitespace
 editor.action.webvieweditor.hideFind
+editor.action.webvieweditor.selectAll
 editor.action.webvieweditor.showFind
 editor.action.wordHighlight.next
 editor.action.wordHighlight.prev
@@ -244,7 +262,6 @@ editor.debug.action.selectionToRepl
 editor.debug.action.selectionToWatch
 editor.debug.action.showDebugHover
 editor.debug.action.toggleBreakpoint
-editor.debug.action.toggleColumnBreakpoint
 editor.debug.action.toggleInlineBreakpoint
 editor.debug.action.toggleLogPoint
 editor.emmet.action.balanceIn
@@ -288,20 +305,16 @@ editor.unfoldAll
 editor.unfoldAllMarkerRegions
 editor.unfoldRecursively
 emmet.expandAbbreviation
-eslint.createConfig
-eslint.disable
-eslint.enable
-eslint.executeAutofix
-eslint.showOutputChannel
 expandLineSelection
-explorer.openToSide
 explorer.newFile
 explorer.newFolder
+explorer.openToSide
 extension.dash.all
 extension.dash.customSyntax
 extension.dash.emptySyntax
 extension.dash.specific
 extension.node-debug.pickLoadedScript
+extension.node-debug.toggleAutoAttach
 filesExplorer.copy
 filesExplorer.findInFolder
 filesExplorer.findInWorkspace
@@ -331,6 +344,7 @@ git.openChange
 git.openFile
 git.openFile2
 git.openHEADFile
+git.openRepository
 git.openResource
 git.publish
 git.pull
@@ -395,6 +409,7 @@ gitlens.explorers.openFileRevision
 gitlens.explorers.openFileRevisionInRemote
 gitlens.explorers.selectForCompare
 gitlens.explorers.terminalCheckoutBranch
+gitlens.explorers.terminalCheckoutCommit
 gitlens.explorers.terminalCherryPickCommit
 gitlens.explorers.terminalCreateBranch
 gitlens.explorers.terminalCreateTag
@@ -520,16 +535,11 @@ list.focusUp                                                    up              
 list.select                                                     enter                   when listFocus
 list.selectAll
 list.toggleExpand                                               space                   when listFocus
-macros.callStackDown                                            shift+cmd+down          when inDebugMode
-macros.callStackUp                                              shift+cmd+up            when inDebugMode
+macros.callStackDown                                            shift+cmd+down          when debugState != 'inactive'
+macros.callStackUp                                              shift+cmd+up            when debugState != 'inactive'
 macros.inspect
-markdown.preview.refresh
-markdown.preview.toggleLock
-markdown.showLockedPreviewToSide
 markdown.showPreview                                            shift+cmd+v
-markdown.showPreviewSecuritySelector
 markdown.showPreviewToSide
-markdown.showSource
 merge-conflict.accept.all-both
 merge-conflict.accept.all-current
 merge-conflict.accept.all-incoming
@@ -556,10 +566,12 @@ notifications.hideToasts
 notifications.showList
 notifications.toggleList
 npm.debugScript
+npm.debugScriptFromHover
 npm.openScript
 npm.refresh
 npm.runInstall
 npm.runScript
+npm.runScriptFromHover
 openInTerminal
 openReferenceToSide
 outdent                                                         shift+tab               when editorTextFocus && !editorTabMovesFocus
@@ -627,7 +639,9 @@ search.action.copyPath
 search.action.focusNextSearchResult
 search.action.focusPreviousSearchResult
 search.action.focusSearchFromResults
+search.action.focusSearchList
 search.action.openResultToSide
+search.action.refreshSearchResults
 search.action.remove
 search.action.replace
 search.action.replaceAll                                        alt+cmd+enter           when replaceActive && searchViewletVisible && !findWidgetVisible
@@ -652,7 +666,10 @@ settings.action.clearSearchResults
 settings.action.editFocusedSetting
 settings.action.focusNextSetting
 settings.action.focusPreviousSetting
+settings.action.focusSearchFromSettings
 settings.action.focusSettingsFile
+settings.action.focusSettingsFromSearch
+settings.action.focusSettingsList
 settings.action.search
 settings.cycle
 settings.cycle.trimTrailingWhitespace                           ctrl+cmd+w
@@ -662,6 +679,7 @@ showPrevParameterHint                                           ctrl+p          
 showPrevParameterHint                                           up                      when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 tab                                                             tab                     when editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible
 toggle.diff.editorMode
+toggleEscapeSequenceLogging
 toggleFindCaseSensitive                                         alt+cmd+c               when editorFocus
 toggleFindInSelection
 toggleFindRegex                                                 alt+cmd+r               when editorFocus
@@ -700,17 +718,17 @@ workbench.action.compareEditor.previousChange
 workbench.action.configureLanguageBasedSettings
 workbench.action.configureLocale
 workbench.action.debug.configure
-workbench.action.debug.continue                                 shift+cmd+right         when inDebugMode
+workbench.action.debug.continue                                 shift+cmd+right         when debugState != 'inactive'
 workbench.action.debug.disconnect
 workbench.action.debug.pause
 workbench.action.debug.restart
-workbench.action.debug.run                                      cmd+d                   when !inDebugMode
+workbench.action.debug.run                                      cmd+d                   when debugState == 'inactive'
 workbench.action.debug.selectandstart
 workbench.action.debug.start
-workbench.action.debug.stepInto                                 cmd+up                  when inDebugMode
-workbench.action.debug.stepOut                                  cmd+down                when inDebugMode
-workbench.action.debug.stepOver                                 cmd+right               when inDebugMode
-workbench.action.debug.stop                                     cmd+d                   when inDebugMode
+workbench.action.debug.stepInto                                 cmd+up                  when debugState != 'inactive'
+workbench.action.debug.stepOut                                  cmd+down                when debugState != 'inactive'
+workbench.action.debug.stepOver                                 cmd+right               when debugState != 'inactive'
+workbench.action.debug.stop                                     cmd+d                   when debugState != 'inactive'
 workbench.action.debug.terminateThread
 workbench.action.decreaseViewSize
 workbench.action.duplicateWorkspaceInNewWindow
@@ -719,15 +737,14 @@ workbench.action.editor.changeEOL
 workbench.action.editor.changeLanguageMode
 workbench.action.editor.nextChange
 workbench.action.editor.previousChange
-workbench.action.editorLayoutCentered
 workbench.action.editorLayoutSingle
 workbench.action.editorLayoutThreeColumns
 workbench.action.editorLayoutThreeRows
 workbench.action.editorLayoutTwoByTwoGrid
 workbench.action.editorLayoutTwoColumns
 workbench.action.editorLayoutTwoColumnsBottom
-workbench.action.editorLayoutTwoColumnsRight
 workbench.action.editorLayoutTwoRows
+workbench.action.editorLayoutTwoRowsRight
 workbench.action.evenEditorWidths
 workbench.action.exitZenMode
 workbench.action.files.copyPathOfActiveFile
@@ -813,6 +830,7 @@ workbench.action.newWindow                                      shift+cmd+n
 workbench.action.nextEditor                                     shift+cmd+]
 workbench.action.nextEditorInGroup
 workbench.action.openActiveLogOutputFile
+workbench.action.openDefaultKeybindingsFile
 workbench.action.openDocumentationUrl
 workbench.action.openEditorAtIndex1                             ctrl+1
 workbench.action.openEditorAtIndex2                             ctrl+2
@@ -823,13 +841,13 @@ workbench.action.openEditorAtIndex6                             ctrl+6
 workbench.action.openEditorAtIndex7                             ctrl+7
 workbench.action.openEditorAtIndex8                             ctrl+8
 workbench.action.openEditorAtIndex9                             ctrl+9
-workbench.action.openFolderAsWorkspaceInNewWindow
 workbench.action.openFolderSettings
 workbench.action.openGlobalKeybindings
 workbench.action.openGlobalKeybindingsFile
 workbench.action.openGlobalSettings                             cmd+,
 workbench.action.openIntroductoryVideosUrl
 workbench.action.openIssueReporter
+workbench.action.openLicenseUrl
 workbench.action.openLogFile
 workbench.action.openLogsFolder
 workbench.action.openLogViewer
@@ -838,13 +856,16 @@ workbench.action.openNextRecentlyUsedEditorInGroup              ctrl+tab
 workbench.action.openPreviousEditorFromHistory
 workbench.action.openPreviousRecentlyUsedEditor
 workbench.action.openPreviousRecentlyUsedEditorInGroup          ctrl+shift+tab
+workbench.action.openPrivacyStatementUrl
 workbench.action.openProcessExplorer
 workbench.action.openRawDefaultSettings
 workbench.action.openRecent
+workbench.action.openRequestFeatureUrl
 workbench.action.openSettings
 workbench.action.openSettings2
 workbench.action.openSnippets
 workbench.action.openTipsAndTricksUrl
+workbench.action.openTwitterUrl
 workbench.action.openView
 workbench.action.openWorkspace
 workbench.action.openWorkspaceConfigFile
@@ -854,6 +875,7 @@ workbench.action.output.toggleOutput                            shift+cmd+u
 workbench.action.previousEditor                                 shift+cmd+[
 workbench.action.previousEditorInGroup
 workbench.action.problems.focus
+workbench.action.quickInputBack
 workbench.action.quickOpen                                      cmd+o
 workbench.action.quickOpenNavigateNext                          cmd+o                   when inQuickOpen
 workbench.action.quickOpenNavigateNextInEditorPicker
@@ -890,6 +912,7 @@ workbench.action.selectIconTheme
 workbench.action.selectTheme
 workbench.action.setLogLevel
 workbench.action.showAboutDialog
+workbench.action.showAccessibilityOptions
 workbench.action.showAllEditors                                 alt+cmd+tab
 workbench.action.showAllSymbols
 workbench.action.showCommands                                   cmd+p
@@ -973,6 +996,7 @@ workbench.action.terminal.split
 workbench.action.terminal.splitInActiveWorkspace
 workbench.action.terminal.toggleTerminal                        shift+cmd+t
 workbench.action.toggleActivityBarVisibility
+workbench.action.toggleAutoSave
 workbench.action.toggleCenteredLayout
 workbench.action.toggleDevTools
 workbench.action.toggleEditorGroupLayout
@@ -1007,6 +1031,10 @@ workbench.debug.viewlet.action.disableAllBreakpoints
 workbench.debug.viewlet.action.enableAllBreakpoints
 workbench.debug.viewlet.action.reapplyBreakpointsAction
 workbench.debug.viewlet.action.removeAllBreakpoints
+workbench.extensions.action.addToWorkspaceFolderIgnoredRecommendations
+workbench.extensions.action.addToWorkspaceFolderRecommendations
+workbench.extensions.action.addToWorkspaceIgnoredRecommendations
+workbench.extensions.action.addToWorkspaceRecommendations
 workbench.extensions.action.checkForUpdates
 workbench.extensions.action.configureWorkspaceFolderRecommendedExtensions
 workbench.extensions.action.configureWorkspaceRecommendedExtensions
@@ -1026,7 +1054,7 @@ workbench.extensions.action.showAzureExtensions
 workbench.extensions.action.showDisabledExtensions
 workbench.extensions.action.showEnabledExtensions
 workbench.extensions.action.showExtensionsForLanguage
-workbench.extensions.action.showExtensionsWithId
+workbench.extensions.action.showExtensionsWithIds
 workbench.extensions.action.showInstalledExtensions
 workbench.extensions.action.showLanguageExtensions
 workbench.extensions.action.showPopularExtensions
@@ -1047,6 +1075,7 @@ workbench.files.action.showActiveFileInExplorer
 workbench.output.action.clearOutput
 workbench.view.debug                                            shift+cmd+d
 workbench.view.explorer                                         shift+cmd+e
+workbench.view.extension.gitlens
 workbench.view.extension.test
 workbench.view.extensions                                       shift+cmd+x
 workbench.view.scm                                              ctrl+shift+g
