@@ -120,6 +120,7 @@ def parse_binding(ctx, binding):
   words = line.split()
   if not words: return
   cmd = words[0]
+  if cmd.startswith('//'): return
   if cmd not in ctx.all_cmds:
     ctx.warn(line_num, 'unknown command:', cmd)
   try:

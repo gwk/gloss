@@ -25,7 +25,7 @@ closeMarkersNavigation                                          escape          
 closeParameterHints                                             escape                  when editorTextFocus && parameterHintsVisible
 closeReferenceSearch                                            escape                  when referenceSearchVisible && !config.editor.stablePeek
 closeReferenceSearchEditor                                      escape                  when inReferenceSearchEditor && !config.editor.stablePeek
-closeReplaceInFilesWidget                                       escape
+closeReplaceInFilesWidget
 closeReviewPanel                                                escape                  when reviewPanelVisible
 columnSelect
 compareFiles
