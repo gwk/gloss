@@ -26,6 +26,7 @@ cp _build/gloss-black.json  "$VSCODE_THEMES"
 cp _build/vscode-keys.json  "$VSCODE_USER/keybindings.json"
 
 set +x
+touch "$VSCODE_USER/settings.json"
 if ! d vscode/settings.json "$VSCODE_USER/settings.json"; then
   confirm 'copy user settings to this repo' \
   && cp "$VSCODE_USER/settings.json" vscode/settings.json \
