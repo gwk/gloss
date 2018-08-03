@@ -87,7 +87,7 @@ def prepare(ctx):
     if when:
       for word in when.split():
         ctx.all_whens.add(word.lstrip('!'))
-      nullification['when'] = when
+      #nullification['when'] = when # Disabled; causes nullification to fail in some cases.
     ctx.bindings.append(nullification)
     ctx.dflt_triples.append((cmd, key, when))
   for cmd in ctx.other_cmds:
