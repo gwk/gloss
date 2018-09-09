@@ -142,13 +142,13 @@
                                        "when": "textInputFocus" },
   { "key": "shift+alt+right",       "command": "cursorWordEndRightSelect",
                                        "when": "textInputFocus" },
+  { "key": "ctrl+alt+left",         "command": "cursorWordPartLeft",
+                                       "when": "textInputFocus" },
+  { "key": "ctrl+shift+alt+left",   "command": "cursorWordPartLeftSelect",
+                                       "when": "textInputFocus" },
   { "key": "ctrl+alt+right",        "command": "cursorWordPartRight",
                                        "when": "textInputFocus" },
   { "key": "ctrl+shift+alt+right",  "command": "cursorWordPartRightSelect",
-                                       "when": "textInputFocus" },
-  { "key": "ctrl+alt+left",         "command": "cursorWordPartStartLeft",
-                                       "when": "textInputFocus" },
-  { "key": "ctrl+shift+alt+left",   "command": "cursorWordPartStartLeftSelect",
                                        "when": "textInputFocus" },
   { "key": "alt+left",              "command": "cursorWordStartLeft",
                                        "when": "textInputFocus" },
@@ -306,7 +306,7 @@
   { "key": "shift+f7",              "command": "editor.action.wordHighlight.prev",
                                        "when": "editorTextFocus && hasWordHighlights" },
   { "key": "cmd+k cmd+i",           "command": "editor.debug.action.showDebugHover",
-                                       "when": "editorTextFocus && debugState != 'inactive'" },
+                                       "when": "editorTextFocus && inDebugMode" },
   { "key": "f9",                    "command": "editor.debug.action.toggleBreakpoint",
                                        "when": "editorTextFocus" },
   { "key": "tab",                   "command": "editor.emmet.action.expandAbbreviation",
@@ -358,7 +358,7 @@
   { "key": "shift+enter",           "command": "settings.action.focusPreviousSetting",
                                        "when": "inSettingsSearch" },
   { "key": "down",                  "command": "settings.action.focusSettingsFile",
-                                       "when": "inSettingsSearch" },
+                                       "when": "inSettingsSearch && !suggestWidgetVisible" },
   { "key": "cmd+f",                 "command": "settings.action.search",
                                        "when": "inSettingsEditor" },
   { "key": "alt+f5",                "command": "workbench.action.editor.nextChange",
@@ -460,9 +460,9 @@
   { "key": "escape",                "command": "cancelRenameInput",
                                        "when": "editorFocus && renameInputVisible" },
   { "key": "shift+cmd+;",           "command": "breadcrumbs.focus",
-                                       "when": "breadcrumbsVisible" },
+                                       "when": "breadcrumbsPossible" },
   { "key": "shift+cmd+.",           "command": "breadcrumbs.focusAndSelect",
-                                       "when": "breadcrumbsVisible" },
+                                       "when": "breadcrumbsPossible" },
   { "key": "alt+right",             "command": "breadcrumbs.focusNext",
                                        "when": "breadcrumbsActive && breadcrumbsVisible" },
   { "key": "right",                 "command": "breadcrumbs.focusNext",
@@ -481,6 +481,8 @@
                                        "when": "breadcrumbsActive && breadcrumbsVisible" },
   { "key": "enter",                 "command": "breadcrumbs.selectFocused",
                                        "when": "breadcrumbsActive && breadcrumbsVisible" },
+  { "key": "shift+cmd+.",           "command": "breadcrumbs.toggleToOn",
+                                       "when": "!config.breadcrumbs.enabled" },
   { "key": "shift+escape",          "command": "closeAccessibilityHelp",
                                        "when": "accessibilityHelpWidgetVisible && editorFocus" },
   { "key": "escape",                "command": "closeAccessibilityHelp",
@@ -551,10 +553,10 @@
                                        "when": "listFocus && !inputFocus" },
   { "key": "up",                    "command": "list.focusUp",
                                        "when": "listFocus && !inputFocus" },
-  { "key": "cmd+down",              "command": "list.select",
-                                       "when": "listFocus && !inputFocus" },
   { "key": "cmd+c",                 "command": "problems.action.copy",
                                        "when": "problemFocus" },
+  { "key": "cmd+down",              "command": "list.select",
+                                       "when": "listFocus && !inputFocus" },
   { "key": "enter",                 "command": "list.select",
                                        "when": "listFocus && !inputFocus" },
   { "key": "cmd+a",                 "command": "list.selectAll",
@@ -623,14 +625,12 @@
                                        "when": "inputBoxFocus && searchViewletVisible" },
   { "key": "cmd+up",                "command": "search.focus.previousInputBox",
                                        "when": "inputBoxFocus && searchViewletVisible && !searchInputBoxFocus" },
-  { "key": "enter",                 "command": "settings.action.editFocusedSetting",
-                                       "when": "inSettingsEditor && settingRowFocused" },
-  { "key": "up",                    "command": "settings.action.focusSearchFromSettings",
-                                       "when": "firstSettingRowFocused && inSettingsEditor" },
   { "key": "down",                  "command": "settings.action.focusSettingsFromSearch",
-                                       "when": "inSettingsSearch" },
+                                       "when": "inSettingsSearch && !suggestWidgetVisible" },
   { "key": "enter",                 "command": "settings.action.focusSettingsList",
                                        "when": "inSettingsEditor && settingsTocRowFocus" },
+  { "key": "shift+f9",              "command": "settings.action.showContextMenu",
+                                       "when": "inSettingsEditor" },
   { "key": "alt+cmd+c",             "command": "toggleSearchCaseSensitive",
                                        "when": "searchInputBoxFocus && searchViewletVisible" },
   { "key": "alt+cmd+r",             "command": "toggleSearchRegex",
@@ -650,29 +650,34 @@
   { "key": "escape",                "command": "workbench.action.closeQuickOpen",
                                        "when": "inQuickOpen" },
   { "key": "cmd+k u",               "command": "workbench.action.closeUnmodifiedEditors" },
+  { "key": "shift+cmd+w",           "command": "workbench.action.closeWindow" },
   { "key": "cmd+w",                 "command": "workbench.action.closeWindow",
                                        "when": "!editorIsOpen && !multipleEditorGroups" },
-  { "key": "shift+cmd+w",           "command": "workbench.action.closeWindow" },
+  { "key": "alt+f5",                "command": "workbench.action.compareEditor.nextChange",
+                                       "when": "textCompareEditorVisible" },
+  { "key": "shift+alt+f5",          "command": "workbench.action.compareEditor.previousChange",
+                                       "when": "textCompareEditorVisible" },
   { "key": "f5",                    "command": "workbench.action.debug.continue",
-                                       "when": "debugState != 'inactive'" },
+                                       "when": "inDebugMode" },
   { "key": "f6",                    "command": "workbench.action.debug.pause",
-                                       "when": "debugState != 'inactive'" },
+                                       "when": "inDebugMode" },
   { "key": "shift+cmd+f5",          "command": "workbench.action.debug.restart",
-                                       "when": "debugState != 'inactive'" },
+                                       "when": "inDebugMode" },
   { "key": "ctrl+f5",               "command": "workbench.action.debug.run",
-                                       "when": "debugState == 'inactive'" },
+                                       "when": "!inDebugMode" },
   { "key": "f5",                    "command": "workbench.action.debug.start",
-                                       "when": "debugState == 'inactive'" },
+                                       "when": "!inDebugMode" },
   { "key": "shift+f11",             "command": "workbench.action.debug.stepOut",
-                                       "when": "debugState != 'inactive'" },
+                                       "when": "inDebugMode" },
   { "key": "f10",                   "command": "workbench.action.debug.stepOver",
-                                       "when": "debugState != 'inactive'" },
+                                       "when": "inDebugMode" },
   { "key": "shift+f5",              "command": "workbench.action.debug.stop",
-                                       "when": "debugState != 'inactive'" },
+                                       "when": "inDebugMode" },
   { "key": "cmd+k m",               "command": "workbench.action.editor.changeLanguageMode" },
   { "key": "cmd+k p",               "command": "workbench.action.files.copyPathOfActiveFile" },
   { "key": "cmd+n",                 "command": "workbench.action.files.newUntitledFile" },
-  { "key": "cmd+o",                 "command": "workbench.action.files.openFileFolder" },
+  { "key": "cmd+o",                 "command": "workbench.action.files.openFileFolder",
+                                       "when": "fileDialog == 'local'" },
   { "key": "cmd+k r",               "command": "workbench.action.files.revealActiveFileInWindows" },
   { "key": "cmd+s",                 "command": "workbench.action.files.save" },
   { "key": "alt+cmd+s",             "command": "workbench.action.files.saveAll" },
@@ -736,7 +741,7 @@
   { "key": "ctrl+tab",              "command": "workbench.action.openNextRecentlyUsedEditorInGroup" },
   { "key": "ctrl+shift+tab",        "command": "workbench.action.openPreviousRecentlyUsedEditorInGroup" },
   { "key": "ctrl+r",                "command": "workbench.action.openRecent" },
-  { "key": "cmd+,",                 "command": "workbench.action.openSettings2" },
+  { "key": "cmd+,",                 "command": "workbench.action.openSettings" },
   { "key": "shift+cmd+u",           "command": "workbench.action.output.toggleOutput" },
   { "key": "shift+cmd+[",           "command": "workbench.action.previousEditor" },
   { "key": "alt+cmd+left",          "command": "workbench.action.previousEditor" },
@@ -848,7 +853,7 @@
   { "key": "escape",                "command": "breadcrumbs.selectEditor",
                                        "when": "breadcrumbsActive && breadcrumbsVisible" },
   { "key": "f11",                   "command": "workbench.action.debug.stepInto",
-                                       "when": "debugState != 'inactive'" },
+                                       "when": "inDebugMode" },
   { "key": "cmd+k",                 "command": "workbench.action.terminal.clear",
                                        "when": "terminalFocus" },
   { "key": "enter",                 "command": "debug.renameWatchExpression",
@@ -1043,6 +1048,8 @@
   // - cursorWordEndLeftSelect
   // - cursorWordLeft
   // - cursorWordLeftSelect
+  // - cursorWordPartStartLeft
+  // - cursorWordPartStartLeftSelect
   // - cursorWordRight
   // - cursorWordRightSelect
   // - cursorWordStartRight
@@ -1133,6 +1140,11 @@
   // - editor.emmet.action.wrapIndividualLinesWithAbbreviation
   // - editor.emmet.action.wrapWithAbbreviation
   // - emmet.expandAbbreviation
+  // - eslint.createConfig
+  // - eslint.disable
+  // - eslint.enable
+  // - eslint.executeAutofix
+  // - eslint.showOutputChannel
   // - explorer.newFile
   // - explorer.newFolder
   // - extension.node-debug.toggleAutoAttach
@@ -1195,6 +1207,7 @@
   // - gitlens.closeUnchangedFiles
   // - gitlens.computingFileAnnotations
   // - gitlens.copyMessageToClipboard
+  // - gitlens.copyRemoteFileUrlToClipboard
   // - gitlens.copyShaToClipboard
   // - gitlens.diffDirectory
   // - gitlens.diffHeadWithBranch
@@ -1319,6 +1332,7 @@
   // - npm.runInstall
   // - npm.runScript
   // - npm.runScriptFromHover
+  // - npm.runSelectedScript
   // - openInTerminal
   // - outline.focus
   // - paste
@@ -1328,6 +1342,7 @@
   // - python.askToStopUnitTests
   // - python.buildWorkspaceSymbols
   // - python.createTerminal
+  // - python.debugger.replaceExperimental
   // - python.debugtests
   // - python.discoverTests
   // - python.enableLinting
@@ -1389,8 +1404,6 @@
   // - workbench.action.closeEditorsToTheLeft
   // - workbench.action.closeEditorsToTheRight
   // - workbench.action.closePanel
-  // - workbench.action.compareEditor.nextChange
-  // - workbench.action.compareEditor.previousChange
   // - workbench.action.configureLanguageBasedSettings
   // - workbench.action.configureLocale
   // - workbench.action.debug.configure
@@ -1449,6 +1462,7 @@
   // - workbench.action.openActiveLogOutputFile
   // - workbench.action.openDefaultKeybindingsFile
   // - workbench.action.openDocumentationUrl
+  // - workbench.action.openEditorAtIndex
   // - workbench.action.openFolderSettings
   // - workbench.action.openGlobalKeybindingsFile
   // - workbench.action.openGlobalSettings
@@ -1465,7 +1479,8 @@
   // - workbench.action.openProcessExplorer
   // - workbench.action.openRawDefaultSettings
   // - workbench.action.openRequestFeatureUrl
-  // - workbench.action.openSettings
+  // - workbench.action.openSettings2
+  // - workbench.action.openSettingsJson
   // - workbench.action.openSnippets
   // - workbench.action.openTipsAndTricksUrl
   // - workbench.action.openTwitterUrl
@@ -1495,7 +1510,6 @@
   // - workbench.action.selectIconTheme
   // - workbench.action.setLogLevel
   // - workbench.action.showAboutDialog
-  // - workbench.action.showAccessibilityOptions
   // - workbench.action.showEditorsInActiveGroup
   // - workbench.action.showEditorsInGroup
   // - workbench.action.showEmmetCommands
@@ -1604,5 +1618,6 @@
   // - workbench.files.action.saveAllInGroup
   // - workbench.files.action.showActiveFileInExplorer
   // - workbench.output.action.clearOutput
+  // - workbench.view.extension.dockerView
   // - workbench.view.extension.gitlens
   // - workbench.view.extension.test

@@ -1,5 +1,5 @@
 acceptRenameInput                                               enter                   when editorFocus && renameInputVisible
-acceptSelectedSuggestion                                        tab                     when editorTextFocus && suggestWidgetVisible
+acceptSelectedSuggestion                                        tab                     when suggestWidgetVisible && textInputFocus
 acceptSelectedSuggestionOnEnter
 acceptSnippet                                                   tab                     when editorTextFocus && inSnippetMode
 actions.find                                                    cmd+f
@@ -14,6 +14,7 @@ breadcrumbs.revealFocusedFromTreeAside
 breadcrumbs.selectEditor
 breadcrumbs.selectFocused
 breadcrumbs.toggle
+breadcrumbs.toggleToOn
 breakpointWidget.action.acceptInput
 cancelRenameInput                                               escape                  when editorFocus && renameInputVisible
 cancelSelection                                                 escape                  when editorHasSelection && editorTextFocus
@@ -59,55 +60,57 @@ cSpell.removeWordFromWorkspaceDictionary
 cSpell.selectInfoTab
 cSpell.setLocal
 cSpell.toggleEnableSpellChecker
-cursorBottom                                                    end                     when editorTextFocus
-cursorBottomSelect                                              shift+cmd+down          when editorTextFocus
-cursorColumnSelectDown                                          alt+down                when editorTextFocus
-cursorColumnSelectLeft                                                                  when editorTextFocus
-cursorColumnSelectPageDown                                      alt+pagedown            when editorTextFocus
-cursorColumnSelectPageUp                                        alt+pageup              when editorTextFocus
-cursorColumnSelectRight                                                                 when editorTextFocus
-cursorColumnSelectUp                                            alt+up                  when editorTextFocus
-cursorDown                                                      ctrl+n                  when editorTextFocus
-cursorDown                                                      down                    when editorTextFocus
-cursorDownSelect                                                shift+down              when editorTextFocus
-cursorEnd                                                       ctrl+e                  when editorTextFocus
-cursorEndSelect                                                 shift+cmd+right         when editorTextFocus
-cursorEndSelect                                                 shift+end               when editorTextFocus
-cursorHome                                                      ctrl+a                  when editorTextFocus
-cursorHomeSelect                                                shift+cmd+left          when editorTextFocus
-cursorHomeSelect                                                shift+home              when editorTextFocus
-cursorLeft                                                      ctrl+b                  when editorTextFocus
-cursorLeft                                                      left                    when editorTextFocus
-cursorLeftSelect                                                shift+left              when editorTextFocus
+cursorBottom                                                    end                     when textInputFocus
+cursorBottomSelect                                              shift+cmd+down          when textInputFocus
+cursorColumnSelectDown                                          alt+down                when textInputFocus
+cursorColumnSelectLeft                                                                  when textInputFocus
+cursorColumnSelectPageDown                                      alt+pagedown            when textInputFocus
+cursorColumnSelectPageUp                                        alt+pageup              when textInputFocus
+cursorColumnSelectRight                                                                 when textInputFocus
+cursorColumnSelectUp                                            alt+up                  when textInputFocus
+cursorDown                                                      ctrl+n                  when textInputFocus
+cursorDown                                                      down                    when textInputFocus
+cursorDownSelect                                                shift+down              when textInputFocus
+cursorEnd                                                       ctrl+e                  when textInputFocus
+cursorEndSelect                                                 shift+cmd+right         when textInputFocus
+cursorEndSelect                                                 shift+end               when textInputFocus
+cursorHome                                                      ctrl+a                  when textInputFocus
+cursorHomeSelect                                                shift+cmd+left          when textInputFocus
+cursorHomeSelect                                                shift+home              when textInputFocus
+cursorLeft                                                      ctrl+b                  when textInputFocus
+cursorLeft                                                      left                    when textInputFocus
+cursorLeftSelect                                                shift+left              when textInputFocus
 cursorLineEnd
 cursorLineStart
-cursorPageDown                                                  pagedown                when editorTextFocus
-cursorPageDownSelect                                            shift+pagedown          when editorTextFocus
-cursorPageUp                                                    pageup                  when editorTextFocus
-cursorPageUpSelect                                              shift+pageup            when editorTextFocus
-cursorRight                                                     ctrl+f                  when editorTextFocus
-cursorRight                                                     right                   when editorTextFocus
-cursorRightSelect                                               shift+right             when editorTextFocus
-cursorTop                                                       home                    when editorTextFocus
-cursorTopSelect                                                 shift+cmd+up            when editorTextFocus
-cursorUndo                                                      cmd+u                   when editorTextFocus
-cursorUp                                                        ctrl+p                  when editorTextFocus
-cursorUp                                                        up                      when editorTextFocus
-cursorUpSelect                                                  shift+up                when editorTextFocus
+cursorPageDown                                                  pagedown                when textInputFocus
+cursorPageDownSelect                                            shift+pagedown          when textInputFocus
+cursorPageUp                                                    pageup                  when textInputFocus
+cursorPageUpSelect                                              shift+pageup            when textInputFocus
+cursorRight                                                     ctrl+f                  when textInputFocus
+cursorRight                                                     right                   when textInputFocus
+cursorRightSelect                                               shift+right             when textInputFocus
+cursorTop                                                       home                    when textInputFocus
+cursorTopSelect                                                 shift+cmd+up            when textInputFocus
+cursorUndo                                                      cmd+u                   when textInputFocus
+cursorUp                                                        ctrl+p                  when textInputFocus
+cursorUp                                                        up                      when textInputFocus
+cursorUpSelect                                                  shift+up                when textInputFocus
 cursorWordEndLeft
 cursorWordEndLeftSelect
-cursorWordEndRight                                              alt+right               when editorTextFocus
-cursorWordEndRightSelect                                        shift+alt+right         when editorTextFocus
+cursorWordEndRight                                              alt+right               when textInputFocus
+cursorWordEndRightSelect                                        shift+alt+right         when textInputFocus
 cursorWordLeft
 cursorWordLeftSelect
+cursorWordPartLeft
+cursorWordPartLeftSelect
 cursorWordPartRight
 cursorWordPartRightSelect
 cursorWordPartStartLeft
 cursorWordPartStartLeftSelect
 cursorWordRight
 cursorWordRightSelect
-cursorWordStartLeft                                             alt+left                when editorTextFocus
-cursorWordStartLeftSelect                                       shift+alt+left          when editorTextFocus
+cursorWordStartLeft                                             alt+left                when textInputFocus
+cursorWordStartLeftSelect                                       shift+alt+left          when textInputFocus
 cursorWordStartRight
 cursorWordStartRightSelect
 cut
@@ -128,19 +131,19 @@ default:redo
 default:replacePreviousChar
 default:type
 default:undo
-deleteAllLeft                                                   ctrl+backspace          when editorTextFocus
-deleteAllRight                                                  ctrl+k                  when editorTextFocus
+deleteAllLeft                                                   ctrl+backspace          when textInputFocus && !editorReadonly
+deleteAllRight                                                  ctrl+k                  when textInputFocus && !editorReadonly
 deleteFile
-deleteLeft                                                      backspace               when editorTextFocus
-deleteLeft                                                      ctrl+h                  when editorTextFocus
-deleteRight                                                     ctrl+d                  when editorTextFocus
-deleteRight                                                     delete                  when editorTextFocus
+deleteLeft                                                      backspace               when textInputFocus && !editorReadonly
+deleteLeft                                                      ctrl+h                  when textInputFocus && !editorReadonly
+deleteRight                                                     ctrl+d                  when textInputFocus && !editorReadonly
+deleteRight                                                     delete                  when textInputFocus && !editorReadonly
 deleteWordEndLeft
 deleteWordEndRight
-deleteWordLeft                                                  alt+backspace           when editorTextFocus && !editorReadonly
+deleteWordLeft                                                  alt+backspace           when textInputFocus && !editorReadonly
 deleteWordPartLeft
 deleteWordPartRight
-deleteWordRight                                                 alt+delete              when editorTextFocus && !editorReadonly
+deleteWordRight                                                 alt+delete              when textInputFocus && !editorReadonly
 deleteWordStartLeft
 deleteWordStartRight
 dev.stats.loader
@@ -150,10 +153,10 @@ editor.action.addSelectionToPreviousFindMatch
 editor.action.blockComment
 editor.action.changeAll
 editor.action.clearoutput
-editor.action.clipboardCopyAction                               cmd+c                   when editorTextFocus
+editor.action.clipboardCopyAction                               cmd+c                   when textInputFocus
 editor.action.clipboardCopyWithSyntaxHighlightingAction
-editor.action.clipboardCutAction                                cmd+x                   when editorTextFocus
-editor.action.clipboardPasteAction                              cmd+v                   when editorTextFocus
+editor.action.clipboardCutAction                                cmd+x                   when textInputFocus && !editorReadonly
+editor.action.clipboardPasteAction                              cmd+v                   when textInputFocus && !editorReadonly
 editor.action.codeAction
 editor.action.commentLine
 editor.action.copyLinesDownAction
@@ -186,8 +189,8 @@ editor.action.inPlaceReplace.up
 editor.action.insertCursorAbove                                 alt+cmd+up              when editorTextFocus
 editor.action.insertCursorAtEndOfEachLineSelected
 editor.action.insertCursorBelow                                 alt+cmd+down            when editorTextFocus
-editor.action.insertLineAfter                                   cmd+enter               when editorTextFocus
-editor.action.insertLineBefore                                  shift+cmd+enter         when editorTextFocus
+editor.action.insertLineAfter                                   cmd+enter               when editorTextFocus && !editorReadonly
+editor.action.insertLineBefore                                  shift+cmd+enter         when editorTextFocus && !editorReadonly
 editor.action.insertSnippet
 editor.action.inspectTMScopes
 editor.action.joinLines
@@ -214,7 +217,7 @@ editor.action.peekTypeDefinition
 editor.action.previewDeclaration
 editor.action.previousMatchFindAction                           shift+cmd+g             when editorFocus
 editor.action.previousSelectionMatchFindAction
-editor.action.quickFix                                          cmd+.                   when editorTextFocus
+editor.action.quickFix                                          cmd+.                   when editorHasCodeActionsProvider && editorTextFocus && !editorReadonly
 editor.action.refactor
 editor.action.referenceSearch.trigger
 editor.action.reindentlines
@@ -305,6 +308,11 @@ editor.unfoldAll
 editor.unfoldAllMarkerRegions
 editor.unfoldRecursively
 emmet.expandAbbreviation
+eslint.createConfig
+eslint.disable
+eslint.enable
+eslint.executeAutofix
+eslint.showOutputChannel
 expandLineSelection
 explorer.newFile
 explorer.newFolder
@@ -376,6 +384,7 @@ gitlens.clearFileAnnotations
 gitlens.closeUnchangedFiles
 gitlens.computingFileAnnotations
 gitlens.copyMessageToClipboard
+gitlens.copyRemoteFileUrlToClipboard
 gitlens.copyShaToClipboard
 gitlens.diffDirectory
 gitlens.diffHeadWithBranch
@@ -535,8 +544,8 @@ list.focusUp                                                    up              
 list.select                                                     enter                   when listFocus
 list.selectAll
 list.toggleExpand                                               space                   when listFocus
-macros.callStackDown                                            shift+cmd+down          when debugState != 'inactive'
-macros.callStackUp                                              shift+cmd+up            when debugState != 'inactive'
+macros.callStackDown                                            shift+cmd+down          when inDebugMode
+macros.callStackUp                                              shift+cmd+up            when inDebugMode
 macros.inspect
 markdown.showPreview                                            shift+cmd+v
 markdown.showPreviewToSide
@@ -572,9 +581,10 @@ npm.refresh
 npm.runInstall
 npm.runScript
 npm.runScriptFromHover
+npm.runSelectedScript
 openInTerminal
 openReferenceToSide
-outdent                                                         shift+tab               when editorTextFocus && !editorTabMovesFocus
+outdent                                                         shift+tab               when editorTextFocus && !editorReadonly && !editorTabMovesFocus
 outline.focus
 outline.focusDownHighlighted
 outline.focusUpHighlighted
@@ -587,6 +597,7 @@ python.askToStopUnitTestDiscovery
 python.askToStopUnitTests
 python.buildWorkspaceSymbols
 python.createTerminal
+python.debugger.replaceExperimental
 python.debugtests
 python.discoverTests
 python.enableLinting
@@ -666,11 +677,11 @@ settings.action.clearSearchResults
 settings.action.editFocusedSetting
 settings.action.focusNextSetting
 settings.action.focusPreviousSetting
-settings.action.focusSearchFromSettings
 settings.action.focusSettingsFile
 settings.action.focusSettingsFromSearch
 settings.action.focusSettingsList
 settings.action.search
+settings.action.showContextMenu
 settings.cycle
 settings.cycle.trimTrailingWhitespace                           ctrl+cmd+w
 showNextParameterHint                                           ctrl+n                  when editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible
@@ -718,17 +729,17 @@ workbench.action.compareEditor.previousChange
 workbench.action.configureLanguageBasedSettings
 workbench.action.configureLocale
 workbench.action.debug.configure
-workbench.action.debug.continue                                 shift+cmd+right         when debugState != 'inactive'
+workbench.action.debug.continue                                 shift+cmd+right         when inDebugMode
 workbench.action.debug.disconnect
 workbench.action.debug.pause
 workbench.action.debug.restart
-workbench.action.debug.run                                      cmd+d                   when debugState == 'inactive'
+workbench.action.debug.run                                      cmd+d                   when !inDebugMode
 workbench.action.debug.selectandstart
 workbench.action.debug.start
-workbench.action.debug.stepInto                                 cmd+up                  when debugState != 'inactive'
-workbench.action.debug.stepOut                                  cmd+down                when debugState != 'inactive'
-workbench.action.debug.stepOver                                 cmd+right               when debugState != 'inactive'
-workbench.action.debug.stop                                     cmd+d                   when debugState != 'inactive'
+workbench.action.debug.stepInto                                 cmd+up                  when inDebugMode
+workbench.action.debug.stepOut                                  cmd+down                when inDebugMode
+workbench.action.debug.stepOver                                 cmd+right               when inDebugMode
+workbench.action.debug.stop                                     cmd+d                   when inDebugMode
 workbench.action.debug.terminateThread
 workbench.action.decreaseViewSize
 workbench.action.duplicateWorkspaceInNewWindow
@@ -832,6 +843,7 @@ workbench.action.nextEditorInGroup
 workbench.action.openActiveLogOutputFile
 workbench.action.openDefaultKeybindingsFile
 workbench.action.openDocumentationUrl
+workbench.action.openEditorAtIndex
 workbench.action.openEditorAtIndex1                             ctrl+1
 workbench.action.openEditorAtIndex2                             ctrl+2
 workbench.action.openEditorAtIndex3                             ctrl+3
@@ -863,6 +875,7 @@ workbench.action.openRecent
 workbench.action.openRequestFeatureUrl
 workbench.action.openSettings
 workbench.action.openSettings2
+workbench.action.openSettingsJson
 workbench.action.openSnippets
 workbench.action.openTipsAndTricksUrl
 workbench.action.openTwitterUrl
@@ -912,7 +925,6 @@ workbench.action.selectIconTheme
 workbench.action.selectTheme
 workbench.action.setLogLevel
 workbench.action.showAboutDialog
-workbench.action.showAccessibilityOptions
 workbench.action.showAllEditors                                 alt+cmd+tab
 workbench.action.showAllSymbols
 workbench.action.showCommands                                   cmd+p
@@ -1075,6 +1087,7 @@ workbench.files.action.showActiveFileInExplorer
 workbench.output.action.clearOutput
 workbench.view.debug                                            shift+cmd+d
 workbench.view.explorer                                         shift+cmd+e
+workbench.view.extension.dockerView
 workbench.view.extension.gitlens
 workbench.view.extension.test
 workbench.view.extensions                                       shift+cmd+x
