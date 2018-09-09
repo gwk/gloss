@@ -54,8 +54,9 @@ def parse_defaults(defaults_path):
   comment_re = re.compile(r'\s*//\s*(-)?\s*(.*)')
   # the defaults file contains comments, which the json parser rejects.
   for line in open(defaults_path):
-    m = comment_re.match(line)
-    if m: # commented line.
+    m = comment_re.match(line) # For now, only recognize comments on their own line.
+    if m: # Commented line.
+      json_lines.append(line[:m.start()]) # Preserve line numbers for json parser.
       if m[1]: # contains dash; assume one of the "other available commands."
         cmd = m[2].strip()
         assert cmd
@@ -133,7 +134,7 @@ def parse_binding(ctx, binding):
     whens = words[when_index+1:]
   ctx.bound_cmds.add(cmd)
   if not keys: return
-  validate_keys(line_num, keys)
+  validate_keys(ctx, line_num, keys)
   validate_whens(ctx, line_num, whens)
 
   if len(binding) == 1:
@@ -159,7 +160,7 @@ def parse_binding(ctx, binding):
   if keys == ['escape']: add_binding(['ctrl+c'])
 
 
-def validate_keys(line_num, keys):
+def validate_keys(ctx, line_num, keys):
   for word in keys:
     for el in word.split('+'):
       if not key_validator.fullmatch(el):
