@@ -4,27 +4,18 @@
 set -eux
 
 VSCODE_GLOSS="$HOME/.vscode-insiders/extensions/gloss"
-VSCODE_CONFIGURATIONS="$VSCODE_GLOSS/configurations"
-VSCODE_SYNTAXES="$VSCODE_GLOSS/syntaxes"
 VSCODE_THEMES="$VSCODE_GLOSS/themes"
-VSCODE_USER="$HOME/Library/Application Support/Code - Insiders/User"
 
-rm -rf "$VSCODE_GLOSS"/*
+craft-vscode-ext -name gloss -src vscode
 
-mkdir -p \
-"$VSCODE_GLOSS" \
-"$VSCODE_CONFIGURATIONS" \
-"$VSCODE_SYNTAXES" \
-"$VSCODE_THEMES" \
-"$VSCODE_USER"
-
-cp vscode/package.json          "$VSCODE_GLOSS"
-cp vscode/configurations/*.json "$VSCODE_CONFIGURATIONS"
-cp vscode/syntaxes/*.json       "$VSCODE_SYNTAXES"
-
+# Not yet handled by craft-vscode-ext.
+mkdir -p "$VSCODE_THEMES"
 cp _build/gloss-black.json  "$VSCODE_THEMES"
-cp _build/vscode-keys.json  "$VSCODE_USER/keybindings.json"
 
+# User settings.
+VSCODE_USER="$HOME/Library/Application Support/Code - Insiders/User"
+mkdir -p "$VSCODE_USER"
+cp _build/vscode-keys.json  "$VSCODE_USER/keybindings.json"
 set +x
 touch "$VSCODE_USER/settings.json"
 if ! d vscode/settings.json "$VSCODE_USER/settings.json"; then
