@@ -57,8 +57,8 @@ def make_settings():
 
   scope('entity', foreground=Ch)
 
-  scope('invalid', background=R)
-  scope('invalid.deprecated', background='#800000')
+  scope('invalid', foreground=R)
+  scope('invalid.deprecated', foreground='#D00000')
 
   scope('keyword', foreground=M)
   scope('keyword.operator', foreground=MVi)
@@ -91,7 +91,7 @@ def make_settings():
   # legs.
   scope('sym.legs', foreground=W)
   scope('section.legs', foreground=L4)
-  scope('section_invalid.legs', foreground=L4, background='#800000')
+  scope('section_invalid.legs', foreground=R)
 
   scope('colon.legs', foreground=C)
   scope('brckt_o', foreground=C)
