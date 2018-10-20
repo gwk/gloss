@@ -166,4 +166,6 @@
   ],
   "editor.multiCursorModifier": "ctrlCmd",
   "gitlens.historyExplorer.enabled": true,
+  "gitlens.hovers.avatars": false,
+  "editor.hover.sticky": false,
 }
