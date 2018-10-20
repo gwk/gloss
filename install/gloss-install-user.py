@@ -7,7 +7,7 @@
 
 from os.path import expanduser as expand_user, isfile as is_file
 from _gloss_install_common import * # parses arguments, etc.
-
+import site
 
 def main():
   # make sure that gloss system is installed.
@@ -32,8 +32,19 @@ def main():
     for p in [profile_path, rc_path]:
       append_line_if_missing(p, source_common_line)
 
+    install_usercustomize()
+
   except OSError as e: # usually permissions.
     exit(e)
+
+
+def install_usercustomize():
+  name = 'usercustomize.py'
+  src = path_join(src_dir, name)
+  dst = path_join(site.getusersitepackages(), name)
+  errSL('installing:', src, '->', dst)
+  copy_file(src, dst)
+
 
 
 def append_line_if_missing(path, line):
