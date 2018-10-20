@@ -114,6 +114,7 @@ def make_settings():
 
   # Writeup.
   scope('entity.section.writeup', foreground=C)
+  scope('entity.code.writeup', foreground=L4)
   scope('meta.version.writeup', foreground=D4)
   return all_settings
 
