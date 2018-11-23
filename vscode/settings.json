@@ -168,4 +168,6 @@
   "gitlens.historyExplorer.enabled": true,
   "gitlens.hovers.avatars": false,
   "editor.hover.sticky": false,
+  "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
+  "python.envFile": "",
 }
