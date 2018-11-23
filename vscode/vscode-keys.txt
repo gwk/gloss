@@ -519,7 +519,7 @@ keybindings.editor.defineKeybinding
 keybindings.editor.focusKeybindings
 keybindings.editor.removeKeybinding
 keybindings.editor.resetKeybinding
-keybindings.editor.searchKeybindings                            cmd+f                   when inKeybindings && keybindingFocus
+keybindings.editor.searchKeybindings                            cmd+f                   when inKeybindings && !inKeybindingsSearch
 keybindings.editor.showConflicts
 lastCursorLineSelect
 lastCursorLineSelectDrag
@@ -559,7 +559,7 @@ merge-conflict.accept.selection
 merge-conflict.compare
 merge-conflict.next
 merge-conflict.previous
-moveFileToTrash                                                 cmd+delete
+moveFileToTrash                                                 cmd+delete              when config.files.enableTrash && explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus
 notification.clear
 notification.collapse
 notification.expand
