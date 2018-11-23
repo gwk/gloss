@@ -1091,5 +1091,5 @@ workbench.view.extension.dockerView
 workbench.view.extension.gitlens
 workbench.view.extension.test
 workbench.view.extensions                                       shift+cmd+x
-workbench.view.scm                                              ctrl+shift+g
+workbench.view.scm                                              shift+cmd+c
 workbench.view.search                                           shift+cmd+f
