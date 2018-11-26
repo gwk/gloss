@@ -54,14 +54,13 @@ def make_settings():
   scope('comment.punctuation', foreground=N)
 
   scope('constant', foreground=Az)
-  scope('constant.character.escape', foreground=Or)
   scope('constant.language', foreground=Az)
-  scope('constant.numeric', foreground=BAz)
+  scope('constant.numeric', foreground=Az)
 
   scope('entity', foreground=Ch)
 
-  scope('invalid', foreground=R)
-  scope('invalid.deprecated', foreground='#D00000')
+  scope('invalid', foreground='#800000')
+  scope('invalid.deprecated', foreground=RD)
 
   scope('keyword', foreground=M)
   scope('keyword.operator', foreground=MVi)
@@ -91,7 +90,42 @@ def make_settings():
 
   scope('sym', foreground=G)
 
-  # legs.
+  scope('comment.typehint', foreground=L4)
+
+
+
+  # Python.
+  # All scopes: https://raw.githubusercontent.com/MagicStack/MagicPython/master/misc/scopes.
+  # Syntax source: https://github.com/MagicStack/MagicPython/tree/master/grammars/src.
+  scope('constant.other.caps.python', foreground=W)
+  scope('constant.other.ellipsis.python', foreground=Vi)
+  scope('entity.name.function.decorator.python', foreground=G)
+  scope('keyword.illegal.name.python', foreground=R8)
+  scope('meta.format.brace.python', foreground=R) # TODO: debug.
+  scope('support.function.builtin.python', foreground=W)
+  scope('support.variable.magic.python', foreground=Sp)
+  scope('variable.legacy.builtin.python', foreground=W)
+
+  # Python strings.
+  scope('constant.character.escape.python', foreground=Or)
+  scope('constant.character.format.placeholder.other.python', foreground=G) # Brace in f-string.
+  scope('storage.type.format.python', foreground=BVi) # Brace format starting at colon.
+
+  # Regexp.
+  scope('constant.character.set.regexp', foreground=G)
+  scope('constant.character.escape.regexp', foreground=Or)
+  scope('constant.other.set.regexp', foreground=C) # Square brackets.
+
+  scope('entity.name.tag.backreference.regexp', foreground=Ro)
+  scope('entity.name.tag.named.backreference.regexp', foreground=Ro)
+
+  scope('entity.name.tag.named.group.regexp', foreground=B) # `?P<name>`.
+  scope('storage.modifier.flag.regexp', foreground=ROr) # `(?x)`.
+  scope('support.other.escape.special.regexp', foreground=Or) # `\w`.
+  scope('constant.character.unicode.regexp', foreground=Or)
+
+  # Legs.
+
   scope('sym.legs', foreground=W)
   scope('section.legs', foreground=L4)
   scope('section_invalid.legs', foreground=R)
@@ -125,7 +159,7 @@ def make_settings():
 # colors.
 # one possible future abbreviation scheme:
 #   mixtures with white are called tints; mixtures with black are shades.
-K = '#000000' # black.
+K  = '#000000' # black.
 D1 = '#101010' # dark.
 D2 = '#202020'
 D3 = '#303030'
@@ -133,7 +167,7 @@ D4 = '#404040'
 D5 = '#505050'
 D6 = '#606060'
 D7 = '#707070'
-N = '#808080' # neutral gray; not present in ANSI SGR codes.
+N  = '#808080' # neutral gray; not present in ANSI SGR codes.
 L7 = '#909090'
 L6 = '#A0A0A0'
 L5 = '#B0B0B0'
@@ -141,11 +175,13 @@ L4 = '#C0C0C0'
 L3 = '#D0D0D0'
 L2 = '#E0E0E0'
 L1 = '#F0F0F0'
-W = '#FFFFFF' # white.
+W  = '#FFFFFF' # white.
 
-R = '#FF0000'
-G = '#20FF20'
-B = '#6060FF'
+R  = '#FF0000'
+R8 = '#800000'
+RD = '#D00000'
+G  = '#20FF20'
+B  = '#6060FF' # Lighten.
 
 Y = '#FFFF00'
 C = '#00FFFF'
@@ -154,8 +190,8 @@ M = '#FF00FF'
 Or = '#FF8000' # orange.
 Ch = '#80FF00' # chartreuse.
 Sp = '#00FF80' # spring green.
-Az = '#0080FF' # azure.
-Vi = '#8000FF' # violet.
+Az = '#1080FF' # azure. Lightened.
+Vi = '#8010FF' # violet. Lightened.
 Ro = '#FF0080' # rose.
 
 RRo = '#FF0040'
@@ -166,8 +202,8 @@ GCh = '#40FF00'
 GSp = '#00FF40'
 CSp = '#00FFC0'
 CAz = '#00C0FF'
-BAz = '#0040FF'
-BVi = '#4000FF'
+BAz = '#2040FF' # Lightened.
+BVi = '#6020FF' # Lightened.
 MVi = '#C000FF'
 MRo = '#FF00C0'
 
