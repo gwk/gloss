@@ -54,6 +54,9 @@ def make_settings():
   scope('comment.punctuation', foreground=N)
 
   scope('constant', foreground=Az)
+  scope('constant.character.escape', foreground=Or)
+  scope('constant.language', foreground=Az)
+  scope('constant.numeric', foreground=BAz)
 
   scope('entity', foreground=Ch)
 
