@@ -40,15 +40,15 @@ gds: git diff --staged "$@"
 # d: ref names
 # s: subject
 
-gl:   git log --format="%C(blue)%ad %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso "$@"
-gl1:  git log --format="%C(blue)%ad %C(yellow)%h %C(cyan)%an %C(green)%d %C(reset)%s" --date=iso -1 "$@"
+gl:   git log --format="%C(blue)%ad %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso "$@"
+gl1:  git log --format="%C(blue)%ad %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso -1 "$@"
 
-glm:    git log --decorate "$@"
-glm1:   git log --decorate -1 "$@"
+glm:    git log "$@"
+glm1:   git log -1 "$@"
 
-# Note: -m flag is documented in git-log "Diff Formatting".
-glv:    git log --decorate --name-status -m "$@"
-glv1:   git log --decorate --name-status -m -1 "$@"
+# Note: -m flag "makes the merge commits show the full diff like regular commits"; documented in git-log "Diff Formatting".
+glv:    git log --name-status -m "$@"
+glv1:   git log --name-status -m -1 "$@"
 
 gls: git ls-files "$@"
 
