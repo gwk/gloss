@@ -50,6 +50,7 @@
 
   "files.associations": {
     "*.pyi": "python",
+    "pylintrc": "ini"
   },
 
   "files.exclude": {
@@ -152,7 +153,7 @@
   "workbench.editor.showIcons": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.sideBar.location": "left",
-  "workbench.startupEditor": "newUntitledFile",
+  "workbench.startupEditor": "none",
   "workbench.statusBar.feedback.visible": false,
   "workbench.statusBar.visible": true,
   "[xcode]": {
@@ -165,9 +166,30 @@
     "overview"
   ],
   "editor.multiCursorModifier": "ctrlCmd",
-  "gitlens.historyExplorer.enabled": true,
   "gitlens.hovers.avatars": false,
   "editor.hover.sticky": false,
   "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
   "python.envFile": "",
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true,
+
+  "yaml.customTags": [
+    "!And",
+    "!If",
+    "!Not",
+    "!Equals",
+    "!Or",
+    "!FindInMap",
+    "!Base64",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!Select",
+    "!Split",
+    "!Join"
+  ],
+  "yaml.format.enable": true
 }
