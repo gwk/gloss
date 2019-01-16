@@ -26,6 +26,8 @@ groups = {
       '.rs', '.rc', '.rust',
       '.sh', '.bash', '.cmd', # shell.
       '.js', '.coffee', '.ts', # javascript.
+      '.html', '.css', '.header', '.footer', '.svg', '.less', '.scss',
+      '.sql',
       '.vert', '.frag', '.geom', '.shader', # shaders.
       '.ml', '.mli',
       '.hs',
@@ -65,9 +67,7 @@ groups = {
       '.dot',
       '.json', '.jsons', '.jsonl', '.cson', '.yaml', '.yml', '.toml',
       '.xml', '.plist', '.strings',
-      '.html', '.css', '.header', '.footer', '.svg', '.less', '.scss',
       '.tmtheme', '.tmlanguage',
-      '.sql',
       '.1', '.2', '.3', '.4', '.5', '.6', '.7', '.8',
     ],
     'blank_pattern' : r'\s*$',
