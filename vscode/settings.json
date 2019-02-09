@@ -187,7 +187,7 @@
     "!ImportValue",
     "!Select",
     "!Split",
-    "!Join"
+    "!Join sequence"
   ],
   "yaml.format.enable": true,
   "terminal.integrated.rendererType": "dom"
