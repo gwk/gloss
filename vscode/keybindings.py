@@ -2,7 +2,7 @@
 
 import re
 from sys import argv
-from pithy.fs import append_path_stem_suffix, path_stem
+from pithy.fs import path_stem
 from pithy.io import errL, errSL, outL, writeL
 from pithy.iterable import group_by_heads
 from pithy.json import JSONDecodeError, parse_json, write_json
