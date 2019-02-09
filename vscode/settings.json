@@ -14,7 +14,7 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": false,
 
-  "editor.autoClosingBrackets": false,
+  "editor.autoClosingBrackets": "never",
   "editor.detectIndentation": true,
   "editor.fontFamily": "Source Code Pro, Menlo, monospace",
   "editor.fontSize": 12,
@@ -26,7 +26,6 @@
   "editor.minimap.maxColumn": 96,
   "editor.minimap.renderCharacters": true,
   "editor.occurrencesHighlight": false,
-  "editor.parameterHints": false,
   "editor.quickSuggestions": {
     "other": true,
     "comments": false,
@@ -110,7 +109,6 @@
   "search.useIgnoreFiles": false,
 
   "python.disableInstallationCheck": true,
-  "python.disablePromptForFeatures": ["pylint"],
   "python.linting.pylintEnabled": false,
   "python.linting.lintOnSave": false,
   "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3",
@@ -191,5 +189,6 @@
     "!Split",
     "!Join"
   ],
-  "yaml.format.enable": true
+  "yaml.format.enable": true,
+  "terminal.integrated.rendererType": "dom"
 }
