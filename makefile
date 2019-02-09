@@ -3,12 +3,13 @@
 # $@: The file name of the target of the rule.
 # $<: The name of the first prerequisite.
 # $^: The names of all the prerequisites, with spaces between them.
+# $*: The stem with which a pattern rule matches.
 
 
 .PHONY: _default build clean cov install-sys install-user install-vscode test uninstall-vscode
 
 # First target of a makefile is the default.
-_default: build
+_default: help
 
 build: _build/gloss-black.json _build/vscode-keys.json
 
@@ -17,6 +18,9 @@ clean:
 
 cov:
 	iotest -fail-fast -coverage
+
+help: # Summarize the targets of this makefile.
+	@GREP_COLOR="1;32" egrep --color=always '^\w[^ :]+:' makefile | sort
 
 install-sys:
 	install/gloss-install-sys.py
