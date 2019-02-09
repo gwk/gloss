@@ -71,6 +71,7 @@ cursorColumnSelectUp                                            alt+up          
 cursorDown                                                      ctrl+n                  when textInputFocus
 cursorDown                                                      down                    when textInputFocus
 cursorDownSelect                                                shift+down              when textInputFocus
+cursorDownSelect                                                shift+ctrl+n            when textInputFocus
 cursorEnd                                                       ctrl+e                  when textInputFocus
 cursorEndSelect                                                 shift+cmd+right         when textInputFocus
 cursorEndSelect                                                 shift+end               when textInputFocus
@@ -80,6 +81,7 @@ cursorHomeSelect                                                shift+home      
 cursorLeft                                                      ctrl+b                  when textInputFocus
 cursorLeft                                                      left                    when textInputFocus
 cursorLeftSelect                                                shift+left              when textInputFocus
+cursorLeftSelect                                                shift+ctrl+b            when textInputFocus
 cursorLineEnd
 cursorLineStart
 cursorPageDown                                                  pagedown                when textInputFocus
@@ -89,28 +91,34 @@ cursorPageUpSelect                                              shift+pageup    
 cursorRight                                                     ctrl+f                  when textInputFocus
 cursorRight                                                     right                   when textInputFocus
 cursorRightSelect                                               shift+right             when textInputFocus
+cursorRightSelect                                               shift+ctrl+f            when textInputFocus
 cursorTop                                                       home                    when textInputFocus
 cursorTopSelect                                                 shift+cmd+up            when textInputFocus
 cursorUndo                                                      cmd+u                   when textInputFocus
 cursorUp                                                        ctrl+p                  when textInputFocus
 cursorUp                                                        up                      when textInputFocus
 cursorUpSelect                                                  shift+up                when textInputFocus
+cursorUpSelect                                                  shift+ctrl+p            when textInputFocus
 cursorWordEndLeft
 cursorWordEndLeftSelect
-cursorWordEndRight                                              alt+right               when textInputFocus
-cursorWordEndRightSelect                                        shift+alt+right         when textInputFocus
-cursorWordLeft
-cursorWordLeftSelect
+cursorWordEndRight
+cursorWordEndRightSelect
+cursorWordLeft                                                  alt+b                   when textInputFocus
+cursorWordLeft                                                  alt+left                when textInputFocus
+cursorWordLeftSelect                                            shift+alt+b             when textInputFocus
+cursorWordLeftSelect                                            shift+alt+left          when textInputFocus
 cursorWordPartLeft
 cursorWordPartLeftSelect
 cursorWordPartRight
 cursorWordPartRightSelect
 cursorWordPartStartLeft
 cursorWordPartStartLeftSelect
-cursorWordRight
-cursorWordRightSelect
-cursorWordStartLeft                                             alt+left                when textInputFocus
-cursorWordStartLeftSelect                                       shift+alt+left          when textInputFocus
+cursorWordRight                                                 alt+f                   when textInputFocus
+cursorWordRight                                                 alt+right               when textInputFocus
+cursorWordRightSelect                                           shift+alt+f             when textInputFocus
+cursorWordRightSelect                                           shift+alt+right         when textInputFocus
+cursorWordStartLeft
+cursorWordStartLeftSelect
 cursorWordStartRight
 cursorWordStartRightSelect
 cut
