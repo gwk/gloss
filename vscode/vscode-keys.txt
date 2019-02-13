@@ -243,8 +243,8 @@ editor.action.revealDeclaration
 editor.action.revealDefinition
 editor.action.revealDefinitionAside
 editor.action.selectAll                                         cmd+a
-editor.action.selectAllMatches                                  alt+enter               when editorFocus && findWidgetVisible
-editor.action.selectHighlights
+editor.action.selectAllMatches
+editor.action.selectHighlights                                  ctrl+s
 editor.action.selectToBracket
 editor.action.showAccessibilityHelp
 editor.action.showContextMenu
@@ -1032,7 +1032,7 @@ workbench.action.focusSixthEditorGroup
 workbench.action.focusThirdEditorGroup                          cmd+3
 workbench.action.generateColorTheme
 workbench.action.gotoLine                                       ctrl+g
-workbench.action.gotoSymbol                                     ctrl+s
+workbench.action.gotoSymbol                                     alt+g
 workbench.action.hideInterfaceOverview
 workbench.action.increaseViewSize
 workbench.action.inspectContextKeys
