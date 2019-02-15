@@ -156,8 +156,41 @@ if [[ -z "$GLOSS_ENV" ]]; then
   # currently unused; would be nice to show only the last n characters of cwd.
   #export GLOSS_PROMPT_DIR_TRIM=32
 
-  # exports only need to be sourced once.
-  source $GLOSS_DIR/sh/gloss_sh_exports.bash
+  # ANSI select graphic rendition (SGR) control sequences.
+
+  export RST='\e[0m' # reset.
+  export RST_BOLD='\e[22m'
+  export RST_ULINE='\e[24m'
+  export RST_BLINK='\e[25m'
+  export RST_INVERT='\e[27m'
+  export RST_TXT='\e[39m'
+  export RST_BG='\e[49m'
+
+  export BOLD='\e[1m'
+  export ULINE='\e[4m'
+  export BLINK='\e[5m'
+  export INVERT='\e[7m'
+
+  export TXT_D='\e[30m' # dark gray
+  export TXT_R='\e[31m' # red
+  export TXT_G='\e[32m' # green
+  export TXT_Y='\e[33m' # yellow
+  export TXT_B='\e[34m' # blue
+  export TXT_M='\e[35m' # magenta
+  export TXT_C='\e[36m' # cyan
+  export TXT_L='\e[37m' # light gray
+
+  export BG_D='\e[40m' # dark gray
+  export BG_R='\e[41m' # red
+  export BG_G='\e[42m' # green
+  export BG_Y='\e[43m' # yellow
+  export BG_B='\e[44m' # blue
+  export BG_M='\e[45m' # magenta
+  export BG_C='\e[46m' # cyan
+  export BG_L='\e[47m' # light gray
+
+  # Utils only need to be sourced once.
+  source $GLOSS_DIR/sh/gloss_sh_utils.bash
 
   # platform specific configuration.
   if [[ "$GLOSS_PLATFORM" == 'darwin' ]]; then
