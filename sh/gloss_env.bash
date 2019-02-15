@@ -152,7 +152,6 @@ if [[ -z "$GLOSS_ENV" ]]; then
   export IGNOREEOF=32
 
   export NODE_REPL_MODE="strict"
-  export NLTK_DATA=~/external/nltk_data
 
   # currently unused; would be nice to show only the last n characters of cwd.
   #export GLOSS_PROMPT_DIR_TRIM=32
