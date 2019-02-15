@@ -6,7 +6,7 @@
 
 export RST='\e[0m' # reset.
 export RST_BOLD='\e[22m'
-export RST_UNDERLINE='\e[24m'
+export RST_ULINE='\e[24m'
 export RST_BLINK='\e[25m'
 export RST_INVERT='\e[27m'
 export RST_TXT='\e[39m'
