@@ -70,8 +70,8 @@ cursorColumnSelectRight                                                         
 cursorColumnSelectUp                                            alt+up                  when textInputFocus
 cursorDown                                                      ctrl+n                  when textInputFocus
 cursorDown                                                      down                    when textInputFocus
-cursorDownSelect                                                shift+down              when textInputFocus
 cursorDownSelect                                                shift+ctrl+n            when textInputFocus
+cursorDownSelect                                                shift+down              when textInputFocus
 cursorEnd                                                       ctrl+e                  when textInputFocus
 cursorEndSelect                                                 shift+cmd+right         when textInputFocus
 cursorEndSelect                                                 shift+end               when textInputFocus
@@ -80,8 +80,8 @@ cursorHomeSelect                                                shift+cmd+left  
 cursorHomeSelect                                                shift+home              when textInputFocus
 cursorLeft                                                      ctrl+b                  when textInputFocus
 cursorLeft                                                      left                    when textInputFocus
-cursorLeftSelect                                                shift+left              when textInputFocus
 cursorLeftSelect                                                shift+ctrl+b            when textInputFocus
+cursorLeftSelect                                                shift+left              when textInputFocus
 cursorLineEnd
 cursorLineStart
 cursorPageDown                                                  pagedown                when textInputFocus
@@ -90,15 +90,15 @@ cursorPageUp                                                    pageup          
 cursorPageUpSelect                                              shift+pageup            when textInputFocus
 cursorRight                                                     ctrl+f                  when textInputFocus
 cursorRight                                                     right                   when textInputFocus
-cursorRightSelect                                               shift+right             when textInputFocus
 cursorRightSelect                                               shift+ctrl+f            when textInputFocus
+cursorRightSelect                                               shift+right             when textInputFocus
 cursorTop                                                       home                    when textInputFocus
 cursorTopSelect                                                 shift+cmd+up            when textInputFocus
 cursorUndo                                                      cmd+u                   when textInputFocus
 cursorUp                                                        ctrl+p                  when textInputFocus
 cursorUp                                                        up                      when textInputFocus
-cursorUpSelect                                                  shift+up                when textInputFocus
 cursorUpSelect                                                  shift+ctrl+p            when textInputFocus
+cursorUpSelect                                                  shift+up                when textInputFocus
 cursorWordEndLeft
 cursorWordEndLeftSelect
 cursorWordEndRight
