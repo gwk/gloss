@@ -21,10 +21,12 @@
   "editor.formatOnPaste": false,
   "editor.formatOnSave": false,
   "editor.formatOnType": false,
+  "editor.hover.sticky": false,
   "editor.insertSpaces": true,
   "editor.minimap.enabled": false,
   "editor.minimap.maxColumn": 96,
   "editor.minimap.renderCharacters": true,
+  "editor.multiCursorModifier": "ctrlCmd",
   "editor.occurrencesHighlight": false,
   "editor.quickSuggestions": {
     "other": true,
@@ -41,6 +43,7 @@
   "editor.suggestOnTriggerCharacters": true,
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": true,
+  "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
   "editor.wordWrap": "on",
 
   "eslint.enable": false,
@@ -76,14 +79,24 @@
 
   "gitlens.advanced.quickPick.closeOnFocusOut": true,
   "gitlens.advanced.telemetry.enabled": false,
+  "gitlens.blame.avatars": false,
   "gitlens.blame.ignoreWhitespace": true,
   "gitlens.codeLens.enabled": false,
   "gitlens.codeLens.recentChange.enabled": true,
   "gitlens.currentLine.enabled": false,
-  "gitlens.keymap": "none",
+  "gitlens.hovers.avatars": false,
   "gitlens.hovers.currentLine.over": "line",
-  "gitlens.statusBar.format": "${ago}: ${message}",
+  "gitlens.hovers.enabled": false,
+  "gitlens.keymap": "none",
   "gitlens.statusBar.dateFormat": "YYYY-MM-DD HH:MM",
+  "gitlens.statusBar.format": "${ago}: ${message}",
+  "gitlens.recentChanges.highlight.locations": [
+    "gutter",
+    "overview"
+  ],
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true,
+
   "html.format.wrapLineLength": 0,
 
   "macros": {
@@ -109,6 +122,7 @@
   "search.useIgnoreFiles": false,
 
   "python.disableInstallationCheck": true,
+  "python.envFile": "",
   "python.linting.pylintEnabled": false,
   "python.linting.lintOnSave": false,
   "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3",
@@ -117,6 +131,7 @@
 
   "terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
   "terminal.integrated.lineHeight": 1.2,
+  "terminal.integrated.rendererType": "dom",
 
   "window.newWindowDimensions": "maximized",
   "window.zoomLevel": 1,
@@ -154,22 +169,10 @@
   "workbench.startupEditor": "none",
   "workbench.statusBar.feedback.visible": false,
   "workbench.statusBar.visible": true,
+
   "[xcode]": {
     "editor.insertSpaces": false
   },
-  "gitlens.blame.avatars": false,
-  "gitlens.hovers.enabled": false,
-  "gitlens.recentChanges.highlight.locations": [
-    "gutter",
-    "overview"
-  ],
-  "editor.multiCursorModifier": "ctrlCmd",
-  "gitlens.hovers.avatars": false,
-  "editor.hover.sticky": false,
-  "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
-  "python.envFile": "",
-  "gitlens.views.fileHistory.enabled": true,
-  "gitlens.views.lineHistory.enabled": true,
 
   "yaml.customTags": [
     "!And",
@@ -189,6 +192,5 @@
     "!Split",
     "!Join sequence"
   ],
-  "yaml.format.enable": true,
-  "terminal.integrated.rendererType": "dom"
+  "yaml.format.enable": true
 }
