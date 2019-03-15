@@ -3,11 +3,11 @@
 import re
 from sys import argv
 from pithy.fs import path_stem
-from pithy.io import errL, errSL, outL, writeL
+from pithy.io import errL, errSL, errLSSL, outL, writeL
 from pithy.iterable import group_by_heads
 from pithy.json import JSONDecodeError, parse_json, write_json
 from dataclasses import dataclass, field
-from typing import Any, Dict, Iterable, List, Set, Tuple
+from typing import Any, DefaultDict, Dict, Iterable, List, Set, Tuple
 
 '''
 Parse the default VSCode keybindings, validate custom ones, and install them.
@@ -31,7 +31,7 @@ def main() -> None:
     all_cmds=set(known_extension_cmds))
 
   write_defaults_txt(defaults_out_path, ctx.dflt_triples)
-  write_whens(whens_out_path, ctx.all_whens)
+  write_whens(whens_out_path, ctx.all_when_words)
   parse_bindings(ctx, bindings_path)
   warn_unbound_cmds(ctx)
 
@@ -70,15 +70,17 @@ def parse_defaults(defaults_path:str) -> Tuple[List[Binding],List[str]]:
 
 @dataclass(frozen=True)
 class Ctx:
-
   bindings_path: str
   defaults: List[Binding]
   other_cmds: List[str]
   all_cmds: Set[str]
-  all_whens: Set[str] = field(default_factory=set)
+  all_when_words: Set[str] = field(default_factory=set)
+  dflt_binding_whens: Dict[str,Set[str]] = field(default_factory=lambda:DefaultDict(set))
+  dflt_escapes: Set[str] = field(default_factory=set)
   dflt_triples: List[Triple] = field(default_factory=list) # used to generate keybindings.txt once.
   bindings: List[Dict[str,str]] = field(default_factory=list)
   bound_cmds: Set[str] = field(default_factory=set)
+  bound_escapes: Set[str] = field(default_factory=set)
 
   def msg(self, line:int, *items:Any):
     errSL(f'{self.bindings_path}:{line}:', *items)
@@ -100,13 +102,19 @@ class Ctx:
         'key': key,
         'command': '-' + cmd
       }
-      when = dflt.get('when', '')
+      if key == 'escape':
+        self.dflt_escapes.add(cmd)
+
+      when_words = dflt.get('when', '').split()
+      when = ' '.join(when_words)
+      self.dflt_binding_whens[cmd].add(when)
       if when:
+        # Note: as of 2018/08/03, do not qualify nullifications with when clauses, or else they will fail in some cases.
         for word in when.split():
-          self.all_whens.add(word.lstrip('!'))
-        #nullification['when'] = when # Disabled; causes nullification to fail in some cases.
+          self.all_when_words.add(word.lstrip('!'))
       self.bindings.append(nullification)
       self.dflt_triples.append((cmd, key, when))
+
     for cmd in self.other_cmds:
       self.all_cmds.add(cmd)
       self.dflt_triples.append((cmd, '', ''))
@@ -120,9 +128,9 @@ def write_defaults_txt(path:str, dflt_triples:List[Triple]) -> None:
     writeL(f, f'{cmd:<63} {key:23} {when_clause}'.strip())
 
 
-def write_whens(path:str, all_whens:Set[str]) -> None:
+def write_whens(path:str, all_when_words:Set[str]) -> None:
   f = open(path, 'w')
-  for when in sorted(all_whens):
+  for when in sorted(all_when_words):
     writeL(f, when)
 
 
@@ -144,14 +152,18 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
     when_index = words.index('when')
   except ValueError:
     keys = words[1:]
-    whens:List[str] = []
+    when_words:List[str] = []
   else:
     keys = words[1:when_index]
-    whens = words[when_index+1:]
+    when_words = words[when_index+1:]
+  when = ' '.join(when_words)
   ctx.bound_cmds.add(cmd)
+
   if not keys: return
-  validate_keys(ctx, line_num, keys)
-  validate_whens(ctx, line_num, whens)
+  key = ' '.join(keys)
+
+  validate_keys(ctx, line_num, keys=keys)
+  validate_when(ctx, line_num, cmd=cmd, when=when, when_words=when_words)
 
   if len(binding) == 1:
     args = None
@@ -164,16 +176,18 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
   def add_binding(keys:Iterable[str]) -> None:
     binding = {
       'command': cmd,
-      'key': ' '.join(keys)
+      'key': key,
     }
-    if whens:
-      binding['when'] = ' '.join(whens)
+    if when_words:
+      binding['when'] = when
     if args is not None:
       binding['args'] = args
     ctx.bindings.append(binding)
 
   add_binding(keys)
-  if keys == ['escape']: add_binding(['ctrl+c'])
+  if key == 'escape':
+    ctx.bound_escapes.add(cmd)
+    add_binding(['ctrl+c'])
 
 
 def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]):
@@ -182,19 +196,22 @@ def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]):
       if not key_validator.fullmatch(el):
         ctx.error(line_num, f'bad key: {el!r}')
 
-def validate_whens(ctx:Ctx, line_num:int, whens:Iterable[str]) -> None:
-  for when in whens:
-    if when.lstrip('!') not in ctx.all_whens:
-      ctx.error(line_num, f'bad when: {when}')
-
+def validate_when(ctx:Ctx, line_num:int, cmd:str, when:str, when_words:List[str]) -> None:
+  default_whens = ctx.dflt_binding_whens[cmd]
+  if default_whens and when not in default_whens:
+    ctx.msg(line_num, f'note: custom when for command: {cmd}\n  when {when}', *[f'\n  when {dflt}' for dflt in default_whens])
+  for word in when_words:
+    if word.lstrip('!') not in ctx.all_when_words:
+      ctx.error(line_num, f'bad when word: {word}')
 
 def warn_unbound_cmds(ctx:Ctx) -> None:
-  unbound = ctx.all_cmds - ctx.bound_cmds
-  if not unbound: return
-  errL('\nunbound commands:')
-  for cmd in sorted(unbound):
-    errL(cmd)
-  errL()
+  unbound_cmds = ctx.all_cmds - ctx.bound_cmds
+  if unbound_cmds:
+    errLSSL('\nunbound commands:', *sorted(unbound_cmds))
+  unbound_escapes = ctx.dflt_escapes - ctx.bound_escapes
+  if unbound_escapes:
+    errLSSL('\nunbound escapes:', *sorted(unbound_escapes))
+
 
 # https://code.visualstudio.com/docs/getstarted/keybindings#_accepted-keys
 key_validator = re.compile(r'''(?x)

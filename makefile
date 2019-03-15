@@ -28,7 +28,7 @@ install-sys:
 install-user:
 	install/gloss-install-user.py
 
-install-vscode: _build/gloss-black.json _build/vscode-keys.json
+install-vscode: vscode
 	install/gloss-install-vscode.sh
 
 xcode_keys_src := keybindings/gloss-xcode.idebindings
@@ -42,6 +42,11 @@ test:
 
 uninstall-vscode:
 	rm -rf ~/.vscode-insiders/extensions/gloss
+
+vscode: _build/gloss-black.json _build/vscode-keys.json
+
+vscode-keys-diff: vscode
+	echo d _build/vscode-keys-defaults.txt vscode/vscode-keys.txt
 
 _build/gloss-black.json: gloss-black.py
 	mkdir -p _build
