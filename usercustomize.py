@@ -3,7 +3,7 @@ import os
 import sys
 
 
-def excepthook(exc_class:type, exc:BaseException, traceback) -> None:
+def gloss_excepthook(exc_class:type, exc:BaseException, traceback) -> None:
 
   from traceback import format_exception
   stderr = sys.stderr
@@ -42,6 +42,8 @@ def excepthook(exc_class:type, exc:BaseException, traceback) -> None:
   TXT_D = sgr(TXT, gray26(9))
   TXT_N = sgr(TXT, gray26(13))
   TXT_L = sgr(TXT, gray26(16))
+  TXT_O = sgr(TXT, rgb6(5, 2, 0))
+  TXT_Y = sgr(TXT, rgb6(5, 5, 0))
 
   lines = format_exception(exc_class, exc, traceback, limit=None, chain=True)
   for line in lines:
@@ -56,6 +58,13 @@ def excepthook(exc_class:type, exc:BaseException, traceback) -> None:
         fn = m['stack_fn']
         code = m['stack_code']
         stderr.write(f'{TXT_L}{f}:{l} {TXT_D}in {TXT_L}{fn}{RST_TXT}\n{code}')
+      elif k == 'exception':
+        name = m['exc_name']
+        msg = m['exc_msg']
+        if msg:
+          stderr.write(f'{TXT_O}{name}{RST}: {TXT_Y}{msg}{RST}\n')
+        else:
+          stderr.write(f'{TXT_O}{name}{RST}\n')
       else:
         stderr.write(line)
     else:
@@ -65,6 +74,7 @@ def excepthook(exc_class:type, exc:BaseException, traceback) -> None:
 _log_msg_re = re.compile(r'''(?x)
   (?P<traceback>Traceback \ \(most\ recent\ call\ last\): )
 | (?P<stack_frame>\ \ File\ "(?P<stack_file>.+)",\ line\ (?P<stack_line>\d+),\ in\ (?P<stack_fn>.+)\n (?P<stack_code>.*\n?))
+| (?P<exception> (?P<exc_name>[.\w]+) (?: :\ (?P<exc_msg>.+))?)
 ''')
 
-sys.excepthook = excepthook
+sys.excepthook = gloss_excepthook
