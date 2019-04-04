@@ -45,36 +45,36 @@ def gloss_excepthook(exc_class:type, exc:BaseException, traceback) -> None:
   TXT_O = sgr(TXT, rgb6(5, 2, 0))
   TXT_Y = sgr(TXT, rgb6(5, 5, 0))
 
-  lines = format_exception(exc_class, exc, traceback, limit=None, chain=True)
-  for line in lines:
-    m = _log_msg_re.match(line)
-    if m:
-      k = m.lastgroup
-      if k == 'traceback':
-        stderr.write(f'{TXT_R3}{m[0]}{RST}\n')
-      elif k == 'stack_frame':
-        f = m['stack_file']
-        l = m['stack_line']
-        fn = m['stack_fn']
-        code = m['stack_code']
-        stderr.write(f'{TXT_L}{f}:{l} {TXT_D}in {TXT_L}{fn}{RST_TXT}\n{code}')
-      elif k == 'exception':
-        name = m['exc_name']
-        msg = m['exc_msg']
-        if msg:
-          stderr.write(f'{TXT_O}{name}{RST}: {TXT_Y}{msg}{RST}\n')
-        else:
-          stderr.write(f'{TXT_O}{name}{RST}\n')
-      else:
-        stderr.write(line)
+  messages = format_exception(exc_class, exc, traceback, limit=None, chain=True)
+  for msg in messages:
+    m = _log_msg_re.fullmatch(msg)
+    if not m:
+      stderr.write(msg)
+      continue
+    k = m.lastgroup
+    if k == 'traceback':
+      stderr.write(f'{TXT_R3}{m[0]}{RST}\n')
+    elif k == 'stack_frame':
+      file = m['stack_file']
+      line = m['stack_line']
+      s_in = ' in ' if m['stack_in'] else ''
+      fn = m['stack_fn']
+      code = m['stack_code']
+      stderr.write(f'{TXT_L}{file}:{line}{TXT_D}{s_in}{TXT_L}{fn}{RST_TXT}{code}')
+      #stderr.write(repr(msg)+'\n')
+    elif k == 'exception':
+      name = m['exc_name']
+      msg = m['exc_msg']
+      stderr.write(f'{TXT_O}{name}{RST}{TXT_Y}{msg}{RST}\n')
     else:
-      stderr.write(line)
+      stderr.write(repr(msg)+'\n')
 
 
-_log_msg_re = re.compile(r'''(?x)
+_log_msg_re = re.compile(r'''(?sx) # s=Dotall; each message can contain newlines.
   (?P<traceback>Traceback \ \(most\ recent\ call\ last\): )
-| (?P<stack_frame>\ \ File\ "(?P<stack_file>.+)",\ line\ (?P<stack_line>\d+),\ in\ (?P<stack_fn>.+)\n (?P<stack_code>.*\n?))
-| (?P<exception> (?P<exc_name>[.\w]+) (?: :\ (?P<exc_msg>.+))?)
+| (?P<stack_frame>\ \ File\ "(?P<stack_file>[^"\n]+)",\ line\ (?P<stack_line>\d+)(?P<stack_in>,\ in\ )?(?P<stack_fn>[^\n]+)
+    (?P<stack_code>.*) )
+| (?P<exception> (?P<exc_name>[.\w]+:?) (?P<exc_msg>.*) )
 ''')
 
 sys.excepthook = gloss_excepthook
