@@ -143,7 +143,7 @@ def parse_bindings(ctx:Ctx, bindings_path:str) -> None:
 def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
   line_num, line = binding[0] # first line.
   words = line.split()
-  if not words: return
+  if not words: return # Empty line.
   cmd = words[0]
   if cmd.startswith('//'): return
   if cmd not in ctx.all_cmds:

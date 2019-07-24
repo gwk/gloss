@@ -46,7 +46,7 @@ uninstall-vscode:
 vscode: _build/gloss-black.json _build/vscode-keys.json
 
 vscode-keys-diff: vscode
-	echo d _build/vscode-keys-defaults.txt vscode/vscode-keys.txt
+	d _build/vscode-keys-defaults.txt vscode/vscode-keys.txt
 
 _build/gloss-black.json: gloss-black.py
 	mkdir -p _build
