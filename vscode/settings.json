@@ -131,7 +131,7 @@
 
   "terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
   "terminal.integrated.lineHeight": 1.2,
-  "terminal.integrated.rendererType": "dom",
+  "terminal.integrated.rendererType": "canvas",
 
   "window.newWindowDimensions": "maximized",
   "window.zoomLevel": 1,
@@ -167,12 +167,7 @@
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "none",
-  "workbench.statusBar.feedback.visible": false,
   "workbench.statusBar.visible": true,
-
-  "[xcode]": {
-    "editor.insertSpaces": false
-  },
 
   "yaml.customTags": [
     "!And",
@@ -192,5 +187,9 @@
     "!Split",
     "!Join sequence"
   ],
-  "yaml.format.enable": true
+  "yaml.format.enable": true,
+  "editor.autoClosingQuotes": "never",
+  "terminal.integrated.drawBoldTextInBrightColors": false,
+  "terminal.integrated.macOptionIsMeta": true,
+  "breadcrumbs.enabled": false,
 }
