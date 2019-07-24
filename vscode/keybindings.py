@@ -160,7 +160,6 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
   ctx.bound_cmds.add(cmd)
 
   if not keys: return
-  key = ' '.join(keys)
 
   validate_keys(ctx, line_num, keys=keys)
   validate_when(ctx, line_num, cmd=cmd, when=when, when_words=when_words)
@@ -173,7 +172,7 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
     except JSONDecodeError as e:
       ctx.error(line_num, f'invalid args JSON: {e}\n{args_str}')
 
-  def add_binding(keys:Iterable[str]) -> None:
+  def add_binding(key:str) -> None:
     binding = {
       'command': cmd,
       'key': key,
@@ -184,10 +183,11 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
       binding['args'] = args
     ctx.bindings.append(binding)
 
-  add_binding(keys)
+  key = ' '.join(keys)
+  add_binding(key)
   if key == 'escape':
     ctx.bound_escapes.add(cmd)
-    add_binding(['ctrl+c'])
+    add_binding('ctrl+c')
 
 
 def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]):
