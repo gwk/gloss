@@ -6,10 +6,7 @@
 
   "cSpell.dictionaryDefinitions": [],
   "cSpell.enabled": false,
-
-  "css.lint.boxModel": "warning",
   "css.lint.important": "warning",
-  "css.lint.float": "warning",
 
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": false,
@@ -192,4 +189,5 @@
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.macOptionIsMeta": true,
   "breadcrumbs.enabled": false,
+  "editor.colorDecorators": false,
 }
