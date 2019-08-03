@@ -1,9 +1,11 @@
 import re
 import os
 import sys
+from types import TracebackType
+from typing import Type
 
 
-def gloss_excepthook(exc_class:type, exc:BaseException, traceback) -> None:
+def gloss_excepthook(type_:Type[BaseException], value:BaseException, traceback:TracebackType) -> None:
 
   from traceback import format_exception
   stderr = sys.stderr
@@ -45,7 +47,7 @@ def gloss_excepthook(exc_class:type, exc:BaseException, traceback) -> None:
   TXT_O = sgr(TXT, rgb6(5, 2, 0))
   TXT_Y = sgr(TXT, rgb6(5, 5, 0))
 
-  messages = format_exception(exc_class, exc, traceback, limit=None, chain=True)
+  messages = format_exception(type_, value, traceback, limit=None, chain=True)
   for msg in messages:
     m = _log_msg_re.fullmatch(msg)
     if not m:
@@ -62,6 +64,8 @@ def gloss_excepthook(exc_class:type, exc:BaseException, traceback) -> None:
       code = m['stack_code']
       stderr.write(f'{TXT_L}{file}:{line}{TXT_D}{s_in}{TXT_L}{fn}{RST_TXT}{code}')
       #stderr.write(repr(msg)+'\n')
+    elif k == 'recursion':
+      stderr.write(f'{TXT_R3}{m[0]}{RST}')
     elif k == 'exception':
       name = m['exc_name']
       msg = m['exc_msg']
@@ -71,9 +75,10 @@ def gloss_excepthook(exc_class:type, exc:BaseException, traceback) -> None:
 
 
 _log_msg_re = re.compile(r'''(?sx) # s=Dotall; each message can contain newlines.
-  (?P<traceback>Traceback \ \(most\ recent\ call\ last\): )
+  (?P<traceback>Traceback\ \(most\ recent\ call\ last\):\n )
 | (?P<stack_frame>\ \ File\ "(?P<stack_file>[^"\n]+)",\ line\ (?P<stack_line>\d+)(?P<stack_in>,\ in\ )?(?P<stack_fn>[^\n]+)
     (?P<stack_code>.*) )
+| (?P<recursion>\ \ \[Previous\ line\ repeated\ [^\n\]]+\]\n )
 | (?P<exception> (?P<exc_name>[.\w]+:?) (?P<exc_msg>.*) )
 ''')
 
