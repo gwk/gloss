@@ -9,6 +9,7 @@ from os.path import expanduser as expand_user, isfile as is_file
 from _gloss_install_common import * # parses arguments, etc.
 import site
 
+
 def main():
   # make sure that gloss system is installed.
   if not is_dir(dst_dir):
@@ -19,7 +20,7 @@ def main():
 
   try:
 
-    common_path = '~/.bash_profile_and_rc' # path to common bash setup file.
+    common_path = '~/.bash_profile_and_rc.bash' # path to common bash setup file.
     profile_path = expand_user('~/.bash_profile') # executed for login shells.
     rc_path = expand_user('~/.bashrc') # executed for non-login shells.
 
