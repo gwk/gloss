@@ -37,6 +37,10 @@ install-xcode-keybindings:
 	[[ ! -f $(xcode_keys_dst) ]] || diff -u $(xcode_keys_src) $(xcode_keys_dst) || true
 	cp -i $(xcode_keys_src) $(xcode_keys_dst)
 
+py-deps:
+	pip3 install b2 docutils keyring msgpack mypy-extensions toml twine typing-extensions zstandard
+	PKG_CONFIG_PATH=/usr/local/opt/libxml2/lib/pkgconfig pip3 install -v html5_parser
+
 test:
 	iotest -fail-fast
 
