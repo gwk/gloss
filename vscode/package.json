@@ -20,7 +20,7 @@
         "filenames": [ "makefile", "makefile.pre", "makefile.pre.in", "GNUmakefile", "OCamlMakefile" ]
       },
       { "id": "swift",
-        "extensions": [".swift"],
+        "extensions": [".swift", ".swiftinterface"],
         "firstLine": "^#!.*\\bswift( +-.+)?",
         "configuration": "./configurations/swift-gloss.json"
       },
