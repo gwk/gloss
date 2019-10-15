@@ -199,7 +199,7 @@ def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]):
 def validate_when(ctx:Ctx, line_num:int, cmd:str, when:str, when_words:List[str]) -> None:
   default_whens = ctx.dflt_binding_whens[cmd]
   if default_whens and when not in default_whens:
-    ctx.msg(line_num, f'note: custom when for command: {cmd}\n  when {when}', *[f'\n  when {dflt}' for dflt in default_whens])
+    ctx.msg(line_num, f'note: custom when for command: {cmd}\n  gloss:   {when}', *[f'\n  default: {dflt}' for dflt in default_whens])
   for word in when_words:
     if word.lstrip('!') not in ctx.all_when_words:
       ctx.error(line_num, f'bad when word: {word}')

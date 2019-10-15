@@ -104,12 +104,6 @@
                                        "when": "textInputFocus && !editorReadonly" },
   { "key": "shift+tab",             "command": "outdent",
                                        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus" },
-  { "key": "cmd+c",                 "command": "problems.action.copy",
-                                       "when": "problemFocus" },
-  { "key": "cmd+f",                 "command": "problems.action.focusFilter",
-                                       "when": "problemsViewFocus" },
-  { "key": "cmd+down",              "command": "problems.action.focusProblemsFromFilter",
-                                       "when": "problemsFilterFocus" },
   { "key": "shift+cmd+z",           "command": "redo",
                                        "when": "textInputFocus && !editorReadonly" },
   { "key": "ctrl+pagedown",         "command": "scrollLineDown",
@@ -202,6 +196,10 @@
                                        "when": "editorTextFocus" },
   { "key": "shift+alt+f3",          "command": "editor.action.dirtydiff.previous",
                                        "when": "editorTextFocus" },
+  { "key": "enter",                 "command": "editor.action.extensioneditor.findNext",
+                                       "when": "webviewFindWidgetFocused && !editorFocus && activeEditor == 'workbench.editor.extension'" },
+  { "key": "shift+enter",           "command": "editor.action.extensioneditor.findPrevious",
+                                       "when": "webviewFindWidgetFocused && !editorFocus && activeEditor == 'workbench.editor.extension'" },
   { "key": "cmd+f",                 "command": "editor.action.extensioneditor.showfind",
                                        "when": "!editorFocus && activeEditor == 'workbench.editor.extension'" },
   { "key": "shift+alt+f",           "command": "editor.action.formatDocument",
@@ -250,6 +248,8 @@
                                        "when": "editorFocus" },
   { "key": "cmd+g",                 "command": "editor.action.nextMatchFindAction",
                                        "when": "editorFocus" },
+  { "key": "enter",                 "command": "editor.action.nextMatchFindAction",
+                                       "when": "editorFocus && findInputFocussed" },
   { "key": "cmd+f3",                "command": "editor.action.nextSelectionMatchFindAction",
                                        "when": "editorFocus" },
   { "key": "shift+alt+o",           "command": "editor.action.organizeImports",
@@ -264,6 +264,8 @@
                                        "when": "editorFocus" },
   { "key": "shift+cmd+g",           "command": "editor.action.previousMatchFindAction",
                                        "when": "editorFocus" },
+  { "key": "shift+enter",           "command": "editor.action.previousMatchFindAction",
+                                       "when": "editorFocus && findInputFocussed" },
   { "key": "shift+cmd+f3",          "command": "editor.action.previousSelectionMatchFindAction",
                                        "when": "editorFocus" },
   { "key": "cmd+.",                 "command": "editor.action.quickFix",
@@ -288,7 +290,11 @@
                                        "when": "textInputFocus" },
   { "key": "cmd+k cmd+i",           "command": "editor.action.showHover",
                                        "when": "editorTextFocus" },
+  { "key": "ctrl+shift+right",      "command": "editor.action.smartSelect.expand",
+                                       "when": "editorTextFocus" },
   { "key": "ctrl+shift+cmd+right",  "command": "editor.action.smartSelect.expand",
+                                       "when": "editorTextFocus" },
+  { "key": "ctrl+shift+left",       "command": "editor.action.smartSelect.shrink",
                                        "when": "editorTextFocus" },
   { "key": "ctrl+shift+cmd+left",   "command": "editor.action.smartSelect.shrink",
                                        "when": "editorTextFocus" },
@@ -307,6 +313,10 @@
                                        "when": "!editorFocus && !inputFocus && activeEditor == 'WebviewEditor'" },
   { "key": "cmd+x",                 "command": "editor.action.webvieweditor.cut",
                                        "when": "!editorFocus && !inputFocus && activeEditor == 'WebviewEditor'" },
+  { "key": "enter",                 "command": "editor.action.webvieweditor.findNext",
+                                       "when": "webviewFindWidgetFocused && !editorFocus && activeEditor == 'WebviewEditor'" },
+  { "key": "shift+enter",           "command": "editor.action.webvieweditor.findPrevious",
+                                       "when": "webviewFindWidgetFocused && !editorFocus && activeEditor == 'WebviewEditor'" },
   { "key": "escape",                "command": "editor.action.webvieweditor.hideFind",
                                        "when": "webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'" },
   { "key": "cmd+v",                 "command": "editor.action.webvieweditor.paste",
@@ -359,6 +369,8 @@
                                        "when": "hasSymbols && config.editor.gotoLocation.multiple == 'goto'" },
   { "key": "escape",                "command": "editor.gotoNextSymbolFromResult.cancel",
                                        "when": "hasSymbols" },
+  { "key": "cmd+k cmd+l",           "command": "editor.toggleFold",
+                                       "when": "editorTextFocus && foldingEnabled" },
   { "key": "alt+cmd+]",             "command": "editor.unfold",
                                        "when": "editorTextFocus && foldingEnabled" },
   { "key": "cmd+k cmd+j",           "command": "editor.unfoldAll",
@@ -387,7 +399,7 @@
                                        "when": "inSettingsSearch && !suggestWidgetVisible" },
   { "key": "cmd+f",                 "command": "settings.action.search",
                                        "when": "inSettingsEditor" },
-  { "key": "cmd+/",                 "command": "suggest.toggleExplainMode",
+  { "key": "cmd+/",                 "command": "toggleExplainMode",
                                        "when": "suggestWidgetVisible" },
   { "key": "alt+f5",                "command": "workbench.action.editor.nextChange",
                                        "when": "editorTextFocus" },
@@ -399,14 +411,26 @@
                                        "when": "commentEditorFocused" },
   { "key": "cmd+enter",             "command": "workbench.action.submitComment",
                                        "when": "commentEditorFocused" },
+  { "key": "alt+left",              "command": "cursorWordAccessibilityLeft",
+                                       "when": "accessibilityModeEnabled && textInputFocus" },
+  { "key": "shift+alt+left",        "command": "cursorWordAccessibilityLeftSelect",
+                                       "when": "accessibilityModeEnabled && textInputFocus" },
+  { "key": "alt+right",             "command": "cursorWordAccessibilityRight",
+                                       "when": "accessibilityModeEnabled && textInputFocus" },
+  { "key": "shift+alt+right",       "command": "cursorWordAccessibilityRightSelect",
+                                       "when": "accessibilityModeEnabled && textInputFocus" },
   { "key": "shift+escape",          "command": "closeFindWidget",
                                        "when": "editorFocus && findWidgetVisible" },
   { "key": "escape",                "command": "closeFindWidget",
                                        "when": "editorFocus && findWidgetVisible" },
   { "key": "alt+cmd+enter",         "command": "editor.action.replaceAll",
                                        "when": "editorFocus && findWidgetVisible" },
+  { "key": "cmd+enter",             "command": "editor.action.replaceAll",
+                                       "when": "editorFocus && findWidgetVisible && replaceInputFocussed" },
   { "key": "shift+cmd+1",           "command": "editor.action.replaceOne",
                                        "when": "editorFocus && findWidgetVisible" },
+  { "key": "enter",                 "command": "editor.action.replaceOne",
+                                       "when": "editorFocus && findWidgetVisible && replaceInputFocussed" },
   { "key": "alt+enter",             "command": "editor.action.selectAllMatches",
                                        "when": "editorFocus && findWidgetVisible" },
   { "key": "alt+cmd+c",             "command": "toggleFindCaseSensitive",
@@ -455,7 +479,11 @@
                                        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible" },
   { "key": "up",                    "command": "showPrevParameterHint",
                                        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible" },
+  { "key": "shift+enter",           "command": "acceptSelectedSuggestion",
+                                       "when": "suggestWidgetVisible && textInputFocus" },
   { "key": "tab",                   "command": "acceptSelectedSuggestion",
+                                       "when": "suggestWidgetVisible && textInputFocus" },
+  { "key": "shift+tab",             "command": "acceptSelectedSuggestion",
                                        "when": "suggestWidgetVisible && textInputFocus" },
   { "key": "enter",                 "command": "acceptSelectedSuggestionOnEnter",
                                        "when": "acceptSuggestionOnEnter && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus" },
@@ -607,6 +635,14 @@
                                        "when": "listFocus && !inputFocus" },
   { "key": "up",                    "command": "list.focusUp",
                                        "when": "listFocus && !inputFocus" },
+  { "key": "cmd+down",              "command": "list.scrollDown",
+                                       "when": "listFocus && !inputFocus" },
+  { "key": "cmd+left",              "command": "list.scrollLeft",
+                                       "when": "listFocus && !inputFocus" },
+  { "key": "cmd+right",             "command": "list.scrollRight",
+                                       "when": "listFocus && !inputFocus" },
+  { "key": "cmd+up",                "command": "list.scrollUp",
+                                       "when": "listFocus && !inputFocus" },
   { "key": "cmd+down",              "command": "list.select",
                                        "when": "listFocus && !inputFocus" },
   { "key": "enter",                 "command": "list.select",
@@ -637,6 +673,12 @@
                                        "when": "notificationFocus && notificationToastsVisible" },
   { "key": "up",                    "command": "notifications.focusPreviousToast",
                                        "when": "notificationFocus && notificationToastsVisible" },
+  { "key": "cmd+c",                 "command": "problems.action.copy",
+                                       "when": "problemFocus" },
+  { "key": "cmd+f",                 "command": "problems.action.focusFilter",
+                                       "when": "problemsViewFocus" },
+  { "key": "cmd+down",              "command": "problems.action.focusProblemsFromFilter",
+                                       "when": "problemsFilterFocus" },
   { "key": "ctrl+enter",            "command": "problems.action.openToSide",
                                        "when": "problemFocus" },
   { "key": "cmd+.",                 "command": "problems.action.showQuickFixes",
@@ -650,7 +692,7 @@
   { "key": "cmd+c",                 "command": "search.action.copyMatch",
                                        "when": "fileMatchOrMatchFocus" },
   { "key": "alt+cmd+c",             "command": "search.action.copyPath",
-                                       "when": "fileMatchOrFolderMatchFocus" },
+                                       "when": "fileMatchOrFolderMatchWithResourceFocus" },
   { "key": "f4",                    "command": "search.action.focusNextSearchResult",
                                        "when": "hasSearchResult" },
   { "key": "shift+f4",              "command": "search.action.focusPreviousSearchResult",
@@ -693,7 +735,8 @@
   { "key": "cmd+k cmd+w",           "command": "workbench.action.closeAllEditors" },
   { "key": "cmd+k shift+cmd+w",     "command": "workbench.action.closeAllGroups" },
   { "key": "cmd+k w",               "command": "workbench.action.closeEditorsInGroup" },
-  { "key": "cmd+k f",               "command": "workbench.action.closeFolder" },
+  { "key": "cmd+k f",               "command": "workbench.action.closeFolder",
+                                       "when": "supportsWorkspaces" },
   { "key": "cmd+w",                 "command": "workbench.action.closeGroup",
                                        "when": "activeEditorGroupEmpty && multipleEditorGroups" },
   { "key": "alt+cmd+t",             "command": "workbench.action.closeOtherEditors" },
@@ -715,8 +758,7 @@
                                        "when": "debugState == 'running'" },
   { "key": "shift+cmd+f5",          "command": "workbench.action.debug.restart",
                                        "when": "inDebugMode" },
-  { "key": "ctrl+f5",               "command": "workbench.action.debug.run",
-                                       "when": "!inDebugMode" },
+  { "key": "ctrl+f5",               "command": "workbench.action.debug.run" },
   { "key": "f5",                    "command": "workbench.action.debug.start",
                                        "when": "!inDebugMode" },
   { "key": "shift+f11",             "command": "workbench.action.debug.stepOut",
@@ -828,6 +870,8 @@
                                        "when": "terminalFocus" },
   { "key": "alt+delete",            "command": "workbench.action.terminal.deleteWordRight",
                                        "when": "terminalFocus" },
+  { "key": "shift+enter",           "command": "workbench.action.terminal.findNext",
+                                       "when": "terminalFindWidgetFocused" },
   { "key": "f3",                    "command": "workbench.action.terminal.findNext",
                                        "when": "terminalFindWidgetFocused" },
   { "key": "cmd+g",                 "command": "workbench.action.terminal.findNext",
@@ -836,6 +880,8 @@
                                        "when": "terminalFocus" },
   { "key": "cmd+g",                 "command": "workbench.action.terminal.findNextTerminalFocus",
                                        "when": "terminalFocus" },
+  { "key": "enter",                 "command": "workbench.action.terminal.findPrevious",
+                                       "when": "terminalFindWidgetFocused" },
   { "key": "shift+f3",              "command": "workbench.action.terminal.findPrevious",
                                        "when": "terminalFindWidgetFocused" },
   { "key": "shift+cmd+g",           "command": "workbench.action.terminal.findPrevious",
@@ -846,6 +892,8 @@
                                        "when": "terminalFocus" },
   { "key": "cmd+f",                 "command": "workbench.action.terminal.focusFindWidget",
                                        "when": "terminalFocus" },
+  { "key": "cmd+f",                 "command": "workbench.action.terminal.focusFindWidget",
+                                       "when": "terminalFindWidgetFocused" },
   { "key": "alt+cmd+down",          "command": "workbench.action.terminal.focusNextPane",
                                        "when": "terminalFocus" },
   { "key": "alt+cmd+right",         "command": "workbench.action.terminal.focusNextPane",
@@ -862,6 +910,16 @@
                                        "when": "terminalFocus" },
   { "key": "cmd+left",              "command": "workbench.action.terminal.moveToLineStart",
                                        "when": "terminalFocus" },
+  { "key": "escape",                "command": "workbench.action.terminal.navigationModeExit",
+                                       "when": "accessibilityModeEnabled && terminalA11yTreeFocus" },
+  { "key": "cmd+down",              "command": "workbench.action.terminal.navigationModeFocusNext",
+                                       "when": "accessibilityModeEnabled && terminalFocus" },
+  { "key": "cmd+down",              "command": "workbench.action.terminal.navigationModeFocusNext",
+                                       "when": "accessibilityModeEnabled && terminalA11yTreeFocus" },
+  { "key": "cmd+up",                "command": "workbench.action.terminal.navigationModeFocusPrevious",
+                                       "when": "accessibilityModeEnabled && terminalFocus" },
+  { "key": "cmd+up",                "command": "workbench.action.terminal.navigationModeFocusPrevious",
+                                       "when": "accessibilityModeEnabled && terminalA11yTreeFocus" },
   { "key": "ctrl+shift+`",          "command": "workbench.action.terminal.new" },
   { "key": "shift+cmd+c",           "command": "workbench.action.terminal.openNativeConsole",
                                        "when": "!terminalFocus" },
@@ -880,9 +938,9 @@
   { "key": "cmd+end",               "command": "workbench.action.terminal.scrollToBottom",
                                        "when": "terminalFocus" },
   { "key": "cmd+down",              "command": "workbench.action.terminal.scrollToNextCommand",
-                                       "when": "terminalFocus" },
+                                       "when": "terminalFocus && !accessibilityModeEnabled" },
   { "key": "cmd+up",                "command": "workbench.action.terminal.scrollToPreviousCommand",
-                                       "when": "terminalFocus" },
+                                       "when": "terminalFocus && !accessibilityModeEnabled" },
   { "key": "cmd+home",              "command": "workbench.action.terminal.scrollToTop",
                                        "when": "terminalFocus" },
   { "key": "alt+cmd+pageup",        "command": "workbench.action.terminal.scrollUp",
@@ -964,6 +1022,8 @@
                                        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus" },
   { "key": "cmd+x",                 "command": "filesExplorer.cut",
                                        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !inputFocus" },
+  { "key": "space",                 "command": "filesExplorer.openFilePreserveFocus",
+                                       "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus" },
   { "key": "cmd+v",                 "command": "filesExplorer.paste",
                                        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus" },
   { "key": "cmd+backspace",         "command": "moveFileToTrash",
@@ -971,7 +1031,7 @@
   { "key": "enter",                 "command": "renameFile",
                                        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus" },
   { "key": "f11",                   "command": "workbench.action.debug.stepInto",
-                                       "when": "debugState == 'stopped'" },
+                                       "when": "inDebugMode" },
   { "key": "shift+escape",          "command": "closeReferenceSearch",
                                        "when": "referenceSearchVisible && !config.editor.stablePeek" },
   { "key": "escape",                "command": "closeReferenceSearch",
@@ -1028,67 +1088,82 @@
                                        "when": "!inDebugMode && debugConfigurationType == 'node'" },
   { "key": "shift+f4",              "command": "references-view.prev",
                                        "when": "reference-list.hasResult" },
-  { "key": "f4",                    "command": "dart.showTypeHierarchy",
-                                       "when": "editorLangId == 'dart'" },
+  { "key": "alt+o",                 "command": "C_Cpp.SwitchHeaderSource",
+                                       "when": "editorTextFocus && editorLangId == 'cpp'" },
   { "key": "ctrl+h",                "command": "extension.dash.specific",
                                        "when": "editorTextFocus" },
   { "key": "cmd+f4",                "command": "extension.node-debug.pickLoadedScript",
                                        "when": "debugType == 'chrome'" },
-  { "key": "alt+left",              "command": "gitlens.key.left",
+  { "key": "left",                  "command": "gitlens.key.left",
                                        "when": "gitlens:key:left" },
   { "key": "shift+alt+cmd+h",       "command": "hexdump.hexdumpOpen" },
+  { "key": "cmd+r l",               "command": "npm-script.showOutput" },
   { "key": "shift+enter",           "command": "python.execSelectionInTerminal",
                                        "when": "editorTextFocus && !findInputFocussed && !python.datascience.ownsSelection && !replaceInputFocussed && editorLangId == 'python'" },
+  { "key": "enter",                 "command": "pythonIndent.newlineAndIndent",
+                                       "when": "editorTextFocus && !editorHasMultipleSelections && !suggestWidgetVisible && !vim.active && editorLangId == 'python'" },
+  { "key": "alt+o",                 "command": "C_Cpp.SwitchHeaderSource",
+                                       "when": "editorTextFocus && editorLangId == 'c'" },
   { "key": "ctrl+alt+h",            "command": "extension.dash.all",
                                        "when": "editorTextFocus" },
-  { "key": "ctrl+f5",               "command": "flutter.hotReload",
-                                       "when": "dart-code:anyFlutterProjectLoaded && dart-code:service.reloadSources && inDebugMode" },
-  { "key": "alt+right",             "command": "gitlens.key.right",
-                                       "when": "gitlens:key:right" },
+  { "key": "alt+left",              "command": "gitlens.key.alt+left",
+                                       "when": "gitlens:key:alt+left" },
   { "key": "shift+enter",           "command": "hexdump.editValue",
                                        "when": "editorTextFocus" },
+  { "key": "cmd+r shift+r",         "command": "npm-script.run" },
   { "key": "shift+enter",           "command": "python.datascience.execSelectionInteractive",
                                        "when": "editorTextFocus && python.datascience.featureenabled && python.datascience.ownsSelection && !findInputFocussed && !replaceInputFocussed && editorLangId == 'python'" },
-  { "key": "shift+cmd+f5",          "command": "dart.rerunLastDebugSession",
-                                       "when": "dart-code:dartProjectLoaded && dart-code:hasLastDebugConfig && !inDebugMode" },
+  { "key": "enter",                 "command": "pythonIndent.newlineAndIndent",
+                                       "when": "editorTextFocus && vim.active && !editorHasMultipleSelections && !suggestWidgetVisible && editorLangId == 'python' && vim.mode =~ /(Insert|Replace|SurroundInputMode)/" },
   { "key": "ctrl+shift+h",          "command": "extension.dash.emptySyntax",
                                        "when": "editorTextFocus" },
-  { "key": "alt+,",                 "command": "gitlens.key.,",
-                                       "when": "gitlens:key:," },
+  { "key": "cmd+left",              "command": "gitlens.key.ctrl+left",
+                                       "when": "gitlens:key:ctrl+left" },
   { "key": "ctrl+g",                "command": "hexdump.gotoAddress",
                                        "when": "editorLangId == 'hexdump'" },
+  { "key": "cmd+r r",               "command": "npm-script.rerun-last-script" },
   { "key": "shift+enter",           "command": "python.datascience.runcurrentcelladvance",
                                        "when": "editorTextFocus && python.datascience.featureenabled && python.datascience.hascodecells && !editorHasSelection" },
-  { "key": "ctrl+alt+d",            "command": "dart.openDevTools",
-                                       "when": "dart-code:dartProjectLoaded && inDebugMode" },
   { "key": "alt+h",                 "command": "extension.dash.customSyntax",
                                        "when": "editorTextFocus" },
-  { "key": "alt+.",                 "command": "gitlens.key..",
-                                       "when": "gitlens:key:." },
+  { "key": "right",                 "command": "gitlens.key.right",
+                                       "when": "gitlens:key:right" },
   { "key": "shift+cmd+s",           "command": "hexdump.exportToFile",
                                        "when": "editorLangId == 'hexdump'" },
+  { "key": "cmd+r shift+x",         "command": "npm-script.terminate-script" },
   { "key": "ctrl+enter",            "command": "python.datascience.runcurrentcell",
                                        "when": "editorTextFocus && python.datascience.featureenabled && python.datascience.hascodecells && !editorHasSelection" },
+  { "key": "alt+right",             "command": "gitlens.key.alt+right",
+                                       "when": "gitlens:key:alt+right" },
+  { "key": "cmd+s",                 "command": "hexdump.save",
+                                       "when": "editorLangId == 'hexdump'" },
+  { "key": "cmd+r t",               "command": "npm-script.test" },
+  { "key": "alt+enter",             "command": "python.datascience.runcurrentcellandaddbelow",
+                                       "when": "editorTextFocus && python.datascience.featureenabled && python.datascience.hascodecells && !editorHasSelection" },
+  { "key": "cmd+right",             "command": "gitlens.key.ctrl+right",
+                                       "when": "gitlens:key:ctrl+right" },
+  { "key": "shift+alt+cmd+e",       "command": "hexdump.toggleEndian",
+                                       "when": "editorLangId == 'hexdump'" },
+  { "key": "alt+,",                 "command": "gitlens.key.alt+,",
+                                       "when": "gitlens:key:," },
+  { "key": "cmd+f",                 "command": "hexdump.searchString",
+                                       "when": "editorLangId == 'hexdump'" },
+  { "key": "alt+.",                 "command": "gitlens.key.alt+.",
+                                       "when": "gitlens:key:." },
+  { "key": "alt+cmd+f",             "command": "hexdump.searchHex",
+                                       "when": "editorLangId == 'hexdump'" },
   { "key": "escape",                "command": "gitlens.key.escape",
                                        "when": "editorTextFocus && gitlens:key:escape && !findWidgetVisible && !isInEmbeddedEditor && !renameInputVisible && !suggestWidgetVisible" },
-  { "key": "cmd+s",                 "command": "hexdump.save",
+  { "key": "alt+cmd+c",             "command": "hexdump.copyAsFormat",
                                        "when": "editorLangId == 'hexdump'" },
   { "key": "alt+b",                 "command": "gitlens.toggleFileBlame",
                                        "when": "editorTextFocus && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /blameable/" },
-  { "key": "shift+alt+cmd+e",       "command": "hexdump.toggleEndian",
-                                       "when": "editorLangId == 'hexdump'" },
   { "key": "shift+alt+b",           "command": "gitlens.toggleCodeLens",
                                        "when": "editorTextFocus && gitlens:canToggleCodeLens && gitlens:enabled && config.gitlens.keymap == 'alternate'" },
-  { "key": "cmd+f",                 "command": "hexdump.searchString",
-                                       "when": "editorLangId == 'hexdump'" },
   { "key": "alt+-",                 "command": "gitlens.showLastQuickPick",
                                        "when": "gitlens:enabled && config.gitlens.keymap == 'alternate'" },
-  { "key": "alt+cmd+f",             "command": "hexdump.searchHex",
-                                       "when": "editorLangId == 'hexdump'" },
   { "key": "alt+/",                 "command": "gitlens.showCommitSearch",
                                        "when": "gitlens:enabled && config.gitlens.keymap == 'alternate'" },
-  { "key": "alt+cmd+c",             "command": "hexdump.copyAsFormat",
-                                       "when": "editorLangId == 'hexdump'" },
   { "key": "alt+h",                 "command": "gitlens.showQuickFileHistory",
                                        "when": "gitlens:enabled && config.gitlens.keymap == 'alternate'" },
   { "key": "shift+alt+h",           "command": "gitlens.showQuickRepoHistory",
@@ -1098,19 +1173,21 @@
   { "key": "alt+c",                 "command": "gitlens.showQuickCommitFileDetails",
                                        "when": "editorTextFocus && gitlens:enabled && config.gitlens.keymap == 'alternate'" },
   { "key": "alt+.",                 "command": "gitlens.diffWithNext",
-                                       "when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /revision/" },
-  { "key": "alt+.",                 "command": "gitlens.diffWithNextInDiff",
-                                       "when": "isInDiffEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /revision/" },
+                                       "when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /revision/ && gitlens:activeFileStatus =~ /revision/" },
+  { "key": "alt+.",                 "command": "gitlens.diffWithNext",
+                                       "when": "editorTextFocus && isInDiffRightEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /revision/ && gitlens:activeFileStatus =~ /revision/" },
+  { "key": "alt+.",                 "command": "gitlens.diffWithNextInDiffLeft",
+                                       "when": "editorTextFocus && isInDiffLeftEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /revision/ && gitlens:activeFileStatus =~ /revision/" },
   { "key": "alt+,",                 "command": "gitlens.diffWithPrevious",
                                        "when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /tracked/" },
-  { "key": "alt+,",                 "command": "gitlens.diffWithPreviousInDiff",
-                                       "when": "isInDiffEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /tracked/" },
+  { "key": "alt+,",                 "command": "gitlens.diffWithPrevious",
+                                       "when": "editorTextFocus && isInDiffLeftEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /tracked/" },
+  { "key": "alt+,",                 "command": "gitlens.diffWithPreviousInDiffRight",
+                                       "when": "editorTextFocus && isInDiffRightEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /tracked/" },
   { "key": "shift+alt+,",           "command": "gitlens.diffLineWithPrevious",
                                        "when": "editorTextFocus && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /tracked/" },
   { "key": "shift+alt+.",           "command": "gitlens.diffWithWorking",
-                                       "when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /revision/" },
-  { "key": "shift+alt+.",           "command": "gitlens.diffWithWorkingInDiff",
-                                       "when": "isInDiffEditor && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /revision/" },
+                                       "when": "editorTextFocus && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /revision/" },
   { "key": "alt+w",                 "command": "gitlens.diffLineWithWorking",
                                        "when": "editorTextFocus && config.gitlens.keymap == 'alternate' && gitlens:activeFileStatus =~ /tracked/" },
   { "key": "alt+cmd+g b",           "command": "gitlens.toggleFileBlame",
@@ -1130,27 +1207,68 @@
   { "key": "alt+cmd+g c",           "command": "gitlens.showQuickCommitFileDetails",
                                        "when": "editorTextFocus && gitlens:enabled && config.gitlens.keymap == 'chorded'" },
   { "key": "alt+cmd+g .",           "command": "gitlens.diffWithNext",
-                                       "when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/" },
-  { "key": "alt+cmd+g .",           "command": "gitlens.diffWithNextInDiff",
-                                       "when": "isInDiffEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/" },
+                                       "when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/ && gitlens:activeFileStatus =~ /revision/" },
+  { "key": "alt+cmd+g .",           "command": "gitlens.diffWithNext",
+                                       "when": "editorTextFocus && isInDiffRightEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/ && gitlens:activeFileStatus =~ /revision/" },
+  { "key": "alt+cmd+g .",           "command": "gitlens.diffWithNextInDiffLeft",
+                                       "when": "editorTextFocus && isInDiffLeftEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/ && gitlens:activeFileStatus =~ /revision/" },
   { "key": "alt+cmd+g ,",           "command": "gitlens.diffWithPrevious",
                                        "when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/" },
-  { "key": "alt+cmd+g ,",           "command": "gitlens.diffWithPreviousInDiff",
-                                       "when": "isInDiffEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/" },
+  { "key": "alt+cmd+g ,",           "command": "gitlens.diffWithPrevious",
+                                       "when": "editorTextFocus && isInDiffLeftEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/" },
+  { "key": "alt+cmd+g ,",           "command": "gitlens.diffWithPreviousInDiffRight",
+                                       "when": "editorTextFocus && isInDiffRightEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/" },
   { "key": "alt+cmd+g shift+,",     "command": "gitlens.diffLineWithPrevious",
                                        "when": "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/" },
   { "key": "alt+cmd+g shift+.",     "command": "gitlens.diffWithWorking",
-                                       "when": "editorTextFocus && !isInDiffEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/" },
-  { "key": "alt+cmd+g shift+.",     "command": "gitlens.diffWithWorkingInDiff",
-                                       "when": "isInDiffEditor && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/" },
+                                       "when": "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /revision/" },
   { "key": "alt+cmd+g w",           "command": "gitlens.diffLineWithWorking",
                                        "when": "editorTextFocus && config.gitlens.keymap == 'chorded' && gitlens:activeFileStatus =~ /tracked/" },
   { "key": "ctrl+shift+g",          "command": "workbench.view.scm",
-                                       "when": "gitlens:enabled && config.gitlens.keymap == 'chorded'" }
+                                       "when": "gitlens:enabled && config.gitlens.keymap == 'chorded'" },
+  { "key": "cmd+c",                 "command": "gitlens.views.repositories.copy",
+                                       "when": "gitlens:enabled && focusedView =~ /^gitlens\\.views\\.repositories/" },
+  { "key": "cmd+c",                 "command": "gitlens.views.fileHistory.copy",
+                                       "when": "gitlens:enabled && focusedView =~ /^gitlens\\.views\\.fileHistory/" },
+  { "key": "cmd+c",                 "command": "gitlens.views.lineHistory.copy",
+                                       "when": "gitlens:enabled && focusedView =~ /^gitlens\\.views\\.lineHistory/" },
+  { "key": "cmd+c",                 "command": "gitlens.views.compare.copy",
+                                       "when": "gitlens:enabled && focusedView =~ /^gitlens\\.views\\.compare/" },
+  { "key": "cmd+c",                 "command": "gitlens.views.search.copy",
+                                       "when": "gitlens:enabled && focusedView =~ /^gitlens\\.views\\.search/" }
   ]
 
 
   // Here are other available commands:
+  // - C_Cpp.BuildAndDebugActiveFile
+  // - C_Cpp.ConfigurationEditJSON
+  // - C_Cpp.ConfigurationEditUI
+  // - C_Cpp.ConfigurationProviderSelect
+  // - C_Cpp.ConfigurationSelect
+  // - C_Cpp.DisableErrorSquiggles
+  // - C_Cpp.EnableErrorSquiggles
+  // - C_Cpp.LogDiagnostics
+  // - C_Cpp.RescanWorkspace
+  // - C_Cpp.ResetDatabase
+  // - C_Cpp.TakeSurvey
+  // - C_Cpp.ToggleDimInactiveRegions
+  // - C_Cpp.ToggleIncludeFallback
+  // - C_Cpp.VcpkgClipboardInstallSuggested
+  // - C_Cpp.VcpkgOnlineHelpSuggested
+  // - C_Cpp.referencesViewGroupByType
+  // - C_Cpp.referencesViewUngroupByType
+  // - CppReferencesView.focus
+  // - CppRenameCandidatesView.focus
+  // - CppRenamePendingView.focus
+  // - CppRenameView.add
+  // - CppRenameView.addAll
+  // - CppRenameView.addFile
+  // - CppRenameView.addReferenceType
+  // - CppRenameView.cancel
+  // - CppRenameView.done
+  // - CppRenameView.remove
+  // - CppRenameView.removeAll
+  // - CppRenameView.removeFile
   // - acceptSnippet
   // - addRootFolder
   // - breadcrumbs.toggle
@@ -1195,25 +1313,6 @@
   // - cursorWordStartRight
   // - cursorWordStartRightSelect
   // - cut
-  // - dart.attach
-  // - dart.changeFlutterSdk
-  // - dart.changeSdk
-  // - dart.completeStatement
-  // - dart.createProject
-  // - dart.debugTestAtCursor
-  // - dart.goToSuper
-  // - dart.openAnalyzerDiagnostics
-  // - dart.openObservatory
-  // - dart.runAllTestsWithoutDebugging
-  // - dart.runTestAtCursor
-  // - dart.sortMembers
-  // - dart.startDebugging
-  // - dart.startDebuggingTest
-  // - dart.startLogging
-  // - dart.startWithoutDebugging
-  // - dart.startWithoutDebuggingTest
-  // - dartPackages.focus
-  // - dartTestTree.focus
   // - debug.addConfiguration
   // - debug.copyStackTrace
   // - debug.enableOrDisableBreakpoint
@@ -1365,33 +1464,6 @@
   // - extensions.vscode-local.outdated.focus
   // - extensions.workspaceRecommendedList.focus
   // - filesExplorer.findInWorkspace
-  // - flutter.attach
-  // - flutter.attachProcess
-  // - flutter.cancelInspectWidget
-  // - flutter.clean
-  // - flutter.createProject
-  // - flutter.createSampleProject
-  // - flutter.createWebProject
-  // - flutter.doctor
-  // - flutter.hotRestart
-  // - flutter.inspectWidget
-  // - flutter.launchEmulator
-  // - flutter.openInAndroidStudio
-  // - flutter.openInXcode
-  // - flutter.openTimeline
-  // - flutter.packages.get
-  // - flutter.packages.upgrade
-  // - flutter.screenshot
-  // - flutter.selectDevice
-  // - flutter.toggleCheckElevations
-  // - flutter.toggleDebugModeBanner
-  // - flutter.toggleDebugPainting
-  // - flutter.togglePaintBaselines
-  // - flutter.togglePerformanceOverlay
-  // - flutter.togglePlatform
-  // - flutter.toggleRepaintRainbow
-  // - flutter.toggleSlowAnimations
-  // - flutter.upgrade
   // - git._syncAll
   // - git.addRemote
   // - git.branch
@@ -1409,7 +1481,6 @@
   // - git.commitStaged
   // - git.commitStagedAmend
   // - git.commitStagedSigned
-  // - git.commitWithInput
   // - git.createTag
   // - git.deleteBranch
   // - git.fetch
@@ -1438,6 +1509,7 @@
   // - git.removeRemote
   // - git.renameBranch
   // - git.restoreCommitTemplate
+  // - git.revealInExplorer
   // - git.revertChange
   // - git.revertSelectedRanges
   // - git.showOutput
@@ -1473,6 +1545,7 @@
   // - gitlens.diffWithRevision
   // - gitlens.diffWorkingWith
   // - gitlens.diffWorkingWithBranch
+  // - gitlens.exploreRepoAtRevision
   // - gitlens.externalDiff
   // - gitlens.externalDiffAll
   // - gitlens.fetchRepositories
@@ -1488,11 +1561,14 @@
   // - gitlens.openFileRevisionFromBranch
   // - gitlens.openInRemote
   // - gitlens.openRepoInRemote
+  // - gitlens.openRevisionFile
   // - gitlens.openWorkingFile
   // - gitlens.pullRepositories
   // - gitlens.pushRepositories
   // - gitlens.resetSuppressedWarnings
+  // - gitlens.revealCommitInView
   // - gitlens.showCommitInView
+  // - gitlens.showCommitsInView
   // - gitlens.showCompareView
   // - gitlens.showFileHistoryInView
   // - gitlens.showFileHistoryView
@@ -1521,8 +1597,9 @@
   // - gitlens.toggleLineBlame
   // - gitlens.toggleReviewMode
   // - gitlens.toggleZenMode
+  // - gitlens.views.addRemote
   // - gitlens.views.applyChanges
-  // - gitlens.views.checkout
+  // - gitlens.views.cherryPick
   // - gitlens.views.closeRepository
   // - gitlens.views.compare.clear
   // - gitlens.views.compare.compareWithSelected
@@ -1545,12 +1622,18 @@
   // - gitlens.views.compareWithRemote
   // - gitlens.views.compareWithSelected
   // - gitlens.views.compareWithWorking
-  // - gitlens.views.contributor.addCoauthoredBy
+  // - gitlens.views.contributor.addAuthor
   // - gitlens.views.contributor.copyToClipboard
+  // - gitlens.views.contributors.addAuthors
+  // - gitlens.views.copy
+  // - gitlens.views.createBranch
+  // - gitlens.views.createTag
+  // - gitlens.views.deleteBranch
+  // - gitlens.views.deleteTag
   // - gitlens.views.dismissNode
   // - gitlens.views.executeNodeCallback
   // - gitlens.views.expandNode
-  // - gitlens.views.exploreRepoRevision
+  // - gitlens.views.exploreRepoAtRevision
   // - gitlens.views.fetch
   // - gitlens.views.fileHistory.changeBase
   // - gitlens.views.fileHistory.refresh
@@ -1570,8 +1653,9 @@
   // - gitlens.views.lineHistory:explorer.focus
   // - gitlens.views.lineHistory:gitlens.focus
   // - gitlens.views.lineHistory:scm.focus
-  // - gitlens.views.openChangedFileChanges
-  // - gitlens.views.openChangedFileChangesWithWorking
+  // - gitlens.views.mergeBranchInto
+  // - gitlens.views.openChangedFileDiffs
+  // - gitlens.views.openChangedFileDiffsWithWorking
   // - gitlens.views.openChangedFileRevisions
   // - gitlens.views.openChangedFiles
   // - gitlens.views.openChanges
@@ -1582,21 +1666,31 @@
   // - gitlens.views.openFileRevision
   // - gitlens.views.openFileRevisionInRemote
   // - gitlens.views.openInTerminal
+  // - gitlens.views.pruneRemote
   // - gitlens.views.pull
   // - gitlens.views.push
   // - gitlens.views.pushWithForce
+  // - gitlens.views.rebaseOntoBranch
+  // - gitlens.views.rebaseOntoCommit
+  // - gitlens.views.rebaseOntoUpstream
   // - gitlens.views.refreshNode
+  // - gitlens.views.renameBranch
   // - gitlens.views.repositories.refresh
   // - gitlens.views.repositories.setAutoRefreshToOff
   // - gitlens.views.repositories.setAutoRefreshToOn
   // - gitlens.views.repositories.setBranchComparisonToBranch
   // - gitlens.views.repositories.setBranchComparisonToWorking
+  // - gitlens.views.repositories.setBranchesLayoutToList
+  // - gitlens.views.repositories.setBranchesLayoutToTree
   // - gitlens.views.repositories.setFilesLayoutToAuto
   // - gitlens.views.repositories.setFilesLayoutToList
   // - gitlens.views.repositories.setFilesLayoutToTree
   // - gitlens.views.repositories:explorer.focus
   // - gitlens.views.repositories:gitlens.focus
   // - gitlens.views.repositories:scm.focus
+  // - gitlens.views.reset
+  // - gitlens.views.restore
+  // - gitlens.views.revert
   // - gitlens.views.search.clear
   // - gitlens.views.search.refresh
   // - gitlens.views.search.searchCommits
@@ -1618,22 +1712,11 @@
   // - gitlens.views.stageDirectory
   // - gitlens.views.stageFile
   // - gitlens.views.star
-  // - gitlens.views.terminalCheckoutBranch
-  // - gitlens.views.terminalCheckoutCommit
-  // - gitlens.views.terminalCherryPickCommit
-  // - gitlens.views.terminalCreateBranch
-  // - gitlens.views.terminalCreateTag
-  // - gitlens.views.terminalDeleteBranch
-  // - gitlens.views.terminalDeleteTag
-  // - gitlens.views.terminalMergeBranch
+  // - gitlens.views.switchToBranch
+  // - gitlens.views.switchToCommit
+  // - gitlens.views.switchToTag
   // - gitlens.views.terminalPushCommit
-  // - gitlens.views.terminalRebaseBranch
-  // - gitlens.views.terminalRebaseBranchToRemote
-  // - gitlens.views.terminalRebaseCommit
   // - gitlens.views.terminalRemoveRemote
-  // - gitlens.views.terminalResetCommit
-  // - gitlens.views.terminalRevertCommit
-  // - gitlens.views.terminalSquashBranchIntoCommit
   // - gitlens.views.unsetAsDefault
   // - gitlens.views.unstageDirectory
   // - gitlens.views.unstageFile
@@ -1660,17 +1743,20 @@
   // - layoutEditorGroups
   // - list.focusFirstChild
   // - list.focusLastChild
+  // - list.focusParent
   // - list.toggleFilterOnType
   // - list.toggleKeyboardNavigation
   // - lldb.changeDisplaySettings
   // - lldb.diagnose
   // - lldb.displayFormat
   // - lldb.getCargoLaunchConfigs
+  // - lldb.modules.copyValue
   // - lldb.pickMyProcess
   // - lldb.pickProcess
   // - lldb.showDisassembly
   // - lldb.toggleDerefPointers
   // - lldb.toggleDisassembly
+  // - loadedModules.focus
   // - macros.callStackDown
   // - macros.callStackUp
   // - macros.inspect
@@ -1693,6 +1779,15 @@
   // - notifications.focusToasts
   // - notifications.showList
   // - notifications.toggleList
+  // - npm-intellisense.import
+  // - npm-script.audit
+  // - npm-script.build
+  // - npm-script.init
+  // - npm-script.install
+  // - npm-script.installInOutputWindow
+  // - npm-script.start
+  // - npm-script.uninstallInOutputWindow
+  // - npm-script.validate
   // - npm.debugScript
   // - npm.debugScriptFromHover
   // - npm.focus
@@ -1700,9 +1795,11 @@
   // - npm.refresh
   // - npm.runInstall
   // - npm.runScript
+  // - npm.runScriptFromFolder
   // - npm.runScriptFromHover
   // - npm.runSelectedScript
   // - openInTerminal
+  // - openWith
   // - outline.focus
   // - paste
   // - perfview.show
@@ -1711,19 +1808,31 @@
   // - problems.action.copyRelatedInformationMessage
   // - problems.action.showMultilineMessage
   // - problems.action.showSinglelineMessage
-  // - pub.get
-  // - pub.upgrade
   // - python.buildWorkspaceSymbols
   // - python.configureTests
   // - python.createTerminal
   // - python.datascience.addcellbelow
   // - python.datascience.collapseallcells
+  // - python.datascience.createnewnotebook
+  // - python.datascience.debugFileInteractive
+  // - python.datascience.debugcell
+  // - python.datascience.debugcontinue
+  // - python.datascience.debugcurrentcell.palette
+  // - python.datascience.debugstepover
+  // - python.datascience.debugstop
   // - python.datascience.expandallcells
   // - python.datascience.exportfileandoutputasnotebook
   // - python.datascience.exportfileasnotebook
   // - python.datascience.exportoutputasnotebook
   // - python.datascience.importnotebook
+  // - python.datascience.importnotebookfile
   // - python.datascience.interruptkernel
+  // - python.datascience.notebookeditor.interruptkernel
+  // - python.datascience.notebookeditor.redocells
+  // - python.datascience.notebookeditor.removeallcells
+  // - python.datascience.notebookeditor.restartkernel
+  // - python.datascience.notebookeditor.undocells
+  // - python.datascience.opennotebook
   // - python.datascience.redocells
   // - python.datascience.removeallcells
   // - python.datascience.restartkernel
@@ -1736,6 +1845,7 @@
   // - python.datascience.runcurrentcellandallbelow.palette
   // - python.datascience.runfromline
   // - python.datascience.runtoline
+  // - python.datascience.scrolltocell
   // - python.datascience.selectjupyteruri
   // - python.datascience.showhistorypane
   // - python.datascience.undocells
@@ -1746,6 +1856,7 @@
   // - python.enableLinting
   // - python.enableSourceMapSupport
   // - python.execInTerminal
+  // - python.execInTerminal-icon
   // - python.execSelectionInDjangoShell
   // - python.goToPythonObject
   // - python.openTestNodeInEditor
@@ -1764,10 +1875,14 @@
   // - python.sortImports
   // - python.startREPL
   // - python.stopTests
-  // - python.updateSparkLibrary
+  // - python.switchOffInsidersChannel
+  // - python.switchToDailyChannel
+  // - python.switchToWeeklyChannel
+  // - python.viewLanguageServerOutput
   // - python.viewOutput
   // - python.viewTestOutput
   // - python_tests.focus
+  // - reOpenWith
   // - references-view.clear
   // - references-view.clearHistory
   // - references-view.copy
@@ -1778,8 +1893,6 @@
   // - references-view.refresh
   // - references-view.remove
   // - references-view.tree.focus
-  // - remote.closeRemote
-  // - remote.showActions
   // - removeRootFolder
   // - repl.action.copyAll
   // - replacePreviousChar
@@ -1805,12 +1918,10 @@
   // - settings.filterByOnline
   // - settings.switchToJSON
   // - showEditorScreenReaderNotification
+  // - sync.resolveConflicts
   // - toggle.diff.ignoreTrimWhitespace
   // - toggle.diff.renderSideBySide
   // - toggleEscapeSequenceLogging
-  // - tslint.createConfig
-  // - tslint.fixAllProblems
-  // - tslint.showOutputChannel
   // - typescript.goToProjectConfig
   // - typescript.openTsServerLog
   // - typescript.reloadProjects
@@ -1898,6 +2009,7 @@
   // - workbench.action.closePanel
   // - workbench.action.configureLanguageBasedSettings
   // - workbench.action.configureLocale
+  // - workbench.action.configureRuntimeArguments
   // - workbench.action.debug.configure
   // - workbench.action.debug.disconnect
   // - workbench.action.debug.restartFrame
@@ -1941,6 +2053,7 @@
   // - workbench.action.joinAllGroups
   // - workbench.action.joinTwoGroups
   // - workbench.action.logStorage
+  // - workbench.action.manageTrustedDomain
   // - workbench.action.maximizeEditor
   // - workbench.action.mergeAllWindowTabs
   // - workbench.action.minimizeOtherEditors
@@ -2008,9 +2121,17 @@
   // - workbench.action.quickPickManyToggle
   // - workbench.action.quickSwitchWindow
   // - workbench.action.reloadWindowWithExtensionsDisabled
+  // - workbench.action.remote.showMenu
   // - workbench.action.removeFromEditorHistory
   // - workbench.action.removeRootFolder
   // - workbench.action.reportPerformanceIssueUsingReporter
+  // - workbench.action.revealPathInFinder1
+  // - workbench.action.revealPathInFinder2
+  // - workbench.action.revealPathInFinder3
+  // - workbench.action.revealPathInFinder4
+  // - workbench.action.revealPathInFinder5
+  // - workbench.action.revealPathInFinder6
+  // - workbench.action.revealPathInFinder7
   // - workbench.action.revertAndCloseActiveEditor
   // - workbench.action.saveWorkspaceAs
   // - workbench.action.selectIconTheme
@@ -2031,11 +2152,11 @@
   // - workbench.action.splitEditorLeft
   // - workbench.action.splitEditorRight
   // - workbench.action.splitEditorUp
-  // - workbench.action.tasks.allowAutomaticRunning
   // - workbench.action.tasks.configureDefaultBuildTask
   // - workbench.action.tasks.configureDefaultTestTask
   // - workbench.action.tasks.configureTaskRunner
-  // - workbench.action.tasks.disallowAutomaticRunning
+  // - workbench.action.tasks.configureUserTask
+  // - workbench.action.tasks.manageAutomaticRunning
   // - workbench.action.tasks.reRunTask
   // - workbench.action.tasks.restartTask
   // - workbench.action.tasks.runTask
@@ -2044,8 +2165,6 @@
   // - workbench.action.tasks.terminate
   // - workbench.action.tasks.test
   // - workbench.action.tasks.toggleProblems
-  // - workbench.action.terminal.allowWorkspaceShell
-  // - workbench.action.terminal.disallowWorkspaceShell
   // - workbench.action.terminal.focus
   // - workbench.action.terminal.focusAtIndex1
   // - workbench.action.terminal.focusAtIndex2
@@ -2059,6 +2178,7 @@
   // - workbench.action.terminal.focusNext
   // - workbench.action.terminal.focusPrevious
   // - workbench.action.terminal.kill
+  // - workbench.action.terminal.manageWorkspaceShellPermissions
   // - workbench.action.terminal.newInActiveWorkspace
   // - workbench.action.terminal.paste
   // - workbench.action.terminal.rename
@@ -2072,6 +2192,7 @@
   // - workbench.action.toggleAutoSave
   // - workbench.action.toggleCenteredLayout
   // - workbench.action.toggleEditorVisibility
+  // - workbench.action.toggleEditorWidths
   // - workbench.action.toggleMaximizedPanel
   // - workbench.action.toggleMultiCursorModifier
   // - workbench.action.togglePanelPosition
@@ -2142,8 +2263,15 @@
   // - workbench.files.action.saveAllInGroup
   // - workbench.files.action.showActiveFileInExplorer
   // - workbench.output.action.clearOutput
+  // - workbench.userData.actions.continueSync
+  // - workbench.userData.actions.login
+  // - workbench.userData.actions.logout
+  // - workbench.userData.actions.stopSync
+  // - workbench.userData.actions.syncStart
+  // - workbench.view.extension.CppRenameActivityBar
   // - workbench.view.extension.dockerView
   // - workbench.view.extension.gitlens
   // - workbench.view.extension.references-view
   // - workbench.view.extension.test
+  // - workbench.view.remote
   // - workbench.view.search.focus

@@ -18,6 +18,24 @@ breadcrumbs.selectFocused
 breadcrumbs.toggle
 breadcrumbs.toggleToOn
 breakpointWidget.action.acceptInput
+C_Cpp.BuildAndDebugActiveFile
+C_Cpp.ConfigurationEditJSON
+C_Cpp.ConfigurationEditUI
+C_Cpp.ConfigurationProviderSelect
+C_Cpp.ConfigurationSelect
+C_Cpp.DisableErrorSquiggles
+C_Cpp.EnableErrorSquiggles
+C_Cpp.LogDiagnostics
+C_Cpp.referencesViewGroupByType
+C_Cpp.referencesViewUngroupByType
+C_Cpp.RescanWorkspace
+C_Cpp.ResetDatabase
+C_Cpp.SwitchHeaderSource
+C_Cpp.TakeSurvey
+C_Cpp.ToggleDimInactiveRegions
+C_Cpp.ToggleIncludeFallback
+C_Cpp.VcpkgClipboardInstallSuggested
+C_Cpp.VcpkgOnlineHelpSuggested
 cancelRenameInput                                               escape                  when editorFocus && renameInputVisible
 cancelSelection                                                 escape                  when editorHasSelection && textInputFocus
 changeEditorIndentation
@@ -37,6 +55,18 @@ compositionEnd
 compositionStart
 copyFilePath
 copyRelativeFilePath
+CppReferencesView.focus
+CppRenameCandidatesView.focus
+CppRenamePendingView.focus
+CppRenameView.add
+CppRenameView.addAll
+CppRenameView.addFile
+CppRenameView.addReferenceType
+CppRenameView.cancel
+CppRenameView.done
+CppRenameView.remove
+CppRenameView.removeAll
+CppRenameView.removeFile
 createCursor
 cSpell.addIgnoreWord
 cSpell.addIgnoreWordToFolder
@@ -100,6 +130,10 @@ cursorUp                                                        ctrl+p          
 cursorUp                                                        up                      when textInputFocus
 cursorUpSelect                                                  shift+ctrl+p            when textInputFocus
 cursorUpSelect                                                  shift+up                when textInputFocus
+cursorWordAccessibilityLeft
+cursorWordAccessibilityLeftSelect
+cursorWordAccessibilityRight
+cursorWordAccessibilityRightSelect
 cursorWordEndLeft
 cursorWordEndLeftSelect
 cursorWordEndRight
@@ -123,28 +157,6 @@ cursorWordStartLeftSelect
 cursorWordStartRight
 cursorWordStartRightSelect
 cut
-dart.attach
-dart.changeFlutterSdk
-dart.changeSdk
-dart.completeStatement
-dart.createProject
-dart.debugTestAtCursor
-dart.goToSuper
-dart.openAnalyzerDiagnostics
-dart.openDevTools
-dart.openObservatory
-dart.rerunLastDebugSession
-dart.runAllTestsWithoutDebugging
-dart.runTestAtCursor
-dart.showTypeHierarchy
-dart.sortMembers
-dart.startDebugging
-dart.startDebuggingTest
-dart.startLogging
-dart.startWithoutDebugging
-dart.startWithoutDebuggingTest
-dartPackages.focus
-dartTestTree.focus
 debug.addConfiguration
 debug.copyStackTrace
 debug.enableOrDisableBreakpoint
@@ -208,6 +220,8 @@ editor.action.diffReview.next
 editor.action.diffReview.prev
 editor.action.dirtydiff.next
 editor.action.dirtydiff.previous
+editor.action.extensioneditor.findNext
+editor.action.extensioneditor.findPrevious
 editor.action.extensioneditor.showfind
 editor.action.findReferences
 editor.action.fixAll
@@ -305,6 +319,8 @@ editor.action.triggerSuggest                                    ctrl+space      
 editor.action.trimTrailingWhitespace
 editor.action.webvieweditor.copy
 editor.action.webvieweditor.cut
+editor.action.webvieweditor.findNext
+editor.action.webvieweditor.findPrevious
 editor.action.webvieweditor.hideFind                            escape                  when webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'
 editor.action.webvieweditor.paste
 editor.action.webvieweditor.redo
@@ -365,6 +381,7 @@ editor.foldRecursively
 editor.gotoNextSymbolFromResult
 editor.gotoNextSymbolFromResult.cancel                          escape                  when hasSymbols
 editor.showCallHierarchy
+editor.toggleFold
 editor.unfold                                                   shift+cmd+]             when editorTextFocus && foldingEnabled
 editor.unfoldAll
 editor.unfoldAllMarkerRegions
@@ -431,35 +448,8 @@ filesExplorer.copy
 filesExplorer.cut
 filesExplorer.findInFolder
 filesExplorer.findInWorkspace
+filesExplorer.openFilePreserveFocus
 filesExplorer.paste
-flutter.attach
-flutter.attachProcess
-flutter.cancelInspectWidget
-flutter.clean
-flutter.createProject
-flutter.createSampleProject
-flutter.createWebProject
-flutter.doctor
-flutter.hotReload
-flutter.hotRestart
-flutter.inspectWidget
-flutter.launchEmulator
-flutter.openInAndroidStudio
-flutter.openInXcode
-flutter.openTimeline
-flutter.packages.get
-flutter.packages.upgrade
-flutter.screenshot
-flutter.selectDevice
-flutter.toggleCheckElevations
-flutter.toggleDebugModeBanner
-flutter.toggleDebugPainting
-flutter.togglePaintBaselines
-flutter.togglePerformanceOverlay
-flutter.togglePlatform
-flutter.toggleRepaintRainbow
-flutter.toggleSlowAnimations
-flutter.upgrade
 git._syncAll
 git.addRemote
 git.branch
@@ -477,7 +467,6 @@ git.commitEmpty
 git.commitStaged
 git.commitStagedAmend
 git.commitStagedSigned
-git.commitWithInput
 git.createTag
 git.deleteBranch
 git.fetch
@@ -506,6 +495,7 @@ git.refresh
 git.removeRemote
 git.renameBranch
 git.restoreCommitTemplate
+git.revealInExplorer
 git.revertChange
 git.revertSelectedRanges
 git.showOutput
@@ -540,22 +530,26 @@ gitlens.diffLineWithWorking
 gitlens.diffWith
 gitlens.diffWithBranch
 gitlens.diffWithNext
-gitlens.diffWithNextInDiff
+gitlens.diffWithNextInDiffLeft
 gitlens.diffWithPrevious
-gitlens.diffWithPreviousInDiff
+gitlens.diffWithPreviousInDiffRight
 gitlens.diffWithRef
 gitlens.diffWithRevision
 gitlens.diffWithWorking
-gitlens.diffWithWorkingInDiff
 gitlens.diffWorkingWith
 gitlens.diffWorkingWithBranch
+gitlens.exploreRepoAtRevision
 gitlens.externalDiff
 gitlens.externalDiffAll
 gitlens.fetchRepositories
 gitlens.gitCommands
 gitlens.inviteToLiveShare
-gitlens.key.,                                                   alt+,                   when gitlens:key:,
-gitlens.key..                                                   alt+.                   when gitlens:key:.
+gitlens.key.alt+,
+gitlens.key.alt+.
+gitlens.key.alt+left
+gitlens.key.alt+right
+gitlens.key.ctrl+left
+gitlens.key.ctrl+right
 gitlens.key.escape                                              escape                  when editorTextFocus && gitlens:key:escape && !findWidgetVisible && !isInEmbeddedEditor && !renameInputVisible && !suggestWidgetVisible
 gitlens.key.left                                                alt+left                when gitlens:key:left
 gitlens.key.right                                               alt+right               when gitlens:key:right
@@ -569,12 +563,15 @@ gitlens.openFileRevisionFrom
 gitlens.openFileRevisionFromBranch
 gitlens.openInRemote
 gitlens.openRepoInRemote
+gitlens.openRevisionFile
 gitlens.openWorkingFile
 gitlens.pullRepositories
 gitlens.pushRepositories
 gitlens.resetSuppressedWarnings
+gitlens.revealCommitInView
 gitlens.showCommitInView
 gitlens.showCommitSearch
+gitlens.showCommitsInView
 gitlens.showCompareView
 gitlens.showFileHistoryInView
 gitlens.showFileHistoryView
@@ -610,14 +607,16 @@ gitlens.toggleFileRecentChanges
 gitlens.toggleLineBlame
 gitlens.toggleReviewMode
 gitlens.toggleZenMode
+gitlens.views.addRemote
 gitlens.views.applyChanges
-gitlens.views.checkout
+gitlens.views.cherryPick
 gitlens.views.closeRepository
 gitlens.views.compare:explorer.focus
 gitlens.views.compare:gitlens.focus
 gitlens.views.compare:scm.focus
 gitlens.views.compare.clear
 gitlens.views.compare.compareWithSelected
+gitlens.views.compare.copy
 gitlens.views.compare.pinComparison
 gitlens.views.compare.refresh
 gitlens.views.compare.selectForCompare
@@ -634,17 +633,24 @@ gitlens.views.compareWithHead
 gitlens.views.compareWithRemote
 gitlens.views.compareWithSelected
 gitlens.views.compareWithWorking
-gitlens.views.contributor.addCoauthoredBy
+gitlens.views.contributor.addAuthor
 gitlens.views.contributor.copyToClipboard
+gitlens.views.contributors.addAuthors
+gitlens.views.copy
+gitlens.views.createBranch
+gitlens.views.createTag
+gitlens.views.deleteBranch
+gitlens.views.deleteTag
 gitlens.views.dismissNode
 gitlens.views.executeNodeCallback
 gitlens.views.expandNode
-gitlens.views.exploreRepoRevision
+gitlens.views.exploreRepoAtRevision
 gitlens.views.fetch
 gitlens.views.fileHistory:explorer.focus
 gitlens.views.fileHistory:gitlens.focus
 gitlens.views.fileHistory:scm.focus
 gitlens.views.fileHistory.changeBase
+gitlens.views.fileHistory.copy
 gitlens.views.fileHistory.refresh
 gitlens.views.fileHistory.setEditorFollowingOff
 gitlens.views.fileHistory.setEditorFollowingOn
@@ -654,13 +660,15 @@ gitlens.views.lineHistory:explorer.focus
 gitlens.views.lineHistory:gitlens.focus
 gitlens.views.lineHistory:scm.focus
 gitlens.views.lineHistory.changeBase
+gitlens.views.lineHistory.copy
 gitlens.views.lineHistory.refresh
 gitlens.views.lineHistory.setEditorFollowingOff
 gitlens.views.lineHistory.setEditorFollowingOn
 gitlens.views.lineHistory.setRenameFollowingOff
 gitlens.views.lineHistory.setRenameFollowingOn
-gitlens.views.openChangedFileChanges
-gitlens.views.openChangedFileChangesWithWorking
+gitlens.views.mergeBranchInto
+gitlens.views.openChangedFileDiffs
+gitlens.views.openChangedFileDiffsWithWorking
 gitlens.views.openChangedFileRevisions
 gitlens.views.openChangedFiles
 gitlens.views.openChanges
@@ -671,25 +679,37 @@ gitlens.views.openFile
 gitlens.views.openFileRevision
 gitlens.views.openFileRevisionInRemote
 gitlens.views.openInTerminal
+gitlens.views.pruneRemote
 gitlens.views.pull
 gitlens.views.push
 gitlens.views.pushWithForce
+gitlens.views.rebaseOntoBranch
+gitlens.views.rebaseOntoCommit
+gitlens.views.rebaseOntoUpstream
 gitlens.views.refreshNode
+gitlens.views.renameBranch
 gitlens.views.repositories:explorer.focus
 gitlens.views.repositories:gitlens.focus
 gitlens.views.repositories:scm.focus
+gitlens.views.repositories.copy
 gitlens.views.repositories.refresh
 gitlens.views.repositories.setAutoRefreshToOff
 gitlens.views.repositories.setAutoRefreshToOn
 gitlens.views.repositories.setBranchComparisonToBranch
 gitlens.views.repositories.setBranchComparisonToWorking
+gitlens.views.repositories.setBranchesLayoutToList
+gitlens.views.repositories.setBranchesLayoutToTree
 gitlens.views.repositories.setFilesLayoutToAuto
 gitlens.views.repositories.setFilesLayoutToList
 gitlens.views.repositories.setFilesLayoutToTree
+gitlens.views.reset
+gitlens.views.restore
+gitlens.views.revert
 gitlens.views.search:explorer.focus
 gitlens.views.search:gitlens.focus
 gitlens.views.search:scm.focus
 gitlens.views.search.clear
+gitlens.views.search.copy
 gitlens.views.search.refresh
 gitlens.views.search.searchCommits
 gitlens.views.search.setFilesLayoutToAuto
@@ -707,22 +727,11 @@ gitlens.views.showMoreChildren
 gitlens.views.stageDirectory
 gitlens.views.stageFile
 gitlens.views.star
-gitlens.views.terminalCheckoutBranch
-gitlens.views.terminalCheckoutCommit
-gitlens.views.terminalCherryPickCommit
-gitlens.views.terminalCreateBranch
-gitlens.views.terminalCreateTag
-gitlens.views.terminalDeleteBranch
-gitlens.views.terminalDeleteTag
-gitlens.views.terminalMergeBranch
+gitlens.views.switchToBranch
+gitlens.views.switchToCommit
+gitlens.views.switchToTag
 gitlens.views.terminalPushCommit
-gitlens.views.terminalRebaseBranch
-gitlens.views.terminalRebaseBranchToRemote
-gitlens.views.terminalRebaseCommit
 gitlens.views.terminalRemoveRemote
-gitlens.views.terminalResetCommit
-gitlens.views.terminalRevertCommit
-gitlens.views.terminalSquashBranchIntoCommit
 gitlens.views.unsetAsDefault
 gitlens.views.unstageDirectory
 gitlens.views.unstageFile
@@ -794,7 +803,12 @@ list.focusLast
 list.focusLastChild
 list.focusPageDown
 list.focusPageUp
+list.focusParent
 list.focusUp                                                    up                      when listFocus && !inputFocus
+list.scrollDown
+list.scrollLeft
+list.scrollRight
+list.scrollUp
 list.select                                                     enter                   when listFocus && !inputFocus
 list.selectAll
 list.toggleExpand                                               space                   when listFocus && !inputFocus
@@ -804,11 +818,13 @@ lldb.changeDisplaySettings
 lldb.diagnose
 lldb.displayFormat
 lldb.getCargoLaunchConfigs
+lldb.modules.copyValue
 lldb.pickMyProcess
 lldb.pickProcess
 lldb.showDisassembly
 lldb.toggleDerefPointers
 lldb.toggleDisassembly
+loadedModules.focus
 macros.callStackDown                                            shift+cmd+down          when inDebugMode
 macros.callStackUp                                              shift+cmd+up            when inDebugMode
 macros.inspect
@@ -844,6 +860,20 @@ notifications.hideList                                          escape          
 notifications.hideToasts                                        escape                  when notificationToastsVisible
 notifications.showList
 notifications.toggleList
+npm-intellisense.import
+npm-script.audit
+npm-script.build
+npm-script.init
+npm-script.install
+npm-script.installInOutputWindow
+npm-script.rerun-last-script
+npm-script.run
+npm-script.showOutput
+npm-script.start
+npm-script.terminate-script
+npm-script.test
+npm-script.uninstallInOutputWindow
+npm-script.validate
 npm.debugScript
 npm.debugScriptFromHover
 npm.focus
@@ -851,10 +881,12 @@ npm.openScript
 npm.refresh
 npm.runInstall
 npm.runScript
+npm.runScriptFromFolder
 npm.runScriptFromHover
 npm.runSelectedScript
 openInTerminal
 openReferenceToSide
+openWith
 outdent                                                         shift+tab               when editorTextFocus && !editorReadonly && !editorTabMovesFocus
 outline.focus
 paste
@@ -869,21 +901,33 @@ problems.action.openToSide
 problems.action.showMultilineMessage
 problems.action.showQuickFixes
 problems.action.showSinglelineMessage
-pub.get
-pub.upgrade
 python_tests.focus
 python.buildWorkspaceSymbols
 python.configureTests
 python.createTerminal
 python.datascience.addcellbelow
 python.datascience.collapseallcells
+python.datascience.createnewnotebook
+python.datascience.debugcell
+python.datascience.debugcontinue
+python.datascience.debugcurrentcell.palette
+python.datascience.debugFileInteractive
+python.datascience.debugstepover
+python.datascience.debugstop
 python.datascience.execSelectionInteractive
 python.datascience.expandallcells
 python.datascience.exportfileandoutputasnotebook
 python.datascience.exportfileasnotebook
 python.datascience.exportoutputasnotebook
 python.datascience.importnotebook
+python.datascience.importnotebookfile
 python.datascience.interruptkernel
+python.datascience.notebookeditor.interruptkernel
+python.datascience.notebookeditor.redocells
+python.datascience.notebookeditor.removeallcells
+python.datascience.notebookeditor.restartkernel
+python.datascience.notebookeditor.undocells
+python.datascience.opennotebook
 python.datascience.redocells
 python.datascience.removeallcells
 python.datascience.restartkernel
@@ -894,10 +938,12 @@ python.datascience.runcell
 python.datascience.runcellandallbelow
 python.datascience.runcurrentcell
 python.datascience.runcurrentcelladvance
+python.datascience.runcurrentcellandaddbelow
 python.datascience.runcurrentcellandallbelow.palette
 python.datascience.runFileInteractive
 python.datascience.runfromline
 python.datascience.runtoline
+python.datascience.scrolltocell
 python.datascience.selectjupyteruri
 python.datascience.showhistorypane
 python.datascience.undocells
@@ -908,6 +954,7 @@ python.discoverTests
 python.enableLinting
 python.enableSourceMapSupport
 python.execInTerminal
+python.execInTerminal-icon
 python.execSelectionInDjangoShell
 python.execSelectionInTerminal
 python.goToPythonObject
@@ -927,9 +974,13 @@ python.setLinter
 python.sortImports
 python.startREPL
 python.stopTests
-python.updateSparkLibrary
+python.switchOffInsidersChannel
+python.switchToDailyChannel
+python.switchToWeeklyChannel
+python.viewLanguageServerOutput
 python.viewOutput
 python.viewTestOutput
+pythonIndent.newlineAndIndent
 redo                                                            shift+cmd+z             when textInputFocus && !editorReadonly
 references-view.clear
 references-view.clearHistory
@@ -944,11 +995,10 @@ references-view.refind
 references-view.refresh
 references-view.remove
 references-view.tree.focus
-remote.closeRemote
-remote.showActions
 removeRootFolder
 removeSecondaryCursors                                          escape                  when editorHasMultipleSelections && textInputFocus
 renameFile
+reOpenWith
 repl.action.acceptInput                                         enter                   when inDebugRepl && textInputFocus
 repl.action.copyAll
 repl.action.filter
@@ -1014,11 +1064,12 @@ showNextParameterHint                                           ctrl+n          
 showNextParameterHint                                           down                    when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           ctrl+p                  when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                      when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
-suggest.toggleExplainMode
-tab                                                             tab                     when editorTextFocus && !editorReadonly && !editorTabMovesFocus && !suggestWidgetVisible
+sync.resolveConflicts
+tab                                                             tab                     when editorTextFocus && !editorReadonly && !editorTabMovesFocus
 toggle.diff.ignoreTrimWhitespace
 toggle.diff.renderSideBySide
 toggleEscapeSequenceLogging
+toggleExplainMode
 toggleFindCaseSensitive                                         alt+cmd+c               when editorFocus
 toggleFindInSelection
 toggleFindRegex                                                 alt+cmd+r               when editorFocus
@@ -1028,9 +1079,6 @@ toggleSearchRegex
 toggleSearchWholeWord
 toggleSuggestionDetails
 toggleSuggestionFocus
-tslint.createConfig
-tslint.fixAllProblems
-tslint.showOutputChannel
 typescript.goToProjectConfig
 typescript.openTsServerLog
 typescript.reloadProjects
@@ -1131,6 +1179,7 @@ workbench.action.compareEditor.nextChange
 workbench.action.compareEditor.previousChange
 workbench.action.configureLanguageBasedSettings
 workbench.action.configureLocale
+workbench.action.configureRuntimeArguments
 workbench.action.debug.configure
 workbench.action.debug.continue                                 shift+cmd+right         when inDebugMode
 workbench.action.debug.disconnect
@@ -1138,11 +1187,11 @@ workbench.action.debug.pause
 workbench.action.debug.restart
 workbench.action.debug.restartFrame
 workbench.action.debug.reverseContinue
-workbench.action.debug.run                                      cmd+d                   when !inDebugMode
+workbench.action.debug.run                                      cmd+d
 workbench.action.debug.selectandstart
 workbench.action.debug.start
 workbench.action.debug.stepBack
-workbench.action.debug.stepInto                                 cmd+up                  when debugState == 'stopped'
+workbench.action.debug.stepInto                                 cmd+up                  when inDebugMode
 workbench.action.debug.stepOut                                  cmd+down                when debugState == 'stopped'
 workbench.action.debug.stepOver                                 cmd+right               when debugState == 'stopped'
 workbench.action.debug.stop                                     cmd+d                   when inDebugMode
@@ -1223,6 +1272,7 @@ workbench.action.keepEditor
 workbench.action.keybindingsReference
 workbench.action.lastEditorInGroup
 workbench.action.logStorage
+workbench.action.manageTrustedDomain
 workbench.action.maximizeEditor
 workbench.action.mergeAllWindowTabs
 workbench.action.minimizeOtherEditors
@@ -1336,11 +1386,19 @@ workbench.action.quickSwitchWindow
 workbench.action.quit                                           cmd+q
 workbench.action.reloadWindow                                   ctrl+alt+cmd+r
 workbench.action.reloadWindowWithExtensionsDisabled
+workbench.action.remote.showMenu
 workbench.action.removeFromEditorHistory
 workbench.action.removeRootFolder
 workbench.action.reopenClosedEditor
 workbench.action.replaceInFiles
 workbench.action.reportPerformanceIssueUsingReporter
+workbench.action.revealPathInFinder1
+workbench.action.revealPathInFinder2
+workbench.action.revealPathInFinder3
+workbench.action.revealPathInFinder4
+workbench.action.revealPathInFinder5
+workbench.action.revealPathInFinder6
+workbench.action.revealPathInFinder7
 workbench.action.revertAndCloseActiveEditor
 workbench.action.saveWorkspaceAs
 workbench.action.search.toggleQueryDetails                      shift+cmd+j             when searchViewletVisible
@@ -1370,12 +1428,12 @@ workbench.action.splitEditorRight
 workbench.action.splitEditorUp
 workbench.action.submitComment
 workbench.action.switchWindow
-workbench.action.tasks.allowAutomaticRunning
 workbench.action.tasks.build                                    cmd+b
 workbench.action.tasks.configureDefaultBuildTask
 workbench.action.tasks.configureDefaultTestTask
 workbench.action.tasks.configureTaskRunner
-workbench.action.tasks.disallowAutomaticRunning
+workbench.action.tasks.configureUserTask
+workbench.action.tasks.manageAutomaticRunning
 workbench.action.tasks.reRunTask
 workbench.action.tasks.restartTask
 workbench.action.tasks.runTask
@@ -1384,14 +1442,12 @@ workbench.action.tasks.showTasks
 workbench.action.tasks.terminate
 workbench.action.tasks.test                                     cmd+t
 workbench.action.tasks.toggleProblems
-workbench.action.terminal.allowWorkspaceShell
 workbench.action.terminal.clear                                 cmd+k
 workbench.action.terminal.clearSelection                        escape                  when terminalFocus && terminalTextSelected && !terminalFindWidgetVisible
 workbench.action.terminal.copySelection
 workbench.action.terminal.deleteToLineStart
 workbench.action.terminal.deleteWordLeft
 workbench.action.terminal.deleteWordRight
-workbench.action.terminal.disallowWorkspaceShell
 workbench.action.terminal.findNext
 workbench.action.terminal.findNextTerminalFocus
 workbench.action.terminal.findPrevious
@@ -1413,8 +1469,12 @@ workbench.action.terminal.focusPrevious
 workbench.action.terminal.focusPreviousPane
 workbench.action.terminal.hideFindWidget                        escape                  when terminalFindWidgetVisible && terminalFocus
 workbench.action.terminal.kill                                  alt+cmd+t
+workbench.action.terminal.manageWorkspaceShellPermissions
 workbench.action.terminal.moveToLineEnd
 workbench.action.terminal.moveToLineStart
+workbench.action.terminal.navigationModeExit                    escape                  when accessibilityModeEnabled && terminalA11yTreeFocus
+workbench.action.terminal.navigationModeFocusNext
+workbench.action.terminal.navigationModeFocusPrevious
 workbench.action.terminal.new                                   ctrl+shift+`
 workbench.action.terminal.newInActiveWorkspace
 workbench.action.terminal.openNativeConsole                     shift+cmd+c             when !terminalFocus
@@ -1455,6 +1515,7 @@ workbench.action.toggleCenteredLayout
 workbench.action.toggleDevTools
 workbench.action.toggleEditorGroupLayout
 workbench.action.toggleEditorVisibility
+workbench.action.toggleEditorWidths
 workbench.action.toggleFullScreen                               ctrl+cmd+f
 workbench.action.toggleMaximizedPanel
 workbench.action.toggleMultiCursorModifier
@@ -1539,13 +1600,20 @@ workbench.files.action.revertLocalChanges
 workbench.files.action.saveAllInGroup
 workbench.files.action.showActiveFileInExplorer
 workbench.output.action.clearOutput
+workbench.userData.actions.continueSync
+workbench.userData.actions.login
+workbench.userData.actions.logout
+workbench.userData.actions.stopSync
+workbench.userData.actions.syncStart
 workbench.view.debug                                            shift+cmd+d
 workbench.view.explorer                                         shift+cmd+e
+workbench.view.extension.CppRenameActivityBar
 workbench.view.extension.dockerView
 workbench.view.extension.gitlens
 workbench.view.extension.references-view
 workbench.view.extension.test
 workbench.view.extensions                                       shift+cmd+x
+workbench.view.remote
 workbench.view.scm                                              shift+cmd+c
-workbench.view.search                                           shift+cmd+f
+workbench.view.search                                           shift+cmd+f             when !searchViewletVisible
 workbench.view.search.focus
