@@ -5,6 +5,7 @@
 
 # install the user-specific portions (does not require root privileges).
 
+from os import makedirs
 from os.path import expanduser as expand_user, isfile as is_file
 from _gloss_install_common import * # parses arguments, etc.
 import site
@@ -40,10 +41,12 @@ def main():
 
 
 def install_usercustomize():
+  site_packages_dir = site.getusersitepackages()
   name = 'usercustomize.py'
   src = path_join(src_dir, name)
-  dst = path_join(site.getusersitepackages(), name)
+  dst = path_join(site_packages_dir, name)
   errSL('installing:', src, '->', dst)
+  makedirs(site_packages_dir, exist_ok=True)
   copy_file(src, dst)
 
 
