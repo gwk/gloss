@@ -122,7 +122,7 @@
   "python.envFile": "",
   "python.linting.pylintEnabled": false,
   "python.linting.lintOnSave": false,
-  "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3",
+  "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.8/bin/python3",
 
   "telemetry.enableTelemetry": false,
 
