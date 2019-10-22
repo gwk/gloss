@@ -15,4 +15,4 @@ for path in sys.argv[1:]:
       json.dump(o, f, sort_keys=True, indent=2)
       f.write('\n')
   except Exception as e:
-    io.errL(f'exception: {path}: {e}')
+    errL(f'exception: {path}: {e}')
