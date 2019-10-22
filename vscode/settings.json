@@ -104,9 +104,10 @@
   },
   "python.disableInstallationCheck": true,
   "python.envFile": "",
+  "python.insidersChannel": "weekly",
   "python.linting.lintOnSave": false,
   "python.linting.pylintEnabled": false,
-  "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.8/bin/python3",
+  "python.pythonPath": "/usr/local/gloss/bin/python3",
   "search.useIgnoreFiles": false,
   "settings.cycle": [
     {
