@@ -6,7 +6,7 @@ from json import JSONDecoder, dump
 
 
 if len(argv) > 2:
-  exit('requires 1 or no arguments (defaults to std-in)')
+  exit('requires 1 or no arguments (defaults to stdin)')
 
 if len(argv) == 2:
   f = open(argv[1])
