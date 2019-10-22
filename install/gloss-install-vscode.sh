@@ -19,8 +19,10 @@ cp _build/vscode-keys.json  "$VSCODE_USER/keybindings.json"
 set +x
 touch "$VSCODE_USER/settings.json"
 if ! d vscode/settings.json "$VSCODE_USER/settings.json"; then
-  confirm 'copy user settings to this repo' \
-  && cp "$VSCODE_USER/settings.json" vscode/settings.json \
+  confirm 'format user settings and copy to this repo' \
+  && json-fmt-in-place "$VSCODE_USER/settings.json" \
+  && cp "$VSCODE_USER/settings.json"  vscode/settings.json \
   || echo "NOTE: user settings are not in sync with repo.
+To format your settings: json-fmt-in-place vscode/settings.json
 To overwrite your settings: cp vscode/settings.json '$VSCODE_USER/settings.json'"
 fi
