@@ -1,6 +1,6 @@
 acceptRenameInput                                               enter                   when editorFocus && renameInputVisible
 acceptSelectedSuggestion                                        tab                     when suggestWidgetVisible && textInputFocus
-acceptSelectedSuggestionOnEnter                                 enter                   when acceptSuggestionOnEnter && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus
+acceptSelectedSuggestion                                        enter                   when acceptSuggestionOnEnter && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus
 acceptSnippet                                                   tab                     when editorTextFocus && inSnippetMode
 actions.find                                                    cmd+f
 actions.findWithSelection
@@ -216,6 +216,7 @@ editor.action.copyLinesUpAction
 editor.action.defineKeybinding
 editor.action.deleteLines
 editor.action.detectIndentation
+editor.action.duplicateSelection
 editor.action.diffReview.next
 editor.action.diffReview.prev
 editor.action.dirtydiff.next
@@ -293,7 +294,6 @@ editor.action.revealDefinitionAside
 editor.action.selectAll                                         cmd+a                   when textInputFocus
 editor.action.selectAllMatches
 editor.action.selectHighlights                                  ctrl+s                  when editorFocus
-editor.action.selectToBracket
 editor.action.showAccessibilityHelp
 editor.action.showContextMenu
 editor.action.showHover
@@ -814,17 +814,6 @@ list.selectAll
 list.toggleExpand                                               space                   when listFocus && !inputFocus
 list.toggleFilterOnType
 list.toggleKeyboardNavigation
-lldb.changeDisplaySettings
-lldb.diagnose
-lldb.displayFormat
-lldb.getCargoLaunchConfigs
-lldb.modules.copyValue
-lldb.pickMyProcess
-lldb.pickProcess
-lldb.showDisassembly
-lldb.toggleDerefPointers
-lldb.toggleDisassembly
-loadedModules.focus
 macros.callStackDown                                            shift+cmd+down          when inDebugMode
 macros.callStackUp                                              shift+cmd+up            when inDebugMode
 macros.inspect
@@ -865,24 +854,19 @@ npm-script.audit
 npm-script.build
 npm-script.init
 npm-script.install
-npm-script.installInOutputWindow
 npm-script.rerun-last-script
 npm-script.run
 npm-script.showOutput
 npm-script.start
 npm-script.terminate-script
 npm-script.test
-npm-script.uninstallInOutputWindow
-npm-script.validate
 npm.debugScript
-npm.debugScriptFromHover
 npm.focus
 npm.openScript
 npm.refresh
 npm.runInstall
 npm.runScript
 npm.runScriptFromFolder
-npm.runScriptFromHover
 npm.runSelectedScript
 openInTerminal
 openReferenceToSide
@@ -1065,7 +1049,7 @@ showNextParameterHint                                           down            
 showPrevParameterHint                                           ctrl+p                  when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                      when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 sync.resolveConflicts
-tab                                                             tab                     when editorTextFocus && !editorReadonly && !editorTabMovesFocus
+tab                                                             tab                     when editorTextFocus && !editorReadonly && !editorTabMovesFocus && !suggestWidgetVisible
 toggle.diff.ignoreTrimWhitespace
 toggle.diff.renderSideBySide
 toggleEscapeSequenceLogging

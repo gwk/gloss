@@ -483,10 +483,10 @@
                                        "when": "suggestWidgetVisible && textInputFocus" },
   { "key": "tab",                   "command": "acceptSelectedSuggestion",
                                        "when": "suggestWidgetVisible && textInputFocus" },
+  { "key": "enter",                 "command": "acceptSelectedSuggestion",
+                                       "when": "acceptSuggestionOnEnter && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus" },
   { "key": "shift+tab",             "command": "acceptSelectedSuggestion",
                                        "when": "suggestWidgetVisible && textInputFocus" },
-  { "key": "enter",                 "command": "acceptSelectedSuggestionOnEnter",
-                                       "when": "acceptSuggestionOnEnter && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus" },
   { "key": "shift+escape",          "command": "hideSuggestWidget",
                                        "when": "suggestWidgetVisible && textInputFocus" },
   { "key": "escape",                "command": "hideSuggestWidget",
@@ -1342,6 +1342,7 @@
   // - editor.action.clearoutput
   // - editor.action.clipboardCopyWithSyntaxHighlightingAction
   // - editor.action.detectIndentation
+  // - editor.action.duplicateSelection
   // - editor.action.findReferences
   // - editor.action.fixAll
   // - editor.action.fontZoomIn
@@ -1371,7 +1372,6 @@
   // - editor.action.reindentlines
   // - editor.action.reindentselectedlines
   // - editor.action.revealDeclaration
-  // - editor.action.selectToBracket
   // - editor.action.showSnippets
   // - editor.action.smartSelect.grow
   // - editor.action.sortLinesAscending
@@ -1746,17 +1746,6 @@
   // - list.focusParent
   // - list.toggleFilterOnType
   // - list.toggleKeyboardNavigation
-  // - lldb.changeDisplaySettings
-  // - lldb.diagnose
-  // - lldb.displayFormat
-  // - lldb.getCargoLaunchConfigs
-  // - lldb.modules.copyValue
-  // - lldb.pickMyProcess
-  // - lldb.pickProcess
-  // - lldb.showDisassembly
-  // - lldb.toggleDerefPointers
-  // - lldb.toggleDisassembly
-  // - loadedModules.focus
   // - macros.callStackDown
   // - macros.callStackUp
   // - macros.inspect
@@ -1784,19 +1773,14 @@
   // - npm-script.build
   // - npm-script.init
   // - npm-script.install
-  // - npm-script.installInOutputWindow
   // - npm-script.start
-  // - npm-script.uninstallInOutputWindow
-  // - npm-script.validate
   // - npm.debugScript
-  // - npm.debugScriptFromHover
   // - npm.focus
   // - npm.openScript
   // - npm.refresh
   // - npm.runInstall
   // - npm.runScript
   // - npm.runScriptFromFolder
-  // - npm.runScriptFromHover
   // - npm.runSelectedScript
   // - openInTerminal
   // - openWith
