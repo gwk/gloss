@@ -20,4 +20,5 @@ dot $inputs -o /dev/stdout \
 -Tsvg \
 -Grankdir=LR -Gsplines=polyline \
 -Gfontname=sans-serif -Nfontname=sans-serif -Efontname=sans-serif \
+-Ecolor="#606060" \
 "$@" | html-view
