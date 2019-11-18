@@ -1265,7 +1265,7 @@ workbench.action.files.saveFiles
 workbench.action.files.saveLocalFile
 workbench.action.files.saveWithoutFormatting
 workbench.action.files.showOpenedFileInNewWindow
-workbench.action.findInFiles
+workbench.action.findInFiles                                    shift+cmd+f
 workbench.action.firstEditorInGroup
 workbench.action.focusAboveGroup
 workbench.action.focusActiveEditorGroup
