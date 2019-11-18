@@ -2,10 +2,10 @@
 
 import re
 from sys import argv
-from pithy.fs import path_stem
 from pithy.io import errL, errSL, errLSSL, outL, writeL
 from pithy.iterable import group_by_heads
 from pithy.json import JSONDecodeError, parse_json, write_json
+from pithy.path import path_stem
 from dataclasses import dataclass, field
 from typing import Any, DefaultDict, Dict, Iterable, List, Set, Tuple
 
