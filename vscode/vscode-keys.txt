@@ -1,6 +1,7 @@
 acceptRenameInput                                               enter                   when editorFocus && renameInputVisible
-acceptSelectedSuggestion                                        tab                     when suggestWidgetVisible && textInputFocus
 acceptSelectedSuggestion                                        enter                   when acceptSuggestionOnEnter && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus
+acceptSelectedSuggestion                                        tab                     when suggestWidgetVisible && textInputFocus
+acceptSelectedSuggestionOnEnter
 acceptSnippet                                                   tab                     when editorTextFocus && inSnippetMode
 actions.find                                                    cmd+f
 actions.findWithSelection
@@ -119,6 +120,7 @@ cursorPageDown                                                  pagedown        
 cursorPageDownSelect                                            shift+pagedown          when textInputFocus
 cursorPageUp                                                    pageup                  when textInputFocus
 cursorPageUpSelect                                              shift+pageup            when textInputFocus
+cursorRedo
 cursorRight                                                     ctrl+f                  when textInputFocus
 cursorRight                                                     right                   when textInputFocus
 cursorRightSelect                                               shift+ctrl+f            when textInputFocus
@@ -213,14 +215,16 @@ editor.action.clipboardPasteAction                              cmd+v           
 editor.action.commentLine
 editor.action.copyLinesDownAction
 editor.action.copyLinesUpAction
+editor.action.customEditor.redo
+editor.action.customEditor.undo
 editor.action.defineKeybinding
 editor.action.deleteLines
 editor.action.detectIndentation
-editor.action.duplicateSelection
 editor.action.diffReview.next
 editor.action.diffReview.prev
 editor.action.dirtydiff.next
 editor.action.dirtydiff.previous
+editor.action.duplicateSelection
 editor.action.extensioneditor.findNext
 editor.action.extensioneditor.findPrevious
 editor.action.extensioneditor.showfind
@@ -238,6 +242,9 @@ editor.action.formatSelection
 editor.action.formatSelection.multiple
 editor.action.goToDeclaration
 editor.action.goToImplementation
+editor.action.gotoNextSymbol
+editor.action.gotoPrevSymbol
+editor.action.goToReferences
 editor.action.goToTypeDefinition
 editor.action.indentationToSpaces
 editor.action.indentationToTabs
@@ -296,7 +303,9 @@ editor.action.selectAllMatches
 editor.action.selectHighlights                                  ctrl+s                  when editorFocus
 editor.action.showAccessibilityHelp
 editor.action.showContextMenu
+editor.action.showDefinitionPreviewHover
 editor.action.showHover
+editor.action.showReferences
 editor.action.showSnippets
 editor.action.smartSelect.expand
 editor.action.smartSelect.grow
@@ -380,7 +389,9 @@ editor.foldLevel7
 editor.foldRecursively
 editor.gotoNextSymbolFromResult
 editor.gotoNextSymbolFromResult.cancel                          escape                  when hasSymbols
+editor.refocusCallHierarchy
 editor.showCallHierarchy
+editor.toggleCallHierarchy
 editor.toggleFold
 editor.unfold                                                   shift+cmd+]             when editorTextFocus && foldingEnabled
 editor.unfoldAll
@@ -392,6 +403,9 @@ eslint.disable
 eslint.enable
 eslint.executeAutofix
 eslint.showOutputChannel
+execCopy
+execCut
+execPaste
 expandLineSelection
 explorer.download
 explorer.newFile
@@ -450,6 +464,7 @@ filesExplorer.findInFolder
 filesExplorer.findInWorkspace
 filesExplorer.openFilePreserveFocus
 filesExplorer.paste
+firstCompressedFolder
 git._syncAll
 git.addRemote
 git.branch
@@ -457,6 +472,8 @@ git.branchFrom
 git.checkout
 git.clean
 git.cleanAll
+git.cleanAllTracked
+git.cleanAllUntracked
 git.clone
 git.close
 git.commit
@@ -469,6 +486,7 @@ git.commitStagedAmend
 git.commitStagedSigned
 git.createTag
 git.deleteBranch
+git.deleteTag
 git.fetch
 git.fetchAll
 git.fetchPrune
@@ -501,11 +519,14 @@ git.revertSelectedRanges
 git.showOutput
 git.stage
 git.stageAll
+git.stageAllTracked
+git.stageAllUntracked
 git.stageChange
 git.stageSelectedRanges
 git.stash
 git.stashApply
 git.stashApplyLatest
+git.stashDrop
 git.stashIncludeUntracked
 git.stashPop
 git.stashPopLatest
@@ -656,6 +677,8 @@ gitlens.views.fileHistory.setEditorFollowingOff
 gitlens.views.fileHistory.setEditorFollowingOn
 gitlens.views.fileHistory.setRenameFollowingOff
 gitlens.views.fileHistory.setRenameFollowingOn
+gitlens.views.highlightChanges
+gitlens.views.highlightRevisionChanges
 gitlens.views.lineHistory:explorer.focus
 gitlens.views.lineHistory:gitlens.focus
 gitlens.views.lineHistory:scm.focus
@@ -761,6 +784,9 @@ hexdump.toggleEndian
 hideSuggestWidget                                               escape                  when suggestWidgetVisible && textInputFocus
 history.showNext
 history.showPrevious
+imagePreview.testing.makeEdit
+imagePreview.zoomIn
+imagePreview.zoomOut
 insertBestCompletion
 insertNextSuggestion
 insertPrevSuggestion
@@ -783,6 +809,7 @@ keybindings.editor.showConflicts
 keybindings.editor.showDefaultKeybindings
 keybindings.editor.showUserKeybindings
 keybindings.editor.toggleSortByPrecedence
+lastCompressedFolder
 lastCursorLineSelect
 lastCursorLineSelectDrag
 lastCursorWordSelect
@@ -806,7 +833,6 @@ list.focusPageUp
 list.focusParent
 list.focusUp                                                    up                      when listFocus && !inputFocus
 list.scrollDown
-list.scrollLeft
 list.scrollRight
 list.scrollUp
 list.select                                                     enter                   when listFocus && !inputFocus
@@ -835,6 +861,10 @@ merge-conflict.compare
 merge-conflict.next
 merge-conflict.previous
 moveFileToTrash                                                 cmd+delete              when explorerResourceMoveableToTrash && explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus
+navigateToTestFile
+navigateToTestFunction
+navigateToTestSuite
+nextCompressedFolder
 notification.clear
 notification.collapse
 notification.expand
@@ -854,19 +884,24 @@ npm-script.audit
 npm-script.build
 npm-script.init
 npm-script.install
+npm-script.installInOutputWindow
 npm-script.rerun-last-script
 npm-script.run
 npm-script.showOutput
 npm-script.start
 npm-script.terminate-script
 npm-script.test
+npm-script.uninstallInOutputWindow
+npm-script.validate
 npm.debugScript
+npm.debugScriptFromHover
 npm.focus
 npm.openScript
 npm.refresh
 npm.runInstall
 npm.runScript
 npm.runScriptFromFolder
+npm.runScriptFromHover
 npm.runSelectedScript
 openInTerminal
 openReferenceToSide
@@ -876,6 +911,7 @@ outline.focus
 paste
 perfview.show
 php.untrustValidationExecutable
+previousCompressedFolder
 problems.action.copy                                            cmd+c                   when problemFocus
 problems.action.copyMessage
 problems.action.copyRelatedInformationMessage
@@ -886,6 +922,10 @@ problems.action.showMultilineMessage
 problems.action.showQuickFixes
 problems.action.showSinglelineMessage
 python_tests.focus
+python._loadLanguageServerExtension
+python.analysis.clearCache
+python.askToStopTestDiscovery
+python.askToStopTests
 python.buildWorkspaceSymbols
 python.configureTests
 python.createTerminal
@@ -906,10 +946,13 @@ python.datascience.exportoutputasnotebook
 python.datascience.importnotebook
 python.datascience.importnotebookfile
 python.datascience.interruptkernel
+python.datascience.notebookeditor.addcellbelow
 python.datascience.notebookeditor.interruptkernel
 python.datascience.notebookeditor.redocells
 python.datascience.notebookeditor.removeallcells
 python.datascience.notebookeditor.restartkernel
+python.datascience.notebookeditor.runallcells
+python.datascience.notebookeditor.runselectedcell
 python.datascience.notebookeditor.undocells
 python.datascience.opennotebook
 python.datascience.redocells
@@ -945,16 +988,21 @@ python.goToPythonObject
 python.openTestNodeInEditor
 python.refactorExtractMethod
 python.refactorExtractVariable
+python.revealTestItem
 python.runCurrentTestFile
 python.runFailedTests
 python.runLinting
 python.runTestNode
 python.runtests
 python.selectAndDebugTestMethod
+python.SelectAndInsertDebugConfiguration
 python.selectAndRunTestFile
 python.selectAndRunTestMethod
+python.selectTestToDebug
+python.selectTestToRun
 python.setInterpreter
 python.setLinter
+python.setShebangInterpreter
 python.sortImports
 python.startREPL
 python.stopTests
@@ -964,6 +1012,7 @@ python.switchToWeeklyChannel
 python.viewLanguageServerOutput
 python.viewOutput
 python.viewTestOutput
+python.viewTestUI
 pythonIndent.newlineAndIndent
 redo                                                            shift+cmd+z             when textInputFocus && !editorReadonly
 references-view.clear
@@ -972,6 +1021,7 @@ references-view.copy
 references-view.copyAll
 references-view.copyPath
 references-view.find
+references-view.findImplementations
 references-view.next
 references-view.pickFromHistory
 references-view.prev
@@ -1048,7 +1098,6 @@ showNextParameterHint                                           ctrl+n          
 showNextParameterHint                                           down                    when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           ctrl+p                  when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                      when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
-sync.resolveConflicts
 tab                                                             tab                     when editorTextFocus && !editorReadonly && !editorTabMovesFocus && !suggestWidgetVisible
 toggle.diff.ignoreTrimWhitespace
 toggle.diff.renderSideBySide
@@ -1070,6 +1119,7 @@ typescript.restartTsServer
 typescript.selectTypeScriptVersion
 undo                                                            cmd+z                   when textInputFocus && !editorReadonly
 update.check
+update.checkForVSCodeUpdate
 update.checking
 update.downloading
 update.downloadNow
@@ -1104,6 +1154,7 @@ vscode-docker.images.runAzureCli
 vscode-docker.images.runInteractive
 vscode-docker.images.tag
 vscode-docker.networks.configureExplorer
+vscode-docker.networks.create
 vscode-docker.networks.inspect
 vscode-docker.networks.prune
 vscode-docker.networks.refresh
@@ -1433,9 +1484,7 @@ workbench.action.terminal.deleteToLineStart
 workbench.action.terminal.deleteWordLeft
 workbench.action.terminal.deleteWordRight
 workbench.action.terminal.findNext
-workbench.action.terminal.findNextTerminalFocus
 workbench.action.terminal.findPrevious
-workbench.action.terminal.findPreviousTerminalFocus
 workbench.action.terminal.focus
 workbench.action.terminal.focusAtIndex1
 workbench.action.terminal.focusAtIndex2
@@ -1487,11 +1536,8 @@ workbench.action.terminal.selectToPreviousLine
 workbench.action.terminal.split
 workbench.action.terminal.splitInActiveWorkspace
 workbench.action.terminal.toggleFindCaseSensitive
-workbench.action.terminal.toggleFindCaseSensitiveTerminalFocus
 workbench.action.terminal.toggleFindRegex
-workbench.action.terminal.toggleFindRegexTerminalFocus
 workbench.action.terminal.toggleFindWholeWord
-workbench.action.terminal.toggleFindWholeWordTerminalFocus
 workbench.action.terminal.toggleTerminal                        shift+cmd+t
 workbench.action.toggleActivityBarVisibility
 workbench.action.toggleAutoSave
@@ -1506,6 +1552,7 @@ workbench.action.toggleMultiCursorModifier
 workbench.action.togglePanel
 workbench.action.togglePanelPosition
 workbench.action.toggleScreencastMode
+workbench.action.toggleSearchOnType
 workbench.action.toggleSharedProcess
 workbench.action.toggleSidebarPosition
 workbench.action.toggleSidebarVisibility                        shift+cmd+l
@@ -1556,6 +1603,7 @@ workbench.extensions.action.installExtensions
 workbench.extensions.action.installVSIX
 workbench.extensions.action.listBuiltInExtensions
 workbench.extensions.action.listOutdatedExtensions
+workbench.extensions.action.manageAuthorizedExtensionURIs
 workbench.extensions.action.openExtensionsFolder
 workbench.extensions.action.reinstall
 workbench.extensions.action.saveExtensionHostProfile
@@ -1571,7 +1619,7 @@ workbench.extensions.action.showRecommendedExtensions
 workbench.extensions.action.showRecommendedKeymapExtensions
 workbench.extensions.action.stopExtensionHostProfile
 workbench.extensions.action.updateAllExtensions
-workbench.extensions.installMissingDepenencies
+workbench.extensions.installMissingDependencies
 workbench.files.action.acceptLocalChanges
 workbench.files.action.collapseExplorerFolders
 workbench.files.action.compareFileWith
@@ -1585,8 +1633,10 @@ workbench.files.action.saveAllInGroup
 workbench.files.action.showActiveFileInExplorer
 workbench.output.action.clearOutput
 workbench.userData.actions.continueSync
-workbench.userData.actions.login
-workbench.userData.actions.logout
+workbench.userData.actions.resolveConflicts
+workbench.userData.actions.signin
+workbench.userData.actions.signingin
+workbench.userData.actions.signout
 workbench.userData.actions.stopSync
 workbench.userData.actions.syncStart
 workbench.view.debug                                            shift+cmd+d
