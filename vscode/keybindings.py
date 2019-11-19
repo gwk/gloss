@@ -11,7 +11,10 @@ from dataclasses import dataclass, field
 from typing import Any, DefaultDict, Dict, Iterable, List, Set, Tuple
 
 '''
-Parse the default VSCode keybindings, validate custom ones, and install them.
+Parse the default VSCode keybindings, validate custom ones, and output custom keybindings to json.
+
+The generated keybindings first reset all bindings, then add in the custom bindings for complete control.
+
 Default keybindings are obtained from selecting "Open Default Keyboard Shortcuts" from the command palette
 and pasting them into the default JSON file in `vscode/`.
 '''
@@ -27,6 +30,7 @@ def main() -> None:
   out_stem = path_stem(out_path)
   defaults_out_path = out_dir + '/keys-default.txt'
   whens_out_path= out_dir + '/key-whens.txt'
+  keys_ref_out_path = out_dir + '/keys-reference.txt'
   defaults, other_cmds = parse_defaults(defaults_json_path)
 
   ctx = Ctx(
@@ -40,8 +44,9 @@ def main() -> None:
   parse_bindings(ctx, bindings_path)
   warn_unbound_cmds(ctx)
 
-  out_file = open(out_path, 'w')
-  write_json(out_file, ctx.bindings)
+  with open(out_path, 'w') as f: write_json(f, ctx.all_bindings)
+
+  write_keys_ref(keys_ref_out_path, ctx.explicit_bindings)
 
 
 Binding = Dict[str,str]
@@ -82,8 +87,9 @@ class Ctx:
   all_when_words: Set[str] = field(default_factory=set)
   dflt_binding_whens: Dict[str,Set[str]] = field(default_factory=lambda:DefaultDict(set))
   dflt_escapes: Set[str] = field(default_factory=set)
-  dflt_triples: List[Triple] = field(default_factory=list) # used to generate keybindings.txt once.
-  bindings: List[Dict[str,str]] = field(default_factory=list)
+  dflt_triples: List[Triple] = field(default_factory=list)
+  all_bindings: List[Dict[str,str]] = field(default_factory=list) # Includes nullifications.
+  explicit_bindings: List[Dict[str,str]] = field(default_factory=list)
   bound_cmds: Set[str] = field(default_factory=set)
   bound_escapes: Set[str] = field(default_factory=set)
 
@@ -117,7 +123,7 @@ class Ctx:
         # Note: as of 2018/08/03, do not qualify nullifications with when clauses, or else they will fail in some cases.
         for word in when.split():
           self.all_when_words.add(word.lstrip('!'))
-      self.bindings.append(nullification)
+      self.all_bindings.append(nullification)
       self.dflt_triples.append((cmd, key, when))
 
     for cmd in self.other_cmds:
@@ -134,9 +140,26 @@ def write_defaults_txt(path:str, dflt_triples:List[Triple]) -> None:
 
 
 def write_whens(path:str, all_when_words:Set[str]) -> None:
-  f = open(path, 'w')
-  for when in sorted(all_when_words):
-    writeL(f, when)
+  with open(path, 'w') as f:
+    for when in sorted(all_when_words):
+      writeL(f, when)
+
+
+def write_keys_ref(path:str, explicit_bindings:List[Dict[str,str]]) -> None:
+  with open(path, 'w') as f:
+    for binding in sorted(explicit_bindings, key=bindings_sort_key):
+      key = binding['key']
+      cmd = binding['command']
+      when = binding.get('when', '')
+      s = when and ' '
+      print(f'{key:24} {cmd:64}{s}{when}', file=f)
+
+
+def bindings_sort_key(binding:Dict[str,str]) -> List[str]:
+  key_combo = binding['key'].split('+')
+  key_combo.reverse()
+  is_regular_key = (len(key_combo[0]) == 1)
+  return [is_regular_key] + key_combo
 
 
 def parse_bindings(ctx:Ctx, bindings_path:str) -> None:
@@ -186,7 +209,8 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
       binding['when'] = when
     if args is not None:
       binding['args'] = args
-    ctx.bindings.append(binding)
+    ctx.all_bindings.append(binding)
+    ctx.explicit_bindings.append(binding)
 
   key = ' '.join(keys)
   add_binding(key)

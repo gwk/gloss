@@ -6,7 +6,7 @@
 # $*: The matching string in a pattern rule.
 
 
-.PHONY: _default build clean cov install-sys install-user install-vscode test uninstall-vscode
+.PHONY: _default build clean cov install-sys install-user install-vscode keys test uninstall-vscode
 
 # First target of a makefile is the default.
 _default: help
@@ -30,6 +30,8 @@ install-user:
 
 install-vscode: vscode
 	install/gloss-install-vscode.sh
+
+keys: _build/vscode-keys.json
 
 xcode_keys_src := keybindings/gloss-xcode.idebindings
 xcode_keys_dst := ~/Library/Developer/Xcode/UserData/KeyBindings/gloss-xcode.idekeybindings
