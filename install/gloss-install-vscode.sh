@@ -10,12 +10,12 @@ craft-vscode-ext -name gloss -src vscode
 
 # Not yet handled by craft-vscode-ext.
 mkdir -p "$VSCODE_THEMES"
-cp _build/gloss-black.json  "$VSCODE_THEMES"
+cp _build/vscode/gloss-black.json  "$VSCODE_THEMES"
 
 # User settings.
 VSCODE_USER="$HOME/Library/Application Support/Code - Insiders/User"
 mkdir -p "$VSCODE_USER"
-cp _build/vscode-keys.json  "$VSCODE_USER/keybindings.json"
+cp _build/vscode/keybindings.json  "$VSCODE_USER/keybindings.json"
 set +x
 touch "$VSCODE_USER/settings.json"
 if ! d vscode/settings.json "$VSCODE_USER/settings.json"; then

@@ -2,10 +2,11 @@
 
 import re
 from sys import argv
+from pithy.fs import make_dirs
 from pithy.io import errL, errSL, errLSSL, outL, writeL
 from pithy.iterable import group_by_heads
 from pithy.json import JSONDecodeError, parse_json, write_json
-from pithy.path import path_stem
+from pithy.path import path_dir, path_stem
 from dataclasses import dataclass, field
 from typing import Any, DefaultDict, Dict, Iterable, List, Set, Tuple
 
@@ -20,8 +21,12 @@ def main() -> None:
   # Paths passed in by make.
   defaults_json_path, bindings_path, out_path = argv[1:]
 
-  defaults_out_path = "_build/vscode-keys-defaults.txt"
-  whens_out_path= "_build/vscode-whens.txt"
+  out_dir = path_dir(out_path)
+  make_dirs(out_dir)
+
+  out_stem = path_stem(out_path)
+  defaults_out_path = out_dir + '/keys-default.txt'
+  whens_out_path= out_dir + '/key-whens.txt'
   defaults, other_cmds = parse_defaults(defaults_json_path)
 
   ctx = Ctx(

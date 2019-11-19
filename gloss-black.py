@@ -11,8 +11,15 @@ import json
 import re
 from sys import argv
 
+from pithy.fs import make_dirs
+from pithy.path import path_dir
+
 
 def main():
+  out_path = argv[1]
+  out_dir = path_dir(out_path)
+  make_dirs(out_dir)
+
   theme = {
     'name': 'gloss-black',
     'settings' : make_settings()

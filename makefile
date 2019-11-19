@@ -11,7 +11,7 @@
 # First target of a makefile is the default.
 _default: help
 
-build: _build/gloss-black.json _build/vscode-keys.json
+build: _build/vscode/gloss-black.json _build/vscode/keybindings.json
 
 clean:
 	rm -rf _build/*
@@ -47,14 +47,14 @@ test:
 uninstall-vscode:
 	rm -rf ~/.vscode-insiders/extensions/gloss
 
-vscode: _build/gloss-black.json _build/vscode-keys.json
+vscode: _build/vscode/gloss-black.json _build/vscode/keybindings.json
 
 vscode-keys-diff: vscode
-	d _build/vscode-keys-defaults.txt vscode/vscode-keys.txt
+	d _build/vscode/keys-default.txt vscode/keys.txt
 
-_build/gloss-black.json: gloss-black.py
+_build/vscode/gloss-black.json: gloss-black.py
 	mkdir -p _build
 	./$^ $@
 
-_build/vscode-keys.json: vscode/keybindings.py vscode/vscode-keys-default.json vscode/vscode-keys.txt
+_build/vscode/keybindings.json: vscode/keybindings.py vscode/keybindings-default.json vscode/keys.txt
 	./$^ $@
