@@ -1,20 +1,21 @@
 #!/usr/bin/env python3 -B
 # Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
-# usage: gloss_user_install.py [custom_dst_dir]
+# Usage: gloss_user_install.py [custom_dst_dir]
 
-# install the user-specific portions (does not require root privileges).
+# Install the user-specific portions (does not require root privileges).
 
 from os import makedirs
-from os.path import expanduser as expand_user, isfile as is_file
-from _gloss_install_common import * # parses arguments, etc.
+from os.path import expanduser as expand_user, isfile as is_file, isdir as is_dir, join as path_join
+from shutil import copy2 as copy_file
+from _gloss_install_common import errSL, dst_dir, src_dir # parses arguments, etc.
 import site
 
 
 def main():
   # make sure that gloss system is installed.
   if not is_dir(dst_dir):
-    errL('bad gloss directory: ', dst_dir,
+    errSL('bad gloss directory:', dst_dir,
       '\nfirst run gloss-install-sys.py; if using a custom install directory,'
       ' it must be the same for both sys and user installations.')
     exit(1)
