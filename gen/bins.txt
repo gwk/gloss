@@ -82,3 +82,5 @@ env-sort: env | sort | text-search -lines -pattern '^\w+=[^{]+' -match-only
 ansi-to-html-view: ansi-to-html "$@" | html-view
 
 calc-size: du -sh "$@"
+
+calc-sizes: du -h -d 1 "$@"
