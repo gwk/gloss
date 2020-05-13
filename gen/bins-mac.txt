@@ -1,6 +1,5 @@
 # Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 te: open -a TextEdit "$@"
-xc: open -a Xcode "$@"
-xcb: open -a Xcode-Beta "$@"
+xcb: xc -beta "$@"
 ql: qlmanage -p "$@" 1>/dev/null 2>/dev/null
