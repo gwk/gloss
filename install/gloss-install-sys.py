@@ -4,23 +4,32 @@
 # Usage: gloss_sys_install.py [custom_dst_dir]
 
 from _gloss_install_common import errSL, src_dir, dst_dir, platform # Parses arguments, etc.
-from os import symlink, mkdir as make_dir, makedirs as make_dirs, listdir as list_dir
+from os import symlink, mkdir as make_dir, makedirs as make_dirs, listdir as list_dir, remove as remove_file, scandir as scan_dir
 from os.path import exists as path_exists, isdir as is_dir, join as path_join, splitext as split_ext
-from shutil import copy2 as copy_file, copytree, rmtree
+from shutil import copy2 as copy_file, copytree, rmtree as remove_tree
 from subprocess import run
 
 
 def main():
   try:
     if is_dir(dst_dir):
-      errSL('removing old dst_dir...')
-      rmtree(dst_dir)
-    make_dirs(dst_dir)
+      errSL('removing old dst_dir contents...')
+      for entry in scan_dir(dst_dir):
+        path = entry.path
+        errSL(path)
+        if is_dir(path): remove_tree(path)
+        else: remove_file(path)
+    else:
+      try: make_dirs(dst_dir) # Note: may fail if /usr/local is owned by root (i.e. has not been tampered with by homebrew).
+      except OSError as e:
+        errSL(f'error: ould not make installation directory: {dst_dir}; {e}.')
+        errSL(f'Please run `sudo mkdir {dst_dir} && sudo chown [username] {dst_dir}')
+        exit(1)
 
     errSL('copying files to dst_dir...')
 
     # Copy directories.
-    sub_dirs = ['sh']
+    sub_dirs = ['zsh']
     for d in sub_dirs:
       src_subdir = path_join(src_dir, d)
       dst_subdir = path_join(dst_dir, d)

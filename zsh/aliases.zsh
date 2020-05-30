@@ -1,7 +1,3 @@
-# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
-
-
-# Aliases.
 
 alias cp='cp -i' # confirm overwrites interactively.
 alias mv='mv -i' # confirm overwrites interactively.
@@ -13,10 +9,3 @@ alias venv-create-3.8='python3.8 -m venv ./venv3.8'
 alias venv-activate-3.6='source ./venv3.6/bin/activate'
 alias venv-activate-3.7='source ./venv3.7/bin/activate'
 alias venv-activate-3.8='source ./venv3.8/bin/activate'
-
-
-# list all functions defined in this shell environment.
-# this must be an alias, rather than a shell script, because declare is a builtin.
-# declare -F lists all defined functions with format: declare -f <function-name>.
-# cut limits output to just the function name.
-alias list_functions='declare -F | cut -d " " -f 3'
