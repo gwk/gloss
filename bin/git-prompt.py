@@ -70,7 +70,7 @@ try:
 
 
   def find_branch():
-    'returns  a pair: branch string (needs to be stripped) and mode suffix.'
+    'Returns a pair: branch string (needs to be stripped) and mode suffix.'
     if is_file(gd + '/rebase-merge/interactive'):
       return open(gd + '/rebase-merge/head-name').read(), '|REBASE-i'
     if is_dir(gd + '/rebase-merge'):
