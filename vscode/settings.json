@@ -14,7 +14,8 @@
   "editor.autoClosingQuotes": "never",
   "editor.colorDecorators": false,
   "editor.detectIndentation": true,
-  "editor.fontFamily": "Source Code Pro, Menlo, monospace",
+  "editor.fontFamily": "JetBrains Mono NL, Source Code Pro, Menlo, monospace",
+  "editor.fontLigatures": true,
   "editor.fontSize": 12,
   "editor.formatOnPaste": false,
   "editor.formatOnSave": false,
@@ -106,7 +107,7 @@
   },
   "python.disableInstallationCheck": true,
   "python.envFile": "",
-  "python.insidersChannel": "weekly",
+  "python.insidersChannel": "off",
   "python.linting.lintOnSave": false,
   "python.linting.pylintEnabled": false,
   "python.pythonPath": "/usr/local/gloss/bin/python3",
@@ -128,7 +129,7 @@
   "settings.cycle.logLevel": "log",
   "telemetry.enableTelemetry": false,
   "terminal.integrated.drawBoldTextInBrightColors": false,
-  "terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
+  "terminal.integrated.fontFamily": "JetBrains Mono NL, Source Code Pro, Menlo, monospace",
   "terminal.integrated.lineHeight": 1.2,
   "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.rendererType": "canvas",
@@ -183,5 +184,11 @@
     "!Split",
     "!Join sequence"
   ],
-  "yaml.format.enable": true
+  "yaml.format.enable": true,
+  "python.experiments.enabled": false,
+  "python.workspaceSymbols.enabled": false,
+  "python.terminal.activateEnvironment": false,
+  "python.testing.autoTestDiscoverOnSaveEnabled": false,
+  "python.testing.promptToConfigure": false,
+  "editor.find.addExtraSpaceOnTop": false
 }
