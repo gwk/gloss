@@ -21,19 +21,12 @@ def main():
     exit(1)
 
   try:
-
-    common_path = '~/.bash_profile_and_rc.bash' # path to common bash setup file.
-    profile_path = expand_user('~/.bash_profile') # executed for login shells.
-    rc_path = expand_user('~/.bashrc') # executed for non-login shells.
-
-    source_env_line   = 'source ' + path_join(dst_dir, 'sh/gloss_env.bash') + '\n' # bash_setup sources gloss_env.
-    source_common_line = 'source ' + common_path + '\n' # traditional bash files source bash_setup.
-
     errSL('setting up bash to use the gloss environment...')
-    append_line_if_missing(expand_user(common_path), source_env_line)
+    source_env_line   = 'source ' + path_join(dst_dir, 'bash/gloss_env.bash') + '\n'
+    for p in ['~/.bash_profile', '~/.bashrc']: # Login and (interactive, nonlogin) respectively.
+      append_line_if_missing(expand_user(p), source_env_line)
 
-    for p in [profile_path, rc_path]:
-      append_line_if_missing(p, source_common_line)
+    # TODO: automatically set up zsh as well.
 
     install_usercustomize()
 
@@ -61,7 +54,7 @@ def append_line_if_missing(path, line):
         return
   errSL('modifying:', path)
   with open(path, 'a') as f:
-    f.write('\n# automatically added by gloss-install-user.py\n')
+    f.write('\n# Automatically added by gloss-install-user.py.\n')
     f.write(line)
 
 

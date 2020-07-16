@@ -20,7 +20,7 @@ prepend_to_search_path() {
   local _path_name=$1
   shift
 
-  local _path=$($GLOSS_DIR/sh/prepend-to-search-path.py $_path_name $@)
+  local _path=$($GLOSS_DIR/bin/prepend-to-search-path.py $_path_name $@)
 
   # NOTE: during shell startup bash will fail to capture the exit code,
   # either due to python not residing in existing PATH or script exit code.
@@ -190,7 +190,7 @@ if [[ -z "$GLOSS_ENV" ]]; then
   export BG_L='\e[47m' # light gray
 
   # Utils only need to be sourced once.
-  source $GLOSS_DIR/sh/gloss_sh_utils.bash
+  source $GLOSS_DIR/bash/gloss_sh_utils.bash
 
   # platform specific configuration.
   if [[ "$GLOSS_PLATFORM" == 'darwin' ]]; then
@@ -227,10 +227,10 @@ if [[ $(type -t update_terminal_cwd) == 'function' ]]; then
 fi
 
 # source alias definitions for every shell instance; apparently aliases cannot be exported.
-source $GLOSS_DIR/sh/gloss_sh_aliases.bash
+source $GLOSS_DIR/bash/gloss_sh_aliases.bash
 
 #if [[ $PS1 && -r /usr/local/share/bash-completion/bash_completion ]]; then
   #source /usr/share/bash-completion/bash_completion
-  #source $GLOSS_DIR/sh/bash_completion/git-completion.bash
+  #source $GLOSS_DIR/bash/bash_completion/git-completion.bash
 #fi
 
