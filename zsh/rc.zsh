@@ -1,8 +1,9 @@
 # zshrc is sourced for interactive shells.
 
 
-setopt pipefail
+setopt interactive_comments
 setopt noclobber
+setopt pipefail
 
 zmodload zsh/nearcolor # Approximate 24 bit color as necessary.
 
@@ -67,6 +68,8 @@ update_terminal_prompt() {
   local _git_escaped=${_git/\%/%%} # Double any percent symbols, as that is the escape character for prompt expansion.
 
 
+  # %{ escapes to allow arbitary literal text in the prompt.
+  # This lets us use ANSI color codes rather than the zsh ones.
   # %(<N>L..) is the ternary test against the current SHLVL.
   # %(!..) is the ternary test for escalated privileges.
   # %n is $USERNAME.
@@ -100,6 +103,11 @@ precmd_functions=(
   update_terminal_cwd
 )
 # update_terminal_cwd is provided by macOS. # TODO: conditionally add for mac, or define it for others?
+
+
+# Disable paste highlighting, which occasionally causes weird overwrite errors with our prompt.
+export zle_highlight=(region:standout special:standout suffix:bold isearch:underline paste:none)
+
 
 # List all aliases/functions defined in this shell environment.
 # These are stored in associative arrays; -k gives us keys only; -o sorts.
