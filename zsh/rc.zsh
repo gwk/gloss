@@ -20,33 +20,33 @@ export NODE_REPL_MODE=strict
 # Command prompt customization.
 
 # The user can override these at any time.
-export GLOSS_PS_SYMBOL='$'
-export GLOSS_PS_SSH_SYMBOL='§'
-export GLOSS_PS_PREFIX_STYLE=$TXT_Y
-export GLOSS_PS_PATH_STYLE=$BOLD$TXT_B
-export GLOSS_PS_VENV_STYLE=$BOLD$TXT_C
-export GLOSS_PS_GIT_STYLE=$BOLD$TXT_M
+export GLOSS_PROMPT_SYMBOL='$'
+export GLOSS_PROMPT_SSH_SYMBOL='§'
+export GLOSS_PROMPT_PREFIX_STYLE=$TXT_Y
+export GLOSS_PROMPT_PATH_STYLE=$BOLD$TXT_B
+export GLOSS_PROMPT_VENV_STYLE=$BOLD$TXT_C
+export GLOSS_PROMPT_GIT_STYLE=$BOLD$TXT_M
 
 # Save the starting shell level.
 [[ -z $GLOSS_SHLVL ]] && export GLOSS_SHLVL=$SHLVL
 
 # shell level prefix.
-export GLOSS_PS_PREFIX_LVL=''
+export GLOSS_PROMPT_PREFIX_LVL=''
 if [[ $SHLVL -gt $GLOSS_SHLVL ]]; then
-  export GLOSS_PS_PREFIX_LVL="$(( SHLVL - GLOSS_SHLVL )) "
+  export GLOSS_PROMPT_PREFIX_LVL="$(( SHLVL - GLOSS_SHLVL )) "
 fi
 
 # Prompt sudo prefix.
-export GLOSS_PS_PREFIX_SUDO=''
+export GLOSS_PROMPT_PREFIX_SUDO=''
 if [[ -n "$SUDO_USER" ]]; then
-  export GLOSS_PS_PREFIX_SUDO="$SUDO_USER "
+  export GLOSS_PROMPT_PREFIX_SUDO="$SUDO_USER "
 fi
 
 # Prompt user color.
 if [[ $(whoami) == root ]]; then
-  export GLOSS_PS_USER_STYLE=$TXT_R
+  export GLOSS_PROMPT_USER_STYLE=$TXT_R
 else
-  export GLOSS_PS_USER_STYLE=$TXT_G
+  export GLOSS_PROMPT_USER_STYLE=$TXT_G
 fi
 
 update_terminal_prompt() {
@@ -60,7 +60,7 @@ update_terminal_prompt() {
   fi
 
   local ssh=''
-  [[ -n "$SSH_TTY" ]] && local ssh="$GLOSS_PS_SSH_SYMBOL "
+  [[ -n "$SSH_TTY" ]] && local ssh="$GLOSS_PROMPT_SSH_SYMBOL "
 
   local venv=''
   [[ -n $VIRTUAL_ENV ]] && local venv="$(basename $(dirname $VIRTUAL_ENV)) "
@@ -75,20 +75,20 @@ update_terminal_prompt() {
   # %(?..) is the ternary test for last exit code.
   # %n is $USERNAME.
   # %~ is the current working directory, with $HOME abbreviation.
-  PS1="\
-%{$RST$GLOSS_PS_PREFIX_STYLE%}\
+  PROMPT="\
+%{$RST$GLOSS_PROMPT_PREFIX_STYLE%}\
 $ssh\
-$GLOSS_PS_PREFIX_LVL\
-$GLOSS_PS_PREFIX_SUDO\
-%{$GLOSS_PS_USER_STYLE%}$USERNAME \
-%{$GLOSS_PS_PATH_STYLE%}%~ \
-%{$GLOSS_PS_VENV_STYLE%}$venv\
-%{$GLOSS_PS_GIT_STYLE%}$_git_escaped\
-%{$prompt_symbol_color%}$GLOSS_PS_SYMBOL \
+$GLOSS_PROMPT_PREFIX_LVL\
+$GLOSS_PROMPT_PREFIX_SUDO\
+%{$GLOSS_PROMPT_USER_STYLE%}$USERNAME \
+%{$GLOSS_PROMPT_PATH_STYLE%}%~ \
+%{$GLOSS_PROMPT_VENV_STYLE%}$venv\
+%{$GLOSS_PROMPT_GIT_STYLE%}$_git_escaped\
+%{$prompt_symbol_color%}$GLOSS_PROMPT_SYMBOL \
 %{$RST%}"
 
   # Continuation prompt.
-  #PS2="%{$RST$TXT_Y$GLOSS_PS_SYMBOL$RST%}"
+  #PS2="%{$RST$TXT_Y$GLOSS_PROMPT_SYMBOL$RST%}"
 }
 
 precmd_functions=(
