@@ -68,13 +68,11 @@ update_terminal_prompt() {
   local _git=$(git-prompt 2>/dev/null)
   local _git_escaped=${_git/\%/%%} # Double any percent symbols, as that is the escape character for prompt expansion.
 
+  # For prompt styling, we mostly eschew the ZSH specific escapes in favor of ANSI escape codes.
   # %{ escapes to allow arbitary escape sequences in the prompt; these must not contain visible text that advances the position.
   # This lets us use ANSI color codes rather than the zsh ones.
-  # %(<N>L..) is the ternary test against the current SHLVL.
-  # %(!..) is the ternary test for escalated privileges.
-  # %(?..) is the ternary test for last exit code.
-  # %n is $USERNAME.
   # %~ is the current working directory, with $HOME abbreviation.
+  # For all ZSH escape codes, see here: http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion.
   PROMPT="\
 %{$RST$GLOSS_PROMPT_PREFIX_STYLE%}\
 $ssh\
