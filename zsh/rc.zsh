@@ -88,7 +88,7 @@ $GLOSS_PROMPT_PREFIX_SUDO\
 %{$RST%}"
 
   # Continuation prompt.
-  #PS2="%{$RST$TXT_Y$GLOSS_PROMPT_SYMBOL$RST%}"
+  PS2="%{$RST$TXT_Y%}%_> %{$RST%}"
 }
 
 precmd_functions=(
