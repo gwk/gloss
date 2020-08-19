@@ -1,7 +1,7 @@
 # zshrc is sourced for interactive shells.
 
 
-setopt interactive_comments
+setopt interactive_comments # Allows typing or pasting a comment into the interactive shell.
 setopt noclobber
 setopt pipefail
 
@@ -20,12 +20,12 @@ export NODE_REPL_MODE=strict
 # Command prompt customization.
 
 # The user can override these at any time.
-[[ -z $GLOSS_PS_SYMBOL ]] && export GLOSS_PS_SYMBOL='$'
-[[ -z $GLOSS_SSH_SYMBOL ]] && export GLOSS_SSH_SYMBOL='§'
-[[ -z $GLOSS_PS_PREFIX_STYLE ]] && export GLOSS_PS_PREFIX_STYLE=$TXT_Y
-[[ -z $GLOSS_PS_PATH_STYLE ]] && export GLOSS_PS_PATH_STYLE=$BOLD$TXT_B
-[[ -z $GLOSS_PS_VENV_STYLE ]] && export GLOSS_PS_VENV_STYLE=$BOLD$TXT_C
-[[ -z $GLOSS_PS_GIT_STYLE ]] && export GLOSS_PS_GIT_STYLE=$BOLD$TXT_M
+export GLOSS_PS_SYMBOL='$'
+export GLOSS_PS_SSH_SYMBOL='§'
+export GLOSS_PS_PREFIX_STYLE=$TXT_Y
+export GLOSS_PS_PATH_STYLE=$BOLD$TXT_B
+export GLOSS_PS_VENV_STYLE=$BOLD$TXT_C
+export GLOSS_PS_GIT_STYLE=$BOLD$TXT_M
 
 # Save the starting shell level.
 [[ -z $GLOSS_SHLVL ]] && export GLOSS_SHLVL=$SHLVL
@@ -54,45 +54,38 @@ update_terminal_prompt() {
 
   # Green prompt if last command exited cleanly (0); otherwise red.
   if [[ $_exit_status -eq 0 ]]; then
-    local prompt_color=$TXT_G
+    local prompt_symbol_color=$TXT_G
   else
-    local prompt_color=$TXT_R
+    local prompt_symbol_color=$TXT_R
   fi
 
   local ssh=''
-  [[ -n "$SSH_TTY" ]] && local ssh="$GLOSS_SSH_SYMBOL "
+  [[ -n "$SSH_TTY" ]] && local ssh="$GLOSS_PS_SSH_SYMBOL "
 
   local venv=''
-  [[ -n $VIRTUAL_ENV ]] && local venv=" $(basename $(dirname $VIRTUAL_ENV))"
+  [[ -n $VIRTUAL_ENV ]] && local venv="$(basename $(dirname $VIRTUAL_ENV)) "
+
   local _git=$(git-prompt 2>/dev/null)
   local _git_escaped=${_git/\%/%%} # Double any percent symbols, as that is the escape character for prompt expansion.
 
-
-  # %{ escapes to allow arbitary literal text in the prompt.
+  # %{ escapes to allow arbitary escape sequences in the prompt; these must not contain visible text that advances the position.
   # This lets us use ANSI color codes rather than the zsh ones.
   # %(<N>L..) is the ternary test against the current SHLVL.
   # %(!..) is the ternary test for escalated privileges.
+  # %(?..) is the ternary test for last exit code.
   # %n is $USERNAME.
   # %~ is the current working directory, with $HOME abbreviation.
-  # %(?..) is the ternary test for last exit code.
   PS1="\
-%{\
-$RST\
-$GLOSS_PS_PREFIX_STYLE\
+%{$RST$GLOSS_PS_PREFIX_STYLE%}\
 $ssh\
 $GLOSS_PS_PREFIX_LVL\
 $GLOSS_PS_PREFIX_SUDO\
-$GLOSS_PS_USER_STYLE$USERNAME \
-$GLOSS_PS_PATH_STYLE\
-%}\
-%~\
-%{\
-$GLOSS_PS_VENV_STYLE$venv\
-$GLOSS_PS_GIT_STYLE$_git_escaped\
-$RST \
-$prompt_color$GLOSS_PS_SYMBOL \
-$RST\
-%}"
+%{$GLOSS_PS_USER_STYLE%}$USERNAME \
+%{$GLOSS_PS_PATH_STYLE%}%~ \
+%{$GLOSS_PS_VENV_STYLE%}$venv\
+%{$GLOSS_PS_GIT_STYLE%}$_git_escaped\
+%{$prompt_symbol_color%}$GLOSS_PS_SYMBOL \
+%{$RST%}"
 
   # Continuation prompt.
   #PS2="%{$RST$TXT_Y$GLOSS_PS_SYMBOL$RST%}"
@@ -105,7 +98,7 @@ precmd_functions=(
 # update_terminal_cwd is provided by macOS. # TODO: conditionally add for mac, or define it for others?
 
 
-# Disable paste highlighting, which occasionally causes weird overwrite errors with our prompt.
+# Disable paste highlighting.
 export zle_highlight=(region:standout special:standout suffix:bold isearch:underline paste:none)
 
 

@@ -42,7 +42,7 @@ def runO(cmd, exp=0):
 time_limit = 1
 
 def prompt(*items):
-  print(' ', *items, sep='', end='')
+  print(*items, ' ', sep='', end='')
   exit(0)
 
 def alarm_handler(signum, current_stack_frame):
