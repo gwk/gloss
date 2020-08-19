@@ -31,7 +31,7 @@ install-user:
 install-vscode: vscode
 	install/gloss-install-vscode.sh
 
-keys: _build/vscode-keys.json
+keys: _build/vscode/keybindings.json
 
 xcode_keys_src := keybindings/gloss-xcode.idebindings
 xcode_keys_dst := ~/Library/Developer/Xcode/UserData/KeyBindings/gloss-xcode.idekeybindings
