@@ -19,11 +19,6 @@
       { "id": "makefile",
         "filenames": [ "makefile", "makefile.pre", "makefile.pre.in", "GNUmakefile", "OCamlMakefile" ]
       },
-      { "id": "swift",
-        "extensions": [".swift", ".swiftinterface"],
-        "firstLine": "^#!.*\\bswift( +-.+)?",
-        "configuration": "./configurations/swift-gloss.json"
-      },
       { "id": "xcode",
         "extensions": [".pbxproj"],
         "firstLine": "// !\\$\\*UTF8\\*\\$!",
@@ -34,10 +29,6 @@
       { "language": "m4",
         "scopeName": "source.m4",
         "path": "./grammars/m4.json"
-      },
-      { "language": "swift",
-        "scopeName": "source.swift",
-        "path": "./grammars/swift-gloss.json"
       },
       { "language": "xcode",
         "scopeName": "source.xcode",
