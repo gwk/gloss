@@ -11,8 +11,8 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Dock.
 defaults write com.apple.dock autohide -bool true
-defaults write com.apple.Dock autohide-delay -float 0
-defaults write com.apple.dock autohide-time-modifier -float 0
+#defaults write com.apple.Dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.4
 defaults write com.apple.dock expose-animation-duration -float 0.1 # Mission Control animation speed.
 defaults write com.apple.dock expose-group-by-app -bool true
 defaults write com.apple.dock show-recents -bool false
