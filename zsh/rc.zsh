@@ -3,9 +3,25 @@
 #   source /usr/local/gloss/zsh/rc.zsh
 
 # Various zsh options.
+
+bindkey '^[[Z' reverse-menu-complete # Bind shift-tab to reverse-step through completion options.
+
 setopt interactive_comments # Allows typing or pasting a comment into the interactive shell.
 setopt noclobber # Do not allow file overwrites with regular io redirects.
 setopt pipefail # Pipe failures cause processes to signal/terminate.
+
+setopt HIST_FIND_NO_DUPS # Do not display duplicates of a line previously found, even if the duplicates are not contiguous.
+#setopt HIST_IGNORE_ALL_DUPS # A new history list command causes older duplicates to be removed from the list (even if not contiguous).
+#setopt HIST_IGNORE_DUPS # Do not enter command lines into the history list if they are duplicates of the previous event.
+
+setopt HIST_IGNORE_DUPS # Do not enter command lines into the history list if they are duplicates of the previous event.
+setopt AUTO_LIST # List choices on ambiguous completion.
+setopt AUTO_MENU # Use menu completion on double-tab.
+setopt AUTO_PARAM_KEYS # Automatically added spaces will be removed for syntactic closing characters that follow.
+setopt AUTO_PARAM_SLASH # Add trailing slash instead of space for directory names.
+#setopt LIST_AMBIGUOUS # Auto-listing only takes place when nothing would be inserted.
+setopt LIST_PACKED # Use more compact, variable-width columns.
+setopt LIST_TYPES
 
 zmodload zsh/nearcolor # Approximate 24 bit color as necessary.
 
@@ -15,6 +31,10 @@ autoload run-help
 
 # Disable paste highlighting.
 export zle_highlight=(region:standout special:standout suffix:bold isearch:underline paste:none)
+
+# zsh completion system.
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 
 # Environment variables for various other tools.
