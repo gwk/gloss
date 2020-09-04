@@ -13,6 +13,12 @@ zmodload zsh/nearcolor # Approximate 24 bit color as necessary.
 unalias run-help
 autoload run-help
 
+# Disable paste highlighting.
+export zle_highlight=(region:standout special:standout suffix:bold isearch:underline paste:none)
+
+
+# Environment variables for various other tools.
+
 export LESS=FRX
 export CLICOLOR=1 # Enable colors in ls.
 
@@ -20,6 +26,14 @@ export GREP_OPTIONS="--color=auto --binary-files=without-match"
 export GREP_COLOR="4" # Grep highlights matches with underline.
 
 export NODE_REPL_MODE=strict
+
+
+# Utility functions.
+
+# List all aliases/functions defined in this shell environment.
+# These are stored in associative arrays; -k gives us keys only; -o sorts.
+list-aliases() { print -c ${(ko)aliases} }
+list-functions() { print -c ${(ko)functions} }
 
 
 # Command prompt customization.
@@ -99,13 +113,3 @@ precmd_functions=(
   update_terminal_cwd
 )
 # update_terminal_cwd is provided by macOS. # TODO: conditionally add for mac, or define it for others?
-
-
-# Disable paste highlighting.
-export zle_highlight=(region:standout special:standout suffix:bold isearch:underline paste:none)
-
-
-# List all aliases/functions defined in this shell environment.
-# These are stored in associative arrays; -k gives us keys only; -o sorts.
-list-aliases() { print -c ${(ko)aliases} }
-list-functions() { print -c ${(ko)functions} }
