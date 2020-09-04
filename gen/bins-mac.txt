@@ -1,5 +1,6 @@
 # Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
+blackout: pmset displaysleepnow
+ql: qlmanage -p "$@" 1>/dev/null 2>/dev/null
 te: open -a TextEdit "$@"
 xcb: xc -beta "$@"
-ql: qlmanage -p "$@" 1>/dev/null 2>/dev/null
