@@ -1,9 +1,11 @@
-# zshrc is sourced for interactive shells.
+# .zshrc is sourced for interactive shells.
+# Source this file from your .zshrc with the following command:
+#   source /usr/local/gloss/zsh/rc.zsh
 
-
+# Various zsh options.
 setopt interactive_comments # Allows typing or pasting a comment into the interactive shell.
-setopt noclobber
-setopt pipefail
+setopt noclobber # Do not allow file overwrites with regular io redirects.
+setopt pipefail # Pipe failures cause processes to signal/terminate.
 
 zmodload zsh/nearcolor # Approximate 24 bit color as necessary.
 
