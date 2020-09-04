@@ -9,6 +9,9 @@ setopt pipefail # Pipe failures cause processes to signal/terminate.
 
 zmodload zsh/nearcolor # Approximate 24 bit color as necessary.
 
+# Enable run-help.
+unalias run-help
+autoload run-help
 
 export LESS=FRX
 export CLICOLOR=1 # Enable colors in ls.
