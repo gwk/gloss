@@ -4,7 +4,7 @@ acceptRenameInputWithPreview
 acceptSelectedSuggestion                                        enter                   when acceptSuggestionOnEnter && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus
 acceptSelectedSuggestion                                        tab                     when suggestWidgetVisible && textInputFocus
 acceptSelectedSuggestionOnEnter
-acceptSnippet                                                   tab                     when editorTextFocus && inSnippetMode
+acceptSnippet
 actions.find                                                    cmd+f
 actions.findWithSelection
 addCursorsAtSearchResults
@@ -115,7 +115,11 @@ cursorWordStartRight
 cursorWordStartRightSelect
 cut
 debug.addConfiguration
+debug.addToWatchExpressions
+debug.breakWhenValueChanges
+debug.copyEvaluatePath
 debug.copyStackTrace
+debug.copyValue
 debug.enableOrDisableBreakpoint
 debug.installAdditionalDebuggers
 debug.jumpToCursor
@@ -184,6 +188,7 @@ editor.action.fontZoomOut
 editor.action.fontZoomReset
 editor.action.forceRetokenize
 editor.action.format                                            shift+alt+f             when editorTextFocus
+editor.action.formatChanges
 editor.action.formatDocument
 editor.action.formatDocument.multiple
 editor.action.formatDocument.none
@@ -348,6 +353,13 @@ editor.unfoldAll
 editor.unfoldAllMarkerRegions
 editor.unfoldRecursively
 emmet.expandAbbreviation
+eslint.createConfig
+eslint.disable
+eslint.enable
+eslint.executeAutofix
+eslint.manageLibraryConfirmations
+eslint.migrateSettings
+eslint.showOutputChannel
 execCopy
 execCut
 execPaste
@@ -355,6 +367,7 @@ expandLineSelection
 explorer.download
 explorer.newFile
 explorer.newFolder
+explorer.openAndPassFocus
 explorer.openToSide
 explorer.openWith
 extension.changeCase.camel
@@ -374,8 +387,12 @@ extension.changeCase.swap
 extension.changeCase.title
 extension.changeCase.upper
 extension.changeCase.upperFirst
+extension.js-debug.autoAttachToProcess
+extension.js-debug.clearAutoAttachVariables
 extension.js-debug.debugLink
+extension.js-debug.experimentEnlist
 extension.js-debug.revealPage
+extension.js-debug.setAutoAttachVariables
 extension.jsProfileVisualizer.table.clearCodeLenses
 extension.node-debug.attachNodeProcess
 extension.node-debug.startWithStopOnEntry
@@ -389,6 +406,7 @@ extension.pwa-chrome-debug.removeCustomBreakpoint
 extension.pwa-node-debug.attachNodeProcess
 extension.pwa-node-debug.createDebuggerTerminal
 extension.pwa-node-debug.npmScript
+extension.pwa-node-debug.pickNodeProcess
 extension.pwa-node-debug.prettyPrint
 extension.pwa-node-debug.startProfile
 extension.pwa-node-debug.stopProfile
@@ -421,11 +439,19 @@ git.close
 git.commit
 git.commitAll
 git.commitAllAmend
+git.commitAllAmendNoVerify
+git.commitAllNoVerify
 git.commitAllSigned
+git.commitAllSignedNoVerify
 git.commitEmpty
+git.commitEmptyNoVerify
+git.commitNoVerify
 git.commitStaged
 git.commitStagedAmend
+git.commitStagedAmendNoVerify
+git.commitStagedNoVerify
 git.commitStagedSigned
+git.commitStagedSignedNoVerify
 git.createTag
 git.deleteBranch
 git.deleteTag
@@ -628,6 +654,9 @@ notebook.cell.quitEdit                                         escape when  inpu
 notebook.cell.split
 notebook.centerActiveCell
 notebook.clearAllCellsOutputs
+notebook.diff.cell.revertMetadata
+notebook.diff.cell.revertOutputs
+notebook.diff.switchToText
 notebook.execute
 notebook.find
 notebook.focusBottom
@@ -658,6 +687,7 @@ notifications.hideToasts                                        escape          
 notifications.showList
 notifications.toggleList
 npm.debugScript
+npm.debugScriptFromHover
 npm.focus
 npm.openScript
 npm.refresh
@@ -665,6 +695,7 @@ npm.resetViewLocation
 npm.runInstall
 npm.runScript
 npm.runScriptFromFolder
+npm.runScriptFromHover
 npm.runSelectedScript
 openInTerminal
 openReference
@@ -918,9 +949,15 @@ showNextParameterHint                                           ctrl+n          
 showNextParameterHint                                           down                    when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           ctrl+p                  when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                      when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
-tab                                                             tab                     when editorTextFocus && !editorReadonly && !editorTabMovesFocus
+tab                                                             tab                     when editorTextFocus && !editorReadonly && !editorTabMovesFocus && !suggestWidgetVisible
+terminal.focus
+terminal.resetViewContainerLocation
+terminal.resetViewLocation
 timeline.focus
+timeline.refresh
 timeline.resetViewLocation
+timeline.toggleExcludeSource:git-history
+timeline.toggleFollowActiveEditor
 toggle.diff.ignoreTrimWhitespace
 toggle.diff.renderSideBySide
 toggleEscapeSequenceLogging
@@ -966,6 +1003,7 @@ workbench.action.clearCommandHistory
 workbench.action.clearEditorHistory
 workbench.action.clearRecentFiles
 workbench.action.closeActiveEditor                              cmd+w
+workbench.action.closeActivePinnedEditor
 workbench.action.closeAllEditors
 workbench.action.closeAllGroups
 workbench.action.closeEditorInAllGroups
@@ -1272,7 +1310,7 @@ workbench.action.tasks.terminate
 workbench.action.tasks.test                                     cmd+t
 workbench.action.tasks.toggleProblems
 workbench.action.terminal.clear                                 cmd+k
-workbench.action.terminal.clearSelection                        escape                  when terminalFocus && terminalTextSelected && !terminalFindVisible
+workbench.action.terminal.clearSelection                        escape                  when terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible
 workbench.action.terminal.copySelection
 workbench.action.terminal.findNext
 workbench.action.terminal.findPrevious
@@ -1291,10 +1329,10 @@ workbench.action.terminal.focusNext
 workbench.action.terminal.focusNextPane
 workbench.action.terminal.focusPrevious
 workbench.action.terminal.focusPreviousPane
-workbench.action.terminal.hideFind                              escape                  when terminalFindVisible && terminalFocus
+workbench.action.terminal.hideFind                              escape                  when terminalFindVisible && terminalFocus && terminalProcessSupported
 workbench.action.terminal.kill                                  alt+cmd+t
 workbench.action.terminal.manageWorkspaceShellPermissions
-workbench.action.terminal.navigationModeExit                    escape                  when accessibilityModeEnabled && terminalA11yTreeFocus
+workbench.action.terminal.navigationModeExit                    escape                  when accessibilityModeEnabled && terminalA11yTreeFocus && terminalProcessSupported
 workbench.action.terminal.navigationModeFocusNext
 workbench.action.terminal.navigationModeFocusPrevious
 workbench.action.terminal.new                                   ctrl+shift+`
@@ -1317,6 +1355,7 @@ workbench.action.terminal.scrollToPreviousCommand
 workbench.action.terminal.scrollToTop
 workbench.action.terminal.scrollUp
 workbench.action.terminal.scrollUpPage
+workbench.action.terminal.searchWorkspace
 workbench.action.terminal.selectAll
 workbench.action.terminal.selectDefaultShell
 workbench.action.terminal.selectToNextCommand
@@ -1340,6 +1379,7 @@ workbench.action.toggleEditorType
 workbench.action.toggleEditorVisibility
 workbench.action.toggleEditorWidths
 workbench.action.toggleFullScreen                               ctrl+cmd+f
+workbench.action.toggleKeybindingsLog
 workbench.action.toggleMaximizedPanel
 workbench.action.toggleMultiCursorModifier
 workbench.action.togglePanel
@@ -1474,9 +1514,6 @@ workbench.panel.output.resetViewLocation
 workbench.panel.repl.resetViewContainerLocation
 workbench.panel.repl.view.focus
 workbench.panel.repl.view.resetViewLocation
-workbench.panel.terminal.focus
-workbench.panel.terminal.resetViewContainerLocation
-workbench.panel.terminal.resetViewLocation
 workbench.scm.focus
 workbench.scm.repositories.focus
 workbench.scm.repositories.resetViewLocation
