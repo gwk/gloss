@@ -52,6 +52,10 @@ glv1:   git log --name-status -m -1 "$@"
 
 gls: git ls-files "$@"
 
+gm: git merge "$@"
+gms: git merge --squash "$@"
+gmff: git merge --ff-only "$@"
+
 gpull:  git pull "$@"
 gpush:  git push "$@"
 
