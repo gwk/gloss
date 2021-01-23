@@ -170,10 +170,18 @@ def parse_bindings(ctx:Ctx, bindings_path:str) -> None:
 
 def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
   line_num, line = binding[0] # first line.
-  words = line.split()
-  if not words: return # Empty line.
-  cmd = words[0]
-  if cmd.startswith('//'): return
+  line = line.rstrip()
+  if not line.strip(): return # Empty line.
+  if line[0].isspace(): ctx.error(line_num, 'line begins with space.')
+  if line.startswith('//'): return
+
+  if m := re.search(r':( |$)', line):
+    cmd = line[:m.start()]
+    words = [cmd] + line[m.end():].split()
+  else:
+    words = line.split()
+    cmd = words[0]
+
   if cmd not in ctx.all_cmds:
     ctx.warn(line_num, 'unknown command:', cmd)
   try:
