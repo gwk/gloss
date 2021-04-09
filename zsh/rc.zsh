@@ -130,6 +130,4 @@ $GLOSS_PROMPT_PREFIX_SUDO\
 
 precmd_functions=(
   update_terminal_prompt
-  update_terminal_cwd
 )
-# update_terminal_cwd is provided by macOS. # TODO: conditionally add for mac, or define it for others?
