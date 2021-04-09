@@ -40,6 +40,10 @@ PATHS=(
   /usr/sbin
   /sbin
   /Library/Apple/usr/bin
+  # Apple's /usr/libexec/path_helper enforces the above ordering.
+  # This is called in /etc/zprofile, which is sourced after ~/.zshenv (which sources this file).
+  /opt/local/bin
+  /opt/local/sbin
   /usr/local/gloss/bin
   /Library/Frameworks/Python.framework/Versions/3.9/bin
   /Library/Frameworks/Python.framework/Versions/3.8/bin
@@ -47,6 +51,9 @@ PATHS=(
 #^ Place python directories after system directories for safety;
 # we do not want pip-installed executables to mask system ones.
 # Note that python and its other core executables are symlinked to /usr/local/bin.
+
+
+export DISPLAY=:0 # MacPorts.
 
 export PATH="${(j[:])PATHS}" # Join the paths with colons.
 export PAGER=less
