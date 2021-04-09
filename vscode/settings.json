@@ -1,4 +1,17 @@
 {
+  "editor.semanticTokenColorCustomizations": {
+    "enabled": true, // enable for all themes
+    "rules": {
+      "*.static": {
+        "foreground": "#ff0000",
+        "fontStyle": "bold"
+      },
+      "type": {
+        "foreground": "#00aa00"
+      }
+    }
+  },
+
   "breadcrumbs.enabled": false,
   "cSpell.allowCompoundWords": true,
   "cSpell.checkLimit": 100,
@@ -111,7 +124,7 @@
   "python.insidersChannel": "off",
   "python.linting.lintOnSave": false,
   "python.linting.pylintEnabled": false,
-  "python.pythonPath": "/usr/local/gloss/bin/python3",
+  "python.pythonPath": "/usr/local/bin/python3",
   "python.terminal.activateEnvironment": false,
   "python.testing.autoTestDiscoverOnSaveEnabled": false,
   "python.testing.promptToConfigure": false,
@@ -132,6 +145,7 @@
     }
   ],
   "settings.cycle.logLevel": "log",
+
   "telemetry.enableTelemetry": false,
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
@@ -140,8 +154,6 @@
   "terminal.integrated.rendererType": "canvas",
   "terminal.integrated.shellArgs.osx": [],
   "window.newWindowDimensions": "maximized",
-  "window.zoomLevel": 1,
-  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
     "statusBar.background": "#181818",
     "statusBar.debuggingBackground": "#263238",
@@ -190,5 +202,15 @@
     "!Split",
     "!Join sequence"
   ],
-  "yaml.format.enable": true
+  "yaml.format.enable": true,
+  "python.showStartPage": false,
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter-notebook",
+      "filenamePattern": "*.ipynb"
+    }
+  ],
+  "workbench.activityBar.visible": false,
+  "python.defaultInterpreterPath": "python3",
+  "python.languageServer": "Pylance"
 }
