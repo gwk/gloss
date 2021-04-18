@@ -8,13 +8,13 @@
   "categories": ["Programming Languages", "Themes"],
   "contributes": {
     "languages": [
+      { "id": "javascript",
+        "firstLine": "^#!.*\\bnode( +-.+)?"
+      },
       { "id": "m4",
         "aliases": ["m4", "autoconf"],
         "extensions": [".ac", ".m4"],
         "filenames": ["configure.in"]
-      },
-      { "id": "javascript",
-        "firstLine": "^#!.*\\bnode( +-.+)?"
       },
       { "id": "makefile",
         "filenames": [ "makefile", "makefile.pre", "makefile.pre.in", "GNUmakefile", "OCamlMakefile" ]
