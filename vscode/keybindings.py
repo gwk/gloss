@@ -3,7 +3,7 @@
 import re
 from sys import argv
 from pithy.fs import make_dirs
-from pithy.io import errL, errSL, errLSSL, outL, writeL
+from pithy.io import errL, errSL, errLL, outL, writeL
 from pithy.iterable import group_by_heads
 from pithy.json import JSONDecodeError, parse_json, write_json
 from pithy.path import path_dir, path_stem
@@ -244,10 +244,11 @@ def validate_when(ctx:Ctx, line_num:int, cmd:str, when:str, when_words:List[str]
 def warn_unbound_cmds(ctx:Ctx) -> None:
   unbound_cmds = ctx.all_cmds - ctx.bound_cmds
   if unbound_cmds:
-    errLSSL('\nunbound commands:', *sorted(unbound_cmds))
+    errLL('\nunbound commands:', *sorted(unbound_cmds))
   unbound_escapes = ctx.dflt_escapes - ctx.bound_escapes
   if unbound_escapes:
-    errLSSL('\nunbound escapes:', *sorted(unbound_escapes))
+    errLL('\nunbound escapes:', *sorted(unbound_escapes))
+  errL()
 
 
 # https://code.visualstudio.com/docs/getstarted/keybindings#_accepted-keys
