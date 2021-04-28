@@ -792,7 +792,7 @@ notebook.cell.moveDown
 notebook.cell.moveUp
 notebook.cell.paste
 notebook.cell.pasteAbove
-notebook.cell.quitEdit                                         escape when  inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible
+notebook.cell.quitEdit                                         escape                   when inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible
 notebook.cell.split
 notebook.centerActiveCell
 notebook.clearAllCellsOutputs
@@ -810,7 +810,7 @@ notebook.focusTop
 notebook.fold
 notebook.format
 notebook.formatCell
-notebook.hideFind                                               escape     when notebookEditorFocused && notebookFindWidgetFocused
+notebook.hideFind                                               escape                  when notebookEditorFocused && notebookFindWidgetFocused
 notebook.inspectLayout
 notebook.renderAllMarkdownCells
 notebook.selectKernel
@@ -1704,7 +1704,7 @@ workbench.scm.repositories.resetViewLocation
 workbench.scm.repositories.toggleVisibility
 workbench.scm.resetViewLocation
 workbench.scm.toggleVisibility
-workbench.statusBar.clearFocus                                  escape                when statusBarFocused
+workbench.statusBar.clearFocus                                  escape                  when statusBarFocused
 workbench.statusBar.focusFirst
 workbench.statusBar.focusLast
 workbench.statusBar.focusNext
