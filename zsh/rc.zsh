@@ -19,6 +19,7 @@ setopt AUTO_LIST # List choices on ambiguous completion.
 setopt AUTO_MENU # Use menu completion on double-tab.
 setopt AUTO_PARAM_KEYS # Automatically added spaces will be removed for syntactic closing characters that follow.
 setopt AUTO_PARAM_SLASH # Add trailing slash instead of space for directory names.
+setopt IGNORE_EOF # Prevent ctrl-d from closing the shell (and terminal window).
 #setopt LIST_AMBIGUOUS # Auto-listing only takes place when nothing would be inserted.
 setopt LIST_PACKED # Use more compact, variable-width columns.
 setopt LIST_TYPES
