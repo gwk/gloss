@@ -932,7 +932,7 @@ showNextParameterHint                                           down            
 showPrevParameterHint                                           ctrl+p                  when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                      when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 simpleBrowser.show
-tab                                                             tab                     when editorTextFocus && !editorReadonly && !editorTabMovesFocus
+tab                                                             tab                     when editorTextFocus && !editorReadonly && !editorTabMovesFocus && !suggestWidgetVisible
 terminal.focus
 terminal.removeView
 terminal.resetViewContainerLocation
