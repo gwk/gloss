@@ -450,7 +450,7 @@ filesExplorer.openFilePreserveFocus
 filesExplorer.paste
 firstCompressedFolder
 getContextKeyInfo
-gettingStarted.goBack                                           escape
+gettingStarted.goBack                                           escape                  when inGettingStarted && activeEditor == 'gettingStartedPage'
 gettingStarted.markStepComplete
 gettingStarted.markStepIncomplete
 gettingStarted.next
@@ -1474,7 +1474,7 @@ workbench.actions.treeView.workbench.views.sync.merges.collapseAll
 workbench.actions.treeView.workbench.views.sync.merges.refresh
 workbench.actions.treeView.workbench.views.sync.remoteActivity.collapseAll
 workbench.actions.treeView.workbench.views.sync.remoteActivity.refresh
-workbench.actions.view.problems                                 shift+cmd+m
+workbench.actions.view.problems                                 shift+cmd+m            when workbench.panel.markers.view.active
 workbench.actions.view.toggleProblems
 workbench.debug.action.copyAll
 workbench.debug.action.focusBreakpointsView
