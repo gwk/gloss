@@ -44,6 +44,10 @@ compareFiles
 compareSelected
 compositionEnd
 compositionStart
+compositionType
+configureExtensionsAutoUpdate.all
+configureExtensionsAutoUpdate.enabled
+configureExtensionsAutoUpdate.none
 copyFilePath
 copyRelativeFilePath
 createCursor
@@ -119,6 +123,8 @@ cut
 debug.addConfiguration
 debug.addToWatchExpressions
 debug.breakWhenValueChanges
+debug.breakWhenValueIsAccessed
+debug.breakWhenValueIsRead
 debug.collapseRepl
 debug.copyEvaluatePath
 debug.copyStackTrace
@@ -137,9 +143,11 @@ debug.replPaste
 debug.setVariable
 debug.startFromConfig
 debug.toggleBreakpoint
+debug.toggleReplIgnoreFocus
 decreaseSearchEditorContextLines
 default:compositionEnd
 default:compositionStart
+default:compositionType
 default:cut
 default:paste
 default:redo
@@ -341,11 +349,11 @@ editor.emmet.action.splitJoinTag
 editor.emmet.action.toggleComment
 editor.emmet.action.updateImageSize
 editor.emmet.action.updateTag
-editor.emmet.action.wrapIndividualLinesWithAbbreviation
 editor.emmet.action.wrapWithAbbreviation
 editor.fold                                                     shift+cmd+[             when editorTextFocus && foldingEnabled
 editor.foldAll
 editor.foldAllBlockComments
+editor.foldAllExcept
 editor.foldAllMarkerRegions
 editor.foldLevel1
 editor.foldLevel2
@@ -364,6 +372,7 @@ editor.showOutgoingCalls
 editor.toggleFold
 editor.unfold                                                   shift+cmd+]             when editorTextFocus && foldingEnabled
 editor.unfoldAll
+editor.unfoldAllExcept
 editor.unfoldAllMarkerRegions
 editor.unfoldRecursively
 emmet.expandAbbreviation
@@ -403,13 +412,24 @@ extension.changeCase.swap
 extension.changeCase.title
 extension.changeCase.upper
 extension.changeCase.upperFirst
+extension.js-debug.addCustomBreakpoints
 extension.js-debug.autoAttachToProcess
 extension.js-debug.clearAutoAttachVariables
+extension.js-debug.createDebuggerTerminal
 extension.js-debug.createDiagnostics
 extension.js-debug.debugLink
 extension.js-debug.experimentEnlist
+extension.js-debug.npmScript
+extension.js-debug.pickNodeProcess
+extension.js-debug.prettyPrint
+extension.js-debug.removeAllCustomBreakpoints
+extension.js-debug.removeCustomBreakpoint
+extension.js-debug.requestCDPProxy
 extension.js-debug.revealPage
 extension.js-debug.setAutoAttachVariables
+extension.js-debug.startProfile
+extension.js-debug.stopProfile
+extension.js-debug.toggleSkippingFile
 extension.jsProfileVisualizer.table.clearCodeLenses
 extension.node-debug.attachNodeProcess
 extension.node-debug.startWithStopOnEntry
@@ -431,6 +451,7 @@ extension.pwa-node-debug.toggleSkippingFile
 extensions.actions.searchByCategory.Azure
 extensions.actions.searchByCategory.Data Science:
 extensions.actions.searchByCategory.Debuggers
+extensions.actions.searchByCategory.Education
 extensions.actions.searchByCategory.Extension Packs:
 extensions.actions.searchByCategory.Formatters
 extensions.actions.searchByCategory.Keymaps
@@ -462,6 +483,12 @@ filesExplorer.findInWorkspace
 filesExplorer.openFilePreserveFocus
 filesExplorer.paste
 firstCompressedFolder
+getContextKeyInfo
+gettingStarted.goBack                                           escape
+gettingStarted.markStepComplete
+gettingStarted.markStepIncomplete
+gettingStarted.next
+gettingStarted.prev
 git._syncAll
 git.addRemote
 git.api.getRemoteSources
@@ -550,9 +577,11 @@ git.stashPop
 git.stashPopLatest
 git.sync
 git.syncRebase
+git.timeline.compareWithSelected
 git.timeline.copyCommitId
 git.timeline.copyCommitMessage
 git.timeline.openDiff
+git.timeline.selectForCompare
 git.undoCommit
 git.unstage
 git.unstageAll
@@ -766,6 +795,7 @@ notebook.cell.changeToCode
 notebook.cell.changeToMarkdown
 notebook.cell.clearOutputs
 notebook.cell.collapseCellContent
+notebook.cell.collapseCellInput
 notebook.cell.collapseCellOutput
 notebook.cell.copy
 notebook.cell.copyDown
@@ -777,6 +807,7 @@ notebook.cell.execute
 notebook.cell.executeAndInsertBelow
 notebook.cell.executeAndSelectBelow
 notebook.cell.expandCellContent
+notebook.cell.expandCellInput
 notebook.cell.expandCellOutput
 notebook.cell.focusInOutput
 notebook.cell.focusOutOutput
@@ -794,12 +825,15 @@ notebook.cell.paste
 notebook.cell.pasteAbove
 notebook.cell.quitEdit                                         escape                   when inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible
 notebook.cell.split
+notebook.cell.toggleLineNumbers
 notebook.centerActiveCell
 notebook.clearAllCellsOutputs
 notebook.diff.cell.revertInput
 notebook.diff.cell.revertMetadata
 notebook.diff.cell.revertOutputs
 notebook.diff.cell.switchOutputRenderingStyleToText
+notebook.diff.showMetadata
+notebook.diff.showOutputs
 notebook.diff.switchToText
 notebook.execute
 notebook.find
@@ -814,6 +848,9 @@ notebook.hideFind                                               escape          
 notebook.inspectLayout
 notebook.renderAllMarkdownCells
 notebook.selectKernel
+notebook.toggleCellToolbarPosition
+notebook.toggleLayoutTroubleshoot
+notebook.toggleLineNumbers
 notebook.trust
 notebook.undo
 notebook.unfold
@@ -846,6 +883,7 @@ npm.runScriptFromHover
 npm.runSelectedScript
 npm.toggleVisibility
 openEditors.closeAll
+openEditors.newUntitledFile
 openInTerminal
 openReference
 openReferenceToSide
@@ -920,6 +958,7 @@ python.viewLanguageServerOutput
 python.viewOutput
 python.viewTestOutput
 redo                                                            shift+cmd+z
+refactorPreview
 refactorPreview.apply
 refactorPreview.discard
 refactorPreview.focus
@@ -961,7 +1000,44 @@ remote.tunnel.makePrivate
 remote.tunnel.makePublic
 remote.tunnel.open
 remote.tunnel.openCommandPalette
+remote.tunnel.openPreview
 remote.tunnel.refresh
+remoteHub.addRepositoryToWorkspace
+remoteHub.clone
+remoteHub.commit
+remoteHub.continueOn
+remoteHub.createBranch
+remoteHub.createBranchFrom
+remoteHub.createDraftPullRequest
+remoteHub.createPullRequest
+remoteHub.deleteAllLocalRepositoryData
+remoteHub.deleteLocalRepositoryData
+remoteHub.discardAllChanges
+remoteHub.discardChanges
+remoteHub.enableIndexing
+remoteHub.exportPatch
+remoteHub.fetch
+remoteHub.keepChanges
+remoteHub.openChanges
+remoteHub.openFile
+remoteHub.openInCodespaces
+remoteHub.openOnDesktop
+remoteHub.openOnRemote
+remoteHub.openOnWeb
+remoteHub.openRepository
+remoteHub.pull
+remoteHub.stageAllChanges
+remoteHub.stageChanges
+remoteHub.switchToBranch
+remoteHub.sync
+remoteHub.timeline.compareWithSelected
+remoteHub.timeline.copyCommitId
+remoteHub.timeline.copyCommitMessage
+remoteHub.timeline.openDiff
+remoteHub.timeline.openOnGitHub
+remoteHub.timeline.selectForCompare
+remoteHub.unstageAllChanges
+remoteHub.unstageChanges
 removeRootFolder
 removeSecondaryCursors                                          escape                  when editorHasMultipleSelections && textInputFocus
 renameFile
@@ -1001,6 +1077,7 @@ search.action.focusSearchList
 search.action.openEditor
 search.action.openInEditor
 search.action.openNewEditor
+search.action.openNewEditorFromView
 search.action.openNewEditorToSide
 search.action.openResult
 search.action.openResultToSide
@@ -1042,6 +1119,7 @@ settings.cycle
 settings.cycle.trimTrailingWhitespace                           ctrl+cmd+w
 settings.filterByModified
 settings.filterByOnline
+settings.filterUntrusted
 settings.switchToJSON
 showEditorScreenReaderNotification
 showNextParameterHint                                           ctrl+n                  when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
@@ -1056,14 +1134,27 @@ terminal.resetViewContainerLocation
 terminal.resetViewLocation
 terminal.toggleVisibility
 testing.cancelRun
+testing.clearTestResults
 testing.collapseAll
 testing.debugAll
+testing.debugAtCursor
+testing.debugCurrentFile
+testing.debugFailTests
+testing.debugLastRun
 testing.debugSelected
-testing.groupByLocation
-testing.groupByStatus
+testing.editFocusedTest
 testing.refreshTests
+testing.reRunFailTests
+testing.reRunLastRun
 testing.runAll
+testing.runAtCursor
+testing.runCurrentFile
 testing.runSelected
+testing.searchForTestExtension
+testing.showMostRecentOutput
+testing.sortByLocation
+testing.sortByName
+testing.toggleautoRun
 testing.viewAsList
 testing.viewAsTree
 timeline.focus
@@ -1235,6 +1326,7 @@ workbench.action.focusSecondEditorGroup                         cmd+2
 workbench.action.focusSeventhEditorGroup
 workbench.action.focusSideBar                                   cmd+0
 workbench.action.focusSixthEditorGroup
+workbench.action.focusStatusBar
 workbench.action.focusThirdEditorGroup                          cmd+3
 workbench.action.generateColorTheme
 workbench.action.gotoLine                                       ctrl+g
@@ -1259,6 +1351,7 @@ workbench.action.keybindingsReference
 workbench.action.lastEditorInGroup
 workbench.action.logStorage
 workbench.action.logWorkingCopies
+workbench.action.manageTrust
 workbench.action.manageTrustedDomain
 workbench.action.maximizeEditor
 workbench.action.mergeAllWindowTabs
@@ -1454,6 +1547,7 @@ workbench.action.terminal.attachToSession
 workbench.action.terminal.clear                                 cmd+k
 workbench.action.terminal.clearSelection                        escape                  when terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible
 workbench.action.terminal.copySelection
+workbench.action.terminal.createProfileButton
 workbench.action.terminal.findNext
 workbench.action.terminal.findPrevious
 workbench.action.terminal.focus
@@ -1471,18 +1565,22 @@ workbench.action.terminal.focusNext
 workbench.action.terminal.focusNextPane
 workbench.action.terminal.focusPrevious
 workbench.action.terminal.focusPreviousPane
+workbench.action.terminal.focusTabsView
 workbench.action.terminal.hideFind                              escape                  when terminalFindVisible && terminalFocus && terminalProcessSupported
 workbench.action.terminal.kill                                  alt+cmd+t
-workbench.action.terminal.manageWorkspaceShellPermissions
+workbench.action.terminal.killInstance
 workbench.action.terminal.navigationModeExit                    escape                  when accessibilityModeEnabled && terminalA11yTreeFocus && terminalProcessSupported
 workbench.action.terminal.navigationModeFocusNext
 workbench.action.terminal.navigationModeFocusPrevious
 workbench.action.terminal.new                                   ctrl+shift+`
 workbench.action.terminal.newInActiveWorkspace
+workbench.action.terminal.newWithProfile
 workbench.action.terminal.openNativeConsole                     shift+cmd+c             when !terminalFocus
+workbench.action.terminal.openSettings
 workbench.action.terminal.paste
 workbench.action.terminal.relaunch
 workbench.action.terminal.rename
+workbench.action.terminal.renameInstance
 workbench.action.terminal.resizePaneDown
 workbench.action.terminal.resizePaneLeft
 workbench.action.terminal.resizePaneRight
@@ -1508,6 +1606,8 @@ workbench.action.terminal.sendSequence
 workbench.action.terminal.showEnvironmentInformation
 workbench.action.terminal.split
 workbench.action.terminal.splitInActiveWorkspace
+workbench.action.terminal.splitInstance
+workbench.action.terminal.switchTerminal
 workbench.action.terminal.toggleFindCaseSensitive
 workbench.action.terminal.toggleFindRegex
 workbench.action.terminal.toggleFindWholeWord
@@ -1557,10 +1657,10 @@ workbench.actions.treeView.loadedModules.refresh
 workbench.actions.treeView.npm.collapseAll
 workbench.actions.treeView.npm.refresh
 workbench.actions.treeView.python_tests.collapseAll
-workbench.actions.treeView.python_tests.refresh
 workbench.actions.treeView.references-view.tree.collapseAll
 workbench.actions.treeView.references-view.tree.refresh
 workbench.actions.treeView.repl.filter
+workbench.actions.treeView.testExplorer.filter
 workbench.actions.treeView.workbench.panel.markers.view.collapseAll
 workbench.actions.treeView.workbench.panel.markers.view.filter
 workbench.actions.treeView.workbench.views.sync.localActivity.collapseAll
@@ -1641,6 +1741,7 @@ workbench.extensions.action.installVSIX
 workbench.extensions.action.installWorkspaceRecommendedExtensions
 workbench.extensions.action.listBuiltInExtensions
 workbench.extensions.action.listOutdatedExtensions
+workbench.extensions.action.listTrustRequiredExtensions
 workbench.extensions.action.manageAuthorizedExtensionURIs
 workbench.extensions.action.openExtensionsFolder
 workbench.extensions.action.recentlyPublishedExtensions
@@ -1696,6 +1797,13 @@ workbench.panel.repl.view.focus
 workbench.panel.repl.view.removeView
 workbench.panel.repl.view.resetViewLocation
 workbench.panel.repl.view.toggleVisibility
+workbench.scm.action.collapseAllRepositories
+workbench.scm.action.expandAllRepositories
+workbench.scm.action.setListViewMode
+workbench.scm.action.setSortKey.name
+workbench.scm.action.setSortKey.path
+workbench.scm.action.setSortKey.status
+workbench.scm.action.setTreeViewMode
 workbench.scm.focus
 workbench.scm.removeView
 workbench.scm.repositories.focus
@@ -1709,6 +1817,7 @@ workbench.statusBar.focusFirst
 workbench.statusBar.focusLast
 workbench.statusBar.focusNext
 workbench.statusBar.focusPrevious
+workbench.trust.manage
 workbench.userData.actions.openSyncBackupsFolder
 workbench.userData.actions.signin
 workbench.userData.actions.turningOn
@@ -1727,8 +1836,6 @@ workbench.view.debug                                            shift+cmd+d
 workbench.view.debug.resetViewContainerLocation
 workbench.view.explorer                                         shift+cmd+e
 workbench.view.explorer.resetViewContainerLocation
-workbench.view.extension.jupyter
-workbench.view.extension.jupyter.resetViewContainerLocation
 workbench.view.extension.references-view
 workbench.view.extension.references-view.resetViewContainerLocation
 workbench.view.extension.test
@@ -1745,6 +1852,7 @@ workbench.view.search.removeView
 workbench.view.search.resetViewContainerLocation
 workbench.view.search.resetViewLocation
 workbench.view.search.toggleVisibility
+workbench.view.sync
 workbench.view.sync.resetViewContainerLocation
 workbench.view.testing.focus
 workbench.view.testing.resetViewLocation
@@ -1778,6 +1886,10 @@ workbench.views.extensions.searchInstalled.focus
 workbench.views.extensions.searchInstalled.resetViewLocation
 workbench.views.extensions.searchOutdated.focus
 workbench.views.extensions.searchOutdated.resetViewLocation
+workbench.views.extensions.trustRequiredOnDemandExtensions.focus
+workbench.views.extensions.trustRequiredOnDemandExtensions.resetViewLocation
+workbench.views.extensions.trustRequiredOnStartExtensions.focus
+workbench.views.extensions.trustRequiredOnStartExtensions.resetViewLocation
 workbench.views.extensions.workspaceRecommendations.focus
 workbench.views.extensions.workspaceRecommendations.resetViewLocation
 workbench.views.sync.localActivity.focus
