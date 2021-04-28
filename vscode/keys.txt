@@ -314,7 +314,7 @@ editor.action.wordHighlight.prev
 editor.action.wordHighlight.trigger
 editor.cancelOperation                                          escape                  when cancellableOperation
 editor.closeCallHierarchy                                       escape                  when callHierarchyVisible && !config.editor.stablePeek
-editor.closeTestPeek                                            escape                  when  testPeekVisible && !config.editor.stablePeek
+editor.closeTestPeek                                            escape                  when testing.isInPeek && !config.editor.stablePeek || testing.isPeekVisible && !config.editor.stablePeek
 editor.debug.action.addLogPoint
 editor.debug.action.closeExceptionWidget                        escape                  when exceptionWidgetVisible
 editor.debug.action.conditionalBreakpoint
@@ -606,7 +606,7 @@ iliazeus.vscode-ansi.showPrettyToSide
 imagePreview.zoomIn
 imagePreview.zoomOut
 increaseSearchEditorContextLines
-insertBestCompletion
+insertBestCompletion                                            tab                     when atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
 insertNextSuggestion
 insertPrevSuggestion
 insertSnippet
@@ -1105,7 +1105,7 @@ setContext
 setSelection
 settings.action.clearSearchResults                              escape                  when inSettingsEditor && inSettingsSearch
 settings.action.editFocusedSetting
-settings.action.focusLevelUp                                    escape                  when inSettingsEditor && !inSettingsSearch
+settings.action.focusLevelUp                                    escape                  when inSettingsEditor && !inSettingsJSONEditor && !inSettingsSearch
 settings.action.focusNextSetting
 settings.action.focusPreviousSetting
 settings.action.focusSettingControl
@@ -1248,7 +1248,7 @@ workbench.action.debug.pause
 workbench.action.debug.restart
 workbench.action.debug.restartFrame
 workbench.action.debug.reverseContinue
-workbench.action.debug.run                                      cmd+d                   when debugState != 'initializing'
+workbench.action.debug.run                                      cmd+d                   when debuggersAvailable && debugState != 'initializing'
 workbench.action.debug.selectandstart
 workbench.action.debug.selectRepl
 workbench.action.debug.start
@@ -1256,7 +1256,7 @@ workbench.action.debug.stepBack
 workbench.action.debug.stepInto                                 cmd+up                  when debugState != 'inactive'
 workbench.action.debug.stepOut                                  cmd+down                when debugState == 'stopped'
 workbench.action.debug.stepOver                                 cmd+right               when debugState == 'stopped'
-workbench.action.debug.stop                                     cmd+d                   when inDebugMode
+workbench.action.debug.stop                                     cmd+d                   when inDebugMode && !focusedSessionIsAttach
 workbench.action.debug.terminateThread
 workbench.action.decreaseViewHeight
 workbench.action.decreaseViewSize
@@ -1440,7 +1440,7 @@ workbench.action.openWorkspaceConfigFile
 workbench.action.openWorkspaceInNewWindow
 workbench.action.openWorkspaceSettings
 workbench.action.openWorkspaceSettingsFile
-workbench.action.output.toggleOutput                            shift+cmd+u
+workbench.action.output.toggleOutput                            shift+cmd+u             when workbench.panel.output.active
 workbench.action.pinEditor
 workbench.action.positionPanelBottom
 workbench.action.positionPanelLeft
@@ -1544,7 +1544,9 @@ workbench.action.tasks.terminate
 workbench.action.tasks.test                                     cmd+t
 workbench.action.tasks.toggleProblems
 workbench.action.terminal.attachToSession
-workbench.action.terminal.clear                                 cmd+k
+workbench.action.terminal.changeIcon
+workbench.action.terminal.changeIconInstance
+workbench.action.terminal.clear                                 cmd+k                   when terminalFocus && terminalProcessSupported
 workbench.action.terminal.clearSelection                        escape                  when terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible
 workbench.action.terminal.copySelection
 workbench.action.terminal.createProfileButton
@@ -1572,7 +1574,7 @@ workbench.action.terminal.killInstance
 workbench.action.terminal.navigationModeExit                    escape                  when accessibilityModeEnabled && terminalA11yTreeFocus && terminalProcessSupported
 workbench.action.terminal.navigationModeFocusNext
 workbench.action.terminal.navigationModeFocusPrevious
-workbench.action.terminal.new                                   ctrl+shift+`
+workbench.action.terminal.new                                   ctrl+shift+`            when terminalProcessSupported
 workbench.action.terminal.newInActiveWorkspace
 workbench.action.terminal.newWithProfile
 workbench.action.terminal.openNativeConsole                     shift+cmd+c             when !terminalFocus
@@ -1611,7 +1613,7 @@ workbench.action.terminal.switchTerminal
 workbench.action.terminal.toggleFindCaseSensitive
 workbench.action.terminal.toggleFindRegex
 workbench.action.terminal.toggleFindWholeWord
-workbench.action.terminal.toggleTerminal                        shift+cmd+t
+workbench.action.terminal.toggleTerminal                        shift+cmd+t             when terminal.active
 workbench.action.toggleActivityBarVisibility
 workbench.action.toggleAutoSave
 workbench.action.toggleCenteredLayout
@@ -1679,7 +1681,7 @@ workbench.debug.action.focusCallStackView
 workbench.debug.action.focusRepl
 workbench.debug.action.focusVariablesView
 workbench.debug.action.focusWatchView
-workbench.debug.action.toggleRepl                               shift+cmd+y
+workbench.debug.action.toggleRepl                               shift+cmd+y             when workbench.panel.repl.view.active
 workbench.debug.breakPointsView.removeView
 workbench.debug.breakPointsView.resetViewLocation
 workbench.debug.breakPointsView.toggleVisibility
@@ -1832,21 +1834,21 @@ workbench.userDataSync.actions.showSyncedData
 workbench.userDataSync.actions.syncNow
 workbench.userDataSync.actions.turnOff
 workbench.userDataSync.actions.turnOn
-workbench.view.debug                                            shift+cmd+d
+workbench.view.debug                                            shift+cmd+d             when viewContainer.workbench.view.debug.enabled
 workbench.view.debug.resetViewContainerLocation
-workbench.view.explorer                                         shift+cmd+e
+workbench.view.explorer                                         shift+cmd+e             when viewContainer.workbench.view.explorer.enabled
 workbench.view.explorer.resetViewContainerLocation
 workbench.view.extension.references-view
 workbench.view.extension.references-view.resetViewContainerLocation
 workbench.view.extension.test
 workbench.view.extension.test.resetViewContainerLocation
-workbench.view.extensions                                       shift+cmd+x
+workbench.view.extensions                                       shift+cmd+x             when viewContainer.workbench.view.extensions.enabled
 workbench.view.extensions.resetViewContainerLocation
 workbench.view.remote
 workbench.view.remote.resetViewContainerLocation
-workbench.view.scm                                              shift+cmd+c
+workbench.view.scm                                              shift+cmd+c             when workbench.scm.active
 workbench.view.scm.resetViewContainerLocation
-workbench.view.search                                           shift+cmd+f             when !searchViewletVisible
+workbench.view.search                                           shift+cmd+f             when workbench.view.search.active
 workbench.view.search.focus
 workbench.view.search.removeView
 workbench.view.search.resetViewContainerLocation
