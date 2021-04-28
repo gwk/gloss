@@ -1223,10 +1223,10 @@ workbench.action.openLogFile
 workbench.action.openLogsFolder
 workbench.action.openNewsletterSignupUrl
 workbench.action.openNextRecentlyUsedEditor
-workbench.action.openNextRecentlyUsedEditorInGroup              ctrl+tab
+workbench.action.openNextRecentlyUsedEditorInGroup
 workbench.action.openPreviousEditorFromHistory
 workbench.action.openPreviousRecentlyUsedEditor
-workbench.action.openPreviousRecentlyUsedEditorInGroup          ctrl+shift+tab
+workbench.action.openPreviousRecentlyUsedEditorInGroup
 workbench.action.openPrivacyStatementUrl
 workbench.action.openProcessExplorer
 workbench.action.openRawDefaultSettings
@@ -1308,7 +1308,7 @@ workbench.action.selectProductIconTheme
 workbench.action.selectTheme
 workbench.action.setLogLevel
 workbench.action.showAboutDialog
-workbench.action.showAllEditors                                 alt+cmd+tab
+workbench.action.showAllEditors
 workbench.action.showAllEditorsByMostRecentlyUsed
 workbench.action.showAllSymbols
 workbench.action.showCommands                                   cmd+p
