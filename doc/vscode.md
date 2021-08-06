@@ -1,3 +1,7 @@
+# Extensions
+* python
+* ansi-colors (iliazeus.vscode-ansi)
+
 # Swift extension
 
 Clone Apple's `sourcekit-lsp` extension: https://github.com/apple/sourcekit-lsp/
