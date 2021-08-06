@@ -50,7 +50,7 @@ def append_line_if_missing(path, line):
   if is_file(path):
     for l in open(path):
       if l == line:
-        errSL('already setup:', path)
+        errSL('already set up:', path)
         return
   errSL('modifying:', path)
   with open(path, 'a') as f:
