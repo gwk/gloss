@@ -3,7 +3,7 @@
 
 set -eux
 
-VSCODE_GLOSS="$HOME/.vscode-insiders/extensions/gloss"
+VSCODE_GLOSS="$HOME/.vscode/extensions/gloss"
 VSCODE_THEMES="$VSCODE_GLOSS/themes"
 
 craft-vscode-ext -name gloss -src vscode
@@ -13,6 +13,6 @@ mkdir -p "$VSCODE_THEMES"
 cp _build/vscode/gloss-black.json  "$VSCODE_THEMES"
 
 # User settings.
-VSCODE_USER="$HOME/Library/Application Support/Code - Insiders/User"
+VSCODE_USER="$HOME/Library/Application Support/Code/User"
 mkdir -p "$VSCODE_USER"
-cp _build/vscode/keybindings.json  "$VSCODE_USER/keybindings.json"
+cp _build/vscode/keybindings.json  "$VSCODE_USER/"
