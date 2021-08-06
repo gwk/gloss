@@ -83,7 +83,7 @@ def main():
     # On mac, create a symlink for python3 that points to the MacOS/Python executable,
     # which appears not to perform the extra exec that python3 does, and is thus more amenable to debugging under lldb.
     # TODO: do not use hardcoded version.
-    mac_python_exe = '/Library/Frameworks/Python.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python'
+    mac_python_exe = '/Library/Frameworks/Python.framework/Versions/3.10/Resources/Python.app/Contents/MacOS/Python'
     if platform == 'mac' and path_exists(mac_python_exe):
       # Note: symlinking into gloss bin is no longer sufficient since we changed env.zsh to put /usr/local/bin ahead.
       # For now, just overwrite whatever is in /usr/local/bin.
