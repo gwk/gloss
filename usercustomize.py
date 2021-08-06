@@ -1,6 +1,8 @@
 import re
 import os
 import sys
+import pathlib
+
 from types import TracebackType
 from typing import Type
 
@@ -49,7 +51,7 @@ def gloss_excepthook(type_:Type[BaseException], value:BaseException, traceback:T
 
   messages = format_exception(type_, value, traceback, limit=None, chain=True)
   for msg in messages:
-    m = _log_msg_re.fullmatch(msg)
+    m = _exc_msg_re.fullmatch(msg)
     if not m:
       stderr.write(msg)
       continue
@@ -62,7 +64,13 @@ def gloss_excepthook(type_:Type[BaseException], value:BaseException, traceback:T
       s_in = ' in ' if m['stack_in'] else ''
       fn = m['stack_fn']
       code = m['stack_code']
-      stderr.write(f'{TXT_L}{file}:{line}{TXT_D}{s_in}{TXT_L}{fn}{RST_TXT}{code}')
+      if file.startswith(_starting_work_dir_slash):
+        rel_file = file[len(_starting_work_dir_slash):]
+        file = ('' if ('/' in rel_file) else './') + rel_file
+      elif file.startswith(_home_dir_slash):
+        rel_file = file[len(_home_dir_slash):]
+        file = '~/' + rel_file
+      stderr.write(f'{TXT_L}  {file}:{line}{TXT_D}{s_in}{TXT_L}{fn}{RST_TXT}{code}')
       #stderr.write(repr(msg)+'\n')
     elif k == 'recursion':
       stderr.write(f'{TXT_R3}{m[0]}{RST}')
@@ -74,7 +82,17 @@ def gloss_excepthook(type_:Type[BaseException], value:BaseException, traceback:T
       stderr.write(repr(msg)+'\n')
 
 
-_log_msg_re = re.compile(r'''(?sx) # s=Dotall; each message can contain newlines.
+_home_dir = str(pathlib.Path.home())
+_home_dir_slash = _home_dir + ('' if _home_dir.endswith('/') else '/')
+
+_work_dir = os.getcwd()
+_starting_work_dir_slash = _work_dir + ('' if _work_dir.endswith('/') else '/')
+
+
+
+# Classify and dissect each message from format_exception.
+# Each message should have one (or more?) newlines.
+_exc_msg_re = re.compile(r'''(?sx) # s=Dotall; allows matching of newlines in trailing content.
   (?P<traceback>Traceback\ \(most\ recent\ call\ last\):\n )
 | (?P<stack_frame>\ \ File\ "(?P<stack_file>[^"\n]+)",\ line\ (?P<stack_line>\d+)(?P<stack_in>,\ in\ )?(?P<stack_fn>[^\n]+)
     (?P<stack_code>.*) )
