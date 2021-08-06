@@ -33,26 +33,33 @@ fi
 export GLOSS_OS
 
 
-PATHS=(
-  /usr/local/bin
-  /usr/bin
-  /bin
-  /usr/sbin
-  /sbin
-  /Library/Apple/usr/bin
-  # Apple's /usr/libexec/path_helper enforces the above ordering.
-  # This is called in /etc/zprofile, which is sourced after ~/.zshenv (which sources this file).
-  /opt/local/bin
-  /opt/local/sbin
-  /usr/local/gloss/bin
-  /Library/Frameworks/Python.framework/Versions/3.9/bin
-)
-#^ Place python directories after system directories for safety;
-# we do not want pip-installed executables to mask system ones.
-# Note that python and its other core executables are symlinked to /usr/local/bin.
-
-
-export DISPLAY=:0 # MacPorts.
+case $GLOSS_OS in
+  mac)
+    export DISPLAY=:0 # MacPorts.
+    PATHS=(
+      /usr/local/bin
+      /usr/bin
+      /bin
+      /usr/sbin
+      /sbin
+      /Library/Apple/usr/bin
+      # Apple's /usr/libexec/path_helper enforces the above ordering.
+      # This is called in /etc/zprofile, which is sourced after ~/.zshenv (which sources this file).
+      /opt/local/bin
+      /opt/local/sbin
+      /usr/local/gloss/bin
+      /Library/Frameworks/Python.framework/Versions/3.10/bin
+      /Library/Frameworks/Python.framework/Versions/3.9/bin
+      /Library/Frameworks/Python.framework/Versions/3.8/bin
+    )
+    #^ Place python directories after system directories for safety;
+    # we do not want pip-installed executables to mask system ones.
+    # Note that python and its other core executables are symlinked to /usr/local/bin.
+    ;;
+  *)
+    echo "WARNING: PATH not configured for unknown OS; $GLOSS_OS"
+    ;;
+esac
 
 export PATH="${(j[:])PATHS}" # Join the paths with colons.
 export PAGER=less
