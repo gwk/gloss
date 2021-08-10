@@ -6,6 +6,8 @@
 
 bindkey '^[[Z' reverse-menu-complete # Bind shift-tab to reverse-step through completion options.
 
+bindkey -r '^J' # Unbind ctrl-J, which defaults to redundant accept-line (same as ctrl-m, which is also the Enter key).
+
 setopt interactive_comments # Allows typing or pasting a comment into the interactive shell.
 setopt noclobber # Do not allow file overwrites with regular io redirects.
 setopt pipefail # Pipe failures cause processes to signal/terminate.
