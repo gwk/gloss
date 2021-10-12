@@ -4,9 +4,11 @@
 import plistlib
 import yaml
 
-from pithy.io import *
-from pithy.fs import *
-from pithy.schema import *
+from sys import stdout, argv
+
+from pithy.io import outL
+from pithy.fs import walk_files
+from pithy.schema import compile_schema, write_schema
 from pithy.json import load_json
 
 syntaxes = []
