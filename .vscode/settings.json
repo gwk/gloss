@@ -1,0 +1,7 @@
+{
+  "search.exclude": {
+    "_build": true,
+    "_misc": true
+  },
+  "mypy.targets": ["bin"]
+}
