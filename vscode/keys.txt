@@ -204,7 +204,7 @@ editor.action.fontZoomIn
 editor.action.fontZoomOut
 editor.action.fontZoomReset
 editor.action.forceRetokenize
-editor.action.format                                            shift+alt+f                     when editorTextFocus
+editor.action.format
 editor.action.formatChanges
 editor.action.formatDocument
 editor.action.formatDocument.multiple
