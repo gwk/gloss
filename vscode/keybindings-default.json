@@ -153,13 +153,13 @@
   { "key": "shift+f4",              "command": "goToPreviousReference",
                                        "when": "inReferenceSearchEditor || referenceSearchVisible" },
   { "key": "shift+enter",           "command": "refactorPreview.apply",
-                                       "when": "refactorPreview.enabled && refactorPreview.enabled && refactorPreview.hasCheckedChanges && focusedView == 'refactorPreview'" },
+                                       "when": "refactorPreview.enabled && refactorPreview.hasCheckedChanges && focusedView == 'refactorPreview'" },
   { "key": "alt+enter",             "command": "testing.editFocusedTest",
                                        "when": "focusedView == 'workbench.view.testing'" },
   { "key": "escape",                "command": "notebook.cell.quitEdit",
                                        "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible" },
   { "key": "ctrl+enter",            "command": "notebook.cell.quitEdit",
-                                       "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && notebookCellType == 'markup'" },
+                                       "when": "inputFocus && notebookEditorFocused && notebookCellType == 'markup'" },
   { "key": "cmd+f",                 "command": "actions.find",
                                        "when": "editorFocus || editorIsOpen" },
   { "key": "cmd+e",                 "command": "actions.findWithSelection" },
@@ -212,7 +212,7 @@
   { "key": "escape",                "command": "editor.action.cancelSelectionAnchor",
                                        "when": "editorTextFocus && selectionAnchorSet" },
   { "key": "cmd+f2",                "command": "editor.action.changeAll",
-                                       "when": "editorTextFocus && editorTextFocus && !editorReadonly" },
+                                       "when": "editorTextFocus && !editorReadonly" },
   { "key": "cmd+c",                 "command": "editor.action.clipboardCopyAction" },
   { "key": "cmd+x",                 "command": "editor.action.clipboardCutAction" },
   { "key": "cmd+v",                 "command": "editor.action.clipboardPasteAction" },
@@ -427,14 +427,6 @@
                                        "when": "editorTextFocus && foldingEnabled" },
   { "key": "cmd+k cmd+]",           "command": "editor.unfoldRecursively",
                                        "when": "editorTextFocus && foldingEnabled" },
-  { "key": "right",                 "command": "gettingStarted.next",
-                                       "when": "inWelcome && activeEditor == 'gettingStartedPage'" },
-  { "key": "down",                  "command": "gettingStarted.next",
-                                       "when": "inWelcome && activeEditor == 'gettingStartedPage'" },
-  { "key": "left",                  "command": "gettingStarted.prev",
-                                       "when": "inWelcome && activeEditor == 'gettingStartedPage'" },
-  { "key": "up",                    "command": "gettingStarted.prev",
-                                       "when": "inWelcome && activeEditor == 'gettingStartedPage'" },
   { "key": "tab",                   "command": "insertSnippet",
                                        "when": "editorTextFocus && hasSnippetCompletions && !editorTabMovesFocus && !inSnippetMode" },
   { "key": "ctrl+enter",            "command": "interactive.execute",
@@ -552,9 +544,9 @@
   { "key": "up",                    "command": "showPrevParameterHint",
                                        "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible" },
   { "key": "shift+tab",             "command": "acceptAlternativeSelectedSuggestion",
-                                       "when": "suggestWidgetVisible && textInputFocus && textInputFocus" },
+                                       "when": "suggestWidgetVisible && textInputFocus" },
   { "key": "shift+enter",           "command": "acceptAlternativeSelectedSuggestion",
-                                       "when": "suggestWidgetVisible && textInputFocus && textInputFocus" },
+                                       "when": "suggestWidgetVisible && textInputFocus" },
   { "key": "tab",                   "command": "acceptSelectedSuggestion",
                                        "when": "suggestWidgetVisible && textInputFocus" },
   { "key": "enter",                 "command": "acceptSelectedSuggestion",
@@ -566,9 +558,9 @@
   { "key": "tab",                   "command": "insertBestCompletion",
                                        "when": "atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'" },
   { "key": "tab",                   "command": "insertNextSuggestion",
-                                       "when": "hasOtherSuggestions && textInputFocus && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'" },
+                                       "when": "hasOtherSuggestions && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'" },
   { "key": "shift+tab",             "command": "insertPrevSuggestion",
-                                       "when": "hasOtherSuggestions && textInputFocus && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'" },
+                                       "when": "hasOtherSuggestions && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'" },
   { "key": "cmd+pagedown",          "command": "selectNextPageSuggestion",
                                        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus" },
   { "key": "pagedown",              "command": "selectNextPageSuggestion",
@@ -589,6 +581,8 @@
                                        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus" },
   { "key": "up",                    "command": "selectPrevSuggestion",
                                        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus" },
+  { "key": "cmd+i",                 "command": "toggleSuggestionDetails",
+                                       "when": "suggestWidgetVisible && textInputFocus" },
   { "key": "ctrl+space",            "command": "toggleSuggestionDetails",
                                        "when": "suggestWidgetVisible && textInputFocus" },
   { "key": "ctrl+alt+space",        "command": "toggleSuggestionFocus",
@@ -661,24 +655,30 @@
                                        "when": "editorTextFocus" },
   { "key": "shift+enter",           "command": "editor.refocusCallHierarchy",
                                        "when": "callHierarchyVisible" },
+  { "key": "shift+enter",           "command": "editor.refocusTypeHierarchy",
+                                       "when": "typeHierarchyVisible" },
   { "key": "shift+alt+h",           "command": "editor.showCallHierarchy",
                                        "when": "editorHasCallHierarchyProvider && editorTextFocus && !inReferenceSearchEditor" },
   { "key": "shift+alt+h",           "command": "editor.showIncomingCalls",
                                        "when": "callHierarchyVisible && callHierarchyDirection == 'outgoingCalls'" },
   { "key": "shift+alt+h",           "command": "editor.showOutgoingCalls",
                                        "when": "callHierarchyVisible && callHierarchyDirection == 'incomingCalls'" },
+  { "key": "shift+alt+h",           "command": "editor.showSubtypes",
+                                       "when": "typeHierarchyVisible && typeHierarchyDirection == 'supertypes'" },
+  { "key": "shift+alt+h",           "command": "editor.showSupertypes",
+                                       "when": "typeHierarchyVisible && typeHierarchyDirection == 'subtypes'" },
   { "key": "ctrl+enter",            "command": "explorer.openToSide",
                                        "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus" },
   { "key": "shift+alt+f",           "command": "filesExplorer.findInFolder",
                                        "when": "explorerResourceIsFolder && explorerViewletVisible && filesExplorerFocus && !inputFocus" },
   { "key": "alt+down",              "command": "history.showNext",
-                                       "when": "historyNavigationEnabled && historyNavigationWidget" },
+                                       "when": "historyNavigationForwardsEnabled && historyNavigationWidget && !suggestWidgetVisible" },
   { "key": "down",                  "command": "history.showNext",
-                                       "when": "historyNavigationEnabled && historyNavigationWidget" },
+                                       "when": "historyNavigationForwardsEnabled && historyNavigationWidget && !suggestWidgetVisible" },
   { "key": "alt+up",                "command": "history.showPrevious",
-                                       "when": "historyNavigationEnabled && historyNavigationWidget" },
+                                       "when": "historyNavigationBackwardsEnabled && historyNavigationWidget && !suggestWidgetVisible" },
   { "key": "up",                    "command": "history.showPrevious",
-                                       "when": "historyNavigationEnabled && historyNavigationWidget" },
+                                       "when": "historyNavigationBackwardsEnabled && historyNavigationWidget && !suggestWidgetVisible" },
   { "key": "alt+=",                 "command": "increaseSearchEditorContextLines",
                                        "when": "inSearchEditor" },
   { "key": "down",                  "command": "interactive.history.next",
@@ -794,7 +794,7 @@
   { "key": "ctrl+l",                "command": "notebook.centerActiveCell",
                                        "when": "notebookEditorFocused" },
   { "key": "cmd+f",                 "command": "notebook.find",
-                                       "when": "notebookEditorFocused || !editorFocus && activeEditor == 'workbench.editor.notebook'" },
+                                       "when": "notebookEditorFocused && !editorFocus && activeEditor == 'workbench.editor.notebook'" },
   { "key": "cmd+down",              "command": "notebook.focusBottom",
                                        "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+cmd+down",         "command": "notebook.focusNextEditor",
@@ -938,6 +938,9 @@
                                        "when": "editorTextFocus" },
   { "key": "cmd+; cmd+o",           "command": "testing.showMostRecentOutput",
                                        "when": "testing.hasAnyResults" },
+  { "key": "cmd+; cmd+i",           "command": "testing.toggleInlineTestOutput" },
+  { "key": "cmd+h",                 "command": "testing.toggleTestingPeekHistory",
+                                       "when": "testing.isPeekVisible" },
   { "key": "alt+cmd+c",             "command": "toggleSearchCaseSensitive",
                                        "when": "searchViewletFocus && !fileMatchOrFolderMatchFocus" },
   { "key": "alt+cmd+c",             "command": "toggleSearchEditorCaseSensitive",
@@ -960,7 +963,7 @@
   { "key": "cmd+k shift+cmd+w",     "command": "workbench.action.closeAllGroups" },
   { "key": "cmd+k w",               "command": "workbench.action.closeEditorsInGroup" },
   { "key": "cmd+k f",               "command": "workbench.action.closeFolder",
-                                       "when": "emptyWorkspaceSupport" },
+                                       "when": "emptyWorkspaceSupport && workbenchState != 'empty'" },
   { "key": "cmd+w",                 "command": "workbench.action.closeGroup",
                                        "when": "activeEditorGroupEmpty && multipleEditorGroups" },
   { "key": "alt+cmd+t",             "command": "workbench.action.closeOtherEditors" },
@@ -994,7 +997,10 @@
                                        "when": "!notebookEditorFocused" },
   { "key": "cmd+k p",               "command": "workbench.action.files.copyPathOfActiveFile" },
   { "key": "cmd+n",                 "command": "workbench.action.files.newUntitledFile" },
-  { "key": "cmd+o",                 "command": "workbench.action.files.openFileFolder" },
+  { "key": "cmd+o",                 "command": "workbench.action.files.openFile",
+                                       "when": "false" },
+  { "key": "cmd+o",                 "command": "workbench.action.files.openFileFolder",
+                                       "when": "isMacNative && openFolderWorkspaceSupport" },
   { "key": "cmd+o",                 "command": "workbench.action.files.openLocalFileFolder",
                                        "when": "remoteFileDialogVisible" },
   { "key": "cmd+k r",               "command": "workbench.action.files.revealActiveFileInWindows" },
@@ -1033,6 +1039,8 @@
                                        "when": "interactivePlaygroundFocus && !editorTextFocus" },
   { "key": "pageup",                "command": "workbench.action.interactivePlayground.pageUp",
                                        "when": "interactivePlaygroundFocus && !editorTextFocus" },
+  { "key": "cmd+k shift+cmd+\\",    "command": "workbench.action.joinEditorInGroup",
+                                       "when": "sideBySideEditorActive" },
   { "key": "cmd+k enter",           "command": "workbench.action.keepEditor" },
   { "key": "cmd+k cmd+r",           "command": "workbench.action.keybindingsReference" },
   { "key": "cmd+9",                 "command": "workbench.action.lastEditorInGroup" },
@@ -1088,13 +1096,15 @@
   { "key": "f1",                    "command": "workbench.action.showCommands" },
   { "key": "shift+cmd+p",           "command": "workbench.action.showCommands" },
   { "key": "cmd+\\",                "command": "workbench.action.splitEditor" },
+  { "key": "cmd+k shift+cmd+\\",    "command": "workbench.action.splitEditorInGroup",
+                                       "when": "activeEditorCanSplitInGroup" },
   { "key": "cmd+k cmd+\\",          "command": "workbench.action.splitEditorOrthogonal" },
   { "key": "ctrl+w",                "command": "workbench.action.switchWindow" },
   { "key": "shift+cmd+b",           "command": "workbench.action.tasks.build" },
   { "key": "escape",                "command": "workbench.action.terminal.clearSelection",
                                        "when": "terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible" },
   { "key": "cmd+c",                 "command": "workbench.action.terminal.copySelection",
-                                       "when": "terminalFocus && terminalProcessSupported && terminalTextSelected && terminalTextSelected" },
+                                       "when": "terminalFocus && terminalProcessSupported && terminalTextSelected" },
   { "key": "f3",                    "command": "workbench.action.terminal.findNext",
                                        "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
   { "key": "cmd+g",                 "command": "workbench.action.terminal.findNext",
@@ -1128,7 +1138,7 @@
   { "key": "escape",                "command": "workbench.action.terminal.hideFind",
                                        "when": "terminalFindVisible && terminalFocus && terminalProcessSupported" },
   { "key": "cmd+w",                 "command": "workbench.action.terminal.killEditor",
-                                       "when": "terminalFocus && terminalProcessSupported && resourceScheme == 'vscode-terminal'" },
+                                       "when": "terminalEditorFocus && terminalFocus && terminalProcessSupported && resourceScheme == 'vscode-terminal'" },
   { "key": "delete",                "command": "workbench.action.terminal.killInstance",
                                        "when": "terminalIsOpen && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus" },
   { "key": "cmd+backspace",         "command": "workbench.action.terminal.killInstance",
@@ -1156,19 +1166,19 @@
   { "key": "ctrl+cmd+up",           "command": "workbench.action.terminal.resizePaneUp",
                                        "when": "terminalFocus && terminalProcessSupported" },
   { "key": "alt+cmd+pagedown",      "command": "workbench.action.terminal.scrollDown",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "pagedown",              "command": "workbench.action.terminal.scrollDownPage",
                                        "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "cmd+end",               "command": "workbench.action.terminal.scrollToBottom",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "cmd+down",              "command": "workbench.action.terminal.scrollToNextCommand",
                                        "when": "terminalFocus && terminalProcessSupported && !accessibilityModeEnabled" },
   { "key": "cmd+up",                "command": "workbench.action.terminal.scrollToPreviousCommand",
                                        "when": "terminalFocus && terminalProcessSupported && !accessibilityModeEnabled" },
   { "key": "cmd+home",              "command": "workbench.action.terminal.scrollToTop",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "alt+cmd+pageup",        "command": "workbench.action.terminal.scrollUp",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "pageup",                "command": "workbench.action.terminal.scrollUpPage",
                                        "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "cmd+a",                 "command": "workbench.action.terminal.selectAll",
@@ -1192,6 +1202,11 @@
   { "key": "cmd+right",             "command": "workbench.action.terminal.sendSequence",
                                        "when": "terminalFocus",
                                        "args": {"text":"\u0005"} },
+  { "key": "cmd+.",                 "command": "workbench.action.terminal.sendSequence",
+                                       "when": "terminalFocus",
+                                       "args": {"text":"\u0003"} },
+  { "key": "alt+z",                 "command": "workbench.action.terminal.sizeToContentWidth",
+                                       "when": "terminalFocus && terminalIsOpen && terminalProcessSupported" },
   { "key": "ctrl+shift+5",          "command": "workbench.action.terminal.split",
                                        "when": "terminalFocus && terminalProcessSupported" },
   { "key": "cmd+\\",                "command": "workbench.action.terminal.split",
@@ -1238,7 +1253,6 @@
                                        "when": "bannerFocused" },
   { "key": "shift+cmd+y",           "command": "workbench.debug.action.toggleRepl",
                                        "when": "workbench.panel.repl.view.active" },
-  { "key": "cmd+k cmd+m",           "command": "workbench.extensions.action.showRecommendedKeymapExtensions" },
   { "key": "cmd+k c",               "command": "workbench.files.action.compareWithClipboard" },
   { "key": "cmd+k d",               "command": "workbench.files.action.compareWithSaved" },
   { "key": "cmd+k e",               "command": "workbench.files.action.focusOpenEditorsView",
@@ -1297,6 +1311,8 @@
                                        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceMoveableToTrash && !explorerResourceReadonly && !inputFocus" },
   { "key": "escape",                "command": "editor.closeCallHierarchy",
                                        "when": "callHierarchyVisible && !config.editor.stablePeek" },
+  { "key": "escape",                "command": "editor.closeTypeHierarchy",
+                                       "when": "typeHierarchyVisible && !config.editor.stablePeek" },
   { "key": "cmd+down",              "command": "explorer.openAndPassFocus",
                                        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus" },
   { "key": "escape",                "command": "filesExplorer.cancelCut",
@@ -1366,7 +1382,7 @@
   { "key": "cmd+r",                 "command": "workbench.action.reloadWindow",
                                        "when": "isDevelopment" },
   { "key": "shift+cmd+f",           "command": "workbench.action.terminal.searchWorkspace",
-                                       "when": "terminalFocus && terminalProcessSupported && terminalProcessSupported && terminalTextSelected" },
+                                       "when": "terminalFocus && terminalProcessSupported && terminalTextSelected" },
   { "key": "alt+cmd+i",             "command": "workbench.action.toggleDevTools",
                                        "when": "isDevelopment" },
   { "key": "escape",                "command": "notifications.hideToasts",
@@ -1393,84 +1409,86 @@
                                        "when": "reference-list.hasResult && references-view.canNavigate" },
   { "key": "shift+alt+h",           "command": "references-view.showCallHierarchy",
                                        "when": "editorHasCallHierarchyProvider" },
+  { "key": "ctrl+enter",            "command": "github.copilot.generate",
+                                       "when": "editorTextFocus" },
   { "key": "shift+cmd+v",           "command": "iliazeus.vscode-ansi.showPretty",
                                        "when": "editorLangId == 'ansi'" },
   { "key": "shift+enter",           "command": "jupyter.execSelectionInteractive",
                                        "when": "editorTextFocus && isWorkspaceTrusted && jupyter.ownsSelection && !findInputFocussed && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'" },
+  { "key": "f",                     "command": "notebook.find",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "shift+enter",           "command": "python.execSelectionInTerminal",
                                        "when": "editorTextFocus && !findInputFocussed && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'" },
+  { "key": "alt+\\",                "command": "editor.action.inlineSuggest.trigger",
+                                       "when": "config.github.copilot.inlineSuggest.enable && editorTextFocus && !editorHasSelection && !inlineSuggestionsVisible" },
   { "key": "cmd+k v",               "command": "iliazeus.vscode-ansi.showPrettyToSide",
                                        "when": "editorLangId == 'ansi'" },
   { "key": "shift+enter",           "command": "jupyter.runcurrentcelladvance",
                                        "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused" },
+  { "key": "k",                     "command": "list.focusUp",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "cmd+r",                 "command": "python.refreshTensorBoard",
-                                       "when": "python.hasActiveTensorBoardSession && python.hasActiveTensorBoardSession" },
+                                       "when": "python.hasActiveTensorBoardSession" },
   { "key": "ctrl+enter",            "command": "jupyter.runcurrentcell",
                                        "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !jupyter.havenativecells && !notebookEditorFocused" },
+  { "key": "j",                     "command": "list.focusDown",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "alt+enter",             "command": "jupyter.runcurrentcellandaddbelow",
                                        "when": "editorTextFocus && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused" },
-  { "key": "f",                     "command": "notebook.find",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "k",                     "command": "list.focusUp",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "j",                     "command": "list.focusDown",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "a",                     "command": "notebook.cell.insertCodeCellAbove",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "b",                     "command": "notebook.cell.insertCodeCellBelow",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "d d",                   "command": "notebook.cell.delete",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "z",                     "command": "jupyter.notebookeditor.keybind.undo",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && notebookEditorFocused && !inputFocus && !inputFocus && notebookType == 'jupyter-notebook' && notebookType == 'jupyter-notebook'" },
-  { "key": "s",                     "command": "jupyter.notebookeditor.keybind.save",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && notebookEditorFocused && !inputFocus && !inputFocus && notebookType == 'jupyter-notebook' && notebookType == 'jupyter-notebook'" },
-  { "key": "c",                     "command": "notebook.cell.copy",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "x",                     "command": "notebook.cell.cut",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "v",                     "command": "notebook.cell.paste",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "o",                     "command": "jupyter.notebookeditor.keybind.toggleOutput",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "shift+l",               "command": "notebook.toggleLineNumbers",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "l",                     "command": "notebook.cell.toggleLineNumbers",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookEditorFocused && !inputFocus && notebookType == 'jupyter-notebook'" },
-  { "key": "ctrl+shift+-",          "command": "notebook.cell.split",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && editorTextFocus && inputFocus && notebookEditorFocused && notebookType == 'jupyter-notebook'" },
-  { "key": "ctrl+enter",            "command": "jupyter.notebookeditor.keybind.executeCell",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookCellListFocused && notebookCellType == 'code' && notebookType == 'jupyter-notebook' || config.jupyter.enableKeyboardShortcuts && editorTextFocus && inputFocus && notebookEditorFocused && notebookType == 'jupyter-notebook'" },
-  { "key": "ctrl+enter",            "command": "notebook.cell.quitEdit",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && notebookCellType == 'markup'" },
-  { "key": "shift+enter",           "command": "notebook.cell.executeAndSelectBelow",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && notebookCellListFocused && notebookCellType == 'code' && notebookType == 'jupyter-notebook' || config.jupyter.enableKeyboardShortcuts && editorTextFocus && inputFocus && notebookEditorFocused && notebookType == 'jupyter-notebook'" },
-  { "key": "shift+enter",           "command": "jupyter.notebookeditor.keybind.renderMarkdownAndSelectBelow",
-                                       "when": "config.jupyter.enableKeyboardShortcuts && inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && notebookCellType == 'markup'" },
+  { "key": "a",                     "command": "notebook.cell.insertCodeCellAboveAndFocusContainer",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "shift+enter",           "command": "interactive.execute",
                                        "when": "resourceScheme == 'vscode-interactive'" },
+  { "key": "b",                     "command": "notebook.cell.insertCodeCellBelowAndFocusContainer",
+                                       "when": "notebookEditorFocused && !inputFocus" },
+  { "key": "escape",                "command": "interactive.input.clear",
+                                       "when": "!LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'" },
+  { "key": "d d",                   "command": "notebook.cell.delete",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+; s",              "command": "jupyter.insertCellBelowPosition",
                                        "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "z",                     "command": "undo",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+; b",              "command": "jupyter.insertCellBelow",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "s",                     "command": "workbench.action.files.save",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+; a",              "command": "jupyter.insertCellAbove",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "c",                     "command": "notebook.cell.copy",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+; x",              "command": "jupyter.deleteCells",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "x",                     "command": "notebook.cell.cut",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+shift+alt+[",      "command": "jupyter.extendSelectionByCellAbove",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "v",                     "command": "notebook.cell.paste",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+shift+alt+]",      "command": "jupyter.extendSelectionByCellBelow",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "shift+l",               "command": "notebook.toggleLineNumbers",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+; u",              "command": "jupyter.moveCellsUp",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "o",                     "command": "notebook.cell.toggleOutputs",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+; d",              "command": "jupyter.moveCellsDown",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "l",                     "command": "notebook.cell.toggleLineNumbers",
+                                       "when": "notebookEditorFocused && !inputFocus" },
   { "key": "ctrl+; m",              "command": "jupyter.changeCellToMarkdown",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "ctrl+shift+-",          "command": "notebook.cell.split",
+                                       "when": "editorTextFocus && inputFocus && notebookEditorFocused" },
   { "key": "ctrl+; c",              "command": "jupyter.changeCellToCode",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "ctrl+enter",            "command": "notebook.cell.executeAndFocusContainer",
+                                       "when": "notebookCellListFocused || editorTextFocus && inputFocus && notebookEditorFocused" },
   { "key": "ctrl+alt+]",            "command": "jupyter.gotoNextCellInFile",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
+  { "key": "shift+enter",           "command": "notebook.cell.executeAndSelectBelow",
+                                       "when": "notebookCellListFocused && notebookCellType == 'code' || editorTextFocus && inputFocus && notebookEditorFocused" },
   { "key": "ctrl+alt+[",            "command": "jupyter.gotoPrevCellInFile",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
   { "key": "ctrl+alt+\\",           "command": "jupyter.selectCellContents",
@@ -1478,7 +1496,14 @@
   { "key": "ctrl+shift+alt+\\",     "command": "jupyter.selectCell",
                                        "when": "editorTextFocus && jupyter.hascodecells && !notebookEditorFocused" },
   { "key": "cmd+r",                 "command": "jupyter.refreshDataViewer",
-                                       "when": "isWorkspaceTrusted && jupyter.dataViewerActive && jupyter.dataViewerActive" }
+                                       "when": "isWorkspaceTrusted && jupyter.dataViewerActive" },
+  { "key": "ctrl+shift+enter",      "command": "jupyter.runAndDebugCell" },
+  { "key": "f10",                   "command": "jupyter.runByLine",
+                                       "when": "!jupyter.notebookeditor.debuggingInProgress && !jupyter.notebookeditor.runByLineInProgress && notebookKernelCount > 0" },
+  { "key": "f10",                   "command": "jupyter.runByLineNext",
+                                       "when": "jupyter.notebookeditor.runByLineInProgress" },
+  { "key": "ctrl+enter",            "command": "jupyter.runByLineStop",
+                                       "when": "jupyter.notebookeditor.runByLineInProgress && notebookKernelCount > 0" }
   ]
 
 
@@ -1487,6 +1512,7 @@
   // - acceptSnippet
   // - addRootFolder
   // - breadcrumbs.toggle
+  // - breadcrumbs.toggleFromEditorTitle
   // - callStack.collapse
   // - changeEditorIndentation
   // - cleanSearchEditorState
@@ -1502,6 +1528,8 @@
   // - configureExtensionsAutoUpdate.all
   // - configureExtensionsAutoUpdate.enabled
   // - configureExtensionsAutoUpdate.none
+  // - copilotSidebarWebview.view.focus
+  // - copilotSidebarWebview.view.resetViewLocation
   // - createCursor
   // - cursorRedo
   // - cursorWordAccessibilityLeft
@@ -1535,6 +1563,7 @@
   // - debug.jumpToCursor
   // - debug.replCopy
   // - debug.replPaste
+  // - debug.setWatchExpression
   // - debug.startFromConfig
   // - debug.toggleReplIgnoreFocus
   // - default:compositionEnd
@@ -1574,7 +1603,6 @@
   // - editor.action.indentUsingTabs
   // - editor.action.indentationToSpaces
   // - editor.action.indentationToTabs
-  // - editor.action.inlineSuggest.trigger
   // - editor.action.insertSnippet
   // - editor.action.inspectTMScopes
   // - editor.action.measureExtHostLatency
@@ -1645,6 +1673,7 @@
   // - editor.gotoNextFold
   // - editor.gotoParentFold
   // - editor.gotoPreviousFold
+  // - editor.showTypeHierarchy
   // - emmet.expandAbbreviation
   // - explorer.download
   // - explorer.newFile
@@ -1673,10 +1702,7 @@
   // - extension.js-debug.stopProfile
   // - extension.js-debug.toggleSkippingFile
   // - extension.jsProfileVisualizer.table.clearCodeLenses
-  // - extension.node-debug.attachNodeProcess
   // - extension.node-debug.toggleAutoAttach
-  // - extension.node-debug.toggleSkippingFile
-  // - extension.node-debug2.toggleSkippingFile
   // - extension.open
   // - extension.pwa-node-debug.attachNodeProcess
   // - extensions.actions.searchByCategory.Azure
@@ -1802,8 +1828,15 @@
   // - git.undoCommit
   // - git.unstage
   // - git.unstageAll
-  // - github-enterprise.provide-token
-  // - github.provide-token
+  // - github.copilot.autocompleteAccepted
+  // - github.copilot.commandUpdate
+  // - github.copilot.generateForRange
+  // - github.copilot.generateForRangeJson
+  // - github.copilot.generateList
+  // - github.copilot.replaceRangeWithSolution
+  // - github.copilot.sendFeedback
+  // - github.copilot.toggleCopilot
+  // - github.provide-manually
   // - github.publish
   // - goToNextReferenceFromEmbeddedEditor
   // - goToPreviousReferenceFromEmbeddedEditor
@@ -1858,17 +1891,13 @@
   // - jupyter.notebookeditor.restartkernel
   // - jupyter.notebookeditor.runallcells
   // - jupyter.notebookeditor.undocells
+  // - jupyter.openOutlineView
   // - jupyter.openVariableView
   // - jupyter.opennotebook
   // - jupyter.opennotebookInPreviewEditor
-  // - jupyter.redocells
   // - jupyter.reloadVSCode
-  // - jupyter.removeallcells
   // - jupyter.resetLoggingLevel
   // - jupyter.restartkernel
-  // - jupyter.runByLine
-  // - jupyter.runByLineContinue
-  // - jupyter.runByLineStop
   // - jupyter.runFileInteractive
   // - jupyter.runallcells
   // - jupyter.runallcellsabove
@@ -1883,15 +1912,13 @@
   // - jupyter.selectNativeJupyterUriFromToolBar
   // - jupyter.selectjupytercommandline
   // - jupyter.selectjupyteruri
-  // - jupyter.setKernel
   // - jupyter.showDataViewer
   // - jupyter.submitGitHubIssue
-  // - jupyter.switchKernel
-  // - jupyter.undocells
   // - jupyter.viewOutput
   // - jupyterViewVariables.focus
   // - jupyterViewVariables.resetViewLocation
   // - keybindings.editor.copyCommandKeybindingEntry
+  // - keybindings.editor.copyCommandTitle
   // - keybindings.editor.resetKeybinding
   // - keybindings.editor.showConflicts
   // - keybindings.editor.showDefaultKeybindings
@@ -1922,9 +1949,6 @@
   // - merge-conflict.compare
   // - merge-conflict.next
   // - merge-conflict.previous
-  // - navigateToTestFile
-  // - navigateToTestFunction
-  // - navigateToTestSuite
   // - noop
   // - notebook.cancelExecution
   // - notebook.cell.cancelExecution
@@ -1946,28 +1970,25 @@
   // - notebook.execute
   // - notebook.inspectLayout
   // - notebook.renderAllMarkdownCells
-  // - notebook.selectKernel
   // - notebook.setProfile
   // - notebook.toggleCellToolbarPosition
+  // - notebook.toggleCellToolbarPositionFromEditorTitle
   // - notebook.toggleLayoutTroubleshoot
+  // - notebook.toggleLineNumbersFromEditorTitle
   // - notifications.clearAll
   // - notifications.focusToasts
   // - notifications.showList
   // - notifications.toggleList
   // - npm.debugScript
-  // - npm.debugScriptFromHover
   // - npm.focus
   // - npm.openScript
   // - npm.packageManager
   // - npm.refresh
-  // - npm.removeView
   // - npm.resetViewLocation
   // - npm.runInstall
   // - npm.runScript
   // - npm.runScriptFromFolder
-  // - npm.runScriptFromHover
   // - npm.runSelectedScript
-  // - npm.toggleVisibility
   // - openEditors.closeAll
   // - openEditors.newUntitledFile
   // - openInTerminal
@@ -1990,68 +2011,60 @@
   // - problems.action.showMultilineMessage
   // - problems.action.showSinglelineMessage
   // - pylance.addToExtraPaths
+  // - pylance.completionAccepted
+  // - pylance.dumpFileDebugInfo
+  // - pylance.executedClientCommand
+  // - pylance.extractMethod
   // - pylance.extractMethodWithRename
+  // - pylance.extractVariable
   // - pylance.extractVariableWithRename
   // - pylance.reportIssue
   // - pylance.runCommands
   // - pylance.triggerParameterHints
+  // - pyright.addoptionalforparam
+  // - pyright.createtypestub
+  // - pyright.organizeimports
   // - python.SelectAndInsertDebugConfiguration
   // - python._loadLanguageServerExtension
+  // - python.addImport
+  // - python.addOptionalForParam
   // - python.analysis.clearCache
   // - python.analysis.restartLanguageServer
-  // - python.askToStopTestDiscovery
-  // - python.askToStopTests
-  // - python.buildWorkspaceSymbols
   // - python.clearPersistentStorage
   // - python.clearWorkspaceInterpreter
   // - python.configureTests
   // - python.createTerminal
-  // - python.debugTestNode
-  // - python.debugtests
-  // - python.discoverTests
-  // - python.discoveringTests
+  // - python.createTypeStub
+  // - python.debugInTerminal
   // - python.enableLinting
   // - python.enableSourceMapSupport
   // - python.execInTerminal
   // - python.execInTerminal-icon
   // - python.execSelectionInDjangoShell
   // - python.goToPythonObject
+  // - python.intellicode.completionItemSelected
+  // - python.intellicode.loadLanguageServerExtension
   // - python.interpreterPath
   // - python.launchTensorBoard
-  // - python.openTestNodeInEditor
+  // - python.orderImports
   // - python.pickLocalProcess
-  // - python.refactorExtractMethod
-  // - python.refactorExtractVariable
+  // - python.refreshTests
+  // - python.refreshingTests
   // - python.reloadVSCode
+  // - python.removeUnusedImport
   // - python.reportIssue
-  // - python.revealTestItem
-  // - python.runCurrentTestFile
-  // - python.runFailedTests
   // - python.runLinting
-  // - python.runParametrizedTests
-  // - python.runTestNode
-  // - python.runtests
-  // - python.selectAndDebugTestMethod
-  // - python.selectAndRunTestFile
-  // - python.selectAndRunTestMethod
-  // - python.selectTestToDebug
-  // - python.selectTestToRun
   // - python.setInterpreter
   // - python.setLinter
   // - python.setShebangInterpreter
   // - python.sortImports
-  // - python.startPage.open
   // - python.startREPL
-  // - python.stopTests
+  // - python.stopRefreshingTests
   // - python.switchOffInsidersChannel
   // - python.switchToDailyChannel
   // - python.switchToWeeklyChannel
   // - python.viewLanguageServerOutput
   // - python.viewOutput
-  // - python.viewTestOutput
-  // - python.viewTestUI
-  // - python_tests.focus
-  // - python_tests.resetViewLocation
   // - refactorPreview
   // - refactorPreview.discard
   // - refactorPreview.focus
@@ -2071,8 +2084,12 @@
   // - references-view.refresh
   // - references-view.removeCallItem
   // - references-view.removeReferenceItem
+  // - references-view.removeTypeItem
   // - references-view.showIncomingCalls
   // - references-view.showOutgoingCalls
+  // - references-view.showSubtypes
+  // - references-view.showSupertypes
+  // - references-view.showTypeHierarchy
   // - references-view.tree.focus
   // - references-view.tree.resetViewLocation
   // - remote.explorer.switch
@@ -2081,8 +2098,6 @@
   // - remote.tunnel.copyAddressCommandPalette
   // - remote.tunnel.forwardCommandPalette
   // - remote.tunnel.forwardInline
-  // - remote.tunnel.makePrivate
-  // - remote.tunnel.makePublic
   // - remote.tunnel.open
   // - remote.tunnel.openCommandPalette
   // - remote.tunnel.openPreview
@@ -2118,6 +2133,7 @@
   // - settings.switchToJSON
   // - showEditorScreenReaderNotification
   // - simpleBrowser.show
+  // - snippy.dismiss
   // - terminal.focus
   // - terminal.removeView
   // - terminal.resetViewContainerLocation
@@ -2129,6 +2145,7 @@
   // - testing.debug
   // - testing.debugSelected
   // - testing.hideTest
+  // - testing.openMessageInEditor
   // - testing.run
   // - testing.runSelected
   // - testing.runUsing
@@ -2224,6 +2241,7 @@
   // - workbench.action.extensionHostProfiler.stop
   // - workbench.action.files.openFileFolderInNewWindow
   // - workbench.action.files.openFileInNewWindow
+  // - workbench.action.files.openFolder
   // - workbench.action.files.openFolderInNewWindow
   // - workbench.action.files.revert
   // - workbench.action.files.saveAll
@@ -2232,16 +2250,20 @@
   // - workbench.action.focusAboveGroupWithoutWrap
   // - workbench.action.focusActiveEditorGroup
   // - workbench.action.focusActivityBar
+  // - workbench.action.focusAuxiliaryBar
   // - workbench.action.focusBanner
   // - workbench.action.focusBelowGroupWithoutWrap
   // - workbench.action.focusCommentsPanel
+  // - workbench.action.focusFirstSideEditor
   // - workbench.action.focusLastEditorGroup
   // - workbench.action.focusLeftGroupWithoutWrap
   // - workbench.action.focusNextGroup
+  // - workbench.action.focusOtherSideEditor
   // - workbench.action.focusPanel
   // - workbench.action.focusPreviousGroup
   // - workbench.action.focusQuickOpen
   // - workbench.action.focusRightGroupWithoutWrap
+  // - workbench.action.focusSecondSideEditor
   // - workbench.action.focusStatusBar
   // - workbench.action.generateColorTheme
   // - workbench.action.increaseViewHeight
@@ -2253,6 +2275,7 @@
   // - workbench.action.installCommandLine
   // - workbench.action.joinAllGroups
   // - workbench.action.joinTwoGroups
+  // - workbench.action.lockEditorGroup
   // - workbench.action.logStorage
   // - workbench.action.logWorkingCopies
   // - workbench.action.manageTrustedDomain
@@ -2288,7 +2311,6 @@
   // - workbench.action.openFolderSettingsFile
   // - workbench.action.openGlobalKeybindingsFile
   // - workbench.action.openGlobalSettings
-  // - workbench.action.openIntroductoryVideosUrl
   // - workbench.action.openIssueReporter
   // - workbench.action.openLicenseUrl
   // - workbench.action.openLogFile
@@ -2303,12 +2325,14 @@
   // - workbench.action.openProcessExplorer
   // - workbench.action.openRawDefaultSettings
   // - workbench.action.openRemoteSettings
+  // - workbench.action.openRemoteSettingsFile
   // - workbench.action.openRequestFeatureUrl
   // - workbench.action.openSettings2
   // - workbench.action.openSettingsJson
   // - workbench.action.openSnippets
   // - workbench.action.openTipsAndTricksUrl
   // - workbench.action.openTwitterUrl
+  // - workbench.action.openVideoTutorialsUrl
   // - workbench.action.openView
   // - workbench.action.openWalkthrough
   // - workbench.action.openWorkspace
@@ -2344,13 +2368,6 @@
   // - workbench.action.resetFocusedViewLocation
   // - workbench.action.resetViewLocations
   // - workbench.action.restartExtensionHost
-  // - workbench.action.revealPathInFinder1
-  // - workbench.action.revealPathInFinder2
-  // - workbench.action.revealPathInFinder3
-  // - workbench.action.revealPathInFinder4
-  // - workbench.action.revealPathInFinder5
-  // - workbench.action.revealPathInFinder6
-  // - workbench.action.revealPathInFinder7
   // - workbench.action.revertAndCloseActiveEditor
   // - workbench.action.saveWorkspaceAs
   // - workbench.action.selectIconTheme
@@ -2372,6 +2389,14 @@
   // - workbench.action.splitEditorDown
   // - workbench.action.splitEditorLeft
   // - workbench.action.splitEditorRight
+  // - workbench.action.splitEditorToAboveGroup
+  // - workbench.action.splitEditorToBelowGroup
+  // - workbench.action.splitEditorToFirstGroup
+  // - workbench.action.splitEditorToLastGroup
+  // - workbench.action.splitEditorToLeftGroup
+  // - workbench.action.splitEditorToNextGroup
+  // - workbench.action.splitEditorToPreviousGroup
+  // - workbench.action.splitEditorToRightGroup
   // - workbench.action.splitEditorUp
   // - workbench.action.tasks.configureDefaultBuildTask
   // - workbench.action.tasks.configureDefaultTestTask
@@ -2390,8 +2415,10 @@
   // - workbench.action.terminal.attachToSession
   // - workbench.action.terminal.changeColor
   // - workbench.action.terminal.changeColorInstance
+  // - workbench.action.terminal.changeColorPanel
   // - workbench.action.terminal.changeIcon
   // - workbench.action.terminal.changeIconInstance
+  // - workbench.action.terminal.changeIconPanel
   // - workbench.action.terminal.createProfileButton
   // - workbench.action.terminal.detachSession
   // - workbench.action.terminal.focus
@@ -2414,21 +2441,26 @@
   // - workbench.action.terminal.openSettings
   // - workbench.action.terminal.relaunch
   // - workbench.action.terminal.rename
+  // - workbench.action.terminal.renamePanel
   // - workbench.action.terminal.runActiveFile
   // - workbench.action.terminal.runSelectedText
   // - workbench.action.terminal.selectDefaultShell
   // - workbench.action.terminal.selectToNextLine
   // - workbench.action.terminal.selectToPreviousLine
+  // - workbench.action.terminal.setDimensions
   // - workbench.action.terminal.showEnvironmentInformation
   // - workbench.action.terminal.showTabs
+  // - workbench.action.terminal.sizeToContentWidthInstance
   // - workbench.action.terminal.splitInActiveWorkspace
   // - workbench.action.terminal.switchTerminal
   // - workbench.action.terminal.unsplit
   // - workbench.action.terminal.unsplitInstance
   // - workbench.action.toggleActivityBarVisibility
   // - workbench.action.toggleAutoSave
+  // - workbench.action.toggleAuxiliaryBar
   // - workbench.action.toggleCenteredLayout
   // - workbench.action.toggleConfirmBeforeClose
+  // - workbench.action.toggleEditorGroupLock
   // - workbench.action.toggleEditorType
   // - workbench.action.toggleEditorVisibility
   // - workbench.action.toggleEditorWidths
@@ -2440,12 +2472,16 @@
   // - workbench.action.toggleSearchOnType
   // - workbench.action.toggleSharedProcess
   // - workbench.action.toggleSidebarPosition
+  // - workbench.action.toggleSplitEditorInGroup
+  // - workbench.action.toggleSplitEditorInGroupLayout
   // - workbench.action.toggleStatusbarVisibility
   // - workbench.action.toggleWindowTabsBar
   // - workbench.action.uninstallCommandLine
+  // - workbench.action.unlockEditorGroup
   // - workbench.action.url.openUrl
   // - workbench.action.webview.openDeveloperTools
   // - workbench.action.webview.reloadWebviewAction
+  // - workbench.actions.sync.compareWithLocal
   // - workbench.actions.sync.editMachineName
   // - workbench.actions.sync.replaceCurrent
   // - workbench.actions.sync.resolveResource
@@ -2455,8 +2491,6 @@
   // - workbench.actions.treeView.jsBrowserBreakpoints.refresh
   // - workbench.actions.treeView.npm.collapseAll
   // - workbench.actions.treeView.npm.refresh
-  // - workbench.actions.treeView.python_tests.collapseAll
-  // - workbench.actions.treeView.python_tests.refresh
   // - workbench.actions.treeView.references-view.tree.collapseAll
   // - workbench.actions.treeView.references-view.tree.refresh
   // - workbench.actions.treeView.repl.filter
@@ -2480,18 +2514,12 @@
   // - workbench.debug.action.focusRepl
   // - workbench.debug.action.focusVariablesView
   // - workbench.debug.action.focusWatchView
-  // - workbench.debug.breakPointsView.removeView
   // - workbench.debug.breakPointsView.resetViewLocation
-  // - workbench.debug.breakPointsView.toggleVisibility
-  // - workbench.debug.callStackView.removeView
   // - workbench.debug.callStackView.resetViewLocation
-  // - workbench.debug.callStackView.toggleVisibility
   // - workbench.debug.loadedScriptsView.focus
   // - workbench.debug.loadedScriptsView.resetViewLocation
   // - workbench.debug.panel.action.clearReplAction
-  // - workbench.debug.variablesView.removeView
   // - workbench.debug.variablesView.resetViewLocation
-  // - workbench.debug.variablesView.toggleVisibility
   // - workbench.debug.viewlet.action.addFunctionBreakpointAction
   // - workbench.debug.viewlet.action.addWatchExpression
   // - workbench.debug.viewlet.action.copyValue
@@ -2502,11 +2530,11 @@
   // - workbench.debug.viewlet.action.removeAllWatchExpressions
   // - workbench.debug.viewlet.action.removeBreakpoint
   // - workbench.debug.viewlet.action.toggleBreakpointsActivatedAction
-  // - workbench.debug.watchExpressionsView.removeView
   // - workbench.debug.watchExpressionsView.resetViewLocation
-  // - workbench.debug.watchExpressionsView.toggleVisibility
   // - workbench.debug.welcome.focus
+  // - workbench.debug.welcome.removeView
   // - workbench.debug.welcome.resetViewLocation
+  // - workbench.debug.welcome.toggleVisibility
   // - workbench.explorer.fileView.focus
   // - workbench.explorer.fileView.removeView
   // - workbench.explorer.fileView.resetViewLocation
@@ -2550,7 +2578,6 @@
   // - workbench.extensions.action.reinstall
   // - workbench.extensions.action.removeExtensionFromWorkspaceRecommendations
   // - workbench.extensions.action.saveExtensionHostProfile
-  // - workbench.extensions.action.showAzureExtensions
   // - workbench.extensions.action.showDisabledExtensions
   // - workbench.extensions.action.showEnabledExtensions
   // - workbench.extensions.action.showExtensionsForLanguage
@@ -2559,6 +2586,7 @@
   // - workbench.extensions.action.showLanguageExtensions
   // - workbench.extensions.action.showPopularExtensions
   // - workbench.extensions.action.showRecommendedExtensions
+  // - workbench.extensions.action.showRecommendedKeymapExtensions
   // - workbench.extensions.action.stopExtensionHostProfile
   // - workbench.extensions.action.toggleIgnoreExtension
   // - workbench.extensions.action.undoIgnoredRecommendation
@@ -2577,6 +2605,7 @@
   // - workbench.files.action.showActiveFileInExplorer
   // - workbench.getCodeExchangeProxyEndpoints
   // - workbench.notebook.layout.configure
+  // - workbench.notebook.layout.configure.editorTitle
   // - workbench.notebook.layout.gettingStarted
   // - workbench.notebook.layout.select
   // - workbench.output.action.clearOutput
@@ -2632,6 +2661,8 @@
   // - workbench.userDataSync.actions.turnOn
   // - workbench.view.debug.resetViewContainerLocation
   // - workbench.view.explorer.resetViewContainerLocation
+  // - workbench.view.extension.copilot-sidebar-webview
+  // - workbench.view.extension.copilot-sidebar-webview.resetViewContainerLocation
   // - workbench.view.extension.jupyter-variables
   // - workbench.view.extension.jupyter-variables.resetViewContainerLocation
   // - workbench.view.extension.references-view
@@ -2650,7 +2681,9 @@
   // - workbench.view.sync
   // - workbench.view.sync.resetViewContainerLocation
   // - workbench.view.testing.focus
+  // - workbench.view.testing.removeView
   // - workbench.view.testing.resetViewLocation
+  // - workbench.view.testing.toggleVisibility
   // - workbench.views.extensions.builtinFeatureExtensions.focus
   // - workbench.views.extensions.builtinFeatureExtensions.resetViewLocation
   // - workbench.views.extensions.builtinProgrammingLanguageExtensions.focus
