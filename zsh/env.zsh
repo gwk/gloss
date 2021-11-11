@@ -71,6 +71,9 @@ esac
 export EDITOR
 
 
+export HELPDIR=/usr/share/zsh/5.8/help
+
+
 # ANSI select graphic rendition (SGR) control sequences.
 # $'' form causes the shell to parse ANSI C escapes.
 export RST=$'\e[0m' # Reset.
