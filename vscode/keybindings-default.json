@@ -650,7 +650,7 @@
   { "key": "alt+-",                 "command": "decreaseSearchEditorContextLines",
                                        "when": "inSearchEditor" },
   { "key": "tab",                   "command": "editor.action.inlineSuggest.commit",
-                                       "when": "inlineSuggestionVisible && !editorTabMovesFocus && !inlineSuggestionHasIndentation" },
+                                       "when": "inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorTabMovesFocus" },
   { "key": "shift+f9",              "command": "editor.debug.action.toggleInlineBreakpoint",
                                        "when": "editorTextFocus" },
   { "key": "shift+enter",           "command": "editor.refocusCallHierarchy",
@@ -685,6 +685,10 @@
                                        "when": "!suggestWidgetVisible && resourceScheme == 'vscode-interactive' && interactiveInputCursorAtBoundary != 'none' && interactiveInputCursorAtBoundary != 'top'" },
   { "key": "up",                    "command": "interactive.history.previous",
                                        "when": "!suggestWidgetVisible && resourceScheme == 'vscode-interactive' && interactiveInputCursorAtBoundary != 'bottom' && interactiveInputCursorAtBoundary != 'none'" },
+  { "key": "cmd+down",              "command": "interactive.scrollToBottom",
+                                       "when": "resourceScheme == 'vscode-interactive'" },
+  { "key": "cmd+up",                "command": "interactive.scrollToTop",
+                                       "when": "resourceScheme == 'vscode-interactive'" },
   { "key": "cmd+k cmd+a",           "command": "keybindings.editor.addKeybinding",
                                        "when": "inKeybindings && keybindingFocus" },
   { "key": "escape",                "command": "keybindings.editor.clearSearchResults",
@@ -836,7 +840,7 @@
   { "key": "up",                    "command": "notifications.focusPreviousToast",
                                        "when": "notificationFocus && notificationToastsVisible" },
   { "key": "cmd+c",                 "command": "problems.action.copy",
-                                       "when": "problemFocus" },
+                                       "when": "problemsVisibility && !relatedInformationFocus && focusedView == 'workbench.panel.markers.view'" },
   { "key": "cmd+f",                 "command": "problems.action.focusFilter",
                                        "when": "focusedView == 'workbench.panel.markers.view'" },
   { "key": "cmd+down",              "command": "problems.action.focusProblemsFromFilter",
@@ -1102,47 +1106,47 @@
   { "key": "ctrl+w",                "command": "workbench.action.switchWindow" },
   { "key": "shift+cmd+b",           "command": "workbench.action.tasks.build" },
   { "key": "escape",                "command": "workbench.action.terminal.clearSelection",
-                                       "when": "terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && terminalTextSelected && !terminalFindVisible || terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible" },
   { "key": "cmd+c",                 "command": "workbench.action.terminal.copySelection",
-                                       "when": "terminalFocus && terminalProcessSupported && terminalTextSelected" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && terminalTextSelected || terminalFocus && terminalProcessSupported && terminalTextSelected" },
   { "key": "f3",                    "command": "workbench.action.terminal.findNext",
-                                       "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "cmd+g",                 "command": "workbench.action.terminal.findNext",
-                                       "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "shift+enter",           "command": "workbench.action.terminal.findNext",
-                                       "when": "terminalFindFocused && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported" },
   { "key": "shift+f3",              "command": "workbench.action.terminal.findPrevious",
-                                       "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "shift+cmd+g",           "command": "workbench.action.terminal.findPrevious",
-                                       "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "enter",                 "command": "workbench.action.terminal.findPrevious",
-                                       "when": "terminalFindFocused && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported" },
   { "key": "cmd+f",                 "command": "workbench.action.terminal.focusFind",
-                                       "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "shift+cmd+]",           "command": "workbench.action.terminal.focusNext",
-                                       "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus" },
   { "key": "alt+cmd+down",          "command": "workbench.action.terminal.focusNextPane",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "alt+cmd+right",         "command": "workbench.action.terminal.focusNextPane",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "shift+cmd+[",           "command": "workbench.action.terminal.focusPrevious",
-                                       "when": "terminalFocus && terminalProcessSupported && !terminalEditorFocus" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus" },
   { "key": "alt+cmd+up",            "command": "workbench.action.terminal.focusPreviousPane",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "alt+cmd+left",          "command": "workbench.action.terminal.focusPreviousPane",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "shift+cmd+\\",          "command": "workbench.action.terminal.focusTabs",
-                                       "when": "terminalFocus && terminalProcessSupported || terminalProcessSupported && terminalTabsFocus" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported || terminalHasBeenCreated && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus" },
   { "key": "shift+escape",          "command": "workbench.action.terminal.hideFind",
-                                       "when": "terminalFindVisible && terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindVisible && terminalFocus && terminalHasBeenCreated || terminalFindVisible && terminalFocus && terminalProcessSupported" },
   { "key": "escape",                "command": "workbench.action.terminal.hideFind",
-                                       "when": "terminalFindVisible && terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindVisible && terminalFocus && terminalHasBeenCreated || terminalFindVisible && terminalFocus && terminalProcessSupported" },
   { "key": "cmd+w",                 "command": "workbench.action.terminal.killEditor",
-                                       "when": "terminalEditorFocus && terminalFocus && terminalProcessSupported && resourceScheme == 'vscode-terminal'" },
+                                       "when": "terminalEditorFocus && terminalFocus && terminalHasBeenCreated && resourceScheme == 'vscode-terminal' || terminalEditorFocus && terminalFocus && terminalProcessSupported && resourceScheme == 'vscode-terminal'" },
   { "key": "delete",                "command": "workbench.action.terminal.killInstance",
-                                       "when": "terminalIsOpen && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus" },
+                                       "when": "terminalHasBeenCreated && terminalTabsFocus || terminalIsOpen && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus" },
   { "key": "cmd+backspace",         "command": "workbench.action.terminal.killInstance",
-                                       "when": "terminalIsOpen && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus" },
+                                       "when": "terminalHasBeenCreated && terminalTabsFocus || terminalIsOpen && terminalTabsFocus || terminalProcessSupported && terminalTabsFocus" },
   { "key": "escape",                "command": "workbench.action.terminal.navigationModeExit",
                                        "when": "accessibilityModeEnabled && terminalA11yTreeFocus && terminalProcessSupported" },
   { "key": "cmd+down",              "command": "workbench.action.terminal.navigationModeFocusNext",
@@ -1154,45 +1158,45 @@
   { "key": "shift+cmd+c",           "command": "workbench.action.terminal.openNativeConsole",
                                        "when": "!terminalFocus" },
   { "key": "cmd+v",                 "command": "workbench.action.terminal.paste",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "enter",                 "command": "workbench.action.terminal.renameInstance",
-                                       "when": "terminalProcessSupported && terminalTabsFocus && terminalTabsSingularSelection" },
+                                       "when": "terminalHasBeenCreated && terminalTabsFocus && terminalTabsSingularSelection || terminalProcessSupported && terminalTabsFocus && terminalTabsSingularSelection" },
   { "key": "ctrl+cmd+down",         "command": "workbench.action.terminal.resizePaneDown",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "ctrl+cmd+left",         "command": "workbench.action.terminal.resizePaneLeft",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "ctrl+cmd+right",        "command": "workbench.action.terminal.resizePaneRight",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "ctrl+cmd+up",           "command": "workbench.action.terminal.resizePaneUp",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "alt+cmd+pagedown",      "command": "workbench.action.terminal.scrollDown",
-                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "pagedown",              "command": "workbench.action.terminal.scrollDownPage",
-                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "cmd+end",               "command": "workbench.action.terminal.scrollToBottom",
-                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "cmd+down",              "command": "workbench.action.terminal.scrollToNextCommand",
-                                       "when": "terminalFocus && terminalProcessSupported && !accessibilityModeEnabled" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !accessibilityModeEnabled || terminalFocus && terminalProcessSupported && !accessibilityModeEnabled" },
   { "key": "cmd+up",                "command": "workbench.action.terminal.scrollToPreviousCommand",
-                                       "when": "terminalFocus && terminalProcessSupported && !accessibilityModeEnabled" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !accessibilityModeEnabled || terminalFocus && terminalProcessSupported && !accessibilityModeEnabled" },
   { "key": "cmd+home",              "command": "workbench.action.terminal.scrollToTop",
-                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "alt+cmd+pageup",        "command": "workbench.action.terminal.scrollUp",
-                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "pageup",                "command": "workbench.action.terminal.scrollUpPage",
-                                       "when": "terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && !terminalAltBufferActive || terminalFocus && terminalProcessSupported && !terminalAltBufferActive" },
   { "key": "cmd+a",                 "command": "workbench.action.terminal.selectAll",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "shift+cmd+down",        "command": "workbench.action.terminal.selectToNextCommand",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "shift+cmd+up",          "command": "workbench.action.terminal.selectToPreviousCommand",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "alt+backspace",         "command": "workbench.action.terminal.sendSequence",
                                        "when": "terminalFocus",
                                        "args": {"text":"\u0017"} },
   { "key": "alt+delete",            "command": "workbench.action.terminal.sendSequence",
                                        "when": "terminalFocus",
-                                       "args": {"text":"\u001bd"} },
+                                       "args": {"text":"\r"} },
   { "key": "cmd+backspace",         "command": "workbench.action.terminal.sendSequence",
                                        "when": "terminalFocus",
                                        "args": {"text":"\u0015"} },
@@ -1205,8 +1209,17 @@
   { "key": "cmd+.",                 "command": "workbench.action.terminal.sendSequence",
                                        "when": "terminalFocus",
                                        "args": {"text":"\u0003"} },
+  { "key": "ctrl+shift+2",          "command": "workbench.action.terminal.sendSequence",
+                                       "when": "terminalFocus",
+                                       "args": {"text":"\u0000"} },
+  { "key": "ctrl+shift+6",          "command": "workbench.action.terminal.sendSequence",
+                                       "when": "terminalFocus",
+                                       "args": {"text":"\u001e"} },
+  { "key": "ctrl+/",                "command": "workbench.action.terminal.sendSequence",
+                                       "when": "terminalFocus",
+                                       "args": {"text":"\u001f"} },
   { "key": "alt+z",                 "command": "workbench.action.terminal.sizeToContentWidth",
-                                       "when": "terminalFocus && terminalIsOpen && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated && terminalIsOpen || terminalFocus && terminalIsOpen && terminalProcessSupported" },
   { "key": "ctrl+shift+5",          "command": "workbench.action.terminal.split",
                                        "when": "terminalFocus && terminalProcessSupported" },
   { "key": "cmd+\\",                "command": "workbench.action.terminal.split",
@@ -1216,11 +1229,11 @@
   { "key": "cmd+\\",                "command": "workbench.action.terminal.splitInstance",
                                        "when": "terminalProcessSupported && terminalTabsFocus" },
   { "key": "alt+cmd+c",             "command": "workbench.action.terminal.toggleFindCaseSensitive",
-                                       "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "alt+cmd+r",             "command": "workbench.action.terminal.toggleFindRegex",
-                                       "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "alt+cmd+w",             "command": "workbench.action.terminal.toggleFindWholeWord",
-                                       "when": "terminalFindFocused && terminalProcessSupported || terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "ctrl+`",                "command": "workbench.action.terminal.toggleTerminal",
                                        "when": "terminal.active" },
   { "key": "alt+cmd+0",             "command": "workbench.action.toggleEditorGroupLayout" },
@@ -1296,7 +1309,7 @@
   { "key": "cmd+k up",              "command": "views.moveViewUp",
                                        "when": "focusedView != ''" },
   { "key": "cmd+k",                 "command": "workbench.action.terminal.clear",
-                                       "when": "terminalFocus && terminalProcessSupported" },
+                                       "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
   { "key": "f6",                    "command": "workbench.action.debug.pause",
                                        "when": "debugState == 'running'" },
   { "key": "enter",                 "command": "debug.renameWatchExpression",
@@ -1409,20 +1422,14 @@
                                        "when": "reference-list.hasResult && references-view.canNavigate" },
   { "key": "shift+alt+h",           "command": "references-view.showCallHierarchy",
                                        "when": "editorHasCallHierarchyProvider" },
-  { "key": "ctrl+enter",            "command": "github.copilot.generate",
-                                       "when": "editorTextFocus" },
-  { "key": "shift+cmd+v",           "command": "iliazeus.vscode-ansi.showPretty",
-                                       "when": "editorLangId == 'ansi'" },
+  { "key": "alt+o",                 "command": "C_Cpp.SwitchHeaderSource",
+                                       "when": "editorTextFocus && editorLangId == 'c' || editorTextFocus && editorLangId == 'cpp' || editorTextFocus && editorLangId == 'cuda-cpp'" },
   { "key": "shift+enter",           "command": "jupyter.execSelectionInteractive",
                                        "when": "editorTextFocus && isWorkspaceTrusted && jupyter.ownsSelection && !findInputFocussed && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'" },
   { "key": "f",                     "command": "notebook.find",
                                        "when": "notebookEditorFocused && !inputFocus" },
   { "key": "shift+enter",           "command": "python.execSelectionInTerminal",
                                        "when": "editorTextFocus && !findInputFocussed && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'" },
-  { "key": "alt+\\",                "command": "editor.action.inlineSuggest.trigger",
-                                       "when": "config.github.copilot.inlineSuggest.enable && editorTextFocus && !editorHasSelection && !inlineSuggestionsVisible" },
-  { "key": "cmd+k v",               "command": "iliazeus.vscode-ansi.showPrettyToSide",
-                                       "when": "editorLangId == 'ansi'" },
   { "key": "shift+enter",           "command": "jupyter.runcurrentcelladvance",
                                        "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !notebookEditorFocused" },
   { "key": "k",                     "command": "list.focusUp",
@@ -1508,6 +1515,29 @@
 
 
   // Here are other available commands:
+  // - C_Cpp.BuildAndDebugActiveFile
+  // - C_Cpp.ConfigurationEditJSON
+  // - C_Cpp.ConfigurationEditUI
+  // - C_Cpp.ConfigurationProviderSelect
+  // - C_Cpp.ConfigurationSelect
+  // - C_Cpp.DisableErrorSquiggles
+  // - C_Cpp.EnableErrorSquiggles
+  // - C_Cpp.GenerateEditorConfig
+  // - C_Cpp.GoToNextDirectiveInGroup
+  // - C_Cpp.GoToPrevDirectiveInGroup
+  // - C_Cpp.LogDiagnostics
+  // - C_Cpp.RescanWorkspace
+  // - C_Cpp.ResetDatabase
+  // - C_Cpp.RestartIntelliSenseForFile
+  // - C_Cpp.TakeSurvey
+  // - C_Cpp.ToggleDimInactiveRegions
+  // - C_Cpp.ToggleIncludeFallback
+  // - C_Cpp.VcpkgClipboardInstallSuggested
+  // - C_Cpp.VcpkgOnlineHelpSuggested
+  // - C_Cpp.referencesViewGroupByType
+  // - C_Cpp.referencesViewUngroupByType
+  // - CppReferencesView.focus
+  // - CppReferencesView.resetViewLocation
   // - acceptSelectedSuggestionOnEnter
   // - acceptSnippet
   // - addRootFolder
@@ -1528,8 +1558,6 @@
   // - configureExtensionsAutoUpdate.all
   // - configureExtensionsAutoUpdate.enabled
   // - configureExtensionsAutoUpdate.none
-  // - copilotSidebarWebview.view.focus
-  // - copilotSidebarWebview.view.resetViewLocation
   // - createCursor
   // - cursorRedo
   // - cursorWordAccessibilityLeft
@@ -1547,6 +1575,7 @@
   // - cursorWordStartRight
   // - cursorWordStartRightSelect
   // - cut
+  // - debug.action.toggleDisassemblyViewSourceCode
   // - debug.addConfiguration
   // - debug.addToWatchExpressions
   // - debug.breakWhenValueChanges
@@ -1580,6 +1609,30 @@
   // - deleteWordEndRight
   // - deleteWordStartLeft
   // - deleteWordStartRight
+  // - detailsContainers.focus
+  // - detailsContainers.resetViewLocation
+  // - devVolumes.focus
+  // - devVolumes.resetViewLocation
+  // - dockerContainers.focus
+  // - dockerContainers.removeView
+  // - dockerContainers.resetViewLocation
+  // - dockerContainers.toggleVisibility
+  // - dockerImages.focus
+  // - dockerImages.removeView
+  // - dockerImages.resetViewLocation
+  // - dockerImages.toggleVisibility
+  // - dockerNetworks.focus
+  // - dockerNetworks.removeView
+  // - dockerNetworks.resetViewLocation
+  // - dockerNetworks.toggleVisibility
+  // - dockerRegistries.focus
+  // - dockerRegistries.removeView
+  // - dockerRegistries.resetViewLocation
+  // - dockerRegistries.toggleVisibility
+  // - dockerVolumes.focus
+  // - dockerVolumes.removeView
+  // - dockerVolumes.resetViewLocation
+  // - dockerVolumes.toggleVisibility
   // - editor.action.addCursorsToBottom
   // - editor.action.addCursorsToTop
   // - editor.action.addSelectionToPreviousFindMatch
@@ -1603,6 +1656,7 @@
   // - editor.action.indentUsingTabs
   // - editor.action.indentationToSpaces
   // - editor.action.indentationToTabs
+  // - editor.action.inlineSuggest.trigger
   // - editor.action.insertSnippet
   // - editor.action.inspectTMScopes
   // - editor.action.measureExtHostLatency
@@ -1618,6 +1672,7 @@
   // - editor.action.referenceSearch.trigger
   // - editor.action.reindentlines
   // - editor.action.reindentselectedlines
+  // - editor.action.removeDuplicateLines
   // - editor.action.resetSuggestSize
   // - editor.action.revealDeclaration
   // - editor.action.selectToBracket
@@ -1674,7 +1729,6 @@
   // - editor.gotoParentFold
   // - editor.gotoPreviousFold
   // - editor.showTypeHierarchy
-  // - emmet.expandAbbreviation
   // - explorer.download
   // - explorer.newFile
   // - explorer.newFolder
@@ -1684,20 +1738,15 @@
   // - extension.bisect.start
   // - extension.bisect.stop
   // - extension.js-debug.addCustomBreakpoints
-  // - extension.js-debug.autoAttachToProcess
-  // - extension.js-debug.clearAutoAttachVariables
   // - extension.js-debug.createDebuggerTerminal
   // - extension.js-debug.createDiagnostics
   // - extension.js-debug.debugLink
   // - extension.js-debug.npmScript
   // - extension.js-debug.openEdgeDevTools
-  // - extension.js-debug.pickNodeProcess
   // - extension.js-debug.prettyPrint
   // - extension.js-debug.removeAllCustomBreakpoints
   // - extension.js-debug.removeCustomBreakpoint
-  // - extension.js-debug.requestCDPProxy
   // - extension.js-debug.revealPage
-  // - extension.js-debug.setAutoAttachVariables
   // - extension.js-debug.startProfile
   // - extension.js-debug.stopProfile
   // - extension.js-debug.toggleSkippingFile
@@ -1828,20 +1877,11 @@
   // - git.undoCommit
   // - git.unstage
   // - git.unstageAll
-  // - github.copilot.autocompleteAccepted
-  // - github.copilot.commandUpdate
-  // - github.copilot.generateForRange
-  // - github.copilot.generateForRangeJson
-  // - github.copilot.generateList
-  // - github.copilot.replaceRangeWithSolution
-  // - github.copilot.sendFeedback
-  // - github.copilot.toggleCopilot
   // - github.provide-manually
   // - github.publish
   // - goToNextReferenceFromEmbeddedEditor
   // - goToPreviousReferenceFromEmbeddedEditor
   // - help.tweetFeedback
-  // - iliazeus.vscode-ansi.insertEscapeCharacter
   // - imagePreview.zoomIn
   // - imagePreview.zoomOut
   // - javascript.goToProjectConfig
@@ -1862,7 +1902,6 @@
   // - jupyter.debugstepover
   // - jupyter.debugstop
   // - jupyter.enableDebugLogging
-  // - jupyter.enableLoadingWidgetScriptsFromThirdPartySource
   // - jupyter.expandallcells
   // - jupyter.export
   // - jupyter.exportAsPythonScript
@@ -1871,6 +1910,7 @@
   // - jupyter.exportfileandoutputasnotebook
   // - jupyter.exportfileasnotebook
   // - jupyter.exportoutputasnotebook
+  // - jupyter.filterKernels
   // - jupyter.importnotebook
   // - jupyter.importnotebookfile
   // - jupyter.interactive.clearAllCells
@@ -1889,13 +1929,9 @@
   // - jupyter.notebookeditor.redocells
   // - jupyter.notebookeditor.removeallcells
   // - jupyter.notebookeditor.restartkernel
-  // - jupyter.notebookeditor.runallcells
   // - jupyter.notebookeditor.undocells
   // - jupyter.openOutlineView
   // - jupyter.openVariableView
-  // - jupyter.opennotebook
-  // - jupyter.opennotebookInPreviewEditor
-  // - jupyter.reloadVSCode
   // - jupyter.resetLoggingLevel
   // - jupyter.restartkernel
   // - jupyter.runFileInteractive
@@ -1970,6 +2006,7 @@
   // - notebook.execute
   // - notebook.inspectLayout
   // - notebook.renderAllMarkdownCells
+  // - notebook.saveMimeTypeOrder
   // - notebook.setProfile
   // - notebook.toggleCellToolbarPosition
   // - notebook.toggleCellToolbarPositionFromEditorTitle
@@ -2028,7 +2065,6 @@
   // - python._loadLanguageServerExtension
   // - python.addImport
   // - python.addOptionalForParam
-  // - python.analysis.clearCache
   // - python.analysis.restartLanguageServer
   // - python.clearPersistentStorage
   // - python.clearWorkspaceInterpreter
@@ -2092,6 +2128,66 @@
   // - references-view.showTypeHierarchy
   // - references-view.tree.focus
   // - references-view.tree.resetViewLocation
+  // - remote-containers.addExtensionToConfig
+  // - remote-containers.attachToContainer
+  // - remote-containers.attachToContainerNewWindow
+  // - remote-containers.attachToK8sContainerFromViewlet
+  // - remote-containers.attachToRunningContainer
+  // - remote-containers.attachToRunningContainerFromViewlet
+  // - remote-containers.checkoutPRInVolume
+  // - remote-containers.cloneInVolume
+  // - remote-containers.cloneInVolumeFromViewlet
+  // - remote-containers.cloneRepositoryInVolumeFromViewlet
+  // - remote-containers.configureContainerFeatures
+  // - remote-containers.createDevContainerFile
+  // - remote-containers.explorerDetailsRefresh
+  // - remote-containers.explorerTargetsRefresh
+  // - remote-containers.explorerVolumesRefresh
+  // - remote-containers.getHelp
+  // - remote-containers.getStarted
+  // - remote-containers.inspectDockerResource
+  // - remote-containers.inspectInBasicDevContainer
+  // - remote-containers.inspectVolume
+  // - remote-containers.inspectVolumeFromViewlet
+  // - remote-containers.installDocker
+  // - remote-containers.installUserCLI
+  // - remote-containers.labelPortAndUpdateConfig
+  // - remote-containers.newContainer
+  // - remote-containers.openAttachConfigByNameFile
+  // - remote-containers.openAttachDevContainerFile
+  // - remote-containers.openDevContainerFile
+  // - remote-containers.openFolder
+  // - remote-containers.openLastLogFile
+  // - remote-containers.openLogFile
+  // - remote-containers.openPullRequestInVolume
+  // - remote-containers.openRepositoryFromRemoteHub
+  // - remote-containers.openRepositoryInUniqueVolume
+  // - remote-containers.openRepositoryInVolume
+  // - remote-containers.openWorkspace
+  // - remote-containers.provideFeedback
+  // - remote-containers.pruneVolumes
+  // - remote-containers.rebuildAndReopenInContainer
+  // - remote-containers.rebuildContainer
+  // - remote-containers.rebuildContainerNoCache
+  // - remote-containers.rebuildNoCacheAndReopenInContainer
+  // - remote-containers.removeContainer
+  // - remote-containers.removeRecentFolder
+  // - remote-containers.removeVolume
+  // - remote-containers.reopenInContainer
+  // - remote-containers.reopenInWSL
+  // - remote-containers.reopenLocally
+  // - remote-containers.reportIssue
+  // - remote-containers.revealLogTerminal
+  // - remote-containers.revealPostCreateTerminal
+  // - remote-containers.settings
+  // - remote-containers.showContainerLog
+  // - remote-containers.showDetails
+  // - remote-containers.showRecoveryContainerNotificationReset
+  // - remote-containers.showReopenInContainerNotificationReset
+  // - remote-containers.startAndOpenFolder
+  // - remote-containers.startContainer
+  // - remote-containers.stopContainer
+  // - remote-containers.trySample
   // - remote.explorer.switch
   // - remote.tunnel.changeLocalPort
   // - remote.tunnel.closeCommandPalette
@@ -2133,7 +2229,8 @@
   // - settings.switchToJSON
   // - showEditorScreenReaderNotification
   // - simpleBrowser.show
-  // - snippy.dismiss
+  // - targetsContainers.focus
+  // - targetsContainers.resetViewLocation
   // - terminal.focus
   // - terminal.removeView
   // - terminal.resetViewContainerLocation
@@ -2151,6 +2248,7 @@
   // - testing.runUsing
   // - testing.searchForTestExtension
   // - testing.selectDefaultTestProfiles
+  // - testing.sortByDuration
   // - testing.sortByLocation
   // - testing.sortByStatus
   // - testing.unhideTest
@@ -2182,6 +2280,103 @@
   // - update.showCurrentReleaseNotes
   // - update.updating
   // - variables.collapse
+  // - vscode-docker.compose.down
+  // - vscode-docker.compose.restart
+  // - vscode-docker.compose.up
+  // - vscode-docker.compose.up.subset
+  // - vscode-docker.configure
+  // - vscode-docker.configureCompose
+  // - vscode-docker.containers.attachShell
+  // - vscode-docker.containers.browse
+  // - vscode-docker.containers.composeGroup.down
+  // - vscode-docker.containers.composeGroup.logs
+  // - vscode-docker.containers.composeGroup.restart
+  // - vscode-docker.containers.composeGroup.start
+  // - vscode-docker.containers.composeGroup.stop
+  // - vscode-docker.containers.configureExplorer
+  // - vscode-docker.containers.downloadFile
+  // - vscode-docker.containers.inspect
+  // - vscode-docker.containers.openFile
+  // - vscode-docker.containers.prune
+  // - vscode-docker.containers.refresh
+  // - vscode-docker.containers.remove
+  // - vscode-docker.containers.restart
+  // - vscode-docker.containers.select
+  // - vscode-docker.containers.start
+  // - vscode-docker.containers.stats
+  // - vscode-docker.containers.stop
+  // - vscode-docker.containers.viewLogs
+  // - vscode-docker.contexts.configureExplorer
+  // - vscode-docker.contexts.create.aci
+  // - vscode-docker.contexts.help
+  // - vscode-docker.contexts.inspect
+  // - vscode-docker.contexts.refresh
+  // - vscode-docker.contexts.remove
+  // - vscode-docker.contexts.use
+  // - vscode-docker.debugging.initializeForDebugging
+  // - vscode-docker.help
+  // - vscode-docker.help.openWalkthrough
+  // - vscode-docker.help.reportIssue
+  // - vscode-docker.images.build
+  // - vscode-docker.images.configureExplorer
+  // - vscode-docker.images.copyFullTag
+  // - vscode-docker.images.inspect
+  // - vscode-docker.images.prune
+  // - vscode-docker.images.pull
+  // - vscode-docker.images.push
+  // - vscode-docker.images.refresh
+  // - vscode-docker.images.remove
+  // - vscode-docker.images.run
+  // - vscode-docker.images.runAzureCli
+  // - vscode-docker.images.runInteractive
+  // - vscode-docker.images.showDangling
+  // - vscode-docker.images.tag
+  // - vscode-docker.installDocker
+  // - vscode-docker.networks.configureExplorer
+  // - vscode-docker.networks.create
+  // - vscode-docker.networks.inspect
+  // - vscode-docker.networks.prune
+  // - vscode-docker.networks.refresh
+  // - vscode-docker.networks.remove
+  // - vscode-docker.pruneSystem
+  // - vscode-docker.registries.azure.buildImage
+  // - vscode-docker.registries.azure.createRegistry
+  // - vscode-docker.registries.azure.deleteRegistry
+  // - vscode-docker.registries.azure.deleteRepository
+  // - vscode-docker.registries.azure.openInPortal
+  // - vscode-docker.registries.azure.runFileAsTask
+  // - vscode-docker.registries.azure.runTask
+  // - vscode-docker.registries.azure.selectSubscriptions
+  // - vscode-docker.registries.azure.untagImage
+  // - vscode-docker.registries.azure.viewProperties
+  // - vscode-docker.registries.azure.viewTaskLogs
+  // - vscode-docker.registries.connectRegistry
+  // - vscode-docker.registries.copyImageDigest
+  // - vscode-docker.registries.deleteImage
+  // - vscode-docker.registries.deployImageToAci
+  // - vscode-docker.registries.deployImageToAzure
+  // - vscode-docker.registries.disconnectRegistry
+  // - vscode-docker.registries.dockerHub.openInBrowser
+  // - vscode-docker.registries.help
+  // - vscode-docker.registries.logInToDockerCli
+  // - vscode-docker.registries.logOutOfDockerCli
+  // - vscode-docker.registries.pullImage
+  // - vscode-docker.registries.pullRepository
+  // - vscode-docker.registries.reconnectRegistry
+  // - vscode-docker.registries.refresh
+  // - vscode-docker.views.dockerContexts.focus
+  // - vscode-docker.views.dockerContexts.removeView
+  // - vscode-docker.views.dockerContexts.resetViewLocation
+  // - vscode-docker.views.dockerContexts.toggleVisibility
+  // - vscode-docker.views.help.focus
+  // - vscode-docker.views.help.removeView
+  // - vscode-docker.views.help.resetViewLocation
+  // - vscode-docker.views.help.toggleVisibility
+  // - vscode-docker.volumes.configureExplorer
+  // - vscode-docker.volumes.inspect
+  // - vscode-docker.volumes.prune
+  // - vscode-docker.volumes.refresh
+  // - vscode-docker.volumes.remove
   // - walkthroughs.selectStep
   // - watch.collapse
   // - welcome.markStepComplete
@@ -2468,6 +2663,7 @@
   // - workbench.action.toggleKeybindingsLog
   // - workbench.action.toggleMaximizedPanel
   // - workbench.action.toggleMultiCursorModifier
+  // - workbench.action.toggleNotebookClipboardLog
   // - workbench.action.toggleScreencastMode
   // - workbench.action.toggleSearchOnType
   // - workbench.action.toggleSharedProcess
@@ -2487,6 +2683,22 @@
   // - workbench.actions.sync.resolveResource
   // - workbench.actions.sync.turnOffSyncOnMachine
   // - workbench.actions.syncData.reset
+  // - workbench.actions.treeView.CppReferencesView.collapseAll
+  // - workbench.actions.treeView.CppReferencesView.refresh
+  // - workbench.actions.treeView.detailsContainers.collapseAll
+  // - workbench.actions.treeView.detailsContainers.refresh
+  // - workbench.actions.treeView.devVolumes.collapseAll
+  // - workbench.actions.treeView.devVolumes.refresh
+  // - workbench.actions.treeView.dockerContainers.collapseAll
+  // - workbench.actions.treeView.dockerContainers.refresh
+  // - workbench.actions.treeView.dockerImages.collapseAll
+  // - workbench.actions.treeView.dockerImages.refresh
+  // - workbench.actions.treeView.dockerNetworks.collapseAll
+  // - workbench.actions.treeView.dockerNetworks.refresh
+  // - workbench.actions.treeView.dockerRegistries.collapseAll
+  // - workbench.actions.treeView.dockerRegistries.refresh
+  // - workbench.actions.treeView.dockerVolumes.collapseAll
+  // - workbench.actions.treeView.dockerVolumes.refresh
   // - workbench.actions.treeView.jsBrowserBreakpoints.collapseAll
   // - workbench.actions.treeView.jsBrowserBreakpoints.refresh
   // - workbench.actions.treeView.npm.collapseAll
@@ -2494,7 +2706,13 @@
   // - workbench.actions.treeView.references-view.tree.collapseAll
   // - workbench.actions.treeView.references-view.tree.refresh
   // - workbench.actions.treeView.repl.filter
+  // - workbench.actions.treeView.targetsContainers.collapseAll
+  // - workbench.actions.treeView.targetsContainers.refresh
   // - workbench.actions.treeView.testExplorer.filter
+  // - workbench.actions.treeView.vscode-docker.views.dockerContexts.collapseAll
+  // - workbench.actions.treeView.vscode-docker.views.dockerContexts.refresh
+  // - workbench.actions.treeView.vscode-docker.views.help.collapseAll
+  // - workbench.actions.treeView.vscode-docker.views.help.refresh
   // - workbench.actions.treeView.workbench.panel.markers.view.collapseAll
   // - workbench.actions.treeView.workbench.panel.markers.view.filter
   // - workbench.actions.treeView.workbench.views.sync.localActivity.collapseAll
@@ -2514,12 +2732,18 @@
   // - workbench.debug.action.focusRepl
   // - workbench.debug.action.focusVariablesView
   // - workbench.debug.action.focusWatchView
+  // - workbench.debug.breakPointsView.removeView
   // - workbench.debug.breakPointsView.resetViewLocation
+  // - workbench.debug.breakPointsView.toggleVisibility
+  // - workbench.debug.callStackView.removeView
   // - workbench.debug.callStackView.resetViewLocation
+  // - workbench.debug.callStackView.toggleVisibility
   // - workbench.debug.loadedScriptsView.focus
   // - workbench.debug.loadedScriptsView.resetViewLocation
   // - workbench.debug.panel.action.clearReplAction
+  // - workbench.debug.variablesView.removeView
   // - workbench.debug.variablesView.resetViewLocation
+  // - workbench.debug.variablesView.toggleVisibility
   // - workbench.debug.viewlet.action.addFunctionBreakpointAction
   // - workbench.debug.viewlet.action.addWatchExpression
   // - workbench.debug.viewlet.action.copyValue
@@ -2530,11 +2754,11 @@
   // - workbench.debug.viewlet.action.removeAllWatchExpressions
   // - workbench.debug.viewlet.action.removeBreakpoint
   // - workbench.debug.viewlet.action.toggleBreakpointsActivatedAction
+  // - workbench.debug.watchExpressionsView.removeView
   // - workbench.debug.watchExpressionsView.resetViewLocation
+  // - workbench.debug.watchExpressionsView.toggleVisibility
   // - workbench.debug.welcome.focus
-  // - workbench.debug.welcome.removeView
   // - workbench.debug.welcome.resetViewLocation
-  // - workbench.debug.welcome.toggleVisibility
   // - workbench.explorer.fileView.focus
   // - workbench.explorer.fileView.removeView
   // - workbench.explorer.fileView.resetViewLocation
@@ -2661,8 +2885,8 @@
   // - workbench.userDataSync.actions.turnOn
   // - workbench.view.debug.resetViewContainerLocation
   // - workbench.view.explorer.resetViewContainerLocation
-  // - workbench.view.extension.copilot-sidebar-webview
-  // - workbench.view.extension.copilot-sidebar-webview.resetViewContainerLocation
+  // - workbench.view.extension.dockerView
+  // - workbench.view.extension.dockerView.resetViewContainerLocation
   // - workbench.view.extension.jupyter-variables
   // - workbench.view.extension.jupyter-variables.resetViewContainerLocation
   // - workbench.view.extension.references-view

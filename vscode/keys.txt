@@ -23,6 +23,28 @@ breadcrumbs.toggle
 breadcrumbs.toggleFromEditorTitle
 breadcrumbs.toggleToOn
 breakpointWidget.action.acceptInput
+C_Cpp.BuildAndDebugActiveFile
+C_Cpp.ConfigurationEditJSON
+C_Cpp.ConfigurationEditUI
+C_Cpp.ConfigurationProviderSelect
+C_Cpp.ConfigurationSelect
+C_Cpp.DisableErrorSquiggles
+C_Cpp.EnableErrorSquiggles
+C_Cpp.GenerateEditorConfig
+C_Cpp.GoToNextDirectiveInGroup
+C_Cpp.GoToPrevDirectiveInGroup
+C_Cpp.LogDiagnostics
+C_Cpp.referencesViewGroupByType
+C_Cpp.referencesViewUngroupByType
+C_Cpp.RescanWorkspace
+C_Cpp.ResetDatabase
+C_Cpp.RestartIntelliSenseForFile
+C_Cpp.SwitchHeaderSource
+C_Cpp.TakeSurvey
+C_Cpp.ToggleDimInactiveRegions
+C_Cpp.ToggleIncludeFallback
+C_Cpp.VcpkgClipboardInstallSuggested
+C_Cpp.VcpkgOnlineHelpSuggested
 callStack.collapse
 cancelLinkedEditingInput                                        escape                          when LinkedEditingInputVisible && editorTextFocus
 cancelRenameInput                                               escape                          when editorFocus && renameInputVisible
@@ -49,10 +71,10 @@ compositionType
 configureExtensionsAutoUpdate.all
 configureExtensionsAutoUpdate.enabled
 configureExtensionsAutoUpdate.none
-copilotSidebarWebview.view.focus
-copilotSidebarWebview.view.resetViewLocation
 copyFilePath
 copyRelativeFilePath
+CppReferencesView.focus
+CppReferencesView.resetViewLocation
 createCursor
 cursorBottom                                                    end                             when textInputFocus
 cursorBottomSelect                                              shift+cmd+down                  when textInputFocus
@@ -123,6 +145,7 @@ cursorWordStartLeftSelect
 cursorWordStartRight
 cursorWordStartRightSelect
 cut
+debug.action.toggleDisassemblyViewSourceCode
 debug.addConfiguration
 debug.addToWatchExpressions
 debug.breakWhenValueChanges
@@ -175,6 +198,30 @@ deleteWordPartRight
 deleteWordRight                                                 alt+delete                      when textInputFocus && !editorReadonly
 deleteWordStartLeft
 deleteWordStartRight
+detailsContainers.focus
+detailsContainers.resetViewLocation
+devVolumes.focus
+devVolumes.resetViewLocation
+dockerContainers.focus
+dockerContainers.removeView
+dockerContainers.resetViewLocation
+dockerContainers.toggleVisibility
+dockerImages.focus
+dockerImages.removeView
+dockerImages.resetViewLocation
+dockerImages.toggleVisibility
+dockerNetworks.focus
+dockerNetworks.removeView
+dockerNetworks.resetViewLocation
+dockerNetworks.toggleVisibility
+dockerRegistries.focus
+dockerRegistries.removeView
+dockerRegistries.resetViewLocation
+dockerRegistries.toggleVisibility
+dockerVolumes.focus
+dockerVolumes.removeView
+dockerVolumes.resetViewLocation
+dockerVolumes.toggleVisibility
 editor.action.addCommentLine
 editor.action.addCursorsToBottom
 editor.action.addCursorsToTop
@@ -273,6 +320,7 @@ editor.action.referenceSearch.trigger
 editor.action.reindentlines
 editor.action.reindentselectedlines
 editor.action.removeCommentLine
+editor.action.removeDuplicateLines
 editor.action.rename
 editor.action.replaceAll                                        alt+cmd+enter                   when editorFocus && findWidgetVisible
 editor.action.replaceOne                                        cmd+r                           when editorFocus && findWidgetVisible
@@ -394,7 +442,6 @@ editor.unfoldAll
 editor.unfoldAllExcept
 editor.unfoldAllMarkerRegions
 editor.unfoldRecursively
-emmet.expandAbbreviation
 execCopy
 execCut
 execPaste
@@ -411,19 +458,15 @@ extension.bisect.start
 extension.bisect.stop
 extension.js-debug.addCustomBreakpoints
 extension.js-debug.autoAttachToProcess
-extension.js-debug.clearAutoAttachVariables
 extension.js-debug.createDebuggerTerminal
 extension.js-debug.createDiagnostics
 extension.js-debug.debugLink
 extension.js-debug.npmScript
 extension.js-debug.openEdgeDevTools
-extension.js-debug.pickNodeProcess
 extension.js-debug.prettyPrint
 extension.js-debug.removeAllCustomBreakpoints
 extension.js-debug.removeCustomBreakpoint
-extension.js-debug.requestCDPProxy
 extension.js-debug.revealPage
-extension.js-debug.setAutoAttachVariables
 extension.js-debug.startProfile
 extension.js-debug.stopProfile
 extension.js-debug.toggleSkippingFile
@@ -598,6 +641,8 @@ interactive.execute
 interactive.history.next
 interactive.history.previous
 interactive.input.clear                                         escape                          when !LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'
+interactive.scrollToBottom
+interactive.scrollToTop
 javascript.goToProjectConfig
 javascript.reloadProjects
 jsBrowserBreakpoints.focus
@@ -621,7 +666,6 @@ jupyter.debugstepover
 jupyter.debugstop
 jupyter.deleteCells
 jupyter.enableDebugLogging
-jupyter.enableLoadingWidgetScriptsFromThirdPartySource
 jupyter.execSelectionInteractive
 jupyter.expandallcells
 jupyter.export
@@ -633,6 +677,7 @@ jupyter.exportToHTML
 jupyter.exportToPDF
 jupyter.extendSelectionByCellAbove
 jupyter.extendSelectionByCellBelow
+jupyter.filterKernels
 jupyter.gotoNextCellInFile
 jupyter.gotoPrevCellInFile
 jupyter.importnotebook
@@ -658,14 +703,10 @@ jupyter.notebookeditor.interruptkernel
 jupyter.notebookeditor.redocells
 jupyter.notebookeditor.removeallcells
 jupyter.notebookeditor.restartkernel
-jupyter.notebookeditor.runallcells
 jupyter.notebookeditor.undocells
-jupyter.opennotebook
-jupyter.opennotebookInPreviewEditor
 jupyter.openOutlineView
 jupyter.openVariableView
 jupyter.refreshDataViewer
-jupyter.reloadVSCode
 jupyter.resetLoggingLevel
 jupyter.restartkernel
 jupyter.runallcells
@@ -828,6 +869,7 @@ notebook.formatCell
 notebook.hideFind                                               escape                          when notebookEditorFocused && notebookFindWidgetFocused
 notebook.inspectLayout
 notebook.renderAllMarkdownCells
+notebook.saveMimeTypeOrder
 notebook.setProfile
 notebook.toggleCellToolbarPosition
 notebook.toggleCellToolbarPositionFromEditorTitle
@@ -879,7 +921,7 @@ paste
 perfview.show
 previousCompressedFolder
 problems.action.clearFilterText
-problems.action.copy                                            cmd+c                           when problemFocus
+problems.action.copy                                            cmd+c                           when problemsVisibility && !relatedInformationFocus && focusedView == 'workbench.panel.markers.view'
 problems.action.copyMessage
 problems.action.copyRelatedInformationMessage
 problems.action.focusFilter
@@ -906,7 +948,6 @@ pyright.organizeimports
 python._loadLanguageServerExtension
 python.addImport
 python.addOptionalForParam
-python.analysis.clearCache
 python.analysis.restartLanguageServer
 python.clearPersistentStorage
 python.clearWorkspaceInterpreter
@@ -980,6 +1021,66 @@ references-view.showSupertypes
 references-view.showTypeHierarchy
 references-view.tree.focus
 references-view.tree.resetViewLocation
+remote-containers.addExtensionToConfig
+remote-containers.attachToContainer
+remote-containers.attachToContainerNewWindow
+remote-containers.attachToK8sContainerFromViewlet
+remote-containers.attachToRunningContainer
+remote-containers.attachToRunningContainerFromViewlet
+remote-containers.checkoutPRInVolume
+remote-containers.cloneInVolume
+remote-containers.cloneInVolumeFromViewlet
+remote-containers.cloneRepositoryInVolumeFromViewlet
+remote-containers.configureContainerFeatures
+remote-containers.createDevContainerFile
+remote-containers.explorerDetailsRefresh
+remote-containers.explorerTargetsRefresh
+remote-containers.explorerVolumesRefresh
+remote-containers.getHelp
+remote-containers.getStarted
+remote-containers.inspectDockerResource
+remote-containers.inspectInBasicDevContainer
+remote-containers.inspectVolume
+remote-containers.inspectVolumeFromViewlet
+remote-containers.installDocker
+remote-containers.installUserCLI
+remote-containers.labelPortAndUpdateConfig
+remote-containers.newContainer
+remote-containers.openAttachConfigByNameFile
+remote-containers.openAttachDevContainerFile
+remote-containers.openDevContainerFile
+remote-containers.openFolder
+remote-containers.openLastLogFile
+remote-containers.openLogFile
+remote-containers.openPullRequestInVolume
+remote-containers.openRepositoryFromRemoteHub
+remote-containers.openRepositoryInUniqueVolume
+remote-containers.openRepositoryInVolume
+remote-containers.openWorkspace
+remote-containers.provideFeedback
+remote-containers.pruneVolumes
+remote-containers.rebuildAndReopenInContainer
+remote-containers.rebuildContainer
+remote-containers.rebuildContainerNoCache
+remote-containers.rebuildNoCacheAndReopenInContainer
+remote-containers.removeContainer
+remote-containers.removeRecentFolder
+remote-containers.removeVolume
+remote-containers.reopenInContainer
+remote-containers.reopenInWSL
+remote-containers.reopenLocally
+remote-containers.reportIssue
+remote-containers.revealLogTerminal
+remote-containers.revealPostCreateTerminal
+remote-containers.settings
+remote-containers.showContainerLog
+remote-containers.showDetails
+remote-containers.showRecoveryContainerNotificationReset
+remote-containers.showReopenInContainerNotificationReset
+remote-containers.startAndOpenFolder
+remote-containers.startContainer
+remote-containers.stopContainer
+remote-containers.trySample
 remote.explorer.switch
 remote.tunnel.changeLocalPort
 remote.tunnel.closeCommandPalette
@@ -1080,8 +1181,9 @@ showNextParameterHint                                           down            
 showPrevParameterHint                                           ctrl+p                          when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                              when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 simpleBrowser.show
-snippy.dismiss
 tab                                                             tab                             when editorTextFocus && !editorReadonly && !editorTabMovesFocus
+targetsContainers.focus
+targetsContainers.resetViewLocation
 terminal.focus
 terminal.removeView
 terminal.resetViewContainerLocation
@@ -1115,6 +1217,7 @@ testing.runUsing
 testing.searchForTestExtension
 testing.selectDefaultTestProfiles
 testing.showMostRecentOutput
+testing.sortByDuration
 testing.sortByLocation
 testing.sortByStatus
 testing.toggleInlineTestOutput
@@ -1170,6 +1273,103 @@ views.moveViewDown
 views.moveViewLeft
 views.moveViewRight
 views.moveViewUp
+vscode-docker.compose.down
+vscode-docker.compose.restart
+vscode-docker.compose.up
+vscode-docker.compose.up.subset
+vscode-docker.configure
+vscode-docker.configureCompose
+vscode-docker.containers.attachShell
+vscode-docker.containers.browse
+vscode-docker.containers.composeGroup.down
+vscode-docker.containers.composeGroup.logs
+vscode-docker.containers.composeGroup.restart
+vscode-docker.containers.composeGroup.start
+vscode-docker.containers.composeGroup.stop
+vscode-docker.containers.configureExplorer
+vscode-docker.containers.downloadFile
+vscode-docker.containers.inspect
+vscode-docker.containers.openFile
+vscode-docker.containers.prune
+vscode-docker.containers.refresh
+vscode-docker.containers.remove
+vscode-docker.containers.restart
+vscode-docker.containers.select
+vscode-docker.containers.start
+vscode-docker.containers.stats
+vscode-docker.containers.stop
+vscode-docker.containers.viewLogs
+vscode-docker.contexts.configureExplorer
+vscode-docker.contexts.create.aci
+vscode-docker.contexts.help
+vscode-docker.contexts.inspect
+vscode-docker.contexts.refresh
+vscode-docker.contexts.remove
+vscode-docker.contexts.use
+vscode-docker.debugging.initializeForDebugging
+vscode-docker.help
+vscode-docker.help.openWalkthrough
+vscode-docker.help.reportIssue
+vscode-docker.images.build
+vscode-docker.images.configureExplorer
+vscode-docker.images.copyFullTag
+vscode-docker.images.inspect
+vscode-docker.images.prune
+vscode-docker.images.pull
+vscode-docker.images.push
+vscode-docker.images.refresh
+vscode-docker.images.remove
+vscode-docker.images.run
+vscode-docker.images.runAzureCli
+vscode-docker.images.runInteractive
+vscode-docker.images.showDangling
+vscode-docker.images.tag
+vscode-docker.installDocker
+vscode-docker.networks.configureExplorer
+vscode-docker.networks.create
+vscode-docker.networks.inspect
+vscode-docker.networks.prune
+vscode-docker.networks.refresh
+vscode-docker.networks.remove
+vscode-docker.pruneSystem
+vscode-docker.registries.azure.buildImage
+vscode-docker.registries.azure.createRegistry
+vscode-docker.registries.azure.deleteRegistry
+vscode-docker.registries.azure.deleteRepository
+vscode-docker.registries.azure.openInPortal
+vscode-docker.registries.azure.runFileAsTask
+vscode-docker.registries.azure.runTask
+vscode-docker.registries.azure.selectSubscriptions
+vscode-docker.registries.azure.untagImage
+vscode-docker.registries.azure.viewProperties
+vscode-docker.registries.azure.viewTaskLogs
+vscode-docker.registries.connectRegistry
+vscode-docker.registries.copyImageDigest
+vscode-docker.registries.deleteImage
+vscode-docker.registries.deployImageToAci
+vscode-docker.registries.deployImageToAzure
+vscode-docker.registries.disconnectRegistry
+vscode-docker.registries.dockerHub.openInBrowser
+vscode-docker.registries.help
+vscode-docker.registries.logInToDockerCli
+vscode-docker.registries.logOutOfDockerCli
+vscode-docker.registries.pullImage
+vscode-docker.registries.pullRepository
+vscode-docker.registries.reconnectRegistry
+vscode-docker.registries.refresh
+vscode-docker.views.dockerContexts.focus
+vscode-docker.views.dockerContexts.removeView
+vscode-docker.views.dockerContexts.resetViewLocation
+vscode-docker.views.dockerContexts.toggleVisibility
+vscode-docker.views.help.focus
+vscode-docker.views.help.removeView
+vscode-docker.views.help.resetViewLocation
+vscode-docker.views.help.toggleVisibility
+vscode-docker.volumes.configureExplorer
+vscode-docker.volumes.inspect
+vscode-docker.volumes.prune
+vscode-docker.volumes.refresh
+vscode-docker.volumes.remove
 walkthroughs.selectStep
 watch.collapse
 welcome.goBack                                                  escape                          when inWelcome && activeEditor == 'gettingStartedPage'
@@ -1536,8 +1736,8 @@ workbench.action.terminal.changeColorPanel
 workbench.action.terminal.changeIcon
 workbench.action.terminal.changeIconInstance
 workbench.action.terminal.changeIconPanel
-workbench.action.terminal.clear                                 cmd+k                           when terminalFocus && terminalProcessSupported
-workbench.action.terminal.clearSelection                        escape                          when terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible
+workbench.action.terminal.clear                                 cmd+k                           when terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported
+workbench.action.terminal.clearSelection                        escape                          when terminalFocus && terminalHasBeenCreated && terminalTextSelected && !terminalFindVisible || terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible
 workbench.action.terminal.copySelection
 workbench.action.terminal.createProfileButton
 workbench.action.terminal.detachSession
@@ -1559,7 +1759,7 @@ workbench.action.terminal.focusNextPane
 workbench.action.terminal.focusPrevious
 workbench.action.terminal.focusPreviousPane
 workbench.action.terminal.focusTabs
-workbench.action.terminal.hideFind                              escape                          when terminalFindVisible && terminalFocus && terminalProcessSupported
+workbench.action.terminal.hideFind                              escape                          when terminalFindVisible && terminalFocus && terminalHasBeenCreated || terminalFindVisible && terminalFocus && terminalProcessSupported
 workbench.action.terminal.joinInstance
 workbench.action.terminal.kill                                  alt+cmd+t
 workbench.action.terminal.killEditor
@@ -1633,6 +1833,7 @@ workbench.action.toggleKeepEditors
 workbench.action.toggleKeybindingsLog
 workbench.action.toggleMaximizedPanel
 workbench.action.toggleMultiCursorModifier
+workbench.action.toggleNotebookClipboardLog
 workbench.action.togglePanel
 workbench.action.toggleScreencastMode
 workbench.action.toggleSearchOnType
@@ -1660,6 +1861,22 @@ workbench.actions.sync.replaceCurrent
 workbench.actions.sync.resolveResource
 workbench.actions.sync.turnOffSyncOnMachine
 workbench.actions.syncData.reset
+workbench.actions.treeView.CppReferencesView.collapseAll
+workbench.actions.treeView.CppReferencesView.refresh
+workbench.actions.treeView.detailsContainers.collapseAll
+workbench.actions.treeView.detailsContainers.refresh
+workbench.actions.treeView.devVolumes.collapseAll
+workbench.actions.treeView.devVolumes.refresh
+workbench.actions.treeView.dockerContainers.collapseAll
+workbench.actions.treeView.dockerContainers.refresh
+workbench.actions.treeView.dockerImages.collapseAll
+workbench.actions.treeView.dockerImages.refresh
+workbench.actions.treeView.dockerNetworks.collapseAll
+workbench.actions.treeView.dockerNetworks.refresh
+workbench.actions.treeView.dockerRegistries.collapseAll
+workbench.actions.treeView.dockerRegistries.refresh
+workbench.actions.treeView.dockerVolumes.collapseAll
+workbench.actions.treeView.dockerVolumes.refresh
 workbench.actions.treeView.jsBrowserBreakpoints.collapseAll
 workbench.actions.treeView.jsBrowserBreakpoints.refresh
 workbench.actions.treeView.npm.collapseAll
@@ -1667,7 +1884,13 @@ workbench.actions.treeView.npm.refresh
 workbench.actions.treeView.references-view.tree.collapseAll
 workbench.actions.treeView.references-view.tree.refresh
 workbench.actions.treeView.repl.filter
+workbench.actions.treeView.targetsContainers.collapseAll
+workbench.actions.treeView.targetsContainers.refresh
 workbench.actions.treeView.testExplorer.filter
+workbench.actions.treeView.vscode-docker.views.dockerContexts.collapseAll
+workbench.actions.treeView.vscode-docker.views.dockerContexts.refresh
+workbench.actions.treeView.vscode-docker.views.help.collapseAll
+workbench.actions.treeView.vscode-docker.views.help.refresh
 workbench.actions.treeView.workbench.panel.markers.view.collapseAll
 workbench.actions.treeView.workbench.panel.markers.view.filter
 workbench.actions.treeView.workbench.views.sync.localActivity.collapseAll
@@ -1692,12 +1915,18 @@ workbench.debug.action.focusRepl
 workbench.debug.action.focusVariablesView
 workbench.debug.action.focusWatchView
 workbench.debug.action.toggleRepl                               shift+cmd+y                     when workbench.panel.repl.view.active
+workbench.debug.breakPointsView.removeView
 workbench.debug.breakPointsView.resetViewLocation
+workbench.debug.breakPointsView.toggleVisibility
+workbench.debug.callStackView.removeView
 workbench.debug.callStackView.resetViewLocation
+workbench.debug.callStackView.toggleVisibility
 workbench.debug.loadedScriptsView.focus
 workbench.debug.loadedScriptsView.resetViewLocation
 workbench.debug.panel.action.clearReplAction
+workbench.debug.variablesView.removeView
 workbench.debug.variablesView.resetViewLocation
+workbench.debug.variablesView.toggleVisibility
 workbench.debug.viewlet.action.addFunctionBreakpointAction
 workbench.debug.viewlet.action.addWatchExpression
 workbench.debug.viewlet.action.copyValue
@@ -1708,11 +1937,11 @@ workbench.debug.viewlet.action.removeAllBreakpoints
 workbench.debug.viewlet.action.removeAllWatchExpressions
 workbench.debug.viewlet.action.removeBreakpoint
 workbench.debug.viewlet.action.toggleBreakpointsActivatedAction
+workbench.debug.watchExpressionsView.removeView
 workbench.debug.watchExpressionsView.resetViewLocation
+workbench.debug.watchExpressionsView.toggleVisibility
 workbench.debug.welcome.focus
-workbench.debug.welcome.removeView
 workbench.debug.welcome.resetViewLocation
-workbench.debug.welcome.toggleVisibility
 workbench.explorer.fileView.focus
 workbench.explorer.fileView.removeView
 workbench.explorer.fileView.resetViewLocation
@@ -1849,8 +2078,8 @@ workbench.view.debug                                            shift+cmd+d     
 workbench.view.debug.resetViewContainerLocation
 workbench.view.explorer                                         shift+cmd+e                     when viewContainer.workbench.view.explorer.enabled
 workbench.view.explorer.resetViewContainerLocation
-workbench.view.extension.copilot-sidebar-webview
-workbench.view.extension.copilot-sidebar-webview.resetViewContainerLocation
+workbench.view.extension.dockerView
+workbench.view.extension.dockerView.resetViewContainerLocation
 workbench.view.extension.jupyter-variables
 workbench.view.extension.jupyter-variables.resetViewContainerLocation
 workbench.view.extension.references-view
