@@ -272,10 +272,10 @@ editor.action.indentationToTabs
 editor.action.indentLines
 editor.action.indentUsingSpaces
 editor.action.indentUsingTabs
-editor.action.inlineSuggest.commit
+editor.action.inlineSuggest.commit                              tab                             when inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorTabMovesFocus
 editor.action.inlineSuggest.hide                                escape                          when inlineSuggestionVisible
-editor.action.inlineSuggest.showNext
-editor.action.inlineSuggest.showPrevious
+editor.action.inlineSuggest.showNext                            alt+]                           when inlineSuggestionVisible && !editorReadonly
+editor.action.inlineSuggest.showPrevious                        alt+[                           when inlineSuggestionVisible && !editorReadonly
 editor.action.inlineSuggest.trigger
 editor.action.inPlaceReplace.down
 editor.action.inPlaceReplace.up
@@ -457,7 +457,6 @@ extension.bisect.next
 extension.bisect.start
 extension.bisect.stop
 extension.js-debug.addCustomBreakpoints
-extension.js-debug.autoAttachToProcess
 extension.js-debug.createDebuggerTerminal
 extension.js-debug.createDiagnostics
 extension.js-debug.debugLink
@@ -608,15 +607,6 @@ git.undoCommit
 git.unstage
 git.unstageAll
 git.unstageSelectedRanges
-github.copilot.autocompleteAccepted
-github.copilot.commandUpdate
-github.copilot.generate
-github.copilot.generateForRange
-github.copilot.generateForRangeJson
-github.copilot.generateList
-github.copilot.replaceRangeWithSolution
-github.copilot.sendFeedback
-github.copilot.toggleCopilot
 github.provide-manually
 github.publish
 goToNextReference
@@ -627,14 +617,11 @@ help.tweetFeedback
 hideSuggestWidget                                               escape                          when suggestWidgetVisible && textInputFocus
 history.showNext
 history.showPrevious
-iliazeus.vscode-ansi.insertEscapeCharacter
-iliazeus.vscode-ansi.showPretty
-iliazeus.vscode-ansi.showPrettyToSide
 imagePreview.zoomIn
 imagePreview.zoomOut
 increaseSearchEditorContextLines
-insertBestCompletion                                            tab                             when atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
-insertNextSuggestion
+insertBestCompletion                                            tab                             when atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on' && !inlineSuggestionVisible
+insertNextSuggestion                                            tab                             when hasOtherSuggestions && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on' && !inlineSuggestionVisible
 insertPrevSuggestion
 insertSnippet
 interactive.execute
@@ -1181,7 +1168,7 @@ showNextParameterHint                                           down            
 showPrevParameterHint                                           ctrl+p                          when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 showPrevParameterHint                                           up                              when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 simpleBrowser.show
-tab                                                             tab                             when editorTextFocus && !editorReadonly && !editorTabMovesFocus
+tab                                                             tab                             when editorTextFocus && !editorReadonly && !editorTabMovesFocus && !suggestWidgetVisible && !inlineSuggestionVisible
 targetsContainers.focus
 targetsContainers.resetViewLocation
 terminal.focus
