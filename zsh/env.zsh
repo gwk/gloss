@@ -51,6 +51,7 @@ case $GLOSS_OS in
       /Library/Frameworks/Python.framework/Versions/3.10/bin
       /Library/Frameworks/Python.framework/Versions/3.9/bin
       /Library/Frameworks/Python.framework/Versions/3.8/bin
+      ~/.cargo/bin
     )
     #^ Place python directories after system directories for safety;
     # we do not want pip-installed executables to mask system ones.
