@@ -131,6 +131,5 @@ $GLOSS_PROMPT_PREFIX_SUDO\
   PS2="%{$RST$TXT_Y%}%_> %{$RST%}"
 }
 
-precmd_functions=(
-  update_terminal_prompt
-)
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd update_terminal_prompt
