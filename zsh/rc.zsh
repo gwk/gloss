@@ -92,7 +92,7 @@ else
 fi
 
 update_terminal_prompt() {
-  local exit_status=$?
+  local _exit_status=$?
 
   # Green prompt if last command exited cleanly (0); otherwise red.
   if [[ $_exit_status -eq 0 ]]; then
