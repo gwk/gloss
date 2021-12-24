@@ -46,6 +46,7 @@ def gloss_excepthook(type_:Type[BaseException], value:BaseException, traceback:T
   TXT_D = sgr(TXT, gray26(9))
   TXT_N = sgr(TXT, gray26(13))
   TXT_L = sgr(TXT, gray26(16))
+  TXT_G = sgr(TXT, rgb6(0, 4, 0))
   TXT_O = sgr(TXT, rgb6(5, 2, 0))
   TXT_Y = sgr(TXT, rgb6(5, 5, 0))
 
@@ -70,7 +71,7 @@ def gloss_excepthook(type_:Type[BaseException], value:BaseException, traceback:T
       elif file.startswith(_home_dir_slash):
         rel_file = file[len(_home_dir_slash):]
         file = '~/' + rel_file
-      stderr.write(f'{TXT_L}  {file}:{line}{TXT_D}{s_in}{TXT_L}{fn}{RST_TXT}{code}')
+      stderr.write(f'{TXT_L}  {file}:{line}{TXT_D}{s_in}{TXT_G}{fn}{RST}{code}')
       #stderr.write(repr(msg)+'\n')
     elif k == 'recursion':
       stderr.write(f'{TXT_R3}{m[0]}{RST}')
