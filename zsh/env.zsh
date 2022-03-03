@@ -48,6 +48,7 @@ case $GLOSS_OS in
       /opt/local/bin
       /opt/local/sbin
       /usr/local/gloss/bin
+      /usr/local/py/Python.framework/Versions/3.10/bin
       /Library/Frameworks/Python.framework/Versions/3.10/bin
       /Library/Frameworks/Python.framework/Versions/3.9/bin
       /Library/Frameworks/Python.framework/Versions/3.8/bin
