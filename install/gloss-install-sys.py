@@ -80,20 +80,6 @@ def main():
     else:
       errSL('no platform specifics to gen found at:', bins_os_path)
 
-    # On mac, create a symlink for python3 that points to the MacOS/Python executable,
-    # which appears not to perform the extra exec that python3 does, and is thus more amenable to debugging under lldb.
-    # TODO: do not use hardcoded version.
-    mac_python_exe = '/Library/Frameworks/Python.framework/Versions/3.10/Resources/Python.app/Contents/MacOS/Python'
-    if platform == 'mac' and path_exists(mac_python_exe):
-      # Note: symlinking into gloss bin is no longer sufficient since we changed env.zsh to put /usr/local/bin ahead.
-      # For now, just overwrite whatever is in /usr/local/bin.
-      #python3_path = path_join(dst_dir, 'bin', 'python3')
-      python3_path = '/usr/local/bin/python3'
-      errSL(f'adding python3 symlink for easier debugging on mac: {python3_path} -> {mac_python_exe}')
-      remove_file(python3_path)
-      symlink(mac_python_exe, python3_path)
-
-
   except OSError as e: # Usually a permissions problem.
     errSL(e)
     exit(1)
