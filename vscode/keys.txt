@@ -1466,7 +1466,7 @@ workbench.action.extensionHostProfiler.stop
 workbench.action.files.copyPathOfActiveFile
 workbench.action.files.newUntitledFile                          cmd+n
 workbench.action.files.openFile
-workbench.action.files.openFileFolder                           shift+cmd+o                     when isMacNative && openFolderWorkspaceSupport
+workbench.action.files.openFileFolder                           alt+cmd+o                       when isMacNative && openFolderWorkspaceSupport
 workbench.action.files.openFileFolderInNewWindow
 workbench.action.files.openFileInNewWindow
 workbench.action.files.openFolder
