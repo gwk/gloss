@@ -9,5 +9,5 @@
 
 # this script selects either the plus or minus commits by grepping for the sign given by $3
 # cut splits on space delimeter, then returns just the commit (field 2).
-# this can be piped to xarg | git log -1 to view)
+# this can be piped to xarg | git log -1 to view.
 git cherry "$1" "$2" | grep "$3" | cut -d ' ' -f 2
