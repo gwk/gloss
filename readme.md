@@ -1,6 +1,8 @@
 # Gloss
 
-Gloss is a set of enhancements to the Unix command line. It is primarily developed on macOS.
+Gloss is a set of enhancements to the Unix command line experience.
+It consists of shell configurations and small utilities.
+It is primarily developed on macOS.
 
 
 # Setup from scratch
@@ -33,4 +35,3 @@ Download and install the following:
 * If it does not work the first time then you may need to go to the debug mode (click the bug icon in the left toolbar of VSCode), and launch it with the GUI controls at the top of the pane.
 * In the debug instance, select `File > Preferences > Color Themes` and pick `gloss-black`.
 * Changes can be reloaded with `Cmd+R` from the debug instance.
-
