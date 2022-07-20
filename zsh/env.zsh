@@ -37,21 +37,9 @@ case $GLOSS_OS in
   mac)
     export DISPLAY=:0 # MacPorts.
     PATHS=(
-      /usr/local/bin
-      /usr/bin
-      /bin
-      /usr/sbin
-      /sbin
-      /Library/Apple/usr/bin
-      # Apple's /usr/libexec/path_helper enforces the above ordering.
-      # This is called in /etc/zprofile, which is sourced after ~/.zshenv (which sources this file).
-      /opt/local/bin
-      /opt/local/sbin
+      /opt/homebrew/bin
+      /opt/homebrew/sbin
       /usr/local/gloss/bin
-      /usr/local/py/Python.framework/Versions/3.10/bin
-      /Library/Frameworks/Python.framework/Versions/3.10/bin
-      /Library/Frameworks/Python.framework/Versions/3.9/bin
-      /Library/Frameworks/Python.framework/Versions/3.8/bin
       ~/.cargo/bin
     )
     #^ Place python directories after system directories for safety;
@@ -63,6 +51,9 @@ case $GLOSS_OS in
     ;;
 esac
 
+# Apple's /usr/libexec/path_helper enforces a basic PATH ordering.
+# This is everything listed in /etc/paths, followed by everything listed in /etc/paths.d/*.
+# path_helper is called in /etc/zprofile, which is sourced after ~/.zshenv (which sources this file).
 export PATH="${(j[:])PATHS}" # Join the paths with colons.
 export PAGER=less
 
@@ -74,6 +65,13 @@ export EDITOR
 
 
 export HELPDIR=/usr/share/zsh/5.8/help
+
+# Standard homebrew configuration.
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
 
 # ANSI select graphic rendition (SGR) control sequences.
