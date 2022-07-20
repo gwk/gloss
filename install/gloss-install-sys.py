@@ -22,7 +22,7 @@ def main():
     else:
       try: make_dirs(dst_dir) # Note: may fail if /usr/local is owned by root (i.e. has not been tampered with by homebrew).
       except OSError as e:
-        errSL(f'error: ould not make installation directory: {dst_dir}; {e}.')
+        errSL(f'error: could not make installation directory: {dst_dir}; {e}.')
         errSL(f'Please run `sudo mkdir {dst_dir} && sudo chown [username] {dst_dir}')
         exit(1)
 
