@@ -22,20 +22,16 @@ errFL() { >&2 printf - $@ }
 [[ -z "$GLOSS_DIR" ]] && export GLOSS_DIR=/usr/local/gloss
 [[ -d "$GLOSS_DIR" ]] || errSL 'WARNING: bad GLOSS_DIR:' $GLOSS_DIR
 
-# Calculate OS string.
-_uname=$(uname)
-if [[ $_uname == 'Darwin' ]]; then
-  GLOSS_OS=mac
-else
-  GLOSS_OS=_uname
-  errSL 'WARNING: unknown OS:' $GLOSS_OS
-fi
-export GLOSS_OS
-
+# Get gloss platform string.
+export GLOSS_OS=$(cut -f1 $GLOSS_DIR/platform.txt)
+export GLOSS_DISTRO=$(cut -f2 $GLOSS_DIR/platform.txt)
 
 case $GLOSS_OS in
   mac)
-    export DISPLAY=:0 # MacPorts.
+    # Apple's /usr/libexec/path_helper enforces a basic PATH ordering.
+    # This is everything listed in /etc/paths, followed by everything listed in /etc/paths.d/*.
+    # path_helper is called in /etc/zprofile, which is sourced after ~/.zshenv (which sources this file).
+    # Thus we can omit all of the paths that path_helper will add.
     PATHS=(
       /opt/homebrew/bin
       /opt/homebrew/sbin
@@ -46,15 +42,29 @@ case $GLOSS_OS in
     # we do not want pip-installed executables to mask system ones.
     # Note that python and its other core executables are symlinked to /usr/local/bin.
     ;;
-  *)
-    echo "WARNING: PATH not configured for unknown OS; $GLOSS_OS"
+  linux)
+    case $GLOSS_DISTRO in
+      amzn2022)
+        PATHS=(
+          /usr/local/bin
+          /usr/bin
+          /usr/local/sbin
+          /usr/sbin
+          /usr/local/gloss/bin
+          ~/bin
+          ~/.cargo/bin
+        )
+        ;;
+    esac
     ;;
 esac
 
-# Apple's /usr/libexec/path_helper enforces a basic PATH ordering.
-# This is everything listed in /etc/paths, followed by everything listed in /etc/paths.d/*.
-# path_helper is called in /etc/zprofile, which is sourced after ~/.zshenv (which sources this file).
-export PATH="${(j[:])PATHS}" # Join the paths with colons.
+if [[ -n "$PATHS" ]]; then
+  export PATH="${(j[:])PATHS}" # Join the paths with colons.
+else
+  echo "WARNING: PATH not configured for unknown OS; $GLOSS_OS"
+fi
+
 export PAGER=less
 
 case $GLOSS_OS in

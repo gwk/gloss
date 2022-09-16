@@ -213,7 +213,7 @@ if [[ -n "$SUDO_USER" ]]; then
 fi
 
 # prompt user color: red for root, green for normal.
-if [[ $(whoami) == root ]]; then
+if [[ "$USER" == root ]]; then
   export GLOSS_PS_USER_STYLE=$TXT_R
 else
   export GLOSS_PS_USER_STYLE=$TXT_G
@@ -233,4 +233,3 @@ source $GLOSS_DIR/bash/gloss_sh_aliases.bash
   #source /usr/share/bash-completion/bash_completion
   #source $GLOSS_DIR/bash/bash_completion/git-completion.bash
 #fi
-

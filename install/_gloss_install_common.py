@@ -11,7 +11,7 @@ from os.path import abspath as abs_path, isdir as is_dir, dirname as path_dir, j
 def errSL(*items): print(*items, file=stderr)
 
 
-supported_platforms = ['mac']
+supported_platforms = ['mac', 'linux']
 
 # gloss uses a single system installation directory for all files, to ease removal and upgrade.
 # a custom installation directory can be speficied as an argument to the installation scripts.
@@ -32,15 +32,21 @@ if not is_dir(src_dir): exit('bad source directory: ' + src_dir)
 
 dst_dir = path_join(install_prefix, 'gloss')
 
-uname = os_uname()[0].lower()
-if uname == 'darwin':
+platform = 'unknown'
+distro = ''
+uname_info = os_uname()
+sysname = uname_info.sysname.lower()
+if sysname == 'darwin':
   platform = 'mac'
-elif uname == 'linux':
-  with open('/etc/issue') as f:
-    # get the first word from the issue string (e.g. 'Fedora')
-    platform = f.readline().split()[0].lower()
+elif sysname == 'linux':
+  platform = 'linux'
+  if 'amzn2022' in uname_info.release:
+    distro = 'amzn2022'
+  else:
+    distro = 'unknown'
+    errSL('warning: unknown linux distro:', uname_info.release)
 else:
-  platform = uname.lower()
+  platform = sysname
 
 errSL('src_dir:', src_dir)
 errSL('dst_dir:', dst_dir)

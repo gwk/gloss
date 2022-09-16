@@ -85,7 +85,7 @@ if [[ -n "$SUDO_USER" ]]; then
 fi
 
 # Prompt user color.
-if [[ $(whoami) == root ]]; then
+if [[ "$USER" == root ]]; then
   export GLOSS_PROMPT_USER_STYLE=$TXT_R
 else
   export GLOSS_PROMPT_USER_STYLE=$TXT_G

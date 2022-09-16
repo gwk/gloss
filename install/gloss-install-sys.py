@@ -1,13 +1,14 @@
-#!/usr/bin/env python3 -B
+#!/usr/bin/env python3
 # Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 # Usage: gloss_sys_install.py [custom_dst_dir]
 
-from _gloss_install_common import errSL, src_dir, dst_dir, platform # Parses arguments, etc.
-from os import symlink, mkdir as make_dir, makedirs as make_dirs, listdir as list_dir, remove as remove_file, scandir as scan_dir
+from os import listdir as list_dir, makedirs as make_dirs, mkdir as make_dir, remove as remove_file, scandir as scan_dir
 from os.path import exists as path_exists, isdir as is_dir, join as path_join, splitext as split_ext
 from shutil import copy2 as copy_file, copytree, rmtree as remove_tree
 from subprocess import run
+
+from _gloss_install_common import distro, dst_dir, errSL, platform, src_dir  # Parses arguments, etc.
 
 
 def main():
@@ -25,6 +26,10 @@ def main():
         errSL(f'error: could not make installation directory: {dst_dir}; {e}.')
         errSL(f'Please run `sudo mkdir {dst_dir} && sudo chown [username] {dst_dir}')
         exit(1)
+
+    errSL('writing platform.txt...')
+    with open(path_join(dst_dir, 'platform.txt'), 'w') as f:
+      f.write(f'{platform}\t{distro}\n') # Tab for default  compatibility with `cut`.
 
     errSL('copying files to dst_dir...')
 
