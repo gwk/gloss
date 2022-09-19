@@ -2,17 +2,14 @@
 
 Gloss is a set of enhancements to the Unix command line experience.
 It consists of shell configurations and small utilities.
-It is primarily developed on macOS.
+It is primarily developed on macOS but is also actively used with Amazon Linux 2022.
 
 
-# Setup from scratch
-
-A short guide to configuring your Mac.
+# Setup
 
 ## Prerequisites
 Download and install the following:
-* Latest Python 2 (https://python.org)
-* Latest Python 3 (https://python.org)
+* Latest Python 3 (For Mac, download from https://python.org or install via Homebrew)
 * Optional: Visual Studio Code (https://code.visualstudio.com)
 
 ## Installation
@@ -24,9 +21,11 @@ Download and install the following:
   * In the command field, type "Shell command: Install 'code' command in PATH command" (it should autocomplete after a few characters)
   * Hit return to run the command; this will create a symlink from `/usr/local/bin/code` to the program inside the application bundle.
   * You can now use the `code` command in the console to open files and folders.
-* Fix up your PATH
-  * TODO
-...
+* Run `sudo make install-sys` or `sudo install/gloss-install-sys.py`
+* Run `make install-user` or `install/gloss-install-user.py`
+* Run `make install-vscode` or `install/gloss-install-vscode.sh`
+* Adjust your `.bash_profile`, `.bashrc`, `.zprofile`, `.zshenv`, `.zshrc` as necessary.
+* TODO: explain those adjustments in more detail.
 
 
 # VSCode Development
