@@ -34,17 +34,6 @@ def main():
     exit(e)
 
 
-def install_usercustomize():
-  site_packages_dir = site.getusersitepackages()
-  name = 'usercustomize.py'
-  src = path_join(src_dir, name)
-  dst = path_join(site_packages_dir, name)
-  errSL('installing:', src, '->', dst)
-  makedirs(site_packages_dir, exist_ok=True)
-  copy_file(src, dst)
-
-
-
 def append_line_if_missing(path, line):
   assert line.endswith('\n')
   if is_file(path):
@@ -56,6 +45,16 @@ def append_line_if_missing(path, line):
   with open(path, 'a') as f:
     f.write('\n# Automatically added by gloss-install-user.py.\n')
     f.write(line)
+
+
+def install_usercustomize():
+  site_packages_dir = site.getusersitepackages()
+  name = 'usercustomize.py'
+  src = path_join(src_dir, name)
+  dst = path_join(site_packages_dir, name)
+  errSL('installing:', src, '->', dst)
+  makedirs(site_packages_dir, exist_ok=True)
+  copy_file(src, dst)
 
 
 if __name__ == '__main__': main()
