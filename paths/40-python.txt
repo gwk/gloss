@@ -1,0 +1,3 @@
+/usr/local/py/Python.framework/Versions/3.11/bin
+/usr/local/py/Python.framework/Versions/3.10/bin
+/usr/local/py/Python.framework/Versions/3.9/bin

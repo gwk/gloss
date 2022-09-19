@@ -22,66 +22,26 @@ errFL() { >&2 printf - $@ }
 [[ -z "$GLOSS_DIR" ]] && export GLOSS_DIR=/usr/local/gloss
 [[ -d "$GLOSS_DIR" ]] || errSL 'WARNING: bad GLOSS_DIR:' $GLOSS_DIR
 
+[[ -n "$PATH" ]] || errSL 'WARNING: PATH is empty when gloss env.zsh is sourced.'
+export PATH="$PATH:$GLOSS_DIR/bin"
+
 # Get gloss platform string.
 export GLOSS_OS=$(cut -f1 $GLOSS_DIR/platform.txt)
 export GLOSS_DISTRO=$(cut -f2 $GLOSS_DIR/platform.txt)
 
-case $GLOSS_OS in
-  mac)
-    # Apple's /usr/libexec/path_helper enforces a basic PATH ordering.
-    # This is everything listed in /etc/paths, followed by everything listed in /etc/paths.d/*.
-    # path_helper is called in /etc/zprofile, which is sourced after ~/.zshenv (which sources this file).
-    # Thus we can omit all of the paths that path_helper will add.
-    PATHS=(
-      /opt/homebrew/bin
-      /opt/homebrew/sbin
-      /usr/local/gloss/bin
-      ~/.cargo/bin
-    )
-    #^ Place python directories after system directories for safety;
-    # we do not want pip-installed executables to mask system ones.
-    # Note that python and its other core executables are symlinked to /usr/local/bin.
-    ;;
-  linux)
-    case $GLOSS_DISTRO in
-      amzn2022)
-        PATHS=(
-          /usr/local/bin
-          /usr/bin
-          /usr/local/sbin
-          /usr/sbin
-          /usr/local/gloss/bin
-          ~/bin
-          ~/.cargo/bin
-        )
-        ;;
-    esac
-    ;;
-esac
-
-if [[ -n "$PATHS" ]]; then
-  export PATH="${(j[:])PATHS}" # Join the paths with colons.
-else
-  echo "WARNING: PATH not configured for unknown OS; $GLOSS_OS"
-fi
-
 export PAGER=less
-
-case $GLOSS_OS in
-  mac)
-    EDITOR='code -w "$@"' # Use VS Code as the shell editor.
-esac
-export EDITOR
-
-
 export HELPDIR=/usr/share/zsh/5.8/help
 
-# Standard homebrew configuration.
-export HOMEBREW_PREFIX="/opt/homebrew";
-export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
-export HOMEBREW_REPOSITORY="/opt/homebrew";
-export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+case $GLOSS_OS in
+  mac)
+    export EDITOR='code -w "$@"' # Use VS Code as the shell editor.
+    # Standard homebrew configuration.
+    export HOMEBREW_PREFIX="/opt/homebrew"
+    export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+    export HOMEBREW_REPOSITORY="/opt/homebrew"
+    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+esac
 
 
 # ANSI select graphic rendition (SGR) control sequences.

@@ -34,3 +34,13 @@ Download and install the following:
 * If it does not work the first time then you may need to go to the debug mode (click the bug icon in the left toolbar of VSCode), and launch it with the GUI controls at the top of the pane.
 * In the debug instance, select `File > Preferences > Color Themes` and pick `gloss-black`.
 * Changes can be reloaded with `Cmd+R` from the debug instance.
+
+
+# PATH configuration
+
+Apple's /usr/libexec/path_helper enforces a basic PATH ordering.
+It first adds every line listed in /etc/paths, followed by every line listed in each file in /etc/paths.d/*.
+path_helper is called in /etc/zprofile, which is sourced after ~/.zshenv.
+Note that files in /etc/paths.d should begin with a two digit ordering number; three digits fails as of macOS 12.6.
+
+Gloss currently does not alter PATH apart from adding its own `$GLOSS_DIR/bin` in `env.zsh`.
