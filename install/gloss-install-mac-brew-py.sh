@@ -1,29 +1,25 @@
 #!/usr/bin/env bash
 
-fail() { echo $* 2>&1; exit 1; }
+fail() { echo "error:" $* 2>&1; exit 1; }
 
 set -e
 
-VERSION=3.10 # TODO: Make this version-independent.
-VERSION_EXACT=3.10.5
-if [[ $(uname) == 'Darwin' ]]; then
-  echo 'Symlinking Python.app/Contents/MacOS/Python to python3.'
-else
+FW_VERSIONED_PATH=$1
+[[ -n "$FW_VERSIONED_PATH" ]] || fail "usage: $0 </opt/homebrew/Cellar/python@3.X/3.X/Frameworks/Python.framework/Versions/3.X>"
+[[ -d "$FW_VERSIONED_PATH" ]] || fail "directory not found: $FW_VERSIONED_PATH"
+
+
+if [[ $(uname) != 'Darwin' ]]; then
   fail 'This script currenly only works for macOS on Arm machines.'
 fi
 
-# Arm Mac Homebrew path.
-FRAMEWORK=/opt/homebrew/Cellar/python@$VERSION/$VERSION_EXACT/Frameworks/Python.framework
-FRAMEWORK_VERSION=$FRAMEWORK/Versions/$VERSION
+echo 'Symlinking Python.app/Contents/MacOS/Python to python3.'
 
-[[ -d $FRAMEWORK ]] || fail 'ERROR: Python framework not found:' $FRAMEWORK
-[[ -d $FRAMEWORK_VERSION ]] || fail 'ERROR: Python framework version directory not found:' $FRAMEWORK_VERSION
-
-python_bin=$FRAMEWORK_VERSION/Resources/Python.app/Contents/MacOS/Python
+python_bin=$FW_VERSIONED_PATH/Resources/Python.app/Contents/MacOS/Python
 #^ Link to the actual mac binary that gets executed, so that lldb can debug it.
-# alternative: python_bin=$FRAMEWORK_VERSION/bin/python$VERSION
+# alternative: python_bin=$FW_VERSIONED_PATH/bin/python$VERSION
 
-pip_bin=$FRAMEWORK_VERSION/bin/pip$VERSION
+pip_bin=$FW_VERSIONED_PATH/bin/pip$VERSION
 
 for suffix in '' '3' $VERSION; do
   ln -svf $python_bin /usr/local/bin/python$suffix
