@@ -28,6 +28,9 @@ install-sys:
 install-user:
 	install/gloss-install-user.py
 
+install-dotfiles:
+	install/gloss-install-dotfile-aliases.sh
+
 install-vscode: vscode
 	install/gloss-install-vscode.sh
 

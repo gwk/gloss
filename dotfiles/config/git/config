@@ -1,0 +1,64 @@
+
+[alias]
+  s = status . && git status
+  a = !git add -u . && status
+  c = commit
+  cm = commit -m
+  ca = commit --amend
+  d = diff
+  main = checkout main
+  pick = cherry-pick
+  aliases = !git config --list | egrep '^alias\\.' | sort
+
+[branch]
+  autoSetupRebase = always
+
+[color]
+  ui = true
+  diff = true
+
+[core]
+  pager = same-same | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
+
+[interactive]
+  diffFilter = same-same -interactive | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
+  singleKey = true
+
+[diff]
+  algorithm = histogram
+  submodule = log
+  interHunkCOntext = 0
+  noprefix = true
+  wsErrorHighlight = none # Intraline coloring creates trouble for same-same.
+  tool = vscode
+
+
+[diff "swift"]
+  # Git 2.17.1 xcfuncname regex does not recognize ERE character classes like [:space:].
+  # It uses the first capture group, which means parens cannot be used around any ignored prefix.
+  xfuncname = "^[ \t]*([ a-zA-Z@](actor|class|enum|extension|func|struct|protocol).*)$"
+
+[difftool]
+  prompt = false
+
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+  trustExitCode = true
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = true
+
+[push]
+  default = simple
+
+[credential]
+  helper = osxkeychain
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true

@@ -1,0 +1,11 @@
+set completion-ignore-case On
+#set convert-meta off
+#set input-meta on
+#set output-meta on
+#set show-all-if-ambiguous on
+set visible-stats on
+
+# Ctrl-left-arrow and Ctrl-right-arrow.
+"\e[5C": forward-word
+"\e[5D": backward-word
+

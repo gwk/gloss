@@ -1,0 +1,31 @@
+
+# Builtin git xfuncname patterns. Must be enabled in gitattributes manually.
+*.ada diff=ada
+*.bash diff=bash
+*.bibtex diff=bibtex
+*.cpp diff=cpp
+*.csharp diff=csharp
+*.css diff=css
+*.dts diff=dts
+*.elixir diff=elixir
+*.fortran diff=fortran
+*.fountain diff=fountain
+*.go diff=golang
+*.html diff=html
+*.java diff=java
+*.kotlin diff=kotlin
+*.md diff=markdown
+*.matlab diff=matlab
+*.m diff=objc
+*.pascal diff=pascal
+*.pl diff=perl
+*.php diff=php
+*.py diff=python
+*.rb diff=ruby
+*.rs diff=rust
+*.scm diff=scheme
+*.sh diff=bash
+*.tex diff=tex
+
+# Additional patterns.
+*.swift diff=swift

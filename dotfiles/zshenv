@@ -1,0 +1,8 @@
+# .zshenv is loaded every time, prior to zprofile or zshrc.
+
+#setopt SOURCE_TRACE # This will print a message every time a file is sourced.
+
+[[ -z $GLOSS_ENV ]] && source /usr/local/gloss/zsh/env.zsh
+
+# ~/.local/bin is where pip installs if it does not have write access to the installation.
+PATH="$PATH:$HOME/.cargo/bin:$HOME/.local/bin"
