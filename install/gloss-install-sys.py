@@ -41,6 +41,12 @@ def main():
       errSL(src_subdir, '=>', dst_subdir)
       copytree(src_subdir, dst_subdir)
 
+    for p in ['pythonstartup.py']:
+      src = path_join(src_dir, p)
+      dst = path_join(dst_dir, p)
+      errSL(src, '=>', dst)
+      copy_file(src, dst)
+
     errSL('installing gloss bin...')
     dst_bin_dir = path_join(dst_dir, 'bin')
     make_dir(dst_bin_dir)

@@ -4,7 +4,7 @@
 ansi-to-rtf-clip: ansi-to-html "$@" | textutil -stdin -convert rtf -stdout | pbcopy
 
 # python
-py: PYTHONSTARTUP=~/.py3_startup.py python3 -q "$@"
+py: PYTHONSTARTUP=$GLOSS_DIR/pythonstartup.py python3 -q "$@"
 pdb: python3 -m pdb "$@" # run a python file using pdb
 py-help: python3 -c "import $1; help($1);"
 py-dir: python3 -c "import $1; print(*sorted(dir($1.$2)), sep='\n');"
