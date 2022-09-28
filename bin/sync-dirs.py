@@ -20,6 +20,12 @@ def main() -> None:
   home_dir_slash = expand_user('~/')
   curr_dir = getcwd()
 
+  if not src and not dst:
+    exit('error: must specify either -src or -dst.')
+
+  if src == dst:
+    exit('error: -src and -dst must be different.')
+
   print(src or '<local>', '->', dst or '<local>')
   for path in args.paths:
     path = expand_user(path)
