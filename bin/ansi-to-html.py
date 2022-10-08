@@ -11,7 +11,7 @@ http://en.wikipedia.org/wiki/ANSI_escape_code.
 
 import html
 import re
-import sys
+from sys import stderr, argv, stdin
 
 
 # scan for control sequence terminated by SGR, capturing semicolon-separated numeric codes
@@ -108,7 +108,7 @@ def excise_span_if_present(class_):
   excise_index = None
   for i, c in enumerate(class_stack):
     if excise_index is not None: # target class already found
-      assertF(not c.startswith(class_[:2]), 'found subsequent class: {}; after excising target class: {}', c, class_)
+      assert not c.startswith(class_[:2]), f'found subsequent class: {c}; after excising target class: {class_}'
       open_span(c) # reopen remaining span
     elif c.startswith(class_[:2]):
       excise_index = i
@@ -134,7 +134,7 @@ def scan_section(line, pos):
     try:
       code = int(s)
     except ValueError:
-      errFL('ERROR: could not parse code: {}; sequence: {}', repr(s), repr(code_string))
+      print(f'ERROR: could not parse code: {s!r}; sequence: {code_string!r}', file=stderr)
       continue
     codes.append(code)
   #errSLD('codes:', codes)
@@ -147,7 +147,7 @@ def scan_section(line, pos):
     try:
       class_ = codes_to_classes[code]
     except KeyError:
-      errSLN('NOTICE: unrecognized SGR code:', code)
+      print('NOTICE: unrecognized SGR code:', code, file=stderr)
       continue
     excise_span_if_present(class_)
     if code not in reset_codes:
@@ -166,16 +166,15 @@ def scan_file(f):
 
 
 # main
-l  = len(sys.argv)
+l  = len(argv)
 if l == 1:
-  scan_file(sys.stdin)
+  scan_file(stdin)
 elif l == 2:
-  with open(sys.argv[1]) as f:
+  with open(argv[1]) as f:
     scan_file(f)
 else:
-  for path in sys.argv[1:]:
+  for path in argv[1:]:
     print('<br/><h3>{}</h3>'.format(html.escape(path, quote=False)))
     with open(path) as f:
       scan_file(f)
 print('</body>\n</html>')
-
