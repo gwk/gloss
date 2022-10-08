@@ -7,7 +7,7 @@ from argparse import ArgumentParser, FileType
 from ast import literal_eval
 
 
-def main():
+def main() -> None:
   parser = ArgumentParser(description="Convert python literal files to JSON.")
   parser.add_argument('input', type=FileType('r'), help='input .pyl file path')
   parser.add_argument('output', nargs='?', type=FileType('w'), default='-',

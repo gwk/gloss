@@ -7,11 +7,12 @@ import shlex
 from os.path import isdir as is_dir, isfile as is_file
 from subprocess import PIPE, Popen
 from sys import stderr
+from typing import Any, NoReturn
 
 
-def run(cmd, exp):
-  cmd = shlex.split(cmd)
-  proc = Popen(cmd, stdin=None, stdout=PIPE, stderr=PIPE, shell=False)
+def run(cmd:str, exp:int=None) -> tuple[int, str, str]:
+  cmd_words = shlex.split(cmd)
+  proc = Popen(cmd_words, stdin=None, stdout=PIPE, stderr=PIPE, shell=False)
   p_out, p_err = proc.communicate() # waits for process to complete.
   code = proc.returncode
   if exp is not None and code != exp:
@@ -19,19 +20,19 @@ def run(cmd, exp):
   return code, p_out.decode('utf-8'), p_err.decode('utf-8')
 
 
-def runC(cmd):
+def runC(cmd:str) -> int:
   'Run a command and return exit code.'
   c, o, e = run(cmd=cmd, exp=None)
   return c
 
 
-def runCO(cmd):
+def runCO(cmd:str) -> tuple[int,str]:
   'Run a command and return exit code, std out; optional err.'
   c, o, e = run(cmd=cmd, exp=None)
   return c, o
 
 
-def runO(cmd, exp=0):
+def runO(cmd:str, exp=0) -> str:
   'Run a command and return exit code, std out; optional err.'
   c, o, e = run(cmd=cmd, exp=exp)
   return o
@@ -41,7 +42,7 @@ def runO(cmd, exp=0):
 # because a long prompt calculation is debilitating, set a single global timeout for the process.
 time_limit = 1
 
-def prompt(*items):
+def prompt(*items:Any) -> NoReturn:
   print(*items, ' ', sep='', end='')
   exit(0)
 
@@ -69,7 +70,7 @@ try:
     bare_prefix = ''
 
 
-  def find_branch():
+  def find_branch() -> tuple[str,str]:
     'Returns a pair: branch string (needs to be stripped) and mode suffix.'
     if is_file(gd + '/rebase-merge/interactive'):
       return open(gd + '/rebase-merge/head-name').read(), '|REBASE-i'
@@ -103,7 +104,7 @@ try:
     # last option.
     try: head_sha = open(gd + '/HEAD').read()[:8]
     except FileNotFoundError: head_sha = 'unknown'
-    return '({})'.format(head_sha), s
+    return f'({head_sha})', s
 
 
   branch_path_n, suffix = find_branch()

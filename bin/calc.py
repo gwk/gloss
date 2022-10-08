@@ -7,11 +7,11 @@ import sys
 import math
 import random
 import pprint
+from typing import Any
 
+env:dict[str,Any] = {}
 
-env = {}
-
-def add(module, name):
+def add(module:object, name:str) -> None:
   env[name] = getattr(module, name)
 
 add(pprint, 'pprint')

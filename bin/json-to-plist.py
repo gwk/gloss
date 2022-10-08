@@ -13,7 +13,7 @@ if not (1 <= len(args) <= 2):
   sys.exit(1)
 
 f_in = open(args[0])
-f_out = open(args[1], 'wb') if len(args) == 2 else sys.stdout.detach() # get binary file.
+f_out = open(args[1], 'wb') if len(args) == 2 else sys.stdout.detach() # type: ignore[attr-defined] # get binary file.
 
 obj = json.load(f_in)
 plistlib.dump(obj, f_out)

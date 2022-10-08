@@ -83,29 +83,29 @@ print('''\
 <body>''')
 
 # a list of all the open span classes
-class_stack = []
+class_stack:list[str] = []
 
-def open_span(class_):
+def open_span(class_) -> None:
   print('<span class="ansi-{}">'.format(class_), end='')
 
-def close_span():
+def close_span() -> None:
   print('</span>', end='')
 
-def open_span_push(class_):
+def open_span_push(class_:str) -> None:
   #errSLD('open_span_push:', class_stack, class_)
   open_span(class_)
   class_stack.append(class_)
 
-def close_spans_clear():
+def close_spans_clear() -> None:
   #errSLD('close_spans_clear:', class_stack)
   for i in class_stack:
     close_span()
   del class_stack[:]
 
 
-def excise_span_if_present(class_):
+def excise_span_if_present(class_:str) -> None:
   #errFLD('excise: {}; {}', class_stack, class_)
-  excise_index = None
+  excise_index:int|None = None
   for i, c in enumerate(class_stack):
     if excise_index is not None: # target class already found
       assert not c.startswith(class_[:2]), f'found subsequent class: {c}; after excising target class: {class_}'
@@ -119,8 +119,8 @@ def excise_span_if_present(class_):
     del class_stack[excise_index]
 
 
-# returns the end position for the scanned section
-def scan_section(line, pos):
+def scan_section(line:str, pos:int) -> int:
+  # returns the end position for the scanned section.
   m = cs_re.search(line, pos)
   if not m: # no match; done
     print(html.escape(line[pos:], quote=False), end='')
@@ -155,7 +155,7 @@ def scan_section(line, pos):
   return m.end()
 
 
-def scan_file(f):
+def scan_file(f) -> None:
   print('<pre>')
   for line in f:
     pos = 0

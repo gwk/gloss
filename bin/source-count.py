@@ -5,17 +5,17 @@
 
 import os
 import re
-
 from argparse import ArgumentParser
 from collections import Counter
-from os.path import splitext as split_ext, basename as path_name, join as path_join, isfile as is_file
+from os.path import basename as path_name, isfile as is_file, join as path_join, splitext as split_ext
 from sys import stderr
+from typing import Any
 
 
 ignored_dirs = {'_build', 'build', '.git', '.hg', '.svn'}
 ignored_exts = {'', '.pyc'}
 
-groups = {
+groups:dict[str,dict[str,Any]] = {
   'source' : {
     'exts' : [
       '.ploy',
@@ -41,7 +41,7 @@ groups = {
       '.l', '.y', '.g4',
     ],
     # skip parentheses, brackets, braces, backlslash, empty comments, and whitespace.
-    'blank_pattern' : r'[\[\](){};\\#/*\s]*'
+    'blank_pattern' : r'[\[\](){};\\#/*\s]*',
   },
 
   'test' : {
@@ -84,15 +84,15 @@ opaque_source_dir_exts = [
 group_keys = ['source', 'test', 'text', 'data']
 
 
-def main():
+def main() -> None:
   arg_parser = ArgumentParser(description='Count lines of source code.')
   arg_parser.add_argument('paths', nargs='+', help='Directories to explore.')
   args = arg_parser.parse_args()
 
-  files = Counter()
-  lines = Counter()
-  blank = Counter()
-  other_exts = Counter()
+  files = Counter[str]()
+  lines = Counter[str]()
+  blank = Counter[str]()
+  other_exts = Counter[str]()
 
   # iterate over all paths.
   for top in args.paths:
@@ -138,7 +138,7 @@ def main():
     print('; '.join('{}: {}'.format(ext, count) for (ext, count) in items))
 
 
-def count_path(path, files, lines, blank, other_exts):
+def count_path(path:str, files:Counter[str], lines:Counter[str], blank:Counter[str], other_exts:Counter[str]) -> None:
   name = path_name(path)
   ext = path_ext(name)
   if ext in ignored_exts:
@@ -160,12 +160,12 @@ def count_path(path, files, lines, blank, other_exts):
 
 
 
-def path_ext(path):
+def path_ext(path:str) -> str:
   return split_ext(path)[1].lower()
 
 ignored_dirs = { '__pycache__', '_build', '_misc' }
 
-def ignore_dir_name(name):
+def ignore_dir_name(name:str) -> bool:
   # note: takes name, not path.
   if name == '.': return False
   if name.startswith('.'): return True
@@ -176,7 +176,7 @@ def ignore_dir_name(name):
 
 exts_to_re = {}
 for g in groups.values():
-  pattern = g['blank_pattern']
+  pattern:str = g['blank_pattern']
   r = re.compile(pattern)
   for e in g['exts']:
     if e in exts_to_re: raise ValueError(e)

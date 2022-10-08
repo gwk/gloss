@@ -4,7 +4,7 @@
 from sys import argv, stdin
 
 
-def main():
+def main() -> None:
   args = argv[1:]
   errors = False
   for path in args:
