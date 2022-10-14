@@ -11,11 +11,11 @@ dotfiles=$(ls -A "$dotfiles_dir")
 cd "$HOME"
 
 for name in $dotfiles; do
-  dotname=".$name"
-  if [[ -e $dotname ]]; then
-    echo "skipping: $dotname; already exists."
+  dot_path="$HOME/.$name"
+  if [[ -e "$dot_path" ]]; then
+    echo "skipping: $dot_path; already exists."
     continue
   fi
-  echo "linking: $dotname -> $dotfiles_dir/$name"
-  ln -s "$dotfiles_dir/$name" "$dotname"
+  echo "linking: $dot_path -> $dotfiles_dir/$name"
+  ln -s "$dotfiles_dir/$name" "$dot_path"
 done
