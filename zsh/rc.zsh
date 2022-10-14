@@ -46,7 +46,8 @@ export LESS=FRX
 export CLICOLOR=1 # Enable colors in ls.
 
 export GREP_OPTIONS="--color=auto --binary-files=without-match"
-export GREP_COLOR="4" # Grep highlights matches with underline.
+export GREP_COLOR='4' # Highlight matches with underline. macOS only recognizes the old var.
+export GREP_COLORS='mt=4' # Highlight matches with underline. Linux wants the new var or else complains about deprecation.
 
 export NODE_REPL_MODE=strict
 
