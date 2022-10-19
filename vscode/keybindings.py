@@ -87,11 +87,13 @@ class Ctx:
   all_when_words: Set[str] = field(default_factory=set)
   dflt_binding_whens: Dict[str,Set[str]] = field(default_factory=lambda:DefaultDict(set))
   dflt_escapes: Set[str] = field(default_factory=set)
+  dflt_tabs: Set[str] = field(default_factory=set)
   dflt_triples: List[Triple] = field(default_factory=list)
   all_bindings: List[Dict[str,str]] = field(default_factory=list) # Includes nullifications.
   explicit_bindings: List[Dict[str,str]] = field(default_factory=list)
   bound_cmds: Set[str] = field(default_factory=set)
   bound_escapes: Set[str] = field(default_factory=set)
+  bound_tabs: Set[str] = field(default_factory=set)
 
   def msg(self, line:int, *items:Any):
     errSL(f'{self.bindings_path}:{line}:', *items)
@@ -115,6 +117,8 @@ class Ctx:
       }
       if key == 'escape':
         self.dflt_escapes.add(cmd)
+      if key == 'tab':
+        self.dflt_tabs.add(cmd)
 
       when_words = dflt.get('when', '').split()
       when = ' '.join(when_words)
@@ -225,6 +229,8 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
   if key == 'escape':
     ctx.bound_escapes.add(cmd)
     add_binding('ctrl+c')
+  if key == 'tab':
+    ctx.bound_tabs.add(cmd)
 
 
 def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]):
@@ -241,13 +247,17 @@ def validate_when(ctx:Ctx, line_num:int, cmd:str, when:str, when_words:List[str]
     if word.lstrip('!') not in ctx.all_when_words:
       ctx.error(line_num, f'bad when word: {word}')
 
+
 def warn_unbound_cmds(ctx:Ctx) -> None:
-  unbound_cmds = ctx.all_cmds - ctx.bound_cmds
-  if unbound_cmds:
+  if unbound_cmds := ctx.all_cmds - ctx.bound_cmds:
     errLL('\nunbound commands:', *sorted(unbound_cmds))
-  unbound_escapes = ctx.dflt_escapes - ctx.bound_escapes
-  if unbound_escapes:
+
+  if unbound_escapes := ctx.dflt_escapes - ctx.bound_escapes:
     errLL('\nunbound escapes:', *sorted(unbound_escapes))
+
+  if unbound_tabs := ctx.dflt_tabs - ctx.bound_tabs:
+    errLL('\nunbound tabs:', *sorted(unbound_tabs))
+
   errL()
 
 
