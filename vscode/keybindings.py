@@ -28,8 +28,8 @@ def main() -> None:
   make_dirs(out_dir)
 
   out_stem = path_stem(out_path)
-  defaults_out_path = out_dir + '/keys-default.txt'
-  whens_out_path= out_dir + '/key-whens.txt'
+  defaults_out_path = out_dir + '/keys-defaults.txt'
+  whens_out_path= out_dir + '/keys-whens.txt'
   keys_ref_out_path = out_dir + '/keys-reference.txt'
   defaults, other_cmds = parse_defaults(defaults_json_path)
 
@@ -140,7 +140,7 @@ def write_defaults_txt(path:str, dflt_triples:List[Triple]) -> None:
   f = open(path, 'w')
   for (cmd, key, when) in sorted(dflt_triples):
     when_clause = f'when {when}' if when else ''
-    writeL(f, f'{cmd:<63} {key:23} {when_clause}'.strip())
+    writeL(f, f'{cmd:<79} {key:15} {when_clause}'.strip())
 
 
 def write_whens(path:str, all_when_words:Set[str]) -> None:

@@ -1,12 +1,12 @@
 acceptAlternativeSelectedSuggestion
-acceptRenameInput                                               enter                           when editorFocus && renameInputVisible
+acceptRenameInput                                                               enter           when editorFocus && renameInputVisible
 acceptRenameInputWithPreview
 acceptSelectedCodeAction
-acceptSelectedSuggestion                                        enter                           when acceptSuggestionOnEnter && suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus
-acceptSelectedSuggestion                                        tab                             when suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus
+acceptSelectedSuggestion                                                        enter           when acceptSuggestionOnEnter && suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus
+acceptSelectedSuggestion                                                        tab             when suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus
 acceptSelectedSuggestionOnEnter
 acceptSnippet
-actions.find                                                    cmd+f                           when  editorFocus || editorIsOpen
+actions.find                                                                    cmd+f           when  editorFocus || editorIsOpen
 actions.findWithSelection
 addCursorsAtSearchResults
 addRootFolder
@@ -19,36 +19,36 @@ breadcrumbs.focusPrevious
 breadcrumbs.focusPreviousWithPicker
 breadcrumbs.revealFocused
 breadcrumbs.revealFocusedFromTreeAside
-breadcrumbs.selectEditor                                        escape                          when breadcrumbsActive && breadcrumbsVisible
+breadcrumbs.selectEditor                                                        escape          when breadcrumbsActive && breadcrumbsVisible
 breadcrumbs.selectFocused
 breadcrumbs.toggle
 breadcrumbs.toggleFromEditorTitle
 breadcrumbs.toggleToOn
 breakpointWidget.action.acceptInput
 callStack.collapse
-cancelLinkedEditingInput                                        escape                          when LinkedEditingInputVisible && editorTextFocus
-cancelRenameInput                                               escape                          when editorFocus && renameInputVisible
-cancelSelection                                                 escape                          when editorHasSelection && textInputFocus
+cancelLinkedEditingInput                                                        escape          when LinkedEditingInputVisible && editorTextFocus
+cancelRenameInput                                                               escape          when editorFocus && renameInputVisible
+cancelSelection                                                                 escape          when editorHasSelection && textInputFocus
 cell-tag.focus
 cell-tag.removeView
 cell-tag.resetViewLocation
 cell-tag.toggleVisibility
 changeEditorIndentation
 cleanSearchEditorState
-closeAccessibilityHelp                                          escape                          when accessibilityHelpWidgetVisible && editorFocus
-closeBreakpointWidget                                           escape                          when breakpointWidgetVisible && textInputFocus
-closeDirtyDiff                                                  escape                          when dirtyDiffVisible
-closeFindWidget                                                 escape                          when editorFocus && findWidgetVisible && !isComposing
-closeMarkersNavigation                                          escape                          when editorFocus && markersNavigationVisible
-closeParameterHints                                             escape                          when editorFocus && parameterHintsVisible
-closeReferenceSearch                                            escape                          when referenceSearchVisible && !config.editor.stablePeek
-closeReferenceSearchEditor                                      escape                          when inReferenceSearchEditor && !config.editor.stablePeek
-closeReplaceInFilesWidget                                       escape                          when replaceInputBoxFocus && searchViewletVisible
+closeAccessibilityHelp                                                          escape          when accessibilityHelpWidgetVisible && editorFocus
+closeBreakpointWidget                                                           escape          when breakpointWidgetVisible && textInputFocus
+closeDirtyDiff                                                                  escape          when dirtyDiffVisible
+closeFindWidget                                                                 escape          when editorFocus && findWidgetVisible && !isComposing
+closeMarkersNavigation                                                          escape          when editorFocus && markersNavigationVisible
+closeParameterHints                                                             escape          when editorFocus && parameterHintsVisible
+closeReferenceSearch                                                            escape          when referenceSearchVisible && !config.editor.stablePeek
+closeReferenceSearchEditor                                                      escape          when inReferenceSearchEditor && !config.editor.stablePeek
+closeReplaceInFilesWidget                                                       escape          when replaceInputBoxFocus && searchViewletVisible
 codelens.showLensesInCurrentLine
 columnSelect
 comments.collapse
 commentsClearFilterText
-commentsClearFilterText                                         escape                          when commentsFilterFocus
+commentsClearFilterText                                                         escape          when commentsFilterFocus
 commentsFocusFilter
 commentsFocusViewFromFilter
 compareFiles
@@ -62,48 +62,48 @@ configureExtensionsAutoUpdate.none
 copyFilePath
 copyRelativeFilePath
 createCursor
-cursorBottom                                                    end                             when textInputFocus
-cursorBottomSelect                                              shift+cmd+down                  when textInputFocus
-cursorColumnSelectDown                                          alt+down                        when textInputFocus
+cursorBottom                                                                    end             when textInputFocus
+cursorBottomSelect                                                              shift+cmd+down  when textInputFocus
+cursorColumnSelectDown                                                          alt+down        when textInputFocus
 cursorColumnSelectLeft                                                                          when textInputFocus
-cursorColumnSelectPageDown                                      alt+pagedown                    when textInputFocus
-cursorColumnSelectPageUp                                        alt+pageup                      when textInputFocus
+cursorColumnSelectPageDown                                                      alt+pagedown    when textInputFocus
+cursorColumnSelectPageUp                                                        alt+pageup      when textInputFocus
 cursorColumnSelectRight                                                                         when textInputFocus
-cursorColumnSelectUp                                            alt+up                          when textInputFocus
-cursorDown                                                      ctrl+n                          when textInputFocus
-cursorDown                                                      down                            when textInputFocus
-cursorDownSelect                                                shift+ctrl+n                    when textInputFocus
-cursorDownSelect                                                shift+down                      when textInputFocus
-cursorEnd                                                       ctrl+e                          when textInputFocus
-cursorEndSelect                                                 shift+cmd+right                 when textInputFocus
-cursorEndSelect                                                 shift+end                       when textInputFocus
-cursorHome                                                      ctrl+a                          when textInputFocus
-cursorHomeSelect                                                shift+cmd+left                  when textInputFocus
-cursorHomeSelect                                                shift+home                      when textInputFocus
-cursorLeft                                                      ctrl+b                          when textInputFocus
-cursorLeft                                                      left                            when textInputFocus
-cursorLeftSelect                                                shift+ctrl+b                    when textInputFocus
-cursorLeftSelect                                                shift+left                      when textInputFocus
+cursorColumnSelectUp                                                            alt+up          when textInputFocus
+cursorDown                                                                      ctrl+n          when textInputFocus
+cursorDown                                                                      down            when textInputFocus
+cursorDownSelect                                                                shift+ctrl+n    when textInputFocus
+cursorDownSelect                                                                shift+down      when textInputFocus
+cursorEnd                                                                       ctrl+e          when textInputFocus
+cursorEndSelect                                                                 shift+cmd+right when textInputFocus
+cursorEndSelect                                                                 shift+end       when textInputFocus
+cursorHome                                                                      ctrl+a          when textInputFocus
+cursorHomeSelect                                                                shift+cmd+left  when textInputFocus
+cursorHomeSelect                                                                shift+home      when textInputFocus
+cursorLeft                                                                      ctrl+b          when textInputFocus
+cursorLeft                                                                      left            when textInputFocus
+cursorLeftSelect                                                                shift+ctrl+b    when textInputFocus
+cursorLeftSelect                                                                shift+left      when textInputFocus
 cursorLineEnd
 cursorLineEndSelect
 cursorLineStart
 cursorLineStartSelect
-cursorPageDown                                                  pagedown                        when textInputFocus
-cursorPageDownSelect                                            shift+pagedown                  when textInputFocus
-cursorPageUp                                                    pageup                          when textInputFocus
-cursorPageUpSelect                                              shift+pageup                    when textInputFocus
+cursorPageDown                                                                  pagedown        when textInputFocus
+cursorPageDownSelect                                                            shift+pagedown  when textInputFocus
+cursorPageUp                                                                    pageup          when textInputFocus
+cursorPageUpSelect                                                              shift+pageup    when textInputFocus
 cursorRedo
-cursorRight                                                     ctrl+f                          when textInputFocus
-cursorRight                                                     right                           when textInputFocus
-cursorRightSelect                                               shift+ctrl+f                    when textInputFocus
-cursorRightSelect                                               shift+right                     when textInputFocus
-cursorTop                                                       home                            when textInputFocus
-cursorTopSelect                                                 shift+cmd+up                    when textInputFocus
-cursorUndo                                                      cmd+u                           when textInputFocus
-cursorUp                                                        ctrl+p                          when textInputFocus
-cursorUp                                                        up                              when textInputFocus
-cursorUpSelect                                                  shift+ctrl+p                    when textInputFocus
-cursorUpSelect                                                  shift+up                        when textInputFocus
+cursorRight                                                                     ctrl+f          when textInputFocus
+cursorRight                                                                     right           when textInputFocus
+cursorRightSelect                                                               shift+ctrl+f    when textInputFocus
+cursorRightSelect                                                               shift+right     when textInputFocus
+cursorTop                                                                       home            when textInputFocus
+cursorTopSelect                                                                 shift+cmd+up    when textInputFocus
+cursorUndo                                                                      cmd+u           when textInputFocus
+cursorUp                                                                        ctrl+p          when textInputFocus
+cursorUp                                                                        up              when textInputFocus
+cursorUpSelect                                                                  shift+ctrl+p    when textInputFocus
+cursorUpSelect                                                                  shift+up        when textInputFocus
 cursorWordAccessibilityLeft
 cursorWordAccessibilityLeftSelect
 cursorWordAccessibilityRight
@@ -112,20 +112,20 @@ cursorWordEndLeft
 cursorWordEndLeftSelect
 cursorWordEndRight
 cursorWordEndRightSelect
-cursorWordLeft                                                  alt+b                           when textInputFocus
-cursorWordLeft                                                  alt+left                        when textInputFocus
-cursorWordLeftSelect                                            shift+alt+b                     when textInputFocus
-cursorWordLeftSelect                                            shift+alt+left                  when textInputFocus
+cursorWordLeft                                                                  alt+b           when textInputFocus
+cursorWordLeft                                                                  alt+left        when textInputFocus
+cursorWordLeftSelect                                                            shift+alt+b     when textInputFocus
+cursorWordLeftSelect                                                            shift+alt+left  when textInputFocus
 cursorWordPartLeft
 cursorWordPartLeftSelect
 cursorWordPartRight
 cursorWordPartRightSelect
 cursorWordPartStartLeft
 cursorWordPartStartLeftSelect
-cursorWordRight                                                 alt+f                           when textInputFocus
-cursorWordRight                                                 alt+right                       when textInputFocus
-cursorWordRightSelect                                           shift+alt+f                     when textInputFocus
-cursorWordRightSelect                                           shift+alt+right                 when textInputFocus
+cursorWordRight                                                                 alt+f           when textInputFocus
+cursorWordRight                                                                 alt+right       when textInputFocus
+cursorWordRightSelect                                                           shift+alt+f     when textInputFocus
+cursorWordRightSelect                                                           shift+alt+right when textInputFocus
 cursorWordStartLeft
 cursorWordStartLeftSelect
 cursorWordStartRight
@@ -169,20 +169,20 @@ default:redo
 default:replacePreviousChar
 default:type
 default:undo
-deleteAllLeft                                                   ctrl+backspace                  when textInputFocus && !editorReadonly
-deleteAllRight                                                  ctrl+k                          when textInputFocus && !editorReadonly
+deleteAllLeft                                                                   ctrl+backspace  when textInputFocus && !editorReadonly
+deleteAllRight                                                                  ctrl+k          when textInputFocus && !editorReadonly
 deleteFile
 deleteInsideWord
-deleteLeft                                                      backspace                       when textInputFocus
-deleteLeft                                                      ctrl+h                          when textInputFocus
-deleteRight                                                     ctrl+d                          when textInputFocus
-deleteRight                                                     delete                          when textInputFocus
+deleteLeft                                                                      backspace       when textInputFocus
+deleteLeft                                                                      ctrl+h          when textInputFocus
+deleteRight                                                                     ctrl+d          when textInputFocus
+deleteRight                                                                     delete          when textInputFocus
 deleteWordEndLeft
 deleteWordEndRight
-deleteWordLeft                                                  alt+backspace                   when textInputFocus && !editorReadonly
+deleteWordLeft                                                                  alt+backspace   when textInputFocus && !editorReadonly
 deleteWordPartLeft
 deleteWordPartRight
-deleteWordRight                                                 alt+delete                      when textInputFocus && !editorReadonly
+deleteWordRight                                                                 alt+delete      when textInputFocus && !editorReadonly
 deleteWordStartLeft
 deleteWordStartRight
 detailsContainers.focus
@@ -216,12 +216,12 @@ editor.action.addSelectionToNextFindMatch
 editor.action.addSelectionToPreviousFindMatch
 editor.action.autoFix
 editor.action.blockComment
-editor.action.cancelSelectionAnchor                             escape                          when editorTextFocus && selectionAnchorSet
+editor.action.cancelSelectionAnchor                                             escape          when editorTextFocus && selectionAnchorSet
 editor.action.changeAll
-editor.action.clipboardCopyAction                               cmd+c
+editor.action.clipboardCopyAction                                               cmd+c
 editor.action.clipboardCopyWithSyntaxHighlightingAction
-editor.action.clipboardCutAction                                cmd+x
-editor.action.clipboardPasteAction                              cmd+v
+editor.action.clipboardCutAction                                                cmd+x
+editor.action.clipboardPasteAction                                              cmd+v
 editor.action.commentLine
 editor.action.copyLinesDownAction
 editor.action.copyLinesUpAction
@@ -261,22 +261,22 @@ editor.action.indentationToTabs
 editor.action.indentLines
 editor.action.indentUsingSpaces
 editor.action.indentUsingTabs
-editor.action.inlineSuggest.commit                              tab                             when inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorTabMovesFocus
-editor.action.inlineSuggest.hide                                escape                          when inlineSuggestionVisible
-editor.action.inlineSuggest.showNext                            alt+]                           when inlineSuggestionVisible && !editorReadonly
-editor.action.inlineSuggest.showPrevious                        alt+[                           when inlineSuggestionVisible && !editorReadonly
+editor.action.inlineSuggest.commit                                              tab             when inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorTabMovesFocus
+editor.action.inlineSuggest.hide                                                escape          when inlineSuggestionVisible
+editor.action.inlineSuggest.showNext                                            alt+]           when inlineSuggestionVisible && !editorReadonly
+editor.action.inlineSuggest.showPrevious                                        alt+[           when inlineSuggestionVisible && !editorReadonly
 editor.action.inlineSuggest.trigger
 editor.action.inPlaceReplace.down
 editor.action.inPlaceReplace.up
-editor.action.insertCursorAbove                                 alt+cmd+up                      when editorTextFocus
+editor.action.insertCursorAbove                                                 alt+cmd+up      when editorTextFocus
 editor.action.insertCursorAtEndOfEachLineSelected
-editor.action.insertCursorBelow                                 alt+cmd+down                    when editorTextFocus
-editor.action.insertLineAfter                                   cmd+enter                       when editorTextFocus && !editorReadonly
-editor.action.insertLineBefore                                  shift+cmd+enter                 when editorTextFocus && !editorReadonly
+editor.action.insertCursorBelow                                                 alt+cmd+down    when editorTextFocus
+editor.action.insertLineAfter                                                   cmd+enter       when editorTextFocus && !editorReadonly
+editor.action.insertLineBefore                                                  shift+cmd+enter when editorTextFocus && !editorReadonly
 editor.action.insertSnippet
 editor.action.inspectTMScopes
 editor.action.joinLines
-editor.action.jumpToBracket                                     cmd+j                           when editorTextFocus
+editor.action.jumpToBracket                                                     cmd+j           when editorTextFocus
 editor.action.linkedEditing
 editor.action.marker.next
 editor.action.marker.nextInFiles
@@ -285,12 +285,12 @@ editor.action.marker.prevInFiles
 editor.action.measureExtHostLatency
 editor.action.moveCarretLeftAction
 editor.action.moveCarretRightAction
-editor.action.moveLinesDownAction                               cmd+down                        when editorTextFocus && !editorReadonly
-editor.action.moveLinesUpAction                                 cmd+up                          when editorTextFocus && !editorReadonly
+editor.action.moveLinesDownAction                                               cmd+down        when editorTextFocus && !editorReadonly
+editor.action.moveLinesUpAction                                                 cmd+up          when editorTextFocus && !editorReadonly
 editor.action.moveSelectionToNextFindMatch
 editor.action.moveSelectionToPreviousFindMatch
 editor.action.nextCommentThreadAction
-editor.action.nextMatchFindAction                               cmd+g                           when editorFocus
+editor.action.nextMatchFindAction                                               cmd+g           when editorFocus
 editor.action.nextSelectionMatchFindAction
 editor.action.openDeclarationToTheSide
 editor.action.openLink
@@ -302,9 +302,9 @@ editor.action.peekImplementation
 editor.action.peekTypeDefinition
 editor.action.previewDeclaration
 editor.action.previousCommentThreadAction
-editor.action.previousMatchFindAction                           shift+cmd+g                     when editorFocus
+editor.action.previousMatchFindAction                                           shift+cmd+g     when editorFocus
 editor.action.previousSelectionMatchFindAction
-editor.action.quickFix                                          cmd+.                           when editorHasCodeActionsProvider && editorTextFocus && !editorReadonly
+editor.action.quickFix                                                          cmd+.           when editorHasCodeActionsProvider && editorTextFocus && !editorReadonly
 editor.action.refactor
 editor.action.refactor.preview
 editor.action.referenceSearch.trigger
@@ -313,16 +313,16 @@ editor.action.reindentselectedlines
 editor.action.removeCommentLine
 editor.action.removeDuplicateLines
 editor.action.rename
-editor.action.replaceAll                                        alt+cmd+enter                   when editorFocus && findWidgetVisible
-editor.action.replaceOne                                        cmd+r                           when editorFocus && findWidgetVisible
+editor.action.replaceAll                                                        alt+cmd+enter   when editorFocus && findWidgetVisible
+editor.action.replaceOne                                                        cmd+r           when editorFocus && findWidgetVisible
 editor.action.resetSuggestSize
 editor.action.revealDeclaration
 editor.action.revealDefinition
 editor.action.revealDefinitionAside
-editor.action.selectAll                                         cmd+a
+editor.action.selectAll                                                         cmd+a
 editor.action.selectAllMatches
 editor.action.selectFromAnchorToCursor
-editor.action.selectHighlights                                  ctrl+s                          when editorFocus
+editor.action.selectHighlights                                                  ctrl+s          when editorFocus
 editor.action.selectToBracket
 editor.action.setSelectionAnchor
 editor.action.showAccessibilityHelp
@@ -334,11 +334,11 @@ editor.action.showSnippets
 editor.action.smartSelect.expand
 editor.action.smartSelect.grow
 editor.action.smartSelect.shrink
-editor.action.sortLinesAscending                                shift+cmd+2                     when editorTextFocus
-editor.action.sortLinesDescending                               shift+cmd+3                     when editorTextFocus
+editor.action.sortLinesAscending                                                shift+cmd+2     when editorTextFocus
+editor.action.sortLinesDescending                                               shift+cmd+3     when editorTextFocus
 editor.action.sourceAction
 editor.action.startDebugTextMate
-editor.action.startFindReplaceAction                            alt+cmd+f                       when editorFocus || editorIsOpen
+editor.action.startFindReplaceAction                                            alt+cmd+f       when editorFocus || editorIsOpen
 editor.action.surroundWithSnippet
 editor.action.toggleColumnSelection
 editor.action.toggleMinimap
@@ -353,9 +353,9 @@ editor.action.transformToSnakecase
 editor.action.transformToTitlecase
 editor.action.transformToUppercase
 editor.action.transpose
-editor.action.transposeLetters                                  ctrl+t                          when textInputFocus && !editorReadonly
+editor.action.transposeLetters                                                  ctrl+t          when textInputFocus && !editorReadonly
 editor.action.triggerParameterHints
-editor.action.triggerSuggest                                    ctrl+space                      when editorHasCompletionItemProvider && textInputFocus && !editorReadonly
+editor.action.triggerSuggest                                                    ctrl+space      when editorHasCompletionItemProvider && textInputFocus && !editorReadonly
 editor.action.trimTrailingWhitespace
 editor.action.unicodeHighlight.disableHighlightingOfAmbiguousCharacters
 editor.action.unicodeHighlight.disableHighlightingOfInvisibleCharacters
@@ -363,19 +363,19 @@ editor.action.unicodeHighlight.disableHighlightingOfNonBasicAsciiCharacters
 editor.action.unicodeHighlight.showExcludeOptions
 editor.action.webvieweditor.findNext
 editor.action.webvieweditor.findPrevious
-editor.action.webvieweditor.hideFind                            escape                          when webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'
-editor.action.webvieweditor.showFind                            cmd+f                           when webviewFindWidgetEnabled && !editorFocus && activeEditor == 'WebviewEditor'
+editor.action.webvieweditor.hideFind                                            escape          when webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'
+editor.action.webvieweditor.showFind                                            cmd+f           when webviewFindWidgetEnabled && !editorFocus && activeEditor == 'WebviewEditor'
 editor.action.wordHighlight.next
 editor.action.wordHighlight.prev
 editor.action.wordHighlight.trigger
 editor.actions.findWithArgs
-editor.cancelOperation                                          escape                          when cancellableOperation
-editor.closeCallHierarchy                                       escape                          when callHierarchyVisible && !config.editor.stablePeek
-editor.closeTestPeek                                            escape                          when testing.isInPeek && !config.editor.stablePeek || testing.isPeekVisible && !config.editor.stablePeek
-editor.closeTypeHierarchy                                       escape                          when typeHierarchyVisible && !config.editor.stablePeek
+editor.cancelOperation                                                          escape          when cancellableOperation
+editor.closeCallHierarchy                                                       escape          when callHierarchyVisible && !config.editor.stablePeek
+editor.closeTestPeek                                                            escape          when testing.isInPeek && !config.editor.stablePeek || testing.isPeekVisible && !config.editor.stablePeek
+editor.closeTypeHierarchy                                                       escape          when typeHierarchyVisible && !config.editor.stablePeek
 editor.createFoldingRangeFromSelection
 editor.debug.action.addLogPoint
-editor.debug.action.closeExceptionWidget                        escape                          when exceptionWidgetVisible
+editor.debug.action.closeExceptionWidget                                        escape          when exceptionWidgetVisible
 editor.debug.action.conditionalBreakpoint
 editor.debug.action.goToNextBreakpoint
 editor.debug.action.goToPreviousBreakpoint
@@ -394,7 +394,7 @@ editor.emmet.action.decrementNumberByOne
 editor.emmet.action.decrementNumberByOneTenth
 editor.emmet.action.decrementNumberByTen
 editor.emmet.action.evaluateMathExpression
-editor.emmet.action.expandAbbreviation                          tab                             when config.emmet.triggerExpansionOnTab && editorTextFocus && !editorReadonly && !editorTabMovesFocus
+editor.emmet.action.expandAbbreviation                                          tab             when config.emmet.triggerExpansionOnTab && editorTextFocus && !editorReadonly && !editorTabMovesFocus
 editor.emmet.action.incrementNumberByOne
 editor.emmet.action.incrementNumberByOneTenth
 editor.emmet.action.incrementNumberByTen
@@ -411,7 +411,7 @@ editor.emmet.action.toggleComment
 editor.emmet.action.updateImageSize
 editor.emmet.action.updateTag
 editor.emmet.action.wrapWithAbbreviation
-editor.fold                                                     shift+cmd+[                     when editorTextFocus && foldingEnabled
+editor.fold                                                                     shift+cmd+[     when editorTextFocus && foldingEnabled
 editor.foldAll
 editor.foldAllBlockComments
 editor.foldAllExcept
@@ -426,7 +426,7 @@ editor.foldLevel7
 editor.foldRecursively
 editor.gotoNextFold
 editor.gotoNextSymbolFromResult
-editor.gotoNextSymbolFromResult.cancel                          escape                          when hasSymbols
+editor.gotoNextSymbolFromResult.cancel                                          escape          when hasSymbols
 editor.gotoParentFold
 editor.gotoPreviousFold
 editor.inlayHints.Reset
@@ -440,7 +440,7 @@ editor.showSubtypes
 editor.showSupertypes
 editor.showTypeHierarchy
 editor.toggleFold
-editor.unfold                                                   shift+cmd+]                     when editorTextFocus && foldingEnabled
+editor.unfold                                                                   shift+cmd+]     when editorTextFocus && foldingEnabled
 editor.unfoldAll
 editor.unfoldAllExcept
 editor.unfoldAllMarkerRegions
@@ -519,7 +519,7 @@ extensions.sort.rating
 extensions.sort.updateDate
 files.openTimeline
 files.participants.resetChoice
-filesExplorer.cancelCut                                         escape                          when explorerResourceCut && explorerViewletVisible && filesExplorerFocus && !inputFocus
+filesExplorer.cancelCut                                                         escape          when explorerResourceCut && explorerViewletVisible && filesExplorerFocus && !inputFocus
 filesExplorer.copy
 filesExplorer.cut
 filesExplorer.findInFolder
@@ -654,24 +654,24 @@ goToPreviousReference
 goToPreviousReferenceFromEmbeddedEditor
 help.tweetFeedback
 hideCodeActionWidget
-hideCodeActionWidget                                            escape                          when codeActionMenuVisible
-hideSuggestWidget                                               escape                          when suggestWidgetVisible && textInputFocus
+hideCodeActionWidget                                                            escape          when codeActionMenuVisible
+hideSuggestWidget                                                               escape          when suggestWidgetVisible && textInputFocus
 history.showNext
 history.showPrevious
 imagePreview.zoomIn
 imagePreview.zoomOut
 increaseSearchEditorContextLines
 inlayHints.startReadingLineWithHint
-inlayHints.stopReadingLineWithHint                              escape                          when isReadingLineWithInlayHints
-insertBestCompletion                                            tab                             when atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
-insertNextSuggestion                                            tab                             when hasOtherSuggestions && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
+inlayHints.stopReadingLineWithHint                                              escape          when isReadingLineWithInlayHints
+insertBestCompletion                                                            tab             when atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
+insertNextSuggestion                                                            tab             when hasOtherSuggestions && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
 insertPrevSuggestion
-insertSnippet                                                   tab                             when editorTextFocus && hasSnippetCompletions && !editorTabMovesFocus && !inSnippetMode
+insertSnippet                                                                   tab             when editorTextFocus && hasSnippetCompletions && !editorTabMovesFocus && !inSnippetMode
 interactive.execute
 interactive.history.focus
 interactive.history.next
 interactive.history.previous
-interactive.input.clear                                         escape                          when !LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'
+interactive.input.clear                                                         escape          when !LinkedEditingInputVisible && !accessibilityHelpWidgetVisible && !breakpointWidgetVisible && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !exceptionWidgetVisible && !findWidgetVisible && !inSnippetMode && !isComposing && !markersNavigationVisible && !notificationToastsVisible && !parameterHintsVisible && !renameInputVisible && !selectionAnchorSet && !suggestWidgetVisible && resourceScheme == 'vscode-interactive'
 interactive.input.focus
 interactive.scrollToBottom
 interactive.scrollToTop
@@ -792,7 +792,7 @@ jupyterViewVariables.resetViewLocation
 jupyterViewVariables.toggleVisibility
 keybindings.editor.addKeybinding
 keybindings.editor.clearSearchHistory
-keybindings.editor.clearSearchResults                           escape                          when inKeybindings && inKeybindingsSearch
+keybindings.editor.clearSearchResults                                           escape          when inKeybindings && inKeybindingsSearch
 keybindings.editor.copyCommandKeybindingEntry
 keybindings.editor.copyCommandTitle
 keybindings.editor.copyKeybindingEntry
@@ -802,7 +802,7 @@ keybindings.editor.focusKeybindings
 keybindings.editor.recordSearchKeys
 keybindings.editor.removeKeybinding
 keybindings.editor.resetKeybinding
-keybindings.editor.searchKeybindings                            cmd+f                           when inKeybindings
+keybindings.editor.searchKeybindings                                            cmd+f           when inKeybindings
 keybindings.editor.showConflicts
 keybindings.editor.showDefaultKeybindings
 keybindings.editor.showExtensionKeybindings
@@ -813,33 +813,33 @@ lastCursorLineSelect
 lastCursorLineSelectDrag
 lastCursorWordSelect
 layoutEditorGroups
-leaveEditorMessage                                              escape                          when messageVisible
-leaveSnippet                                                    escape                          when editorTextFocus && inSnippetMode
-lineBreakInsert                                                 ctrl+r                          when textInputFocus && !editorReadonly
-list.clear                                                      escape                          when listFocus && listHasSelectionOrFocus && !inputFocus
+leaveEditorMessage                                                              escape          when messageVisible
+leaveSnippet                                                                    escape          when editorTextFocus && inSnippetMode
+lineBreakInsert                                                                 ctrl+r          when textInputFocus && !editorReadonly
+list.clear                                                                      escape          when listFocus && listHasSelectionOrFocus && !inputFocus
 list.closeFind
-list.closeFind                                                  escape                          when listFocus && treeFindOpen
+list.closeFind                                                                  escape          when listFocus && treeFindOpen
 list.collapse
 list.collapseAll
 list.expand
 list.expandSelectionDown
 list.expandSelectionUp
 list.find
-list.focusDown                                                  down                            when listFocus && !inputFocus
+list.focusDown                                                                  down            when listFocus && !inputFocus
 list.focusFirst
 list.focusLast
 list.focusPageDown
 list.focusPageUp
 list.focusParent
-list.focusUp                                                    up                              when listFocus && !inputFocus
+list.focusUp                                                                    up              when listFocus && !inputFocus
 list.scrollDown
 list.scrollLeft
 list.scrollRight
 list.scrollUp
-list.select                                                     enter                           when listFocus && !inputFocus
+list.select                                                                     enter           when listFocus && !inputFocus
 list.selectAll
 list.selectAndPreserveFocus
-list.toggleExpand                                               space                           when listFocus && !inputFocus
+list.toggleExpand                                                               space           when listFocus && !inputFocus
 list.toggleFilterOnType
 list.toggleFindMode
 list.toggleKeyboardNavigation
@@ -867,7 +867,7 @@ markdown.findAllFileReferences
 markdown.preview.refresh
 markdown.preview.toggleLock
 markdown.showLockedPreviewToSide
-markdown.showPreview                                            shift+cmd+v                     when !notebookEditorFocused && editorLangId == 'markdown'
+markdown.showPreview                                                            shift+cmd+v     when !notebookEditorFocused && editorLangId == 'markdown'
 markdown.showPreviewSecuritySelector
 markdown.showPreviewToSide
 markdown.showSource
@@ -904,7 +904,7 @@ mergeEditor.acceptMerge
 mergeEditor.compareInput1WithBase
 mergeEditor.compareInput2WithBase
 mergeEditor.resetResultToBaseAndAutoMerge
-moveFileToTrash                                                 cmd+delete                      when explorerResourceMoveableToTrash && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus
+moveFileToTrash                                                                 cmd+delete      when explorerResourceMoveableToTrash && explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus
 nextCompressedFolder
 noop
 notebook.cancelExecution
@@ -954,7 +954,7 @@ notebook.cell.moveDown
 notebook.cell.moveUp
 notebook.cell.paste
 notebook.cell.pasteAbove
-notebook.cell.quitEdit                                         escape                           when inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible
+notebook.cell.quitEdit                                                          escape          when inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible
 notebook.cell.split
 notebook.cell.toggleLineNumbers
 notebook.cell.toggleOutputs
@@ -977,7 +977,7 @@ notebook.focusTop
 notebook.fold
 notebook.format
 notebook.formatCell
-notebook.hideFind                                               escape                          when notebookEditorFocused && notebookFindWidgetFocused
+notebook.hideFind                                                               escape          when notebookEditorFocused && notebookFindWidgetFocused
 notebook.inspectLayout
 notebook.interruptExecution
 notebook.renderAllMarkdownCells
@@ -1001,8 +1001,8 @@ notifications.focusLastToast
 notifications.focusNextToast
 notifications.focusPreviousToast
 notifications.focusToasts
-notifications.hideList                                          escape                          when notificationCenterVisible
-notifications.hideToasts                                        escape                          when notificationToastsVisible
+notifications.hideList                                                          escape          when notificationCenterVisible
+notifications.hideToasts                                                        escape          when notificationToastsVisible
 notifications.showList
 notifications.toggleDoNotDisturbMode
 notifications.toggleList
@@ -1049,7 +1049,7 @@ opensshremotesexplorer.emptyWindowInNewWindow
 opensshremotesexplorer.refresh
 opensshremotesexplorer.reopenFolderInCurrentWindow
 opensshremotesexplorer.reopenFolderInNewWindow
-outdent                                                         shift+tab                       when editorTextFocus && !editorReadonly && !editorTabMovesFocus
+outdent                                                                         shift+tab       when editorTextFocus && !editorReadonly && !editorTabMovesFocus
 outline.collapse
 outline.filterOnType
 outline.focus
@@ -1068,8 +1068,8 @@ perfview.show
 previewSelectedCodeAction
 previousCompressedFolder
 problems.action.clearFilterText
-problems.action.clearFilterText                                 escape                          when problemsFilterFocus
-problems.action.copy                                            cmd+c                           when problemsVisibility && !relatedInformationFocus && focusedView == 'workbench.panel.markers.view'
+problems.action.clearFilterText                                                 escape          when problemsFilterFocus
+problems.action.copy                                                            cmd+c           when problemsVisibility && !relatedInformationFocus && focusedView == 'workbench.panel.markers.view'
 problems.action.copyMessage
 problems.action.copyRelatedInformationMessage
 problems.action.focusFilter
@@ -1139,7 +1139,7 @@ python.startREPL
 python.triggerEnvSelection
 python.viewLanguageServerOutput
 python.viewOutput
-redo                                                            shift+cmd+z
+redo                                                                            shift+cmd+z
 refactorPreview
 refactorPreview.apply
 refactorPreview.discard
@@ -1250,9 +1250,9 @@ remote.tunnel.openPreview
 remote.tunnel.setProtocolHttp
 remote.tunnel.setProtocolHttps
 removeRootFolder
-removeSecondaryCursors                                          escape                          when editorHasMultipleSelections && textInputFocus
+removeSecondaryCursors                                                          escape          when editorHasMultipleSelections && textInputFocus
 renameFile
-repl.action.acceptInput                                         enter                           when inDebugRepl && textInputFocus
+repl.action.acceptInput                                                         enter           when inDebugRepl && textInputFocus
 repl.action.copyAll
 repl.action.filter
 replacePreviousChar
@@ -1261,7 +1261,7 @@ resetGettingStartedProgress
 revealFileInOS
 revealInExplorer
 revealReference
-saveAll                                                         alt+cmd+s
+saveAll                                                                         alt+cmd+s
 scm.acceptInput
 scm.forceViewNextCommit
 scm.forceViewPreviousCommit
@@ -1270,11 +1270,11 @@ scm.viewNextCommit
 scm.viewPreviousCommit
 scrollEditorBottom
 scrollEditorTop
-scrollLineDown                                                  ctrl+pagedown                   when textInputFocus
-scrollLineUp                                                    ctrl+pageup                     when textInputFocus
-scrollPageDown                                                  cmd+pagedown                    when textInputFocus
-scrollPageUp                                                    cmd+pageup                      when textInputFocus
-search.action.cancel                                            escape                          when listFocus && searchViewletVisible && !inputFocus && searchState != '0'
+scrollLineDown                                                                  ctrl+pagedown   when textInputFocus
+scrollLineUp                                                                    ctrl+pageup     when textInputFocus
+scrollPageDown                                                                  cmd+pagedown    when textInputFocus
+scrollPageUp                                                                    cmd+pageup      when textInputFocus
+search.action.cancel                                                            escape          when listFocus && searchViewletVisible && !inputFocus && searchState != '0'
 search.action.clearHistory
 search.action.clearSearchResults
 search.action.collapseSearchResults
@@ -1286,7 +1286,7 @@ search.action.focusFilesToExclude
 search.action.focusFilesToInclude
 search.action.focusNextSearchResult
 search.action.focusPreviousSearchResult
-search.action.focusQueryEditorWidget                            escape                          when inSearchEditor
+search.action.focusQueryEditorWidget                                            escape          when inSearchEditor
 search.action.focusSearchFromResults
 search.action.focusSearchList
 search.action.openEditor
@@ -1299,7 +1299,7 @@ search.action.openResultToSide
 search.action.refreshSearchResults
 search.action.remove
 search.action.replace
-search.action.replaceAll                                        alt+cmd+enter                   when replaceActive && searchViewletVisible && !findWidgetVisible
+search.action.replaceAll                                                        alt+cmd+enter   when replaceActive && searchViewletVisible && !findWidgetVisible
 search.action.replaceAllInFile
 search.action.replaceAllInFolder
 search.action.revealInSideBar
@@ -1313,18 +1313,18 @@ selectFirstSuggestion
 selectForCompare
 selectLastSuggestion
 selectNextCodeAction
-selectNextPageSuggestion                                        pagedown                        when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
-selectNextSuggestion                                            ctrl+n                          when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
-selectNextSuggestion                                            down                            when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
+selectNextPageSuggestion                                                        pagedown        when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
+selectNextSuggestion                                                            ctrl+n          when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
+selectNextSuggestion                                                            down            when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
 selectPrevCodeAction
-selectPrevPageSuggestion                                        pageup                          when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
-selectPrevSuggestion                                            ctrl+p                          when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
-selectPrevSuggestion                                            up                              when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
+selectPrevPageSuggestion                                                        pageup          when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
+selectPrevSuggestion                                                            ctrl+p          when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
+selectPrevSuggestion                                                            up              when suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus
 setContext
 setRootFolder
 setSelection
-settings.action.clearSearchResults                              escape                          when inSettingsEditor && inSettingsSearch
-settings.action.focusLevelUp                                    escape                          when inSettingsEditor && !inSettingsJSONEditor && !inSettingsSearch
+settings.action.clearSearchResults                                              escape          when inSettingsEditor && inSettingsSearch
+settings.action.focusLevelUp                                                    escape          when inSettingsEditor && !inSettingsJSONEditor && !inSettingsSearch
 settings.action.focusSettingControl
 settings.action.focusSettingsFile
 settings.action.focusSettingsFromSearch
@@ -1332,20 +1332,20 @@ settings.action.focusSettingsList
 settings.action.focusTOC
 settings.action.search
 settings.action.showContextMenu
-settings.cycle.trimTrailingWhitespace                           ctrl+cmd+w
+settings.cycle.trimTrailingWhitespace                                           ctrl+cmd+w
 settings.filterByOnline
 settings.filterByTelemetry
 settings.filterUntrusted
 settings.switchToJSON
 showEditorScreenReaderNotification
-showNextParameterHint                                           ctrl+n                          when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
-showNextParameterHint                                           down                            when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
-showPrevParameterHint                                           ctrl+p                          when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
-showPrevParameterHint                                           up                              when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
+showNextParameterHint                                                           ctrl+n          when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
+showNextParameterHint                                                           down            when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
+showPrevParameterHint                                                           ctrl+p          when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
+showPrevParameterHint                                                           up              when editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible
 simpleBrowser.show
 sshHosts.focus
 sshHosts.resetViewLocation
-tab                                                             tab                             when editorTextFocus && !editorReadonly && !editorTabMovesFocus
+tab                                                                             tab             when editorTextFocus && !editorReadonly && !editorTabMovesFocus
 targetsContainers.focus
 targetsContainers.resetViewLocation
 terminal.focus
@@ -1406,12 +1406,12 @@ toggle.window.commandCenter
 toggle.workbench.layoutControl.enabled
 toggleEscapeSequenceLogging
 toggleExplainMode
-toggleFindCaseSensitive                                         alt+cmd+c                       when editorFocus
+toggleFindCaseSensitive                                                         alt+cmd+c       when editorFocus
 toggleFindInSelection
-toggleFindRegex                                                 alt+cmd+r                       when editorFocus
-toggleFindWholeWord                                             alt+cmd+w                       when editorFocus
+toggleFindRegex                                                                 alt+cmd+r       when editorFocus
+toggleFindWholeWord                                                             alt+cmd+w       when editorFocus
 togglePeekWidgetFocus
-togglePreserveCase                                              alt+cmd+p                       when editorFocus
+togglePreserveCase                                                              alt+cmd+p       when editorFocus
 toggleSearchCaseSensitive
 toggleSearchEditorCaseSensitive
 toggleSearchEditorContextLines
@@ -1429,7 +1429,7 @@ typescript.openTsServerLog
 typescript.reloadProjects
 typescript.restartTsServer
 typescript.selectTypeScriptVersion
-undo                                                            cmd+z
+undo                                                                            cmd+z
 update.check
 update.checkForVSCodeUpdate
 update.checking
@@ -1548,7 +1548,7 @@ vscode-docker.volumes.refresh
 vscode-docker.volumes.remove
 walkthroughs.selectStep
 watch.collapse
-welcome.goBack                                                  escape                          when inWelcome && activeEditor == 'gettingStartedPage'
+welcome.goBack                                                                  escape          when inWelcome && activeEditor == 'gettingStartedPage'
 welcome.markStepComplete
 welcome.markStepIncomplete
 welcome.showAllWalkthroughs
@@ -1566,7 +1566,7 @@ workbench.action.clearCommandHistory
 workbench.action.clearEditorHistory
 workbench.action.clearLocalePreference
 workbench.action.clearRecentFiles
-workbench.action.closeActiveEditor                              cmd+w
+workbench.action.closeActiveEditor                                              cmd+w
 workbench.action.closeActivePinnedEditor
 workbench.action.closeAllEditors
 workbench.action.closeAllGroups
@@ -1581,10 +1581,10 @@ workbench.action.closeFolder
 workbench.action.closeGroup
 workbench.action.closeOtherEditors
 workbench.action.closePanel
-workbench.action.closeQuickOpen                                 escape                          when inQuickOpen
+workbench.action.closeQuickOpen                                                 escape          when inQuickOpen
 workbench.action.closeSidebar
 workbench.action.closeUnmodifiedEditors
-workbench.action.closeWindow                                    shift+cmd+w
+workbench.action.closeWindow                                                    shift+cmd+w
 workbench.action.collapseAllComments
 workbench.action.compareEditor.focusOtherSide
 workbench.action.compareEditor.focusPrimarySide
@@ -1602,7 +1602,7 @@ workbench.action.debug.callStackDown
 workbench.action.debug.callStackTop
 workbench.action.debug.callStackUp
 workbench.action.debug.configure
-workbench.action.debug.continue                                 shift+cmd+right                 when debugState == 'stopped'
+workbench.action.debug.continue                                                 shift+cmd+right when debugState == 'stopped'
 workbench.action.debug.disconnect
 workbench.action.debug.disconnectAndSuspend
 workbench.action.debug.focusProcess
@@ -1612,7 +1612,7 @@ workbench.action.debug.prevConsole
 workbench.action.debug.restart
 workbench.action.debug.restartFrame
 workbench.action.debug.reverseContinue
-workbench.action.debug.run                                      cmd+d                           when debuggersAvailable && debugState != 'initializing'
+workbench.action.debug.run                                                      cmd+d           when debuggersAvailable && debugState != 'initializing'
 workbench.action.debug.selectandstart
 workbench.action.debug.selectDebugConsole
 workbench.action.debug.selectDebugSession
@@ -1620,11 +1620,11 @@ workbench.action.debug.selectRepl
 workbench.action.debug.showLoadedScripts
 workbench.action.debug.start
 workbench.action.debug.stepBack
-workbench.action.debug.stepInto                                 cmd+up                          when debugState != 'inactive'
+workbench.action.debug.stepInto                                                 cmd+up          when debugState != 'inactive'
 workbench.action.debug.stepIntoTarget
-workbench.action.debug.stepOut                                  cmd+down                        when debugState == 'stopped'
-workbench.action.debug.stepOver                                 cmd+right                       when debugState == 'stopped'
-workbench.action.debug.stop                                     cmd+d                           when inDebugMode && !focusedSessionIsAttach
+workbench.action.debug.stepOut                                                  cmd+down        when debugState == 'stopped'
+workbench.action.debug.stepOver                                                 cmd+right       when debugState == 'stopped'
+workbench.action.debug.stop                                                     cmd+d           when inDebugMode && !focusedSessionIsAttach
 workbench.action.debug.terminateThread
 workbench.action.decreaseViewHeight
 workbench.action.decreaseViewSize
@@ -1653,9 +1653,9 @@ workbench.action.expandAllComments
 workbench.action.extensionHostProfiler.stop
 workbench.action.files.copyPathOfActiveFile
 workbench.action.files.newFile
-workbench.action.files.newUntitledFile                          cmd+n
+workbench.action.files.newUntitledFile                                          cmd+n
 workbench.action.files.openFile
-workbench.action.files.openFileFolder                           alt+cmd+o                       when isMacNative && openFolderWorkspaceSupport
+workbench.action.files.openFileFolder                                           alt+cmd+o       when isMacNative && openFolderWorkspaceSupport
 workbench.action.files.openFileFolderInNewWindow
 workbench.action.files.openFileInNewWindow
 workbench.action.files.openFolder
@@ -1664,14 +1664,14 @@ workbench.action.files.openFolderViaWorkspace
 workbench.action.files.openLocalFileFolder
 workbench.action.files.revealActiveFileInWindows
 workbench.action.files.revert
-workbench.action.files.save                                     cmd+s
-workbench.action.files.saveAll                                  alt+cmd+s
-workbench.action.files.saveAs                                   shift+cmd+s
+workbench.action.files.save                                                     cmd+s
+workbench.action.files.saveAll                                                  alt+cmd+s
+workbench.action.files.saveAs                                                   shift+cmd+s
 workbench.action.files.saveFiles
 workbench.action.files.saveLocalFile
 workbench.action.files.saveWithoutFormatting
 workbench.action.files.showOpenedFileInNewWindow
-workbench.action.findInFiles                                    shift+cmd+f
+workbench.action.findInFiles                                                    shift+cmd+f
 workbench.action.firstEditorInGroup
 workbench.action.focusAboveGroup
 workbench.action.focusAboveGroupWithoutWrap
@@ -1684,7 +1684,7 @@ workbench.action.focusBelowGroupWithoutWrap
 workbench.action.focusCommentsPanel
 workbench.action.focusEighthEditorGroup
 workbench.action.focusFifthEditorGroup
-workbench.action.focusFirstEditorGroup                          cmd+1
+workbench.action.focusFirstEditorGroup                                          cmd+1
 workbench.action.focusFirstSideEditor
 workbench.action.focusFourthEditorGroup
 workbench.action.focusLastEditorGroup
@@ -1699,19 +1699,19 @@ workbench.action.focusPreviousPart
 workbench.action.focusQuickOpen
 workbench.action.focusRightGroup
 workbench.action.focusRightGroupWithoutWrap
-workbench.action.focusSecondEditorGroup                         cmd+2
+workbench.action.focusSecondEditorGroup                                         cmd+2
 workbench.action.focusSecondSideEditor
 workbench.action.focusSeventhEditorGroup
-workbench.action.focusSideBar                                   cmd+0
+workbench.action.focusSideBar                                                   cmd+0
 workbench.action.focusSixthEditorGroup
 workbench.action.focusStatusBar
-workbench.action.focusThirdEditorGroup                          cmd+3
+workbench.action.focusThirdEditorGroup                                          cmd+3
 workbench.action.focusTitleBar
 workbench.action.generateColorTheme
-workbench.action.gotoLine                                       ctrl+g
-workbench.action.gotoSymbol                                     alt+g
-workbench.action.hideComment                                    escape                          when commentEditorFocused
-workbench.action.hideInterfaceOverview                          escape                          when interfaceOverviewVisible
+workbench.action.gotoLine                                                       ctrl+g
+workbench.action.gotoSymbol                                                     alt+g
+workbench.action.hideComment                                                    escape          when commentEditorFocused
+workbench.action.hideInterfaceOverview                                          escape          when interfaceOverviewVisible
 workbench.action.increaseViewHeight
 workbench.action.increaseViewSize
 workbench.action.increaseViewWidth
@@ -1772,12 +1772,12 @@ workbench.action.moveSideBarRight
 workbench.action.moveSidePanelToPanel
 workbench.action.moveView
 workbench.action.moveWindowTabToNewWindow
-workbench.action.navigateBack                                   ctrl+-                          when canNavigateBack
+workbench.action.navigateBack                                                   ctrl+-          when canNavigateBack
 workbench.action.navigateBackInEditLocations
 workbench.action.navigateBackInNavigationLocations
 workbench.action.navigateDown
 workbench.action.navigateEditorGroups
-workbench.action.navigateForward                                ctrl+shift+-                    when canNavigateForward
+workbench.action.navigateForward                                                ctrl+shift+-    when canNavigateForward
 workbench.action.navigateForwardInEditLocations
 workbench.action.navigateForwardInNavigationLocations
 workbench.action.navigateLast
@@ -1792,9 +1792,9 @@ workbench.action.newGroupAbove
 workbench.action.newGroupBelow
 workbench.action.newGroupLeft
 workbench.action.newGroupRight
-workbench.action.newWindow                                      shift+cmd+n
+workbench.action.newWindow                                                      shift+cmd+n
 workbench.action.newWindowTab
-workbench.action.nextEditor                                     shift+cmd+]
+workbench.action.nextEditor                                                     shift+cmd+]
 workbench.action.nextEditorInGroup
 workbench.action.nextPanelView
 workbench.action.nextSideBarView
@@ -1803,21 +1803,21 @@ workbench.action.openApplicationSettingsJson
 workbench.action.openDefaultKeybindingsFile
 workbench.action.openDocumentationUrl
 workbench.action.openEditorAtIndex
-workbench.action.openEditorAtIndex1                             ctrl+1
-workbench.action.openEditorAtIndex2                             ctrl+2
-workbench.action.openEditorAtIndex3                             ctrl+3
-workbench.action.openEditorAtIndex4                             ctrl+4
-workbench.action.openEditorAtIndex5                             ctrl+5
-workbench.action.openEditorAtIndex6                             ctrl+6
-workbench.action.openEditorAtIndex7                             ctrl+7
-workbench.action.openEditorAtIndex8                             ctrl+8
-workbench.action.openEditorAtIndex9                             ctrl+9
+workbench.action.openEditorAtIndex1                                             ctrl+1
+workbench.action.openEditorAtIndex2                                             ctrl+2
+workbench.action.openEditorAtIndex3                                             ctrl+3
+workbench.action.openEditorAtIndex4                                             ctrl+4
+workbench.action.openEditorAtIndex5                                             ctrl+5
+workbench.action.openEditorAtIndex6                                             ctrl+6
+workbench.action.openEditorAtIndex7                                             ctrl+7
+workbench.action.openEditorAtIndex8                                             ctrl+8
+workbench.action.openEditorAtIndex9                                             ctrl+9
 workbench.action.openExtensionLogsFolder
 workbench.action.openFolderSettings
 workbench.action.openFolderSettingsFile
 workbench.action.openGlobalKeybindings
 workbench.action.openGlobalKeybindingsFile
-workbench.action.openGlobalSettings                             cmd+,
+workbench.action.openGlobalSettings                                             cmd+,
 workbench.action.openIssueReporter
 workbench.action.openLicenseUrl
 workbench.action.openLogFile
@@ -1850,7 +1850,7 @@ workbench.action.openWorkspaceFromEditor
 workbench.action.openWorkspaceInNewWindow
 workbench.action.openWorkspaceSettings
 workbench.action.openWorkspaceSettingsFile
-workbench.action.output.toggleOutput                            shift+cmd+u                     when workbench.panel.output.active
+workbench.action.output.toggleOutput                                            shift+cmd+u     when workbench.panel.output.active
 workbench.action.pauseSocketWriting
 workbench.action.pinEditor
 workbench.action.populateFileFromSnippet
@@ -1858,22 +1858,22 @@ workbench.action.positionPanelBottom
 workbench.action.positionPanelLeft
 workbench.action.positionPanelRight
 workbench.action.previewColorTheme
-workbench.action.previousEditor                                 shift+cmd+[
+workbench.action.previousEditor                                                 shift+cmd+[
 workbench.action.previousEditorInGroup
 workbench.action.previousPanelView
 workbench.action.previousSideBarView
 workbench.action.problems.focus
 workbench.action.quickInputBack
-workbench.action.quickOpen                                      cmd+o
+workbench.action.quickOpen                                                      cmd+o
 workbench.action.quickOpenLeastRecentlyUsedEditor
 workbench.action.quickOpenLeastRecentlyUsedEditorInGroup
-workbench.action.quickOpenNavigateNext                          cmd+o                           when inQuickOpen
+workbench.action.quickOpenNavigateNext                                          cmd+o           when inQuickOpen
 workbench.action.quickOpenNavigateNextInEditorPicker
 workbench.action.quickOpenNavigateNextInFilePicker
 workbench.action.quickOpenNavigateNextInRecentFilesPicker
 workbench.action.quickOpenNavigateNextInTerminalPicker
 workbench.action.quickOpenNavigateNextInViewPicker
-workbench.action.quickOpenNavigatePrevious                      shift+cmd+o                     when inQuickOpen
+workbench.action.quickOpenNavigatePrevious                                      shift+cmd+o     when inQuickOpen
 workbench.action.quickOpenNavigatePreviousInEditorPicker
 workbench.action.quickOpenNavigatePreviousInFilePicker
 workbench.action.quickOpenNavigatePreviousInRecentFilesPicker
@@ -1883,14 +1883,14 @@ workbench.action.quickOpenPreviousEditor
 workbench.action.quickOpenPreviousRecentlyUsedEditor
 workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup
 workbench.action.quickOpenRecent
-workbench.action.quickOpenSelectNext                            ctrl+n                          when inQuickOpen
-workbench.action.quickOpenSelectPrevious                        ctrl+p                          when inQuickOpen
+workbench.action.quickOpenSelectNext                                            ctrl+n          when inQuickOpen
+workbench.action.quickOpenSelectPrevious                                        ctrl+p          when inQuickOpen
 workbench.action.quickOpenTerm
 workbench.action.quickOpenView
 workbench.action.quickPickManyToggle
 workbench.action.quickSwitchWindow
-workbench.action.quit                                           cmd+q
-workbench.action.reloadWindow                                   ctrl+alt+cmd+r
+workbench.action.quit                                                           cmd+q
+workbench.action.reloadWindow                                                   ctrl+alt+cmd+r
 workbench.action.reloadWindowWithExtensionsDisabled
 workbench.action.remote.close
 workbench.action.remote.extensions
@@ -1913,7 +1913,7 @@ workbench.action.revealPathInFinder6
 workbench.action.revealPathInFinder7
 workbench.action.revertAndCloseActiveEditor
 workbench.action.saveWorkspaceAs
-workbench.action.search.toggleQueryDetails                      shift+cmd+j                     when inSearchEditor || searchViewletFocus
+workbench.action.search.toggleQueryDetails                                      shift+cmd+j     when inSearchEditor || searchViewletFocus
 workbench.action.selectIconTheme
 workbench.action.selectProductIconTheme
 workbench.action.selectTheme
@@ -1922,7 +1922,7 @@ workbench.action.showAboutDialog
 workbench.action.showAllEditors
 workbench.action.showAllEditorsByMostRecentlyUsed
 workbench.action.showAllSymbols
-workbench.action.showCommands                                   cmd+p
+workbench.action.showCommands                                                   cmd+p
 workbench.action.showEditorsInActiveGroup
 workbench.action.showEditorsInGroup
 workbench.action.showEmmetCommands
@@ -1935,7 +1935,7 @@ workbench.action.showPreviousWindowTab
 workbench.action.showRuntimeExtensions
 workbench.action.showTreeHover
 workbench.action.showWindowLog
-workbench.action.splitEditor                                    cmd+\
+workbench.action.splitEditor                                                    cmd+\
 workbench.action.splitEditorDown
 workbench.action.splitEditorInGroup
 workbench.action.splitEditorLeft
@@ -1953,7 +1953,7 @@ workbench.action.splitEditorUp
 workbench.action.stopTracing
 workbench.action.submitComment
 workbench.action.switchWindow
-workbench.action.tasks.build                                    cmd+b                           when taskCommandsRegistered
+workbench.action.tasks.build                                                    cmd+b           when taskCommandsRegistered
 workbench.action.tasks.configureDefaultBuildTask
 workbench.action.tasks.configureDefaultTestTask
 workbench.action.tasks.configureTaskRunner
@@ -1966,7 +1966,7 @@ workbench.action.tasks.runTask
 workbench.action.tasks.showLog
 workbench.action.tasks.showTasks
 workbench.action.tasks.terminate
-workbench.action.tasks.test                                     cmd+t
+workbench.action.tasks.test                                                     cmd+t
 workbench.action.tasks.toggleProblems
 workbench.action.terminal.attachToSession
 workbench.action.terminal.changeColor
@@ -1975,9 +1975,9 @@ workbench.action.terminal.changeColorPanel
 workbench.action.terminal.changeIcon
 workbench.action.terminal.changeIconInstance
 workbench.action.terminal.changeIconPanel
-workbench.action.terminal.clear                                 cmd+k                           when terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported
+workbench.action.terminal.clear                                                 cmd+k           when terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported
 workbench.action.terminal.clearCommandHistory
-workbench.action.terminal.clearSelection                        escape                          when terminalFocus && terminalHasBeenCreated && terminalTextSelected && !terminalFindVisible || terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible
+workbench.action.terminal.clearSelection                                        escape          when terminalFocus && terminalHasBeenCreated && terminalTextSelected && !terminalFindVisible || terminalFocus && terminalProcessSupported && terminalTextSelected && !terminalFindVisible
 workbench.action.terminal.copyLastCommand
 workbench.action.terminal.copySelection
 workbench.action.terminal.copySelectionAsHtml
@@ -2002,27 +2002,27 @@ workbench.action.terminal.focusPreviousPane
 workbench.action.terminal.focusTabs
 workbench.action.terminal.gitCreateProfileButton
 workbench.action.terminal.goToRecentDirectory
-workbench.action.terminal.hideFind                              escape                          when terminalFindVisible && terminalFocus && terminalHasBeenCreated || terminalFindVisible && terminalFocus && terminalProcessSupported
+workbench.action.terminal.hideFind                                              escape          when terminalFindVisible && terminalFocus && terminalHasBeenCreated || terminalFindVisible && terminalFocus && terminalProcessSupported
 workbench.action.terminal.join
 workbench.action.terminal.joinInstance
-workbench.action.terminal.kill                                  alt+cmd+t
+workbench.action.terminal.kill                                                  alt+cmd+t
 workbench.action.terminal.killAll
 workbench.action.terminal.killEditor
 workbench.action.terminal.killInstance
 workbench.action.terminal.moveToEditor
 workbench.action.terminal.moveToEditorInstance
 workbench.action.terminal.moveToTerminalPanel
-workbench.action.terminal.navigationModeExit                    escape                          when accessibilityModeEnabled && terminalA11yTreeFocus && terminalProcessSupported
+workbench.action.terminal.navigationModeExit                                    escape          when accessibilityModeEnabled && terminalA11yTreeFocus && terminalProcessSupported
 workbench.action.terminal.navigationModeFocusNext
 workbench.action.terminal.navigationModeFocusNextPage
 workbench.action.terminal.navigationModeFocusPrevious
 workbench.action.terminal.navigationModeFocusPreviousPage
-workbench.action.terminal.new                                   ctrl+shift+`                    when terminalProcessSupported || terminalWebExtensionContributedProfile
+workbench.action.terminal.new                                                   ctrl+shift+`    when terminalProcessSupported || terminalWebExtensionContributedProfile
 workbench.action.terminal.newInActiveWorkspace
 workbench.action.terminal.newWithProfile
 workbench.action.terminal.openDetectedLink
 workbench.action.terminal.openFileLink
-workbench.action.terminal.openNativeConsole                     shift+cmd+c                     when !terminalFocus
+workbench.action.terminal.openNativeConsole                                     shift+cmd+c     when !terminalFocus
 workbench.action.terminal.openSettings
 workbench.action.terminal.openUrlLink
 workbench.action.terminal.paste
@@ -2066,13 +2066,13 @@ workbench.action.terminal.switchTerminal
 workbench.action.terminal.toggleFindCaseSensitive
 workbench.action.terminal.toggleFindRegex
 workbench.action.terminal.toggleFindWholeWord
-workbench.action.terminal.toggleTerminal                        shift+cmd+t                     when terminal.active
+workbench.action.terminal.toggleTerminal                                        shift+cmd+t     when terminal.active
 workbench.action.terminal.unsplit
 workbench.action.terminal.unsplitInstance
 workbench.action.terminal.writeDataToTerminal
 workbench.action.toggleActivityBarVisibility
 workbench.action.toggleAutoSave
-workbench.action.toggleAuxiliaryBar                             shift+cmd+r
+workbench.action.toggleAuxiliaryBar                                             shift+cmd+r
 workbench.action.toggleCenteredLayout
 workbench.action.toggleCommenting
 workbench.action.toggleConfirmBeforeClose
@@ -2082,7 +2082,7 @@ workbench.action.toggleEditorGroupLock
 workbench.action.toggleEditorType
 workbench.action.toggleEditorVisibility
 workbench.action.toggleEditorWidths
-workbench.action.toggleFullScreen                               ctrl+cmd+f                      when !isIOS
+workbench.action.toggleFullScreen                                               ctrl+cmd+f      when !isIOS
 workbench.action.toggleKeepEditors
 workbench.action.toggleKeybindingsLog
 workbench.action.toggleLightDarkThemes
@@ -2094,7 +2094,7 @@ workbench.action.toggleScreencastMode
 workbench.action.toggleSearchOnType
 workbench.action.toggleSharedProcess
 workbench.action.toggleSidebarPosition
-workbench.action.toggleSidebarVisibility                        shift+cmd+l
+workbench.action.toggleSidebarVisibility                                        shift+cmd+l
 workbench.action.toggleSplitEditorInGroup
 workbench.action.toggleSplitEditorInGroupLayout
 workbench.action.toggleStatusbarVisibility
@@ -2108,9 +2108,9 @@ workbench.action.unpinEditor
 workbench.action.url.openUrl
 workbench.action.webview.openDeveloperTools
 workbench.action.webview.reloadWebviewAction
-workbench.action.zoomIn                                         cmd+=
-workbench.action.zoomOut                                        cmd+-
-workbench.action.zoomReset                                      cmd+/
+workbench.action.zoomIn                                                         cmd+=
+workbench.action.zoomOut                                                        cmd+-
+workbench.action.zoomReset                                                      cmd+/
 workbench.actions.sync.compareWithLocal
 workbench.actions.sync.editMachineName
 workbench.actions.sync.replaceCurrent
@@ -2124,9 +2124,9 @@ workbench.actions.treeView.testExplorer.filter
 workbench.actions.treeView.workbench.panel.comments.filter
 workbench.actions.treeView.workbench.panel.markers.view.collapseAll
 workbench.actions.treeView.workbench.panel.markers.view.filter
-workbench.actions.view.problems                                 shift+cmd+m                     when workbench.panel.markers.view.active
+workbench.actions.view.problems                                                 shift+cmd+m     when workbench.panel.markers.view.active
 workbench.actions.view.toggleProblems
-workbench.banner.focusBanner                                    escape                          when bannerFocused
+workbench.banner.focusBanner                                                    escape          when bannerFocused
 workbench.banner.focusNextAction
 workbench.banner.focusPreviousAction
 workbench.debug.action.copyAll
@@ -2135,7 +2135,7 @@ workbench.debug.action.focusCallStackView
 workbench.debug.action.focusRepl
 workbench.debug.action.focusVariablesView
 workbench.debug.action.focusWatchView
-workbench.debug.action.toggleRepl                               shift+cmd+y                     when workbench.panel.repl.view.active
+workbench.debug.action.toggleRepl                                               shift+cmd+y     when workbench.panel.repl.view.active
 workbench.debug.breakPointsView.removeView
 workbench.debug.breakPointsView.resetViewLocation
 workbench.debug.breakPointsView.toggleVisibility
@@ -2309,7 +2309,7 @@ workbench.scm.repositories.resetViewLocation
 workbench.scm.repositories.toggleVisibility
 workbench.scm.resetViewLocation
 workbench.scm.toggleVisibility
-workbench.statusBar.clearFocus                                  escape                          when statusBarFocused
+workbench.statusBar.clearFocus                                                  escape          when statusBarFocused
 workbench.statusBar.focusFirst
 workbench.statusBar.focusLast
 workbench.statusBar.focusNext
@@ -2332,10 +2332,10 @@ workbench.userDataSync.actions.showSyncedData
 workbench.userDataSync.actions.syncNow
 workbench.userDataSync.actions.turnOff
 workbench.userDataSync.actions.turnOn
-workbench.view.debug                                            shift+cmd+d                     when viewContainer.workbench.view.debug.enabled
+workbench.view.debug                                                            shift+cmd+d     when viewContainer.workbench.view.debug.enabled
 workbench.view.debug.resetViewContainerLocation
 workbench.view.editSessions.resetViewContainerLocation
-workbench.view.explorer                                         shift+cmd+e                     when viewContainer.workbench.view.explorer.enabled
+workbench.view.explorer                                                         shift+cmd+e     when viewContainer.workbench.view.explorer.enabled
 workbench.view.explorer.resetViewContainerLocation
 workbench.view.extension.dockerView
 workbench.view.extension.dockerView.resetViewContainerLocation
@@ -2347,13 +2347,13 @@ workbench.view.extension.references-view
 workbench.view.extension.references-view.resetViewContainerLocation
 workbench.view.extension.test
 workbench.view.extension.test.resetViewContainerLocation
-workbench.view.extensions                                       shift+cmd+x                     when viewContainer.workbench.view.extensions.enabled
+workbench.view.extensions                                                       shift+cmd+x     when viewContainer.workbench.view.extensions.enabled
 workbench.view.extensions.resetViewContainerLocation
 workbench.view.remote
 workbench.view.remote.resetViewContainerLocation
-workbench.view.scm                                              shift+cmd+c                     when workbench.scm.active
+workbench.view.scm                                                              shift+cmd+c     when workbench.scm.active
 workbench.view.scm.resetViewContainerLocation
-workbench.view.search                                           shift+cmd+f                     when workbench.view.search.active && neverMatch =~ /doesNotMatch/
+workbench.view.search                                                           shift+cmd+f     when workbench.view.search.active && neverMatch =~ /doesNotMatch/
 workbench.view.search.focus
 workbench.view.search.removeView
 workbench.view.search.resetViewContainerLocation
