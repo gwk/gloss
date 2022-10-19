@@ -2,8 +2,8 @@ acceptAlternativeSelectedSuggestion
 acceptRenameInput                                               enter                           when editorFocus && renameInputVisible
 acceptRenameInputWithPreview
 acceptSelectedCodeAction
-acceptSelectedSuggestion                                        enter                           when acceptSuggestionOnEnter && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus
-acceptSelectedSuggestion                                        tab                             when suggestWidgetVisible && textInputFocus
+acceptSelectedSuggestion                                        enter                           when acceptSuggestionOnEnter && suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && suggestionMakesTextEdit && textInputFocus
+acceptSelectedSuggestion                                        tab                             when suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus
 acceptSelectedSuggestionOnEnter
 acceptSnippet
 actions.find                                                    cmd+f                           when  editorFocus || editorIsOpen
@@ -394,7 +394,7 @@ editor.emmet.action.decrementNumberByOne
 editor.emmet.action.decrementNumberByOneTenth
 editor.emmet.action.decrementNumberByTen
 editor.emmet.action.evaluateMathExpression
-editor.emmet.action.expandAbbreviation
+editor.emmet.action.expandAbbreviation                          tab                             when config.emmet.triggerExpansionOnTab && editorTextFocus && !editorReadonly && !editorTabMovesFocus
 editor.emmet.action.incrementNumberByOne
 editor.emmet.action.incrementNumberByOneTenth
 editor.emmet.action.incrementNumberByTen
@@ -663,10 +663,10 @@ imagePreview.zoomOut
 increaseSearchEditorContextLines
 inlayHints.startReadingLineWithHint
 inlayHints.stopReadingLineWithHint                              escape                          when isReadingLineWithInlayHints
-insertBestCompletion                                            tab                             when atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on' && !inlineSuggestionVisible
-insertNextSuggestion                                            tab                             when hasOtherSuggestions && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on' && !inlineSuggestionVisible
+insertBestCompletion                                            tab                             when atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
+insertNextSuggestion                                            tab                             when hasOtherSuggestions && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
 insertPrevSuggestion
-insertSnippet
+insertSnippet                                                   tab                             when editorTextFocus && hasSnippetCompletions && !editorTabMovesFocus && !inSnippetMode
 interactive.execute
 interactive.history.focus
 interactive.history.next
@@ -685,7 +685,7 @@ jsBrowserBreakpoints.resetViewLocation
 jsExcludedCallers.focus
 jsExcludedCallers.resetViewLocation
 json.clearCache
-jumpToNextSnippetPlaceholder
+jumpToNextSnippetPlaceholder                                                    tab             when editorTextFocus && hasNextTabstop && inSnippetMode
 jumpToPrevSnippetPlaceholder
 jupyter-cell-tags.addTag
 jupyter-cell-tags.editTagsInJSON
@@ -1345,7 +1345,7 @@ showPrevParameterHint                                           up              
 simpleBrowser.show
 sshHosts.focus
 sshHosts.resetViewLocation
-tab                                                             tab                             when editorTextFocus && !editorReadonly && !editorTabMovesFocus && !suggestWidgetVisible && !inlineSuggestionVisible
+tab                                                             tab                             when editorTextFocus && !editorReadonly && !editorTabMovesFocus
 targetsContainers.focus
 targetsContainers.resetViewLocation
 terminal.focus
