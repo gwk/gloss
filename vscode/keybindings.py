@@ -56,7 +56,7 @@ Triple = Tuple[str,str,str]
 def parse_defaults(defaults_path:str) -> Tuple[List[Binding],List[str]]:
   # Parse the default JSON. It has comments in it, so we have to strip those out first.
   json_lines = []
-  other_cmds = []
+  other_cmds = [] # Commands suggested by "Here are other available commands:" comment at end of the defaults file.
   comment_re = re.compile(r'\s*//\s*(-)?\s*(.*)')
   for line in open(defaults_path):
     m = comment_re.match(line) # For now, only recognize comments on their own line.
@@ -82,7 +82,7 @@ def parse_defaults(defaults_path:str) -> Tuple[List[Binding],List[str]]:
 class Ctx:
   bindings_path: str
   defaults: List[Binding]
-  other_cmds: List[str]
+  other_cmds: List[str] # Commands that are not bound by default.
   all_cmds: Set[str]
   all_when_words: Set[str] = field(default_factory=set)
   dflt_binding_whens: Dict[str,Set[str]] = field(default_factory=lambda:DefaultDict(set))
