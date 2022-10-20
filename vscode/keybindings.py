@@ -10,10 +10,18 @@ from pithy.path import path_dir, path_stem
 from dataclasses import dataclass, field
 from typing import Any, DefaultDict, Dict, Iterable, List, Set, Tuple
 
-'''
-Parse the default VSCode keybindings, validate custom ones, and output custom keybindings to json.
 
-The generated keybindings first reset all bindings, then add in the custom bindings for complete control.
+'''
+Parse the default VSCode keybindings, validate customzations from `keys.txt`, and output custom keybindings to json.
+
+VSCode keybindings are complex and interact with each other in subtle ways.
+
+This script first resets all bindings and then adds in the custom bindings.
+This is desirable because I don't want unknown actions to fire if I mistakenly hit a key combination.
+However it appears that order of bindings matters for complicated bindings, particularly the tab key.
+To mitigate this we ignore tab key bindings in both the nullifications and the custom bindings.
+Tab bindings still appear in the keys file and are checked against the defaults.
+Obviously this leaves something to be desired but is the path of least resistance for now.
 
 Default keybindings are obtained from selecting "Open Default Keyboard Shortcuts" from the command palette
 and pasting them into the default JSON file in `vscode/`.
@@ -31,6 +39,7 @@ def main() -> None:
   defaults_out_path = out_dir + '/keys-defaults.txt'
   whens_out_path= out_dir + '/keys-whens.txt'
   keys_ref_out_path = out_dir + '/keys-reference.txt'
+
   defaults, other_cmds = parse_defaults(defaults_json_path)
 
   ctx = Ctx(
@@ -41,12 +50,12 @@ def main() -> None:
 
   write_defaults_txt(defaults_out_path, ctx.dflt_triples)
   write_whens(whens_out_path, ctx.all_when_words)
+
   parse_bindings(ctx, bindings_path)
   warn_unbound_cmds(ctx)
 
-  with open(out_path, 'w') as f: write_json(f, ctx.all_bindings)
-
-  write_keys_ref(keys_ref_out_path, ctx.explicit_bindings)
+  write_bindings(ctx, out_path)
+  write_keys_ref(keys_ref_out_path, ctx.bindings)
 
 
 Binding = Dict[str,str]
@@ -84,25 +93,30 @@ class Ctx:
   defaults: List[Binding]
   other_cmds: List[str] # Commands that are not bound by default.
   all_cmds: Set[str]
+
   all_when_words: Set[str] = field(default_factory=set)
   dflt_binding_whens: Dict[str,Set[str]] = field(default_factory=lambda:DefaultDict(set))
   dflt_escapes: Set[str] = field(default_factory=set)
   dflt_tabs: Set[str] = field(default_factory=set)
   dflt_triples: List[Triple] = field(default_factory=list)
-  all_bindings: List[Dict[str,str]] = field(default_factory=list) # Includes nullifications.
-  explicit_bindings: List[Dict[str,str]] = field(default_factory=list)
+
+  bindings: List[Dict[str,str]] = field(default_factory=list) # Includes nullifications.
   bound_cmds: Set[str] = field(default_factory=set)
   bound_escapes: Set[str] = field(default_factory=set)
   bound_tabs: Set[str] = field(default_factory=set)
 
+
   def msg(self, line:int, *items:Any):
     errSL(f'{self.bindings_path}:{line}:', *items)
 
+
   def warn(self, line:int, *items:Any): self.msg(line, 'warning:', *items)
+
 
   def error(self, line:int, *items:Any):
     self.msg(line, 'error:', *items)
     exit(1)
+
 
   def __post_init__(self) -> None:
     # Nullify each default by adding a matching rule with a negating command.
@@ -127,7 +141,7 @@ class Ctx:
         # Note: as of 2018/08/03, do not qualify nullifications with when clauses, or else they will fail in some cases.
         for word in when.split():
           self.all_when_words.add(word.lstrip('!'))
-      self.all_bindings.append(nullification)
+      self.bindings.append(nullification)
       self.dflt_triples.append((cmd, key, when))
 
     for cmd in self.other_cmds:
@@ -135,10 +149,12 @@ class Ctx:
       self.dflt_triples.append((cmd, '', ''))
 
 
+
 def write_defaults_txt(path:str, dflt_triples:List[Triple]) -> None:
   'Generate keybindings.txt as starting point for customization.'
   f = open(path, 'w')
   for (cmd, key, when) in sorted(dflt_triples):
+    if ' ' in cmd: cmd += ':' # Add a trailing colon delimiter to disambiguate commands with spaces.
     when_clause = f'when {when}' if when else ''
     writeL(f, f'{cmd:<79} {key:15} {when_clause}'.strip())
 
@@ -149,7 +165,13 @@ def write_whens(path:str, all_when_words:Set[str]) -> None:
       writeL(f, when)
 
 
-def write_keys_ref(path:str, explicit_bindings:List[Dict[str,str]]) -> None:
+def write_bindings(ctx:Ctx, out_path:str) -> None:
+  output_bindings = [b for b in ctx.bindings if b['key'] != 'tab']
+  with open(out_path, 'w') as f: write_json(f, output_bindings)
+
+
+def write_keys_ref(path:str, bindings:list[dict[str,str]]) -> None:
+  explicit_bindings = [b for b in bindings if b['key']]
   with open(path, 'w') as f:
     for binding in sorted(explicit_bindings, key=bindings_sort_key):
       key = binding['key']
@@ -179,6 +201,8 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
   if line[0].isspace(): ctx.error(line_num, 'line begins with space.')
   if line.startswith('//'): return
 
+  # Find the command name at the start of the line.
+  # Some command names have spaces in them so we delimit them with a colon.
   if m := re.search(r':( |$)', line):
     cmd = line[:m.start()]
     words = [cmd] + line[m.end():].split()
@@ -221,8 +245,7 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
       binding['when'] = when
     if args is not None:
       binding['args'] = args
-    ctx.all_bindings.append(binding)
-    ctx.explicit_bindings.append(binding)
+    ctx.bindings.append(binding)
 
   key = ' '.join(keys)
   add_binding(key)

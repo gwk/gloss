@@ -62,4 +62,5 @@ _build/vscode/gloss-black.json: gloss-black.py
 	./$^ $@
 
 _build/vscode/keybindings.json: vscode/keybindings.py vscode/keybindings-default.json vscode/keys.txt
+	mkdir -p _build
 	./$^ $@
