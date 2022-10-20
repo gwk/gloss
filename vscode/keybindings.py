@@ -189,13 +189,11 @@ def bindings_sort_key(binding:Dict[str,str]) -> List[str]:
 
 
 def parse_bindings(ctx:Ctx, bindings_path:str) -> None:
-  numbered_lines = enumerate(open(bindings_path), 1)
-  for lines in group_by_heads(numbered_lines, is_head=lambda p: not p[1].startswith(' ')):
-    parse_binding(ctx, lines)
+  for line_num, line in enumerate(open(bindings_path), 1):
+    parse_binding(ctx, line_num, line)
 
 
-def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
-  line_num, line = binding[0] # first line.
+def parse_binding(ctx:Ctx, line_num:int, line:str) -> None:
   line = line.rstrip()
   if not line.strip(): return # Empty line.
   if line[0].isspace(): ctx.error(line_num, 'line begins with space.')
@@ -228,14 +226,6 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
   validate_keys(ctx, line_num, keys=keys)
   validate_when(ctx, line_num, cmd=cmd, when=when, when_words=when_words)
 
-  if len(binding) == 1:
-    args = None
-  else:
-    args_str = ''.join(l for i, l in binding[1:])
-    try: args = parse_json(args_str)
-    except JSONDecodeError as e:
-      ctx.error(line_num, f'invalid args JSON: {e}\n{args_str}')
-
   def add_binding(key:str) -> None:
     binding = {
       'command': cmd,
@@ -243,6 +233,10 @@ def parse_binding(ctx:Ctx, binding:List[Tuple[int,str]]) -> None:
     }
     if when_words:
       binding['when'] = when
+
+    # Originally this supported multiline bindings with subsequent lines indented, containing `args` in json synatx.
+    # However over time I came to rely on sorting the whole file by lines in order to update it when new bindings were added to VSCode.
+    args = None
     if args is not None:
       binding['args'] = args
     ctx.bindings.append(binding)
