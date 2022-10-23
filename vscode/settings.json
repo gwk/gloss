@@ -1,53 +1,26 @@
 {
-  "editor.semanticTokenColorCustomizations": {
-    "enabled": true, // enable for all themes
-    "rules": {
-      "*.static": {
-        "foreground": "#ff0000",
-        "fontStyle": "bold"
-      },
-      "type": {
-        "foreground": "#00aa00"
-      }
-    }
-  },
-
-  "breadcrumbs.enabled": false,
-  "cSpell.allowCompoundWords": true,
-  "cSpell.checkLimit": 100,
-  "cSpell.diagnosticLevel": "Warning",
-  "cSpell.dictionaryDefinitions": [],
-  "cSpell.enabled": false,
   "css.lint.important": "warning",
+  "css.validate": false,
   "diffEditor.ignoreTrimWhitespace": false,
-  "diffEditor.renderSideBySide": false,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.acceptSuggestionOnEnter": "off",
   "editor.autoClosingBrackets": "never",
+  "editor.autoClosingDelete": "never",
   "editor.autoClosingQuotes": "never",
-  "editor.colorDecorators": false,
-  "editor.detectIndentation": true,
+  "editor.autoSurround": "never",
+  "editor.bracketPairColorization.enabled": true,
   "editor.find.addExtraSpaceOnTop": false,
-  "editor.fontFamily": "Source Code Pro, Menlo, monospace",
+  "editor.fontFamily": "SF Mono, Menlo, monospace",
   "editor.fontSize": 12,
   "editor.formatOnPaste": false,
   "editor.formatOnSave": false,
   "editor.formatOnType": false,
   "editor.hover.sticky": false,
-  "editor.insertSpaces": true,
   "editor.minimap.enabled": false,
-  "editor.minimap.maxColumn": 96,
+  "editor.minimap.maxColumn": 128,
   "editor.minimap.renderCharacters": true,
-  "editor.multiCursorModifier": "ctrlCmd",
-  "editor.occurrencesHighlight": false,
-  "editor.quickSuggestions": {
-    "comments": false,
-    "other": true,
-    "strings": false
-  },
-  "editor.quickSuggestionsDelay": 10,
+  "editor.multiCursorModifier": "alt",
   "editor.renderControlCharacters": true,
-  "editor.renderIndentGuides": true,
   "editor.renderWhitespace": "none",
   "editor.roundedSelection": false,
   "editor.rulers": [
@@ -55,14 +28,26 @@
     96,
     128
   ],
+  "editor.scrollBeyondLastColumn": 4,
   "editor.scrollBeyondLastLine": false,
+  "editor.semanticTokenColorCustomizations": {
+    "enabled": true,
+    "rules": {
+      "*.static": {
+        "fontStyle": "bold",
+        "foreground": "#ff0000"
+      },
+      "type": {
+        "foreground": "#00aa00"
+      }
+    }
+  },
   "editor.suggestOnTriggerCharacters": true,
+  "editor.tabCompletion": "on",
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": true,
   "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
   "editor.wordWrap": "on",
-  "eslint.enable": false,
-  "explorer.confirmDelete": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.pyi": "python",
@@ -77,35 +62,13 @@
     "**/_build/release": true,
     "**/mypy_cache": true
   },
+  "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-  "git.autofetch": false,
-  "gitlens.advanced.messages": {
-    "suppressLineUncommittedWarning": true,
-    "suppressResultsExplorerNotice": true,
-    "suppressShowKeyBindingsNotice": true,
-    "suppressUpdateNotice": true,
-    "suppressWelcomeNotice": true
-  },
-  "gitlens.advanced.quickPick.closeOnFocusOut": true,
-  "gitlens.advanced.telemetry.enabled": false,
-  "gitlens.blame.avatars": false,
-  "gitlens.blame.ignoreWhitespace": true,
-  "gitlens.codeLens.enabled": false,
-  "gitlens.codeLens.recentChange.enabled": true,
-  "gitlens.currentLine.enabled": false,
-  "gitlens.hovers.avatars": false,
-  "gitlens.hovers.currentLine.over": "line",
-  "gitlens.hovers.enabled": false,
-  "gitlens.keymap": "none",
-  "gitlens.recentChanges.highlight.locations": [
-    "gutter",
-    "overview"
-  ],
-  "gitlens.statusBar.dateFormat": "YYYY-MM-DD HH:MM",
-  "gitlens.statusBar.format": "${ago}: ${message}",
-  "gitlens.views.fileHistory.enabled": true,
-  "gitlens.views.lineHistory.enabled": true,
+  "html.autoClosingTags": false,
+  "html.completion.attributeDefaultValue": "singlequotes",
   "html.format.wrapLineLength": 0,
+  "javascript.autoClosingTags": false,
+  "jupyter.pylanceHandlesNotebooks": false,
   "macros": {
     "callStackDown": [
       "workbench.debug.action.focusCallStackView",
@@ -118,18 +81,16 @@
       "list.select"
     ]
   },
-  "python.disableInstallationCheck": true,
-  "python.envFile": "",
+  "python.analysis.stubPath": "typestubs",
+  "python.defaultInterpreterPath": "python3",
   "python.experiments.enabled": false,
-  "python.insidersChannel": "off",
+  "python.languageServer": "Pylance",
   "python.linting.lintOnSave": false,
   "python.linting.pylintEnabled": false,
-  "python.pythonPath": "/usr/local/bin/python3",
+  "python.sortImports.path": "isort",
   "python.terminal.activateEnvironment": false,
   "python.testing.autoTestDiscoverOnSaveEnabled": false,
   "python.testing.promptToConfigure": false,
-  "python.workspaceSymbols.enabled": false,
-  "search.useIgnoreFiles": false,
   "settings.cycle": [
     {
       "id": "trimTrailingWhitespace",
@@ -145,16 +106,20 @@
     }
   ],
   "settings.cycle.logLevel": "log",
-
-  "telemetry.enableTelemetry": false,
   "terminal.integrated.drawBoldTextInBrightColors": false,
-  "terminal.integrated.fontFamily": "Source Code Pro, Menlo, monospace",
-  "terminal.integrated.lineHeight": 1.2,
-  "terminal.integrated.macOptionIsMeta": true,
-  "terminal.integrated.rendererType": "canvas",
-  "terminal.integrated.shellArgs.osx": [],
+  "terminal.integrated.fontFamily": "SF Mono, Menlo, monospace",
+  "terminal.integrated.lineHeight": 1,
+  "typescript.autoClosingTags": false,
   "window.newWindowDimensions": "maximized",
+  "workbench.activityBar.visible": false,
   "workbench.colorCustomizations": {
+    "editorBracketHighlight.foreground1": "#5c79ef",
+    "editorBracketHighlight.foreground2": "#d6df76",
+    "editorBracketHighlight.foreground3": "#c172d9",
+    "editorBracketHighlight.foreground4": "#4fb1bc",
+    "editorBracketHighlight.foreground5": "#60b069",
+    "editorBracketHighlight.foreground6": "#abb2c0",
+    "editorBracketHighlight.unexpectedBracket.foreground": "#e82124",
     "statusBar.background": "#181818",
     "statusBar.debuggingBackground": "#263238",
     "statusBar.foreground": "#707070",
@@ -183,34 +148,5 @@
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.sideBar.location": "left",
   "workbench.startupEditor": "none",
-  "workbench.statusBar.visible": true,
-  "yaml.customTags": [
-    "!And",
-    "!If",
-    "!Not",
-    "!Equals",
-    "!Or",
-    "!FindInMap",
-    "!Base64",
-    "!Cidr",
-    "!Ref",
-    "!Sub",
-    "!GetAtt",
-    "!GetAZs",
-    "!ImportValue",
-    "!Select",
-    "!Split",
-    "!Join sequence"
-  ],
-  "yaml.format.enable": true,
-  "python.showStartPage": false,
-  "workbench.editorAssociations": [
-    {
-      "viewType": "jupyter-notebook",
-      "filenamePattern": "*.ipynb"
-    }
-  ],
-  "workbench.activityBar.visible": false,
-  "python.defaultInterpreterPath": "python3",
-  "python.languageServer": "Pylance"
+  "workbench.statusBar.visible": false
 }
