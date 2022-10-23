@@ -1,5 +1,12 @@
-change-case (wmaurer)
-hexdump (slevesque)
-settings cycler (cody hoover)
-sort lines (daniel imms)
-settings cycler (hoovercj)
+github.copilot
+guyskk.language-cython
+hoovercj.vscode-settings-cycler
+matangover.mypy
+ms-azuretools.vscode-docker
+ms-vscode-remote.remote-containers
+ms-vscode.hexeditor
+smelukov.vscode-csstree
+tamasfe.even-better-toml
+tyriar.sort-lines
+vadimcn.vscode-lldb
+wmaurer.change-case
