@@ -3,7 +3,7 @@
 
 set -eux
 
-VSCODE_USER="$HOME/Library/Application Support/Code - Insiders/User"
+VSCODE_USER="$HOME/Library/Application Support/Code/User"
 
 mkdir -p "$VSCODE_USER"
 
