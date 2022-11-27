@@ -83,10 +83,8 @@ tr-to-lc: tr '[:upper:]' '[:lower:]' # translate to lower case
 tr-to-uc: tr '[:lower:]' '[:upper:]' # translate to upper case
 
 # misc
-uuid4: python3 -c 'import uuid; print(uuid.uuid4())'
-env-sort: env | sort | text-search -lines -pattern '^\w+=[^{]+' -match-only
 ansi-to-html-view: ansi-to-html "$@" | html-view
-
 calc-size: du -sh "$@"
-
 calc-sizes: du -h -d 1 "$@"
+env-sort: env | sort | text-search -lines -pattern '^\w+=[^{]+' -match-only
+uuid4: python3 -c 'import uuid; print(uuid.uuid4())'
