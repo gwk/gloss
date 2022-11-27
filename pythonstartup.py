@@ -39,6 +39,7 @@ import pithy.loader; from pithy.loader import *
 import pithy.path; from pithy.path import *
 import pithy.path_encode; from pithy.path_encode import *
 import pithy.range; from pithy.range import *
+import pithy.reprs; from pithy.reprs import *
 import pithy.schema; from pithy.schema import *
 import pithy.sequence; from pithy.sequence import *
 import pithy.string; from pithy.string import *
