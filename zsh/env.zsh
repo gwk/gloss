@@ -33,6 +33,8 @@ export PAGER=less
 export HELPDIR=/usr/share/zsh/5.8/help
 
 case $GLOSS_OS in
+  linux)
+    export EDITOR=nano;;
   mac)
     export EDITOR='code -w "$@"' # Use VS Code as the shell editor.
     # Standard homebrew configuration.
@@ -40,7 +42,7 @@ case $GLOSS_OS in
     export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
     export HOMEBREW_REPOSITORY="/opt/homebrew"
     export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
-    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";;
 esac
 
 
