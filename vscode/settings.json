@@ -2,6 +2,7 @@
   "css.lint.important": "warning",
   "css.validate": false,
   "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.renderSideBySide": false,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.acceptSuggestionOnEnter": "off",
   "editor.autoClosingBrackets": "never",
@@ -16,6 +17,7 @@
   "editor.formatOnSave": false,
   "editor.formatOnType": false,
   "editor.hover.sticky": false,
+  "editor.inlineSuggest.enabled": true,
   "editor.minimap.enabled": false,
   "editor.minimap.maxColumn": 128,
   "editor.minimap.renderCharacters": true,
@@ -33,13 +35,6 @@
   "editor.semanticTokenColorCustomizations": {
     "enabled": true,
     "rules": {
-      "*.static": {
-        "fontStyle": "bold",
-        "foreground": "#ff0000"
-      },
-      "type": {
-        "foreground": "#00aa00"
-      }
     }
   },
   "editor.suggestOnTriggerCharacters": true,
