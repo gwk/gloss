@@ -51,7 +51,7 @@ def make_settings():
     findHighlightForeground=N,
     foreground=W,
     invisibles=D3,
-    lineHighlight=D1,
+    lineHighlight=D14,
     selection=L6,
     selectionBorder=L5,
     tagsOptions=['stippled_underline'],
@@ -168,7 +168,9 @@ def make_settings():
 #   mixtures with white are called tints; mixtures with black are shades.
 K  = '#000000' # black.
 D1 = '#101010' # dark.
+D14 = '#141414'
 D2 = '#202020'
+D28 = '#282828'
 D3 = '#303030'
 D4 = '#404040'
 D5 = '#505050'
