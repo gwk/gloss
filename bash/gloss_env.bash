@@ -158,37 +158,38 @@ if [[ -z "$GLOSS_ENV" ]]; then
   #export GLOSS_PROMPT_DIR_TRIM=32
 
   # ANSI select graphic rendition (SGR) control sequences.
-
-  export RST='\e[0m' # reset.
-  export RST_BOLD='\e[22m'
-  export RST_ULINE='\e[24m'
-  export RST_BLINK='\e[25m'
-  export RST_INVERT='\e[27m'
-  export RST_TXT='\e[39m'
-  export RST_BG='\e[49m'
+  # Note: the resets are ordered after the codes so that `env` looks less crazy.
 
   export BOLD='\e[1m'
+  export RST_BOLD='\e[22m'
   export ULINE='\e[4m'
+  export RST_ULINE='\e[24m'
   export BLINK='\e[5m'
+  export RST_BLINK='\e[25m'
   export INVERT='\e[7m'
+  export RST_INVERT='\e[27m'
 
-  export TXT_D='\e[30m' # dark gray
-  export TXT_R='\e[31m' # red
-  export TXT_G='\e[32m' # green
-  export TXT_Y='\e[33m' # yellow
-  export TXT_B='\e[34m' # blue
-  export TXT_M='\e[35m' # magenta
-  export TXT_C='\e[36m' # cyan
-  export TXT_L='\e[37m' # light gray
+  export TXT_D='\e[30m' # Dark gray.
+  export TXT_R='\e[31m' # Red.
+  export TXT_G='\e[32m' # Green.
+  export TXT_Y='\e[33m' # Yellow.
+  export TXT_B='\e[34m' # Blue.
+  export TXT_M='\e[35m' # Magenta.
+  export TXT_C='\e[36m' # Cyan.
+  export TXT_L='\e[37m' # Light gray.
+  export RST_TXT='\e[39m'
 
-  export BG_D='\e[40m' # dark gray
-  export BG_R='\e[41m' # red
-  export BG_G='\e[42m' # green
-  export BG_Y='\e[43m' # yellow
-  export BG_B='\e[44m' # blue
-  export BG_M='\e[45m' # magenta
-  export BG_C='\e[46m' # cyan
-  export BG_L='\e[47m' # light gray
+  export BG_D='\e[40m' # Dark gray.
+  export BG_R='\e[41m' # Red.
+  export BG_G='\e[42m' # Green.
+  export BG_Y='\e[43m' # Yellow.
+  export BG_B='\e[44m' # Blue.
+  export BG_M='\e[45m' # Magenta.
+  export BG_C='\e[46m' # Cyan.
+  export BG_L='\e[47m' # Light gray.
+  export RST_BG='\e[49m'
+
+  export RST='\e[0m' # Reset everything.
 
   # Utils only need to be sourced once.
   source $GLOSS_DIR/bash/gloss_sh_utils.bash

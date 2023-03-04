@@ -48,18 +48,16 @@ esac
 
 # ANSI select graphic rendition (SGR) control sequences.
 # $'' form causes the shell to parse ANSI C escapes.
-export RST=$'\e[0m' # Reset.
-export RST_BOLD=$'\e[22m'
-export RST_ULINE=$'\e[24m'
-export RST_BLINK=$'\e[25m'
-export RST_INVERT=$'\e[27m'
-export RST_TXT=$'\e[39m'
-export RST_BG=$'\e[49m'
+# Note: the resets are ordered after the codes so that `env` looks less crazy.
 
 export BOLD=$'\e[1m'
+export RST_BOLD=$'\e[22m'
 export ULINE=$'\e[4m'
+export RST_ULINE=$'\e[24m'
 export BLINK=$'\e[5m'
+export RST_BLINK=$'\e[25m'
 export INVERT=$'\e[7m'
+export RST_INVERT=$'\e[27m'
 
 export TXT_K=$'\e[30m' # Black.
 export TXT_R=$'\e[31m' # Red.
@@ -69,6 +67,7 @@ export TXT_B=$'\e[34m' # Blue.
 export TXT_M=$'\e[35m' # Magenta.
 export TXT_C=$'\e[36m' # Cyan.
 export TXT_W=$'\e[37m' # White.
+export RST_TXT=$'\e[39m'
 
 export BG_K=$'\e[40m' # Black.
 export BG_R=$'\e[41m' # Red.
@@ -78,3 +77,6 @@ export BG_B=$'\e[44m' # Blue.
 export BG_M=$'\e[45m' # Magenta.
 export BG_C=$'\e[46m' # Cyan.
 export BG_W=$'\e[47m' # White.
+export RST_BG=$'\e[49m'
+
+export RST=$'\e[0m' # Reset everything.
