@@ -73,11 +73,6 @@ sha512: openssl dgst -sha512 "$@"
 # SQLite.
 sqlite-wal: for path in "$@"; do sqlite3 "$path" 'PRAGMA journal_mode=WAL;'; done
 
-# pf
-pfctl-f:  pfctl -F all -f /etc/pf.conf  # flush pf and reload the standard pf.conf
-pfctl-nf: pfctl -nf /etc/pf.conf        # test the standard pf.conf
-pfctl-s:  pfctl -s info | less          # get pf info
-
 # translate
 tr-to-lc: tr '[:upper:]' '[:lower:]' # translate to lower case
 tr-to-uc: tr '[:lower:]' '[:upper:]' # translate to upper case
