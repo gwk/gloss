@@ -64,6 +64,7 @@ groups:dict[str,dict[str,Any]] = {
 
   'data' : {
     'exts' : [
+      '.csv', '.tsv',
       '.dot',
       '.json', '.jsons', '.jsonl', '.cson', '.yaml', '.yml', '.toml',
       '.xml', '.plist', '.strings',
