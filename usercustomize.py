@@ -50,6 +50,7 @@ def gloss_excepthook(type_:Type[BaseException], value:BaseException, traceback:T
   TXT_O = sgr(TXT, rgb6(5, 2, 0))
   TXT_Y = sgr(TXT, rgb6(5, 5, 0))
 
+  stderr.write('\n') # Add a newline before the traceback in case the last line was not terminated.
   messages = format_exception(type_, value, traceback, limit=None, chain=True)
   for msg in messages:
     m = _exc_msg_re.fullmatch(msg)
