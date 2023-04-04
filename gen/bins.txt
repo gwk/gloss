@@ -81,6 +81,6 @@ tr-to-uc: tr '[:lower:]' '[:upper:]' # translate to upper case
 ansi-to-html-view: ansi-to-html "$@" | html-view
 calc-size: du -sh "$@"
 calc-sizes: du -h -d 1 "$@"
-empty: for path in "$@"; do confirm "$path" && truncate -s 0 "$path"; done
+empty: for path in "$@"; do confirm "empty '$path'" && truncate -s 0 "$path"; done
 env-sort: env | sort | grep --color=never '=' | sed -e 's/\x1b\[[0-9;]*m//g' # Remove ANSI sgr codes.
 uuid4: python3 -c 'import uuid; print(uuid.uuid4())'
