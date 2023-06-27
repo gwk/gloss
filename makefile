@@ -49,7 +49,7 @@ test:
 	iotest -fail-fast
 
 uninstall-vscode:
-	rm -rf ~/.vscode-insiders/extensions/gloss
+	rm -rf ~/.vscode{,-insiders}/extensions/gloss
 
 vscode: _build/vscode/gloss-black.json _build/vscode/keybindings.json
 
