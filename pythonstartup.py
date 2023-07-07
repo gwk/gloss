@@ -18,6 +18,7 @@ import os; from os import environ
 import re;
 import sys; from sys import argv, stderr, stdout
 import time; from time import *
+import zoneinfo; from zoneinfo import *
 
 import pithy.ansi; from pithy.ansi import *
 import pithy.buffer; from pithy.buffer import *
