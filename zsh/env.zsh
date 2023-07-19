@@ -23,6 +23,9 @@ errLL() { >&2 print -l - $@ }
 errF()  { >&2 printf -n - $@ }
 errFL() { >&2 printf - $@ }
 
+# Source gloss custom environment if it exists.
+[[ -f ~/.config/gloss.env ]] && source ~/.config/gloss.env
+
 # Default to system-wide installation.
 [[ -z "$GLOSS_DIR" ]] && export GLOSS_DIR=/usr/local/gloss
 [[ -d "$GLOSS_DIR" ]] || errSL 'WARNING: bad GLOSS_DIR:' $GLOSS_DIR
