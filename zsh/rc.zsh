@@ -1,3 +1,5 @@
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
+
 # .zshrc is sourced for interactive shells.
 # Source this file from your .zshrc with the following command:
 #   source /usr/local/gloss/zsh/rc.zsh

@@ -1,3 +1,8 @@
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
+
+# .zshenv is loaded every time, prior to zprofile or zshrc.
+# Source this file from your .zshenv with the following command:
+#   source /usr/local/gloss/zsh/env.zsh
 
 export GLOSS_ENV=GLOSS_ENV
 
