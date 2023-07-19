@@ -2,6 +2,7 @@
 
 'common code for the install scripts.'
 
+import re
 from os import uname as os_uname
 from sys import argv, stderr
 
@@ -40,7 +41,9 @@ if sysname == 'darwin':
   platform = 'mac'
 elif sysname == 'linux':
   platform = 'linux'
-  if 'amzn2022' in uname_info.release:
+  if re.search('\.fc\d+\.', uname_info.release):
+    distro = 'fedora'
+  elif 'amzn2022' in uname_info.release:
     distro = 'amzn2022'
   else:
     distro = 'unknown'

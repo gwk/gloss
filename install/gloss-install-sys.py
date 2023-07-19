@@ -27,9 +27,10 @@ def main():
         errSL(f'Please run `sudo mkdir {dst_dir} && sudo chown [username] {dst_dir}')
         exit(1)
 
-    errSL('writing platform.txt...')
+    platform_txt = f'{platform}\t{distro}'  # Use a tab for default compatibility with `cut`.
+    errSL(f'writing platform.txt: {platform_txt}')
     with open(path_join(dst_dir, 'platform.txt'), 'w') as f:
-      f.write(f'{platform}\t{distro}\n') # Tab for default  compatibility with `cut`.
+      print(platform_txt, file=f)
 
     errSL('copying files to dst_dir...')
 
