@@ -2,20 +2,23 @@ set -e
 
 fail() { echo "error: $@" >&2; exit 1; }
 
-dotfiles_dir="$PWD/dotfiles"
+dotfiles_dir="dotfiles"
 
 [[ -d "$dotfiles_dir" ]] || fail "gloss dotfiles directory not found: $dotfiles_dir"
 
-dotfiles=$(ls -A "$dotfiles_dir")
+for dir in $(find $dotfiles_dir/* -type d); do
+  dot_dir="$HOME/.${dir#$dotfiles_dir/}"
+  echo "creating: $dot_dir"
+  mkdir -p $dot_dir
+done
 
-cd "$HOME"
-
-for name in $dotfiles; do
-  dot_path="$HOME/.$name"
+for path in $(find $dotfiles_dir -type f); do
+  abs_path="$PWD/$path"
+  dot_path="$HOME/.${path#$dotfiles_dir/}"
   if [[ -e "$dot_path" ]]; then
-    echo "skipping: $dot_path; already exists."
+    echo "already exists: $dot_path"
     continue
   fi
-  echo "linking: $dot_path -> $dotfiles_dir/$name"
-  ln -s "$dotfiles_dir/$name" "$dot_path"
+  echo "linking: $dot_path -> $abs_path"
+  ln -s "$abs_path" "$dot_path"
 done
