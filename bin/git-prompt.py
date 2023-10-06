@@ -10,7 +10,7 @@ from sys import stderr
 from typing import Any, NoReturn
 
 
-def run(cmd:str, exp:int=None) -> tuple[int, str, str]:
+def run(cmd:str, exp:int|None=None) -> tuple[int, str, str]:
   cmd_words = shlex.split(cmd)
   proc = Popen(cmd_words, stdin=None, stdout=PIPE, stderr=PIPE, shell=False)
   p_out, p_err = proc.communicate() # waits for process to complete.
