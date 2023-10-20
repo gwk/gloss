@@ -1,7 +1,7 @@
 {
   "name": "gloss",
   "displayName": "gloss",
-  "description": "Aggressive configuration.",
+  "description": "Various enhancements for VSCode.",
   "version": "1.0.0",
   "publisher": "gwk",
   "engines": {"vscode": "^1.0.0"},
