@@ -4,39 +4,67 @@
   "description": "Various enhancements for VSCode.",
   "version": "1.0.0",
   "publisher": "gwk",
-  "engines": {"vscode": "^1.0.0"},
-  "categories": ["Programming Languages", "Themes"],
+  "engines": {
+    "vscode": "^1.0.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Themes"
+  ],
   "contributes": {
     "languages": [
-      { "id": "javascript",
+      {
+        "id": "javascript",
         "firstLine": "^#!.*\\bnode( +-.+)?"
       },
-      { "id": "m4",
-        "aliases": ["m4", "autoconf"],
-        "extensions": [".ac", ".m4"],
-        "filenames": ["configure.in"]
+      {
+        "id": "m4",
+        "aliases": [
+          "m4",
+          "autoconf"
+        ],
+        "extensions": [
+          ".ac",
+          ".m4"
+        ],
+        "filenames": [
+          "configure.in"
+        ]
       },
-      { "id": "makefile",
-        "filenames": [ "makefile", "makefile.pre", "makefile.pre.in", "GNUmakefile", "OCamlMakefile" ]
+      {
+        "id": "makefile",
+        "filenames": [
+          "makefile",
+          "makefile.pre",
+          "makefile.pre.in",
+          "GNUmakefile",
+          "OCamlMakefile"
+        ]
       },
-      { "id": "xcode",
-        "extensions": [".pbxproj"],
+      {
+        "id": "xcode",
+        "extensions": [
+          ".pbxproj"
+        ],
         "firstLine": "// !\\$\\*UTF8\\*\\$!",
         "configuration": "./configurations/xcode.json"
       }
     ],
     "grammars": [
-      { "language": "m4",
+      {
+        "language": "m4",
         "scopeName": "source.m4",
         "path": "./grammars/m4.json"
       },
-      { "language": "xcode",
+      {
+        "language": "xcode",
         "scopeName": "source.xcode",
         "path": "./grammars/xcode.json"
       }
     ],
     "themes": [
-      { "label": "gloss-black",
+      {
+        "label": "gloss-black",
         "uiTheme": "vs-dark",
         "path": "./themes/gloss-black.json"
       }
