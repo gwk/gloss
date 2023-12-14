@@ -2,5 +2,6 @@
 
 blackout: pmset displaysleepnow
 ql: qlmanage -p "$@" 1>/dev/null 2>/dev/null
+openscad: /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD "$@"
 te: open -a TextEdit "$@"
 xcb: xc -beta "$@"
