@@ -84,7 +84,7 @@ descriptions = {
 }
 
 
-for i in range(0xff):
+for i in range(0x100):
   if i < 0x20: # ascii control code; use control picture.
     c = i + 0x2400
   elif i == 0x20: # sp
