@@ -29,7 +29,6 @@ import pithy.date; from pithy.date import *
 import pithy.default; from pithy.default import *
 import pithy.desc; from pithy.desc import *
 import pithy.dict; from pithy.dict import *
-import pithy.html; from pithy.html import *
 import pithy.format; from pithy.format import *
 import pithy.fs; from pithy.fs import *
 import pithy.graph; from pithy.graph import *
@@ -50,7 +49,6 @@ import pithy.types; from pithy.types import *
 import pithy.untyped; from pithy.untyped import *
 import pithy.url; from pithy.url import *
 import pithy.util; from pithy.util import *
-import pithy.xml; from pithy.xml import *
 
 # Currently buggy for 3.7.
 #import jedi.utils
