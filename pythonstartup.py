@@ -50,6 +50,7 @@ import pithy.untyped; from pithy.untyped import *
 import pithy.url; from pithy.url import *
 import pithy.util; from pithy.util import *
 
-# Currently buggy for 3.7.
-#import jedi.utils
-#jedi.utils.setup_readline()
+
+try: import jedi.utils
+except ImportError as e: print(f'Note: jedi autocomplete not available: {e}', file=stderr)
+else: jedi.utils.setup_readline()
