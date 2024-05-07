@@ -20,7 +20,7 @@ prepend_to_search_path() {
   local _path_name=$1
   shift
 
-  local _path=$($GLOSS_DIR/bin/prepend-to-search-path.py $_path_name $@)
+  local _path=$($GLOSS_DIR/bin/prepend-to-search-path $_path_name $@)
 
   # NOTE: during shell startup bash will fail to capture the exit code,
   # either due to python not residing in existing PATH or script exit code.
