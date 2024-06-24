@@ -21,6 +21,7 @@ import time; from time import *
 import zoneinfo; from zoneinfo import *
 
 import pithy.ansi; from pithy.ansi import *
+import pithy.ast; from pithy.ast import *
 import pithy.buffer; from pithy.buffer import *
 import pithy.collection; from pithy.collection import *
 import pithy.clock; from pithy.clock import *
