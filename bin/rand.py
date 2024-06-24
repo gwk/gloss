@@ -54,7 +54,7 @@ def main() -> None:
     print(val)
 
 
-def get_sole_arg(args: Namespace, *names:str) -> (str, Any):
+def get_sole_arg(args: Namespace, *names:str) -> tuple[str, Any]:
   '''
   Verify that only a single one of the given arguments is specified, and return its name and value.
   If none or multiple of the arguments is specified, exit with an error message.
