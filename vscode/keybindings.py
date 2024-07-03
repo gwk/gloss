@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 import re
-from sys import argv
+from sys import argv, stderr
 from pithy.fs import make_dirs
-from pithy.io import errL, errSL, errLL, outL, writeL
-from pithy.iterable import group_by_heads
+from pithy.io import errL, errSL, writeL
 from pithy.json import JSONDecodeError, parse_json, write_json
-from pithy.path import path_dir, path_stem
+from pithy.path import path_dir
 from dataclasses import dataclass, field
-from typing import Any, DefaultDict, Dict, Iterable, List, Set, Tuple
+from typing import Any, DefaultDict, Dict, Iterable, List, Set, Tuple, TextIO
 
 
 '''
@@ -24,7 +23,7 @@ Tab bindings still appear in the keys file and are checked against the defaults.
 Obviously this leaves something to be desired but is the path of least resistance for now.
 
 Default keybindings are obtained from selecting "Open Default Keyboard Shortcuts" from the command palette
-and pasting them into the default JSON file in `vscode/`.
+and pasting them into `vscode/keybindings-default.json`.
 '''
 
 
@@ -35,7 +34,6 @@ def main() -> None:
   out_dir = path_dir(out_path)
   make_dirs(out_dir)
 
-  out_stem = path_stem(out_path)
   defaults_out_path = out_dir + '/keys-defaults.txt'
   whens_out_path= out_dir + '/keys-whens.txt'
   keys_ref_out_path = out_dir + '/keys-reference.txt'
@@ -67,12 +65,17 @@ def parse_defaults(defaults_path:str) -> Tuple[List[Binding],List[str]]:
   json_lines = []
   other_cmds = [] # Commands suggested by "Here are other available commands:" comment at end of the defaults file.
   comment_re = re.compile(r'\s*//\s*(-)?\s*(.*)')
+  other_command_trailing_junk_re = re.compile(r'(-#\d+-.+)$')
+  #^ As of 2024-07, some extension commands have a weird "-#1-" followed by the extension description, which includes spaces.
   for line in open(defaults_path):
     m = comment_re.match(line) # For now, only recognize comments on their own line.
     if m: # Commented line.
       json_lines.append(line[:m.start()]) # Preserve line numbers for json parser.
       if m[1]: # Contains dash; assume one of the "other available commands."
         cmd = m[2].strip()
+        if junk_m := other_command_trailing_junk_re.search(cmd):
+          print("note: stripped junk from commented command:", cmd)
+          cmd = cmd[:junk_m.start()]
         assert cmd
         other_cmds.append(cmd)
     else:
@@ -154,14 +157,19 @@ def write_defaults_txt(path:str, dflt_triples:List[Triple]) -> None:
   'Generate keybindings.txt as starting point for customization.'
   f = open(path, 'w')
   for (cmd, key, when) in sorted(dflt_triples):
-    if ' ' in cmd: cmd += ':' # Add a trailing colon delimiter to disambiguate commands with spaces.
-    when_clause = f'when {when}' if when else ''
-    writeL(f, f'{cmd:<79} {key:15} {when_clause}'.strip())
+    write_key_line(f, cmd, key, when)
+
+
+def write_key_line(f:TextIO, cmd:str, key:str, when:str='') -> None:
+  assert not re.search(r':( |$)', cmd), cmd # Check to make sure our delimiter is not ambiguous; see `parse_binding`.
+  if ' ' in cmd: cmd += ':' # Add a trailing colon delimiter to disambiguate commands with spaces.
+  when_clause = f'when {when}' if when else ''
+  writeL(f, f'{cmd:<79} {key:15} {when_clause}'.rstrip())
 
 
 def write_whens(path:str, all_when_words:Set[str]) -> None:
   with open(path, 'w') as f:
-    for when in sorted(all_when_words):
+    for when in sorted(all_when_words, key=lambda word: (word.isalnum(), word)):
       writeL(f, when)
 
 
@@ -223,6 +231,7 @@ def parse_binding(ctx:Ctx, line_num:int, line:str) -> None:
 
   if not keys: return
 
+  validate_cmd(ctx, line_num, cmd=cmd)
   validate_keys(ctx, line_num, keys=keys)
   validate_when(ctx, line_num, cmd=cmd, when=when, when_words=when_words)
 
@@ -250,15 +259,20 @@ def parse_binding(ctx:Ctx, line_num:int, line:str) -> None:
     ctx.bound_tabs.add(cmd)
 
 
+def validate_cmd(ctx:Ctx, line_num:int, cmd:str) -> None:
+  pass
+
+
 def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]):
   for word in keys:
     for el in word.split('+'):
       if not key_validator.fullmatch(el):
         ctx.error(line_num, f'bad key: {el!r}')
 
+
 def validate_when(ctx:Ctx, line_num:int, cmd:str, when:str, when_words:List[str]) -> None:
   default_whens = ctx.dflt_binding_whens[cmd]
-  if default_whens and when not in default_whens:
+  if default_whens and when not in default_whens and cmd not in known_custom_when_cmds:
     ctx.msg(line_num, f'note: custom when for command: {cmd}\n  gloss:   {when}', *[f'\n  default: {dflt}' for dflt in default_whens])
   for word in when_words:
     if word.lstrip('!') not in ctx.all_when_words:
@@ -267,13 +281,19 @@ def validate_when(ctx:Ctx, line_num:int, cmd:str, when:str, when_words:List[str]
 
 def warn_unbound_cmds(ctx:Ctx) -> None:
   if unbound_cmds := ctx.all_cmds - ctx.bound_cmds:
-    errLL('\nunbound commands:', *sorted(unbound_cmds))
+    errL('\nunbound commands:')
+    for cmd in sorted(unbound_cmds):
+      write_key_line(stderr, cmd, '')
 
   if unbound_escapes := ctx.dflt_escapes - ctx.bound_escapes:
-    errLL('\nunbound escapes:', *sorted(unbound_escapes))
+    errL('\nunbound escapes:')
+    for cmd in sorted(unbound_escapes):
+      write_key_line(stderr, cmd, 'escape')
 
   if unbound_tabs := ctx.dflt_tabs - ctx.bound_tabs:
-    errLL('\nunbound tabs:', *sorted(unbound_tabs))
+    errL('\nunbound tabs:')
+    for cmd in sorted(unbound_tabs):
+      write_key_line(stderr, cmd, 'tab')
 
   errL()
 
@@ -291,6 +311,12 @@ key_validator = re.compile(r'''(?x)
 | f(?:\d{1,2})
 | \\?[][-zA-Z0-9\'"`.,;/\\=-]
 ''')
+
+
+known_custom_when_cmds = {
+  'workbench.action.reloadWindow'
+}
+
 
 known_extension_cmds = {
   'settings.cycle.trimTrailingWhitespace',
