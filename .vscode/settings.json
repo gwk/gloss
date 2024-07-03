@@ -3,5 +3,8 @@
     "_build": true,
     "_misc": true
   },
-  "mypy.targets": ["bin"]
+  "mypy.targets": ["bin"],
+  "files.associations": {
+    "vscode/keybindings-default.json": "jsonc"
+  }
 }
