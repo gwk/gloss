@@ -1,5 +1,3 @@
-
-
 ~remote.forwardedPorts.focus
 ~remote.forwardedPorts.removeView
 ~remote.forwardedPorts.resetViewLocation
@@ -1945,7 +1943,7 @@ workbench.action.files.revealActiveFileInWindows
 workbench.action.files.revert
 workbench.action.files.save                                                     cmd+s
 workbench.action.files.saveAll                                                  alt+cmd+s
-workbench.action.files.saveAs                                                   shift+cmd+s
+workbench.action.files.saveAs
 workbench.action.files.saveFiles
 workbench.action.files.saveLocalFile
 workbench.action.files.saveWithoutFormatting
@@ -2265,7 +2263,7 @@ workbench.action.showPreviousWindowTab
 workbench.action.showRuntimeExtensions
 workbench.action.showWindowLog
 workbench.action.speech.stopReadAloud                                           escape          when scopedChatSynthesisInProgress && textToSpeechInProgress
-workbench.action.splitEditor                                                    cmd+\
+workbench.action.splitEditor                                                    shift+cmd+s
 workbench.action.splitEditorDown
 workbench.action.splitEditorInGroup
 workbench.action.splitEditorLeft
