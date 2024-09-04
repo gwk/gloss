@@ -23,5 +23,5 @@ if paths:
     with open(p, 'rb') as bf:
       cat_file(bf)
 else:
-  bf = sys.stdin.detach() # type: ignore [attr-defined] # get the underlying binary buffer.
+  bf = sys.stdin.detach() # type: ignore [union-attr] # get the underlying binary buffer.
   cat_file(bf)
