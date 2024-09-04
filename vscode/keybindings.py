@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
 import re
+from dataclasses import dataclass, field
 from sys import argv, stderr
+from typing import Any, DefaultDict, Dict, Iterable, List, Set, TextIO, Tuple
+
 from pithy.fs import make_dirs
 from pithy.io import errL, errSL, writeL
 from pithy.json import JSONDecodeError, parse_json, write_json
 from pithy.path import path_dir
-from dataclasses import dataclass, field
-from typing import Any, DefaultDict, Dict, Iterable, List, Set, Tuple, TextIO
 
 
 '''
@@ -90,6 +91,10 @@ def parse_defaults(defaults_path:str) -> Tuple[List[Binding],List[str]]:
   return defaults, other_cmds
 
 
+special_keys = ('enter', 'escape', 'tab') # Warn when bindings that default to these keys are not bound.
+#^ The binding names have changed over time and various aspects of the UI are not usable without them.
+#^ It can be difficult to discover the name of a binding when it breaks.
+
 @dataclass(frozen=True)
 class Ctx:
   bindings_path: str
@@ -98,15 +103,13 @@ class Ctx:
   all_cmds: Set[str]
 
   all_when_words: Set[str] = field(default_factory=set)
-  dflt_binding_whens: Dict[str,Set[str]] = field(default_factory=lambda:DefaultDict(set))
-  dflt_escapes: Set[str] = field(default_factory=set)
-  dflt_tabs: Set[str] = field(default_factory=set)
+  dflt_binding_whens: DefaultDict[str,Set[str]] = field(default_factory=lambda:DefaultDict(set))
+  dflt_specials: DefaultDict[str,Set[str]] = field(default_factory=lambda:DefaultDict(set))
   dflt_triples: List[Triple] = field(default_factory=list)
 
   bindings: List[Dict[str,str]] = field(default_factory=list) # Includes nullifications.
   bound_cmds: Set[str] = field(default_factory=set)
-  bound_escapes: Set[str] = field(default_factory=set)
-  bound_tabs: Set[str] = field(default_factory=set)
+  bound_specials: DefaultDict[str,Set[str]] = field(default_factory=lambda:DefaultDict(set))
 
 
   def msg(self, line:int, *items:Any):
@@ -132,10 +135,8 @@ class Ctx:
         'key': key,
         'command': '-' + cmd
       }
-      if key == 'escape':
-        self.dflt_escapes.add(cmd)
-      if key == 'tab':
-        self.dflt_tabs.add(cmd)
+      if key in special_keys:
+        self.dflt_specials[key].add(cmd)
 
       when_words = dflt.get('when', '').split()
       when = ' '.join(when_words)
@@ -252,11 +253,8 @@ def parse_binding(ctx:Ctx, line_num:int, line:str) -> None:
 
   key = ' '.join(keys)
   add_binding(key)
-  if key == 'escape':
-    ctx.bound_escapes.add(cmd)
-    add_binding('ctrl+c')
-  if key == 'tab':
-    ctx.bound_tabs.add(cmd)
+  if key in special_keys:
+    ctx.bound_specials[key].add(cmd)
 
 
 def validate_cmd(ctx:Ctx, line_num:int, cmd:str) -> None:
@@ -273,10 +271,15 @@ def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]):
 def validate_when(ctx:Ctx, line_num:int, cmd:str, when:str, when_words:List[str]) -> None:
   default_whens = ctx.dflt_binding_whens[cmd]
   if default_whens and when not in default_whens and cmd not in known_custom_when_cmds:
-    ctx.msg(line_num, f'note: custom when for command: {cmd}\n  gloss:   {when}', *[f'\n  default: {dflt}' for dflt in default_whens])
+    ctx.msg(line_num, f'note: custom when for command: {cmd}\n  gloss:   {fmt_when(when)}',
+      *[f'\n  default: {fmt_when(dflt)}' for dflt in default_whens])
   for word in when_words:
     if word.lstrip('!') not in ctx.all_when_words:
       ctx.error(line_num, f'bad when word: {word}')
+
+
+def fmt_when(when:str) -> str:
+  return f'when {when}' if when else ''
 
 
 def warn_unbound_cmds(ctx:Ctx) -> None:
@@ -285,15 +288,11 @@ def warn_unbound_cmds(ctx:Ctx) -> None:
     for cmd in sorted(unbound_cmds):
       write_key_line(stderr, cmd, '')
 
-  if unbound_escapes := ctx.dflt_escapes - ctx.bound_escapes:
-    errL('\nunbound escapes:')
-    for cmd in sorted(unbound_escapes):
-      write_key_line(stderr, cmd, 'escape')
-
-  if unbound_tabs := ctx.dflt_tabs - ctx.bound_tabs:
-    errL('\nunbound tabs:')
-    for cmd in sorted(unbound_tabs):
-      write_key_line(stderr, cmd, 'tab')
+  for key in special_keys:
+    if unbound := ctx.dflt_specials[key] - ctx.bound_specials[key]:
+      errL(f'\nunbound {key!r} commands:')
+      for cmd in sorted(unbound):
+        write_key_line(stderr, cmd, key)
 
   errL()
 
