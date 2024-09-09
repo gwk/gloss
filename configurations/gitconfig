@@ -6,8 +6,8 @@
   c = commit
   cm = commit -m
   ca = commit --amend
+  cam = commit --amend -m
   d = diff
-  master = checkout master
   aliases = !git config --list | egrep '^alias\\.' | sort
 [branch]
   autoSetupRebase = always
