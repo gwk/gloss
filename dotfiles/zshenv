@@ -3,10 +3,3 @@
 #setopt SOURCE_TRACE # This will print a message every time a file is sourced.
 
 [[ -z $GLOSS_ENV ]] && source /usr/local/gloss/zsh/env.zsh
-
-# Place the custom python environment ahead of /usr/local/bin.
-PATH="/usr/local/py/bin:$PATH"
-
-# ~/.cargo/bin is where rustup installs.
-# ~/.local/bin is where pip installs if it does not have write access to the installation.
-PATH="$PATH:$HOME/.cargo/bin:$HOME/.local/bin"
