@@ -1,3 +1,1 @@
-/usr/local/py/Python.framework/Versions/3.12/bin
-/usr/local/py/Python.framework/Versions/3.11/bin
-/usr/local/py/Python.framework/Versions/3.10/bin
+/usr/local/py/Python.framework/Versions/3.13/bin
