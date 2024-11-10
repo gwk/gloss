@@ -92,6 +92,16 @@ def main():
     else:
       errSL('no platform specifics to gen found at:', bins_os_path)
 
+    if platform == 'mac':
+      errSL('installing /etc/paths.d...')
+      paths_src_dir = path_join(src_dir, 'paths')
+      paths_src_names = list_dir(paths_src_dir)
+      for src_name in paths_src_names:
+        src_path = path_join(paths_src_dir, src_name)
+        dst_path = path_join('/etc/paths.d', path_stem(src_name))
+        errSL(src_path, '=>', dst_path)
+        copy_file(src_path, dst_path)
+
   except OSError as e: # Usually a permissions problem.
     errSL(e)
     exit(1)
