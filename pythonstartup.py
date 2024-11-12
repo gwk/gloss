@@ -95,8 +95,3 @@ from pithy.types import *
 from pithy.untyped import *
 from pithy.url import *
 from pithy.util import *
-
-
-try: import jedi.utils
-except ImportError as e: print(f'Note: jedi autocomplete not available: {e}', file=stderr)
-else: jedi.utils.setup_readline()
