@@ -3,12 +3,6 @@
 source /usr/local/gloss/zsh/rc.zsh
 source /usr/local/gloss/zsh/aliases.zsh
 
-# These are set by default on macOS but not on Linux.
-HISTFILE=~/.zsh_history
-HISTSIZE=2000
-SAVEHIST=1000
-setopt appendhistory
-
 # zstyle commands must come before the completion system is initialized.
 # Therefore gloss relies on the end user to call autoload for themselves.
 autoload -Uz compinit && compinit

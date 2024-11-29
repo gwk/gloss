@@ -19,6 +19,13 @@ setopt HIST_FIND_NO_DUPS # Do not display duplicates of a line previously found,
 #setopt HIST_IGNORE_DUPS # Do not enter command lines into the history list if they are duplicates of the previous event.
 
 setopt HIST_IGNORE_DUPS # Do not enter command lines into the history list if they are duplicates of the previous event.
+
+# These are set by default on macOS but not on Linux.
+export HISTFILE=~/.zsh_history
+export HISTSIZE=2000
+export SAVEHIST=1000
+setopt INC_APPEND_HISTORY # Write to the history file immediately, not when the shell exits.
+
 setopt AUTO_LIST # List choices on ambiguous completion.
 setopt AUTO_MENU # Use menu completion on double-tab.
 setopt AUTO_PARAM_KEYS # Automatically added spaces will be removed for syntactic closing characters that follow.
