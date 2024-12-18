@@ -24,7 +24,9 @@ setopt HIST_IGNORE_DUPS # Do not enter command lines into the history list if th
 export HISTFILE=~/.zsh_history
 export HISTSIZE=2000
 export SAVEHIST=1000
-setopt INC_APPEND_HISTORY # Write to the history file immediately, not when the shell exits.
+
+setopt SHARE_HISTORY # Write to the history file immediately, not when the shell exits.
+#^ Do not also set INC_APPEND_HISTORY. See: https://zsh.sourceforge.io/Doc/Release/Options.html#History.
 
 setopt AUTO_LIST # List choices on ambiguous completion.
 setopt AUTO_MENU # Use menu completion on double-tab.
