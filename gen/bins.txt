@@ -53,10 +53,12 @@ gls: git ls-files "$@"
 
 gm: git merge "$@"
 gms: git merge --squash "$@"
-gmff: git merge --ff-only "$@"
+gmffo: git merge --ff-only "$@"
 
 gpull:  git pull "$@"
 gpush:  git push "$@"
+
+gri:    git rebase --interactive "$@"
 
 gsh:    git show "$@"
 gshw:   git show --color-words "$@"
