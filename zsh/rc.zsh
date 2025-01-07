@@ -114,7 +114,10 @@ update_terminal_prompt() {
   fi
 
   local ssh=''
-  [[ -n "$SSH_TTY" ]] && local ssh="$GLOSS_PROMPT_SSH_SYMBOL$GLOSS_SSH_NAME "
+  if [[ -n "$SSH_TTY" ]]; then
+    local _ssh_hostname=$(hostname -s)
+    local ssh="$GLOSS_PROMPT_SSH_SYMBOL$_ssh_hostname "
+  fi
 
   local venv=''
   [[ -n $VIRTUAL_ENV ]] && local venv="$(basename $(dirname $VIRTUAL_ENV)) "
