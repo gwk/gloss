@@ -39,8 +39,8 @@ gds: git diff --staged "$@"
 # d: ref names
 # s: subject
 
-gl:   git log --format="%C(blue)%ad %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso "$@"
-gl1:  git log --format="%C(blue)%ad %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso -1 "$@"
+gl:   git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso "$@"
+gl1:  git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso -1 "$@"
 
 glm:    git log "$@"
 glm1:   git log -1 "$@"
