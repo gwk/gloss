@@ -36,7 +36,7 @@ from typing import *
 from zoneinfo import *
 
 import pithy.ansi
-import pithy.ast
+import pithy.ast_utils
 import pithy.buffer
 import pithy.clock
 import pithy.collection
@@ -61,12 +61,13 @@ import pithy.sequence
 import pithy.string
 import pithy.svg
 import pithy.task
-import pithy.types
+import pithy.type_utils
+import pithy.typing_utils
 import pithy.untyped
 import pithy.url
 import pithy.util
 from pithy.ansi import *
-from pithy.ast import *
+from pithy.ast_utils import *
 from pithy.buffer import *
 from pithy.clock import *
 from pithy.collection import *
@@ -91,7 +92,8 @@ from pithy.sequence import *
 from pithy.string import *
 from pithy.svg import *
 from pithy.task import *
-from pithy.types import *
+from pithy.type_utils import *
+from pithy.typing_utils import *
 from pithy.untyped import *
 from pithy.url import *
 from pithy.util import *
