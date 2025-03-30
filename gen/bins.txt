@@ -46,8 +46,8 @@ glm:    git log "$@"
 glm1:   git log -1 "$@"
 
 # Note: -m flag "makes the merge commits show the full diff like regular commits"; documented in git-log "Diff Formatting".
-glv:    git log --name-status -m "$@"
-glv1:   git log --name-status -m -1 "$@"
+glv:    git log --name-status --format=fuller -m "$@"
+glv1:   git log --name-status --format=fuller -m -1 "$@"
 
 gls: git ls-files "$@"
 
