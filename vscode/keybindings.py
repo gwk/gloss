@@ -141,10 +141,8 @@ class Ctx:
       when_words = dflt.get('when', '').split()
       when = ' '.join(when_words)
       self.dflt_binding_whens[cmd].add(when)
-      if when:
-        # Note: as of 2018/08/03, do not qualify nullifications with when clauses, or else they will fail in some cases.
-        for word in when.split():
-          self.all_when_words.add(word.lstrip('!'))
+      for word in when_words:
+        self.all_when_words.add(word.lstrip('!'))
       self.bindings.append(nullification)
       self.dflt_triples.append((cmd, key, when))
 
@@ -275,7 +273,7 @@ def validate_when(ctx:Ctx, line_num:int, cmd:str, when:str, when_words:List[str]
       *[f'\n  default: {fmt_when(dflt)}' for dflt in default_whens])
   for word in when_words:
     if word.lstrip('!') not in ctx.all_when_words:
-      ctx.error(line_num, f'bad when word: {word}')
+      ctx.warn(line_num, f'bad when word: {word}')
 
 
 def fmt_when(when:str) -> str:
