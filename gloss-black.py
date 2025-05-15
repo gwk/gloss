@@ -10,12 +10,13 @@ for settings color customizations, see https://code.visualstudio.com/docs/getsta
 import json
 import re
 from sys import argv
+from typing import Any
 
 from pithy.fs import make_dirs
 from pithy.path import path_dir
 
 
-def main():
+def main() -> None:
   out_path = argv[1]
   out_dir = path_dir(out_path)
   make_dirs(out_dir)
@@ -28,14 +29,14 @@ def main():
     json.dump(theme, f, indent=2)
 
 
-def make_settings():
-  all_settings = []
+def make_settings() -> list[dict[str, Any]]:
+  all_settings:list[dict[str, Any]] = []
 
-  def base(**settings):
+  def base(**settings:Any) -> None:
     validate(settings)
     all_settings.append({'settings': settings})
 
-  def scope(*scopes, **settings):
+  def scope(*scopes:Any, **settings:Any) -> None:
     validate(settings)
     all_settings.append({'scope': scopes, 'settings': settings})
 
@@ -220,7 +221,7 @@ MRo = '#FF00C0'
 
 valid_words = { 'bold', 'italic', 'underline', 'stippled_underline' }
 
-def validate_value(v):
+def validate_value(v:Any) -> None:
   if v is None: return
   if isinstance(v, str):
     if v.isdigit(): return
@@ -238,7 +239,7 @@ def validate_value(v):
   else:
     raise ValueError('bad type: {}'.format(v))
 
-def validate(d):
+def validate(d:dict[str,Any]) -> None:
   for k, v in d.items():
     # TODO: validate keys. raise KeyError(k)
     validate_value(v)

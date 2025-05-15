@@ -11,7 +11,7 @@ from subprocess import run
 from _gloss_install_common import distro, dst_dir, errSL, platform, src_dir  # Parses arguments, etc.
 
 
-def main():
+def main() -> None:
   try:
     if is_dir(dst_dir):
       errSL('removing old dst_dir contents...')
@@ -53,7 +53,7 @@ def main():
     make_dir(dst_bin_dir)
 
 
-    def install_bin_dir(bin_dir):
+    def install_bin_dir(bin_dir:str) -> None:
       errSL('install_bin_dir:', bin_dir)
 
       for src in list_dir(bin_dir):

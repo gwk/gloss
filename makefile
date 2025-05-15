@@ -47,6 +47,9 @@ py-deps:
 test:
 	iotest -fail-fast
 
+typecheck:
+	mypy .
+
 uninstall-vscode:
 	rm -rf ~/.vscode/extensions/gloss
 

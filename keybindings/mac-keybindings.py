@@ -4,11 +4,12 @@
 # https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/EventOverview/TextDefaultsBindings/TextDefaultsBindings.html.
 
 import plistlib
+
 import NSEventKeys
-from pithy import errFL
+from pithy.io import errL
 
 
-def main():
+def main() -> None:
   f = open('/System/Library/Frameworks/AppKit.framework/Resources/StandardKeyBinding.dict', 'rb')
   # note: user customizations go in '~/Library/KeyBindings/DefaultKeyBinding.dict'.
   bindings = plistlib.load(f)
@@ -16,10 +17,10 @@ def main():
   for key, cmd in sorted(bindings.items(), key=lambda p: repr(p[1])):
     if cmd == 'noop:': continue
     desc = '+'.join(translate_key(c) for c in key)
-    errFL('{:<48} {!r}', str(cmd), desc)
+    errL(f'{cmd:<48} {desc!r}')
 
 
-def translate_key(c): return mods.get(c, c)
+def translate_key(c:str) -> str: return mods.get(c, c)
 
 mods = {
   ' ' : 'space',

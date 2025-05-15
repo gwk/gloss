@@ -1,13 +1,12 @@
-import re
 import os
-import sys
 import pathlib
-
+import re
+import sys
 from types import TracebackType
-from typing import Type
+from typing import Any, Type
 
 
-def gloss_excepthook(type_:Type[BaseException], value:BaseException, traceback:TracebackType) -> None:
+def gloss_excepthook(type_:Type[BaseException], value:BaseException, traceback:TracebackType|None) -> Any:
 
   from traceback import format_exception
   stderr = sys.stderr

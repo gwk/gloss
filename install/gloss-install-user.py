@@ -5,14 +5,15 @@
 
 # Install the user-specific portions (does not require root privileges).
 
-from os import makedirs
-from os.path import expanduser as expand_user, isfile as is_file, isdir as is_dir, join as path_join
-from shutil import copy2 as copy_file
-from _gloss_install_common import errSL, dst_dir, src_dir # parses arguments, etc.
 import site
+from os import makedirs
+from os.path import expanduser as expand_user, isdir as is_dir, isfile as is_file, join as path_join
+from shutil import copy2 as copy_file
+
+from _gloss_install_common import dst_dir, errSL, src_dir  # parses arguments, etc.
 
 
-def main():
+def main() -> None:
   # make sure that gloss system is installed.
   if not is_dir(dst_dir):
     errSL('bad gloss directory:', dst_dir,
@@ -31,10 +32,10 @@ def main():
     install_usercustomize()
 
   except OSError as e: # usually permissions.
-    exit(e)
+    exit(str(e))
 
 
-def append_line_if_missing(path, line):
+def append_line_if_missing(path, line) -> None:
   assert line.endswith('\n')
   if is_file(path):
     for l in open(path):
@@ -47,7 +48,7 @@ def append_line_if_missing(path, line):
     f.write(line)
 
 
-def install_usercustomize():
+def install_usercustomize() -> None:
   site_packages_dir = site.getusersitepackages()
   name = 'usercustomize.py'
   src = path_join(src_dir, name)

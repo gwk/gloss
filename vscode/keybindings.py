@@ -188,7 +188,7 @@ def write_keys_ref(path:str, bindings:list[dict[str,str]]) -> None:
       print(f'{key:24} {cmd:64}{s}{when}', file=f)
 
 
-def bindings_sort_key(binding:Dict[str,str]) -> List[str]:
+def bindings_sort_key(binding:Dict[str,str]) -> List[bool|str]:
   key_combo = binding['key'].split('+')
   key_combo.reverse()
   is_regular_key = (len(key_combo[0]) == 1)
@@ -242,11 +242,6 @@ def parse_binding(ctx:Ctx, line_num:int, line:str) -> None:
     if when_words:
       binding['when'] = when
 
-    # Originally this supported multiline bindings with subsequent lines indented, containing `args` in json synatx.
-    # However over time I came to rely on sorting the whole file by lines in order to update it when new bindings were added to VSCode.
-    args = None
-    if args is not None:
-      binding['args'] = args
     ctx.bindings.append(binding)
 
   key = ' '.join(keys)

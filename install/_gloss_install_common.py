@@ -4,12 +4,12 @@
 
 import re
 from os import uname as os_uname
+from os.path import abspath as abs_path, dirname as path_dir, isdir as is_dir, join as path_join
 from sys import argv, stderr
+from typing import Any
 
-from os.path import abspath as abs_path, isdir as is_dir, dirname as path_dir, join as path_join
 
-
-def errSL(*items): print(*items, file=stderr)
+def errSL(*items:Any) -> None: print(*items, file=stderr)
 
 
 supported_platforms = ['mac', 'linux']
