@@ -35,7 +35,7 @@ def main() -> None:
     errSL('copying files to dst_dir...')
 
     # Copy directories.
-    sub_dirs = ['bash', 'zsh']
+    sub_dirs = ['zsh']
     for d in sub_dirs:
       src_subdir = path_join(src_dir, d)
       dst_subdir = path_join(dst_dir, d)
