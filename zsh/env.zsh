@@ -7,20 +7,20 @@
 export GLOSS_ENV=GLOSS_ENV
 
 # Printing functions.
-out()   { print -n - ${(j..)@} }
+outZ()   { print -n - ${(j..)@} }
 outL()  { print - ${(j..)@} }
-outS()  { print -n - $@ }
+outSZ()  { print -n - $@ }
 outSL() { print - $@ }
 outLL() { print -l - $@ }
-outF()  { printf -n - $@ }
+outFZ()  { printf -n - $@ }
 outFL() { printf - $@ }
 
-err()   { >&2 print -n - ${(j..)@} }
+errZ()   { >&2 print -n - ${(j..)@} }
 errL()  { >&2 print - ${(j..)@} }
-errS()  { >&2 print -n - $@ }
+errSZ()  { >&2 print -n - $@ }
 errSL() { >&2 print - $@ }
 errLL() { >&2 print -l - $@ }
-errF()  { >&2 printf -n - $@ }
+errFZ()  { >&2 printf -n - $@ }
 errFL() { >&2 printf - $@ }
 
 # Source gloss custom environment if it exists.
