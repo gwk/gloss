@@ -37,20 +37,21 @@ export PATH="$PATH:$GLOSS_DIR/bin"
 export GLOSS_OS=$(cut -f1 $GLOSS_DIR/platform.txt)
 export GLOSS_DISTRO=$(cut -f2 $GLOSS_DIR/platform.txt)
 
+export EDITOR=nano
 export PAGER=less
 export HELPDIR=/usr/share/zsh/5.8/help
 
 case $GLOSS_OS in
   linux)
-    export EDITOR=nano;;
+    ;;
   mac)
-    export EDITOR='code -w' # Use VS Code as the shell editor.
     # Standard homebrew configuration.
     export HOMEBREW_PREFIX="/opt/homebrew"
     export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
     export HOMEBREW_REPOSITORY="/opt/homebrew"
     export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
-    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";;
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+    ;;
 esac
 
 

@@ -193,11 +193,6 @@ if [[ -z "$GLOSS_ENV" ]]; then
 
   # Utils only need to be sourced once.
   source $GLOSS_DIR/bash/gloss_sh_utils.bash
-
-  # platform specific configuration.
-  if [[ "$GLOSS_PLATFORM" == 'darwin' ]]; then
-    export EDITOR='code -w "$@"' # use vs code as shell editor.
-  fi
 fi
 
 # set the following for every shell.
