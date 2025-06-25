@@ -17,9 +17,11 @@ branch="$1"
 # Check if the branch already exists.
 if git show-ref --verify --quiet refs/heads/"$branch"; then
   echo "Branch '$branch' already exists." 1>&2
+  set -x
   git checkout "$branch"
 else
   # Create the new branch.
+  set -x
   git checkout -b "$branch"
 fi
 
