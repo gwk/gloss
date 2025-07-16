@@ -5,6 +5,6 @@
   },
   "mypy.targets": ["bin"],
   "files.associations": {
-    "vscode/keybindings-default.json": "jsonc"
+    "keybindings-default.json": "jsonc"
   }
 }
