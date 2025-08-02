@@ -50,6 +50,10 @@ export zle_highlight=(region:standout special:standout suffix:bold isearch:under
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
+# Homebrew completion.
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
+  fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
+fi
 
 # Environment variables for various other tools.
 
