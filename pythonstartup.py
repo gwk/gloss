@@ -29,14 +29,13 @@ from io import *
 from itertools import *
 from math import *
 from operator import *
-from os import environ
+from os import environ, uname
 from sys import argv, stderr, stdout
 from time import *
 from typing import *
 from zoneinfo import *
 
 import pithy.ansi
-import pithy.ast_utils
 import pithy.buffer
 import pithy.clock
 import pithy.collection
@@ -67,7 +66,6 @@ import pithy.untyped
 import pithy.url
 import pithy.util
 from pithy.ansi import *
-from pithy.ast_utils import *
 from pithy.buffer import *
 from pithy.clock import *
 from pithy.collection import *
