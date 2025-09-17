@@ -1,1 +1,2 @@
 /usr/local/py/Python.framework/Versions/3.13/bin
+/Library/Frameworks/Python.framework/Versions/3.13/bin
