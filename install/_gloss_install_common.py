@@ -41,7 +41,7 @@ if sysname == 'darwin':
   platform = 'mac'
 elif sysname == 'linux':
   platform = 'linux'
-  if re.search('\.fc\d+\.', uname_info.release):
+  if re.search(r'\.fc\d+\.', uname_info.release):
     distro = 'fedora'
   elif 'amzn2022' in uname_info.release:
     distro = 'amzn2022'
