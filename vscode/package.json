@@ -50,6 +50,13 @@
         "scopeName": "source.toml"
       },
       {
+        "id": "vrl",
+        "extensions": [
+          ".vrl"
+        ],
+        "scopeName": "source.vrl"
+      },
+      {
         "id": "xcode",
         "extensions": [
           ".pbxproj"
@@ -68,6 +75,11 @@
         "language": "toml",
         "scopeName": "source.toml",
         "path": "./grammars/toml.json"
+      },
+      {
+        "language": "vrl",
+        "scopeName": "source.vrl",
+        "path": "./grammars/vrl.json"
       },
       {
         "language": "xcode",
