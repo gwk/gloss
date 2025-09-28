@@ -4,6 +4,7 @@
   "description": "Various enhancements for VSCode.",
   "version": "1.0.0",
   "publisher": "gwk",
+  "repository": "https://github.com/gwk/gloss",
   "engines": {
     "vscode": "^1.0.0"
   },
@@ -42,6 +43,13 @@
         ]
       },
       {
+        "id": "toml",
+        "extensions": [
+          ".toml"
+        ],
+        "scopeName": "source.toml"
+      },
+      {
         "id": "xcode",
         "extensions": [
           ".pbxproj"
@@ -55,6 +63,11 @@
         "language": "m4",
         "scopeName": "source.m4",
         "path": "./grammars/m4.json"
+      },
+      {
+        "language": "toml",
+        "scopeName": "source.toml",
+        "path": "./grammars/toml.json"
       },
       {
         "language": "xcode",
