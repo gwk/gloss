@@ -58,11 +58,16 @@ gmffo: git merge --ff-only "$@"
 gpull:  git pull "$@"
 gpush:  git push "$@"
 
-gri:    git rebase --interactive "$@"
+gr:    git rebase "$@"
+gra:   git rebase --abort
+gri:   git rebase --interactive "$@"
+grc:   git rebase --continue
+grscp: git rebase --show-current-patch
 
 gsh:    git show "$@"
 gshw:   git show --color-words "$@"
 gst:    git status --short --branch "$@"
+
 gtags:  git tag -l "$@"
 
 # file hashes.
