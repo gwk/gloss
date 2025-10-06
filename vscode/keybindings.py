@@ -2,13 +2,15 @@
 
 import re
 from collections import defaultdict
+from copy import replace
 from dataclasses import dataclass, field
 from json import JSONDecodeError
-from sys import argv, stderr
-from typing import Any, Iterable, TextIO
+from sys import argv
+from typing import Any, Iterable
 
 from pithy.fs import make_dirs
-from pithy.io import errL, errSL, writeL
+from pithy.io import errL, writeL
+from pithy.iterable import fan_by_attr
 from pithy.json import JsonDict, parse_json, write_json
 from pithy.path import path_dir
 
@@ -46,13 +48,13 @@ def main() -> None:
 
   nullifications = [nullification_binding(b) for b in defaults if b.key]
 
-  dflt_specials = defaultdict[str,set[str]](set)
-  dflt_binding_whens = defaultdict[str,set[str]](set)
+  dflt_specials = defaultdict[str,list[str]](list) # Maps special key to commands bound to it. Use lists to preserve order.
+  dflt_binding_whens = defaultdict[str,set[str]](set) # Maps command name to list of default 'when' clauses.
   all_when_words = set[str]()
 
   for b in defaults:
     if b.key in special_keys:
-      dflt_specials[b.key].add(b.cmd)
+      dflt_specials[b.key].append(b.cmd)
 
     if when := b.when:
       dflt_binding_whens[b.cmd].add(when)
@@ -62,8 +64,7 @@ def main() -> None:
   write_keys_txt(defaults_out_path, defaults)
   write_whens(whens_out_path, all_when_words)
 
-  # Parse the custom bindings and validate them.
-
+  # Set up context for parsing.
   ctx = Ctx(
     bindings_path=bindings_path,
     defaults=defaults,
@@ -71,7 +72,13 @@ def main() -> None:
     dflt_binding_whens=dflt_binding_whens,
     all_when_words=all_when_words)
 
+  # Parse and validate the custom bindings.
+
   bindings = parse_bindings(ctx, bindings_path)
+
+  cmd_bindings:dict[str,list[Binding]] = fan_by_attr(bindings, 'cmd')
+  for cmd, cmd_bs in cmd_bindings.items():
+    validate_whens_list(ctx, cmd, cmd_bs)
 
   bound_specials = defaultdict[str,set[str]](set)
   for b in bindings:
@@ -91,6 +98,7 @@ def main() -> None:
 class Binding:
   cmd:str
   key:str
+  line_num:int = 0
   when:str = ''
   args:dict[str,str]|None = None
 
@@ -101,13 +109,19 @@ class Binding:
     return d
 
 
-special_keys = ('enter', 'escape', 'tab') # Warn when bindings that default to these keys are not bound.
-#^ The binding names have changed over time and various aspects of the UI are not usable without them.
+special_keys = ('enter', 'escape', 'tab') # Handle bindings to these keys specially.
+#^ These often have many bindings, sometimes to the same command but with different complex 'when' clauses.
+#^ Furthermore, order appears to matter for bindings, which makes these keys especially tricky.
+#^ Binding names change over time and various aspects of the UI are not usable without these bindings.
 #^ It can be difficult to discover the name of a binding when it breaks.
 
 
 def parse_defaults_json(defaults_path:str) -> list[Binding]:
-  # Parse the default JSON. It has comments in it, so we have to strip those out first.
+  '''
+  Parse the default JSON. It has comments in it, some of which are the "other available commands".
+  Thus we have to preprocess the comments first.
+  This function preserves the ordering of the input bindings.
+  '''
   json_lines = []
   other_cmds = [] # Commands suggested by "Here are other available commands:" comment at end of the defaults file.
   comment_re = re.compile(r'\s*//\s*(-)?\s*(.*)')
@@ -138,7 +152,7 @@ def parse_defaults_json(defaults_path:str) -> list[Binding]:
   def clean_when(when:str) -> str: return ' '.join(when.split())
 
   defaults = [
-    Binding( cmd=d['command'], key=d['key'],when=clean_when(d.get('when', '')), args=d.get('args')) for d in defaults_json]
+    Binding(cmd=d['command'], key=d['key'],when=clean_when(d.get('when', '')), args=d.get('args')) for d in defaults_json]
 
   for cmd in other_cmds:
     defaults.append(Binding(cmd=cmd, key=''))
@@ -153,23 +167,27 @@ def nullification_binding(binding:Binding) -> JsonDict:
   }
 
 
-def write_keys_txt(path:str, bindings:list[Binding]) -> None:
-  'Generate a keybindings text file.'
-  f = open(path, 'w')
-  for binding in sorted(bindings, key=lambda b: (b.cmd.lower(), b.key, b.when)):
-    write_key_line(f, binding)
-
-
-def write_key_line(f:TextIO, binding:Binding) -> None:
+def fmt_key_line(binding:Binding) -> str:
   cmd = binding.cmd
   key = binding.key
   when = binding.when
   args = binding.args
   assert not re.search(r':( |$)', cmd), cmd # Check to make sure our delimiter is not ambiguous; see `parse_binding`.
   if ' ' in cmd: cmd += ':' # Add a trailing colon delimiter to disambiguate commands with spaces.
-  when_clause = f' when {when}' if when else ''
+  when_clause = fmt_when(when)
   args_clause = f' {args}' if args else ''
-  writeL(f, f'{cmd:<79} {key:15}{when_clause}{args_clause}'.rstrip())
+  return f'{cmd:<79} {key:15} {when_clause}{args_clause}'.rstrip()
+
+
+def fmt_when(when:str) -> str:
+  return f'when {when}' if when else ''
+
+
+def write_keys_txt(path:str, bindings:list[Binding]) -> None:
+  'Generate a keybindings text file.'
+  f = open(path, 'w')
+  for binding in sorted(bindings, key=lambda b: (b.cmd.lower(), b.key, b.when)):
+    f.write(fmt_key_line(binding) + '\n')
 
 
 def write_whens(path:str, all_when_words:set[str]) -> None:
@@ -187,13 +205,14 @@ class Ctx:
   all_when_words: set[str]
   bound_cmds: set[str] = field(default_factory=set)
 
-  def msg(self, line:int, *items:Any):
-    errSL(f'{self.bindings_path}:{line}:', *items)
+  def _msg(self, line:int, severity:str, item:Any, *items:Any, sep=' '):
+    errL(f'{self.bindings_path}:{line}: {severity}: {item}', *items, sep=sep)
 
-  def warn(self, line:int, *items:Any): self.msg(line, 'warning:', *items)
+  def warn(self, line:int, item:Any, *items:Any, sep=' '):
+    self._msg(line, 'warning', item, *items, sep=sep)
 
-  def error(self, line:int, *items:Any):
-    self.msg(line, 'error:', *items)
+  def error(self, line:int, item:Any, *items:Any, sep=' '):
+    self._msg(line, 'error', item, *items, sep=sep)
     exit(1)
 
 
@@ -213,7 +232,6 @@ def write_keys_ref(path:str, bindings:list[Binding]) -> None:
       cmd = binding.cmd
       key = binding.key
       when = binding.when
-      args = binding.args
       when = f' when {binding.when}' if binding.when else ''
       args = f' {binding.args}' if binding.args else ''
 
@@ -250,8 +268,6 @@ def parse_binding(ctx:Ctx, line_num:int, line:str) -> Binding|None:
     words = line.split()
     cmd = words[0]
 
-  if cmd not in ctx.all_cmds:
-    ctx.warn(line_num, 'unknown command:', cmd)
   try:
     when_index = words.index('when')
   except ValueError:
@@ -265,12 +281,12 @@ def parse_binding(ctx:Ctx, line_num:int, line:str) -> Binding|None:
 
   if not validate_cmd(ctx, line_num, cmd=cmd): return None # Omit unknown commands.
   validate_keys(ctx, line_num, keys=keys)
-  if keys:
-    validate_when(ctx, line_num, cmd=cmd, when=when, when_words=when_words)
+
+  if keys: validate_when(ctx, line_num, cmd=cmd, when=when, when_words=when_words)
 
   key = ' '.join(keys)
 
-  return Binding(cmd=cmd, key=key, when=when)
+  return Binding(cmd=cmd, key=key, line_num=line_num, when=when)
 
 
 def validate_cmd(ctx:Ctx, line_num:int, cmd:str) -> bool:
@@ -288,32 +304,56 @@ def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]):
 
 
 def validate_when(ctx:Ctx, line_num:int, cmd:str, when:str, when_words:list[str]) -> None:
-  default_whens = ctx.dflt_binding_whens[cmd]
-  if default_whens and when not in default_whens and cmd not in known_custom_when_cmds:
-    ctx.msg(line_num, f'note: custom when for command: {cmd}\n  gloss:   {fmt_when(when)}',
-      *[f'\n  default: {fmt_when(dflt)}' for dflt in default_whens])
   for word in when_words:
     if word.lstrip('!') not in ctx.all_when_words and word not in known_when_words:
       ctx.warn(line_num, f'bad when word: {word}')
 
 
-def fmt_when(when:str) -> str:
-  return f'when {when}' if when else ''
+def validate_whens_list(ctx:Ctx, cmd:str, bindings:list[Binding]) -> None:
+  if not any(b.key for b in bindings): return # No bound keys.
+
+  dflt_whens_unaltered = ctx.dflt_binding_whens.get(cmd, set())
+  if not dflt_whens_unaltered: return # No default whens to compare against.
+
+  when_alterations = known_when_alterations.get(cmd, {})
+  dflt_whens = {when_alterations.get(w, w) for w in dflt_whens_unaltered}
+
+  covered_whens = set()
+
+  has_problem = False
+
+  for b in bindings:
+    if b.when not in dflt_whens:
+      ctx.warn(b.line_num, f'mismatched when for command: {cmd}',
+        f'gloss: {fmt_when(b.when)}',
+        *[fmt_key_line(replace(b, when=dw)) for dw in dflt_whens],
+        sep='\n')
+      has_problem = True
+    else:
+      covered_whens.add(b.when)
+
+  if missing_whens := dflt_whens - covered_whens:
+    ctx.warn(bindings[-1].line_num, f'missing whens for command: {cmd}',
+      *[fmt_key_line(replace(bindings[0], when=dw)) for dw in missing_whens],
+      sep='\n')
+    has_problem = True
+
+  if has_problem: errL()
 
 
-def detect_unbound_cmds(all_cmds:set[str], bound_cmds:set[str], dflt_specials:defaultdict[str,set[str]],
+def detect_unbound_cmds(all_cmds:set[str], bound_cmds:set[str], dflt_specials:defaultdict[str,list[str]],
  bound_specials:defaultdict[str,set[str]]) -> None:
 
   if unbound_cmds := all_cmds - bound_cmds:
     errL('\nunbound commands:')
     for cmd in sorted(unbound_cmds):
-      write_key_line(stderr, Binding(cmd=cmd, key=''))
+      errL(fmt_key_line(Binding(cmd=cmd, key='')))
 
   for key in special_keys:
-    if unbound := dflt_specials[key] - bound_specials[key]:
+    if unbound := [cmd for cmd in dflt_specials[key] if cmd not in bound_specials[key]]:
       errL(f'\nunbound {key!r} commands:')
       for cmd in sorted(unbound):
-        write_key_line(stderr, Binding(cmd=cmd, key=key))
+        errL(fmt_key_line(Binding(cmd=cmd, key=key)))
 
   errL()
 
@@ -343,6 +383,11 @@ known_custom_when_cmds = {
 
 known_when_words = {
   'inlineChatShowingHint',
+}
+
+
+known_when_alterations:dict[str,dict[str,str]] = {
+  'workbench.action.reloadWindow': {'isDevelopment' : ''}
 }
 
 
