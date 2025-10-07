@@ -5,12 +5,9 @@
 
 # Install the user-specific portions (does not require root privileges).
 
-import site
-from os import makedirs
 from os.path import expanduser as expand_user, isdir as is_dir, isfile as is_file, join as path_join
-from shutil import copy2 as copy_file
 
-from _gloss_install_common import dst_dir, errSL, src_dir  # parses arguments, etc.
+from _gloss_install_common import dst_dir, errSL  # Parses arguments, etc.
 
 
 def main() -> None:
@@ -29,8 +26,6 @@ def main() -> None:
 
     # TODO: automatically set up zsh as well.
 
-    install_usercustomize()
-
   except OSError as e: # usually permissions.
     exit(str(e))
 
@@ -46,16 +41,6 @@ def append_line_if_missing(path, line) -> None:
   with open(path, 'a') as f:
     f.write('\n# Automatically added by gloss-install-user.py.\n')
     f.write(line)
-
-
-def install_usercustomize() -> None:
-  site_packages_dir = site.getusersitepackages()
-  name = 'usercustomize.py'
-  src = path_join(src_dir, name)
-  dst = path_join(site_packages_dir, name)
-  errSL('installing:', src, '->', dst)
-  makedirs(site_packages_dir, exist_ok=True)
-  copy_file(src, dst)
 
 
 if __name__ == '__main__': main()
