@@ -1,10 +1,31 @@
 {
-  "css.lint.important": "warning",
-  "css.validate": false,
+  "[plaintext]": {
+    "editor.colorDecorators": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false
+  },
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.formatOnType": false
+  },
+  "[scad]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnType": false
+  },
+  "css.format.enable": false,
+  "css.format.maxPreserveNewLines": 2,
+  "css.format.newlineBetweenRules": false,
+  "css.format.newlineBetweenSelectors": false,
+  "css.format.spaceAroundSelectorSeparator": true,
+  "css.lint.duplicateProperties": "warning",
+  "css.lint.emptyRules": "ignore",
   "diffEditor.ignoreTrimWhitespace": false,
   "diffEditor.renderSideBySide": false,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.acceptSuggestionOnEnter": "off",
+  "editor.accessibilitySupport": "off",
   "editor.autoClosingBrackets": "never",
   "editor.autoClosingDelete": "never",
   "editor.autoClosingQuotes": "never",
@@ -14,14 +35,16 @@
   "editor.fontFamily": "SF Mono, Menlo, monospace",
   "editor.fontSize": 12,
   "editor.formatOnPaste": false,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.formatOnType": false,
-  "editor.hover.sticky": false,
   "editor.inlineSuggest.enabled": true,
+  "editor.lightbulb.enabled": "onCode",
   "editor.minimap.enabled": false,
   "editor.minimap.maxColumn": 128,
   "editor.minimap.renderCharacters": true,
+  "editor.mouseWheelScrollSensitivity": 0.5,
   "editor.multiCursorModifier": "alt",
+  "editor.parameterHints.enabled": false,
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "none",
   "editor.roundedSelection": false,
@@ -34,20 +57,23 @@
   "editor.scrollBeyondLastLine": false,
   "editor.semanticTokenColorCustomizations": {
     "enabled": true,
-    "rules": {
-    }
+    "rules": {}
   },
+  "editor.stickyScroll.enabled": true,
   "editor.suggestOnTriggerCharacters": true,
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
   "editor.trimAutoWhitespace": true,
   "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
   "editor.wordWrap": "on",
+  "explorer.confirmDelete": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
+    "*.m": "objective-c",
     "*.pyi": "python",
     "pylintrc": "ini"
   },
+  "files.dialog.defaultPath": "/Users/gwk/work",
   "files.exclude": {
     "**/.DS_Store": true,
     "**/.git": true,
@@ -57,35 +83,38 @@
     "**/_build/release": true,
     "**/mypy_cache": true
   },
+  "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "git.openRepositoryInParentFolders": "never",
+  "github.copilot.advanced": {},
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": true,
+    "plaintext": false,
+    "scminput": false,
+    "yaml": false
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.selectedCompletionModel": "gpt-4o-copilot",
   "html.autoClosingTags": false,
   "html.completion.attributeDefaultValue": "singlequotes",
+  "html.format.enable": false,
   "html.format.wrapLineLength": 0,
   "javascript.autoClosingTags": false,
-  "jupyter.pylanceHandlesNotebooks": false,
-  "macros": {
-    "callStackDown": [
-      "workbench.debug.action.focusCallStackView",
-      "list.focusDown",
-      "list.select"
-    ],
-    "callStackUp": [
-      "workbench.debug.action.focusCallStackView",
-      "list.focusUp",
-      "list.select"
-    ]
-  },
-  "python.analysis.stubPath": "typestubs",
+  "json.format.enable": false,
+  "json.format.keepLines": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.createEnvironment.trigger": "off",
   "python.defaultInterpreterPath": "python3",
   "python.experiments.enabled": false,
-  "python.languageServer": "Pylance",
-  "python.linting.lintOnSave": false,
-  "python.linting.pylintEnabled": false,
-  "python.sortImports.path": "isort",
   "python.terminal.activateEnvironment": false,
   "python.testing.autoTestDiscoverOnSaveEnabled": false,
   "python.testing.promptToConfigure": false,
+  "scad-lsp.fmtExePath": "/opt/homebrew/bin/clang-format",
+  "scad-lsp.searchPaths": "${workspaceFolder}/scadlib",
+  "scss.format.enable": false,
+  "search.useIgnoreFiles": false,
   "settings.cycle": [
     {
       "id": "trimTrailingWhitespace",
@@ -104,9 +133,12 @@
   "terminal.integrated.drawBoldTextInBrightColors": false,
   "terminal.integrated.fontFamily": "SF Mono, Menlo, monospace",
   "terminal.integrated.lineHeight": 1,
+  "terminal.integrated.mouseWheelScrollSensitivity": 0.5,
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.tabs.enabled": false,
   "typescript.autoClosingTags": false,
   "window.newWindowDimensions": "maximized",
-  "workbench.activityBar.visible": false,
+  "workbench.activityBar.location": "top",
   "workbench.colorCustomizations": {
     "editorBracketHighlight.foreground1": "#5c79ef",
     "editorBracketHighlight.foreground2": "#d6df76",
@@ -140,8 +172,9 @@
   },
   "workbench.colorTheme": "gloss-black",
   "workbench.editor.showIcons": false,
+  "workbench.list.mouseWheelScrollSensitivity": 0.5,
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.settings.enableNaturalLanguageSearch": false,
   "workbench.sideBar.location": "left",
-  "workbench.startupEditor": "none",
-  "workbench.statusBar.visible": false
+  "workbench.startupEditor": "none"
 }
