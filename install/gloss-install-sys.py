@@ -3,28 +3,32 @@
 
 # Usage: gloss_sys_install.py [custom_dst_dir]
 
-from os import listdir as list_dir, makedirs as make_dirs, mkdir as make_dir, remove as remove_file, scandir as scan_dir
+from os import (chmod, listdir as list_dir, makedirs as make_dirs, mkdir as make_dir, remove as remove_file,
+  scandir as scan_dir, stat, umask)
 from os.path import exists as path_exists, isdir as is_dir, join as path_join, splitext as split_ext
-from shutil import copy2 as copy_file, copytree, rmtree as remove_tree
+from shutil import copyfile, copytree, rmtree as remove_tree
 from subprocess import run
 
 from _gloss_install_common import distro, dst_dir, errSL, platform, src_dir  # Parses arguments, etc.
 
 
 def main() -> None:
+  umask(0o022) # Ensure created files are world-readable and executable.
+
   try:
     if is_dir(dst_dir):
-      errSL('removing old dst_dir contents...')
+      errSL('removing old dst_dir contents…')
       for entry in scan_dir(dst_dir):
         path = entry.path
-        errSL(path)
+        errSL(' ', path)
         if is_dir(path): remove_tree(path)
         else: remove_file(path)
     else:
-      try: make_dirs(dst_dir) # Note: may fail if /usr/local is owned by root (i.e. has not been tampered with by homebrew).
+      try:
+        make_dirs(dst_dir, mode=0o755)
       except OSError as e:
         errSL(f'error: could not make installation directory: {dst_dir}; {e}.')
-        errSL(f'Please run `sudo mkdir {dst_dir} && sudo chown [username] {dst_dir}')
+        errSL(f'Please run `sudo mkdir {dst_dir} and chown as necessary.')
         exit(1)
 
     platform_txt = f'{platform}\t{distro}'  # Use a tab for default compatibility with `cut`.
@@ -32,25 +36,24 @@ def main() -> None:
     with open(path_join(dst_dir, 'platform.txt'), 'w') as f:
       print(platform_txt, file=f)
 
-    errSL('copying files to dst_dir...')
+    errSL('copying files to dst_dir…')
 
     # Copy directories.
     sub_dirs = ['zsh']
     for d in sub_dirs:
       src_subdir = path_join(src_dir, d)
       dst_subdir = path_join(dst_dir, d)
-      errSL(src_subdir, '=>', dst_subdir)
-      copytree(src_subdir, dst_subdir)
+      install_tree(src_subdir, dst_subdir)
 
+    # Copy individual files.
     for p in ['pythonstartup.py']:
       src = path_join(src_dir, p)
       dst = path_join(dst_dir, p)
-      errSL(src, '=>', dst)
-      copy_file(src, dst)
+      install_file(src, dst)
 
     errSL('installing gloss bin...')
     dst_bin_dir = path_join(dst_dir, 'bin')
-    make_dir(dst_bin_dir)
+    make_dir(dst_bin_dir, mode=0o755)
 
 
     def install_bin_dir(bin_dir:str) -> None:
@@ -65,32 +68,34 @@ def main() -> None:
         dst_path = path_join(dst_bin_dir, name)
         res = run(['which', name], capture_output=True)
         if res.returncode == 0:
-          errSL('notice:', name, 'already installed at:', res.stdout, '\n  shadowed by:', dst_path)
-
-        copy_file(src_path, dst_path)
+          errSL('notice:', name, 'already installed at:', res.stdout.decode(), '\n  shadowed by:', dst_path)
+        install_file(src_path, dst_path)
 
 
     # Install cross-platform bin dir.
-    install_bin_dir(path_join(src_dir, 'bin'))
+    cross_bin_dir = path_join(src_dir, 'bin')
+    install_bin_dir(cross_bin_dir)
 
     # Install platform-specific bin dir.
     os_bin_dir = path_join(src_dir, 'os', platform, 'bin')
     if is_dir(os_bin_dir):
       install_bin_dir(os_bin_dir)
 
-    errSL('generating additional scripts...')
+    errSL('generating additional scripts…')
 
     gen_dir       = path_join(src_dir, 'gen')
     gen_cmd       = path_join(gen_dir, 'gen-bins.py')
     bins_path     = path_join(gen_dir, 'bins.txt')
     bins_os_path  = path_join(gen_dir, 'bins-{}.txt'.format(platform))
 
-    run([gen_cmd, bins_path, dst_bin_dir]).check_returncode()
+    run([gen_cmd, bins_path, dst_bin_dir], check=True)
 
     if path_exists(bins_os_path):
-      run([gen_cmd, bins_os_path, dst_bin_dir]).check_returncode()
+      run([gen_cmd, bins_os_path, dst_bin_dir], check=True)
     else:
-      errSL('no platform specifics to gen found at:', bins_os_path)
+      errSL('no platform specifics to generate found at:', bins_os_path)
+
+    run(['chmod', '-R', '+rx', dst_bin_dir])
 
     if platform == 'mac':
       errSL('installing /etc/paths.d...')
@@ -99,12 +104,29 @@ def main() -> None:
       for src_name in paths_src_names:
         src_path = path_join(paths_src_dir, src_name)
         dst_path = path_join('/etc/paths.d', path_stem(src_name))
-        errSL(src_path, '=>', dst_path)
-        copy_file(src_path, dst_path)
+        install_file(src_path, dst_path)
 
   except OSError as e: # Usually a permissions problem.
     errSL(e)
     exit(1)
+
+
+def install_file(src:str, dst:str) -> None:
+  '''
+  Copy a file and then set a+rX permissions on the copied file.
+  '''
+  errSL(src, '=>', dst)
+  copyfile(src, dst)
+  run(['chmod', 'a+rX', dst], check=True)
+
+
+def install_tree(src:str, dst:str) -> None:
+  '''
+  Copy a directory tree and then set a+rX permissions on eveyrthing in the copied tree.
+  '''
+  errSL(src, '=>', dst)
+  copytree(src, dst, dirs_exist_ok=True)
+  run(['chmod', '-R', 'a+rX', dst], check=True)
 
 
 def path_stem(path:str) -> str: return split_ext(path)[0]

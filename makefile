@@ -23,7 +23,7 @@ help: # Summarize the targets of this makefile.
 	@GREP_COLOR="1;32" egrep --color=always '^\w[^ :]+:' makefile | sort
 
 install-sys:
-	install/gloss-install-sys.py
+	sudo install/gloss-install-sys.py
 
 install-user:
 	install/gloss-install-user.py
