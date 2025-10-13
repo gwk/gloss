@@ -3,10 +3,11 @@
 
 # generate small shell scripts from a text file.
 
-import sys
-import re
 import os.path
+import re
 import subprocess
+import sys
+
 
 skip_re = re.compile(r'\s*(#.*)?$')
 line_re = re.compile(r'(\S+):\s+(\S+)\s+([^#]+)')
