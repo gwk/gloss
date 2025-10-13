@@ -1,6 +1,4 @@
 
-# Import typing first so that other symbols take precedence.
-# This is especially desirable for the collections symbols; the typing versions are deprecated.
 import collections
 import collections.abc
 import dataclasses
@@ -18,9 +16,16 @@ import sys
 import time
 import typing
 import zoneinfo
+
+# Import typing first so that other imports take precedence, particularly the collections and collections.abc types.
+from typing import *
 from collections import *
 from collections.abc import *
+
+# Import copy symbols after dataclasses so that copy.replace is used.
 from dataclasses import *
+from copy import *
+
 from enum import *
 from functools import *
 from importlib import *
@@ -32,10 +37,10 @@ from operator import *
 from os import environ, uname
 from sys import argv, stderr, stdout
 from time import *
-from typing import *
 from zoneinfo import *
 
 
+# Pithy imports are conditional.
 try:
   import pithy
 except ImportError:
