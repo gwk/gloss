@@ -19,6 +19,20 @@
         "firstLine": "^#!.*\\bnode( +-.+)?"
       },
       {
+        "id": "just",
+        "aliases": [
+          "just",
+          "justfile"
+        ],
+        "extensions": [
+          ".just"
+        ],
+        "filenames": [
+          "justfile",
+          "Justfile"
+        ]
+      },
+      {
         "id": "m4",
         "aliases": [
           "m4",
@@ -66,6 +80,11 @@
       }
     ],
     "grammars": [
+      {
+        "language": "just",
+        "scopeName": "source.just",
+        "path": "./grammars/just.json"
+      },
       {
         "language": "m4",
         "scopeName": "source.m4",
