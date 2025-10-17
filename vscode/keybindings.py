@@ -12,7 +12,9 @@ from pithy.fs import make_dirs
 from pithy.io import errL, writeL
 from pithy.iterable import fan_by_attr
 from pithy.json import JsonDict, parse_json, write_json
+from pithy.parse import ParseError
 from pithy.path import path_dir
+from pithy.vscode.when import parse_when_text
 
 
 '''
@@ -57,6 +59,9 @@ def main() -> None:
       dflt_specials[b.key].append(b.cmd)
 
     if when := b.when:
+      try: expr = parse_when_text(text=when)
+      except ParseError as e: e.fail()
+      # TODO: use the parsed expression to split top-level Or clauses.
       dflt_binding_whens[b.cmd].add(when)
       for word in when.split():
         all_when_words.add(word.lstrip('!'))
