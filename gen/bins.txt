@@ -39,15 +39,15 @@ gds: git diff --staged "$@"
 # d: ref names
 # s: subject
 
-gl:   git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso "$@"
-gl1:  git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso -1 "$@"
+gl:  git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso "$@"
+gl1: git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso -1 "$@"
 
-glm:    git log "$@"
-glm1:   git log -1 "$@"
+glm:  git log "$@"
+glm1: git log -1 "$@"
 
 # Note: -m flag "makes the merge commits show the full diff like regular commits"; documented in git-log "Diff Formatting".
-glv:    git log --name-status --format=fuller -m "$@"
-glv1:   git log --name-status --format=fuller -m -1 "$@"
+glv:  git log --name-status --format=fuller -m "$@"
+glv1: git log --name-status --format=fuller -m -1 "$@"
 
 gls: git ls-files "$@"
 
@@ -55,8 +55,8 @@ gm: git merge "$@"
 gms: git merge --squash "$@"
 gmffo: git merge --ff-only "$@"
 
-gpull:  git pull "$@"
-gpush:  git push "$@"
+gpull: git pull "$@"
+gpush: git push "$@"
 
 gr:    git rebase "$@"
 gra:   git rebase --abort
@@ -64,9 +64,9 @@ gri:   git rebase --interactive "$@"
 grc:   git rebase --continue
 grscp: git rebase --show-current-patch
 
-gsh:    git show "$@"
-gshw:   git show --color-words "$@"
-gst:    git status --short --branch "$@"
+gsh:  git show "$@"
+gshw: git show --color-words "$@"
+gst:  git status --short --branch "$@"
 
 gtags:  git tag -l "$@"
 
