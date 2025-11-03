@@ -1852,8 +1852,6 @@
 { "key": "cmd+numpad0",           "command": "workbench.action.zoomReset" },
 { "key": "shift+cmd+m",           "command": "workbench.actions.view.problems",
                                      "when": "workbench.panel.markers.view.active" },
-{ "key": "escape",                "command": "workbench.actions.workbench.panel.output.clearFilterText",
-                                     "when": "outputFilterFocus" },
 { "key": "escape",                "command": "workbench.banner.focusBanner",
                                      "when": "bannerFocused" },
 { "key": "down",                  "command": "workbench.banner.focusNextAction",
@@ -2249,7 +2247,7 @@
 // - breadcrumbs.toggleFromEditorTitle
 // - callStack.collapse
 // - callStackWidget.goToFile
-// - changeEditorIndentation2
+// - changeEditorIndentation6
 // - chat.configureToolSets
 // - chat.enablePremiumOverages
 // - chat.inlineResourceAnchor.addFileToChat
@@ -2734,7 +2732,6 @@
 // - github.copilot.chat.debug.hideElements
 // - github.copilot.chat.debug.hideNesRequests
 // - github.copilot.chat.debug.hideTools
-// - github.copilot.chat.debug.saveCurrentMarkdown
 // - github.copilot.chat.debug.showElements
 // - github.copilot.chat.debug.showNesRequests
 // - github.copilot.chat.debug.showRawRequestBody
@@ -2759,15 +2756,12 @@
 // - github.copilot.chat.review
 // - github.copilot.chat.review.apply
 // - github.copilot.chat.review.applyAndNext
-// - github.copilot.chat.review.applyShort
 // - github.copilot.chat.review.changes
 // - github.copilot.chat.review.continueInChat
 // - github.copilot.chat.review.continueInInlineChat
-// - github.copilot.chat.review.current
 // - github.copilot.chat.review.discard
 // - github.copilot.chat.review.discardAll
 // - github.copilot.chat.review.discardAndNext
-// - github.copilot.chat.review.discardShort
 // - github.copilot.chat.review.markHelpful
 // - github.copilot.chat.review.markUnhelpful
 // - github.copilot.chat.review.next
@@ -2783,18 +2777,13 @@
 // - github.copilot.completions.enable
 // - github.copilot.completions.quotaExceeded
 // - github.copilot.completions.toggle
-// - github.copilot.createFile
 // - github.copilot.createLaunchJsonFileWithContents
-// - github.copilot.createProject
 // - github.copilot.debug.collectDiagnostics
 // - github.copilot.debug.collectWorkspaceIndexDiagnostics
 // - github.copilot.debug.generateConfiguration
 // - github.copilot.debug.generateInlineEditTests
 // - github.copilot.debug.generateSTest
 // - github.copilot.debug.inlineEdit.clearCache
-// - github.copilot.debug.inlineEdit.learnMore
-// - github.copilot.debug.inlineEdit.pickProvider
-// - github.copilot.debug.inlineEdit.reportFeedback
 // - github.copilot.debug.inlineEdit.reportNotebookNESIssue
 // - github.copilot.debug.resetVirtualToolGroups
 // - github.copilot.debug.showChatLogView
@@ -2802,7 +2791,6 @@
 // - github.copilot.debug.showOutputChannel
 // - github.copilot.debug.workbenchState
 // - github.copilot.devcontainer.generateDevContainerConfig
-// - github.copilot.executeSearch
 // - github.copilot.generate
 // - github.copilot.generateComparison
 // - github.copilot.git.generateCommitMessage
@@ -2811,7 +2799,6 @@
 // - github.copilot.mcp.viewContext7
 // - github.copilot.open.walkthrough
 // - github.copilot.openDocs
-// - github.copilot.openFile
 // - github.copilot.openLogs
 // - github.copilot.openModelPicker
 // - github.copilot.refreshToken
@@ -2825,9 +2812,6 @@
 // - github.copilot.startDebugging
 // - github.copilot.survey.signalUsage
 // - github.copilot.terminal.explainTerminalLastCommand
-// - github.copilot.terminal.fixTerminalLastCommand
-// - github.copilot.terminal.generateCommitMessage
-// - github.copilot.tests.applyMutations
 // - github.copilot.tests.fixTestFailure
 // - github.copilot.tests.fixTestFailure.fromInline
 // - github.copilot.toggleStatusMenu
@@ -2880,6 +2864,7 @@
 // - jsExcludedCallers.resetViewLocation
 // - json.clearCache
 // - json.sort
+// - json.validate
 // - keybindings.editor.clearSearchHistory
 // - keybindings.editor.copyCommandKeybindingEntry
 // - keybindings.editor.copyCommandTitle
@@ -3131,6 +3116,7 @@
 // - pylance.fixAll
 // - pylance.fixupCopilotDocstringOutput
 // - pylance.foldDocstrings
+// - pylance.generateCopilotSummary
 // - pylance.generateDocstring
 // - pylance.getAllDocstringRanges
 // - pylance.getAutoImports
@@ -3440,6 +3426,7 @@
 // - typescript.restartTsServer
 // - typescript.selectTypeScriptVersion
 // - typescript.sortImports
+// - typescript.tsserverRequest
 // - update.check
 // - update.checkForUpdate
 // - update.checking
@@ -3815,10 +3802,12 @@
 // - workbench.action.output.show.shared
 // - workbench.action.output.show.tasks
 // - workbench.action.output.show.terminal
+// - workbench.action.output.show.textModelChanges
 // - workbench.action.output.show.userDataSync
 // - workbench.action.output.show.vscode.git.Git
 // - workbench.action.output.show.vscode.github-authentication.GitHub Authentication
 // - workbench.action.output.show.vscode.github.GitHub
+// - workbench.action.output.show.vscode.json-language-features.JSON Language Server
 // - workbench.action.output.show.vscode.microsoft-authentication.Microsoft Authentication
 // - workbench.action.pauseSocketWriting
 // - workbench.action.populateFileFromSnippet
@@ -3859,6 +3848,13 @@
 // - workbench.action.restartExtensionHost
 // - workbench.action.restoreAuxiliaryBar
 // - workbench.action.restoreEditorsToMainWindow
+// - workbench.action.revealPathInFinder1
+// - workbench.action.revealPathInFinder2
+// - workbench.action.revealPathInFinder3
+// - workbench.action.revealPathInFinder4
+// - workbench.action.revealPathInFinder5
+// - workbench.action.revealPathInFinder6
+// - workbench.action.revealPathInFinder7
 // - workbench.action.revealUserDataFolder
 // - workbench.action.revertAndCloseActiveEditor
 // - workbench.action.saveActiveLogOutputAs
@@ -4033,6 +4029,7 @@
 // - workbench.actions.workbench.panel.markers.view.toggleExcludedFiles
 // - workbench.actions.workbench.panel.markers.view.toggleInfos
 // - workbench.actions.workbench.panel.markers.view.toggleWarnings
+// - workbench.actions.workbench.panel.output.clearFilterText
 // - workbench.actions.workbench.panel.output.toggle.debug
 // - workbench.actions.workbench.panel.output.toggle.error
 // - workbench.actions.workbench.panel.output.toggle.info
