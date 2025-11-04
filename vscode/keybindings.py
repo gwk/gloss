@@ -378,14 +378,6 @@ key_validator = re.compile(r'''(?x)
 ''')
 
 
-known_custom_when_cmds = {
-  'undo',
-  'editor.action.acceptCursorTabSuggestion',
-  'workbench.action.reloadWindow',
-  'inlineChat.hideHint',
-}
-
-
 known_when_words = {
   'inlineChatShowingHint',
 }
