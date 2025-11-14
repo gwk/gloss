@@ -8,6 +8,7 @@ from json import JSONDecodeError
 from sys import argv
 from typing import Any, Iterable
 
+from pithy.ansi import RST, TXT_C, TXT_G, TXT_R
 from pithy.fs import make_dirs
 from pithy.io import errL, writeL
 from pithy.iterable import fan_by_attr
@@ -211,7 +212,7 @@ class Ctx:
   bound_cmds: set[str] = field(default_factory=set)
 
   def _msg(self, line:int, severity:str, item:Any, *items:Any, sep=' '):
-    errL(f'{self.bindings_path}:{line}: {severity}: {item}', *items, sep=sep)
+    errL(f'{TXT_C}{self.bindings_path}:{line}{RST}: {severity}: {item}', *items, sep=sep)
 
   def warn(self, line:int, item:Any, *items:Any, sep=' '):
     self._msg(line, 'warning', item, *items, sep=sep)
@@ -318,7 +319,7 @@ def validate_whens_list(ctx:Ctx, cmd:str, bindings:list[Binding]) -> None:
   if not any(b.key for b in bindings): return # No bound keys.
 
   dflt_whens_unaltered = ctx.dflt_binding_whens.get(cmd, set())
-  if not dflt_whens_unaltered: return # No default whens to compare against.
+  #if not dflt_whens_unaltered: return # No default whens to compare against.
 
   when_alterations = known_when_alterations.get(cmd, {})
   dflt_whens = {when_alterations.get(w, w) for w in dflt_whens_unaltered}
@@ -328,10 +329,10 @@ def validate_whens_list(ctx:Ctx, cmd:str, bindings:list[Binding]) -> None:
   has_problem = False
 
   for b in bindings:
-    if b.when not in dflt_whens:
+    if (b.when not in dflt_whens) and not (b.when == '' and not dflt_whens):
       ctx.warn(b.line_num, f'mismatched when for command: {cmd}',
-        f'gloss: {fmt_when(b.when)}',
-        *[fmt_key_line(replace(b, when=dw)) for dw in dflt_whens],
+        f'gloss: {TXT_R}{fmt_when(b.when)}{RST}',
+        *[f'{TXT_G}{fmt_key_line(replace(b, when=dw))}{RST}' for dw in dflt_whens],
         sep='\n')
       has_problem = True
     else:
@@ -339,7 +340,7 @@ def validate_whens_list(ctx:Ctx, cmd:str, bindings:list[Binding]) -> None:
 
   if missing_whens := dflt_whens - covered_whens:
     ctx.warn(bindings[-1].line_num, f'missing whens for command: {cmd}',
-      *[fmt_key_line(replace(bindings[0], when=dw)) for dw in missing_whens],
+      *[f'{TXT_G}{fmt_key_line(replace(bindings[0], when=dw))}{RST}' for dw in missing_whens],
       sep='\n')
     has_problem = True
 
