@@ -350,13 +350,13 @@ def validate_whens_list(ctx:Ctx, cmd:str, bindings:list[Binding]) -> None:
 def detect_unbound_cmds(all_cmds:set[str], bound_cmds:set[str], dflt_specials:defaultdict[str,list[str]],
  bound_specials:defaultdict[str,set[str]]) -> None:
 
-  if unbound_cmds := all_cmds - bound_cmds:
+  if unbound_cmds := all_cmds - bound_cmds - ignored_commands:
     errL('\nunbound commands:')
     for cmd in sorted(unbound_cmds):
       errL(fmt_key_line(Binding(cmd=cmd, key='')))
 
   for key in special_keys:
-    if unbound := [cmd for cmd in dflt_specials[key] if cmd not in bound_specials[key]]:
+    if unbound := [cmd for cmd in dflt_specials[key] if cmd not in bound_specials[key] and cmd not in ignored_special_commands.get(key, set())]:
       errL(f'\nunbound {key!r} commands:')
       for cmd in sorted(unbound):
         errL(fmt_key_line(Binding(cmd=cmd, key=key)))
@@ -392,5 +392,17 @@ known_when_alterations:dict[str,dict[str,str]] = {
 known_extension_cmds = {
   'settings.cycle.trimTrailingWhitespace',
 }
+
+
+ignored_commands = {
+  'workbench.action.output.show.ms-python.python.Python Language Server'
+}
+
+ignored_special_commands = {
+  'enter': {
+    'workbench.action.terminal.findPrevious',
+  }
+}
+
 
 main()

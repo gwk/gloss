@@ -926,7 +926,7 @@
 { "key": "cmd+down",              "command": "inlineChat.viewInChat",
                                      "when": "inChatInput && inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook' || inChatInput && inlineChatHasProvider && inlineChatVisible && activeEditor != 'workbench.editor.notebook'" },
 { "key": "enter",                 "command": "inlineChat2.keep",
-                                     "when": "chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && chatLocation == 'editor' && activeEditor != 'workbench.editor.notebook' || chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && activeEditor == 'workbench.editor.notebook' && chatLocation == 'editor'" },
+                                     "when": "chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && activeEditor != 'workbench.editor.notebook' || chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && activeEditor == 'workbench.editor.notebook'" },
 { "key": "cmd+up",                "command": "interactive.history.focus",
                                      "when": "isCompositeNotebook && isLinux && !notebookEditorFocused || isCompositeNotebook && isWindows && !notebookEditorFocused" },
 { "key": "down",                  "command": "interactive.history.next",
@@ -2031,7 +2031,7 @@
 { "key": "cmd+enter",             "command": "inlineChat.acceptChanges",
                                      "when": "inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook' || inlineChatHasProvider && inlineChatVisible && activeEditor != 'workbench.editor.notebook'" },
 { "key": "cmd+enter",             "command": "inlineChat2.keep",
-                                     "when": "chatEdits.hasEditorModifications && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && chatLocation == 'editor' && activeEditor != 'workbench.editor.notebook' || chatEdits.hasEditorModifications && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && activeEditor == 'workbench.editor.notebook' && chatLocation == 'editor'" },
+                                     "when": "chatEdits.hasEditorModifications && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && activeEditor != 'workbench.editor.notebook' || chatEdits.hasEditorModifications && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && activeEditor == 'workbench.editor.notebook'" },
 { "key": "end",                   "command": "lastCompressedFolder",
                                      "when": "explorerViewletCompressedFocus && filesExplorerFocus && foldersViewVisible && !explorerViewletCompressedLastFocus && !inputFocus" },
 { "key": "shift+cmd+t",           "command": "mergeEditor.toggleBetweenInputs",
@@ -2232,7 +2232,7 @@
 // - breadcrumbs.toggleFromEditorTitle
 // - callStack.collapse
 // - callStackWidget.goToFile
-// - changeEditorIndentation2
+// - changeEditorIndentation1
 // - chat.configureToolSets
 // - chat.enablePremiumOverages
 // - chat.inlineResourceAnchor.addFileToChat
@@ -2260,6 +2260,7 @@
 // - cleanSearchEditorState
 // - closeReferenceSearchEditor
 // - codelens.showLensesInCurrentLine
+// - codereferencing.showOutputPane
 // - codex-placeholder.focus
 // - codex-placeholder.resetViewLocation
 // - columnSelect
@@ -3126,35 +3127,59 @@
 // - problems.action.showMultilineMessage
 // - problems.action.showSinglelineMessage
 // - pylance.addToExtraPaths
+// - pylance.changeSpelling
+// - pylance.completionAccepted
+// - pylance.convertImportFormat
+// - pylance.diagnosticRefactor
 // - pylance.dumpCachedTypes
 // - pylance.dumpCodeFlowGraph
 // - pylance.dumpNodes
 // - pylance.dumpTokens
 // - pylance.dumpTypes
+// - pylance.executedClientCommand
+// - pylance.extractMethod
 // - pylance.extractMethodWithRename
+// - pylance.extractVariable
 // - pylance.extractVariableWithRename
 // - pylance.findMatchingEnv
+// - pylance.fixAll
+// - pylance.fixupCopilotDocstringOutput
 // - pylance.foldDocstrings
+// - pylance.generateCopilotSummary
+// - pylance.generateDocstring
+// - pylance.getAllDocstringRanges
+// - pylance.getAutoImports
+// - pylance.getSourceFiles
 // - pylance.gotoOutputChannel
+// - pylance.implementAllAbstractClasses
+// - pylance.implementAllAbstractClassesWithCopilot
+// - pylance.implementUsingCopilot
 // - pylance.indexing.clearPersistedIndices
 // - pylance.installMissingPackages
 // - pylance.learnMoreAboutImportResolution
 // - pylance.logging.start
 // - pylance.logging.stop
+// - pylance.moveSymbol
 // - pylance.moveSymbolWithFileSelection
 // - pylance.openConfig
 // - pylance.openUri
 // - pylance.profiling.start
 // - pylance.profiling.stop
+// - pylance.pytest.addAllFixtureTypeAnnotations
+// - pylance.pytest.addFixtureTypeAnnotation
 // - pylance.reportIssue
 // - pylance.runCommands
 // - pylance.runCurrentFileInSandbox
 // - pylance.searchImports
+// - pylance.server.runCurrentFileInSandbox
 // - pylance.setAutoImportCompletions
 // - pylance.showTypeCheckingPicker
 // - pylance.triggerParameterHints
 // - pylance.troubleshootMissingImports
 // - pylance.unfoldDocstrings
+// - pyright.createtypestub
+// - pyright.dumpFileDebugInfo
+// - pyright.organizeimports
 // - python-envs.addPythonProject
 // - python-envs.addPythonProjectGivenResource
 // - python-envs.clearCache
@@ -3185,28 +3210,37 @@
 // - python-projects.focus
 // - python-projects.resetViewLocation
 // - python._loadLanguageServerExtension
+// - python.addImport
+// - python.addOptionalForParam
 // - python.analysis.restartLanguageServer
 // - python.clearCacheAndReload
 // - python.clearWorkspaceInterpreter
 // - python.configureTests
+// - python.copilotSetupTests
 // - python.copyTestId
 // - python.createEnvironment
 // - python.createEnvironment-button
 // - python.createEnvironmentCheck
 // - python.createNewFile
 // - python.createTerminal
+// - python.createTypeStub
 // - python.debugInTerminal
 // - python.execInDedicatedTerminal
 // - python.execInTerminal
 // - python.execInTerminal-icon
 // - python.execSelectionInDjangoShell
+// - python.getRecommendedEnvironment
 // - python.installJupyter
 // - python.installPython
 // - python.installPythonOnLinux
 // - python.installPythonOnMac
+// - python.intellicode.completionItemSelected
+// - python.intellicode.loadLanguageServerExtension
 // - python.interpreterPath
+// - python.orderImports
 // - python.pickLocalProcess
 // - python.reloadVSCode
+// - python.removeUnusedImport
 // - python.reportIssue
 // - python.setInterpreter
 // - python.startNativeREPL
@@ -3789,11 +3823,13 @@
 // - workbench.action.output.remove
 // - workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat
 // - workbench.action.output.show.GitHub.copilot.GitHub Copilot
+// - workbench.action.output.show.extension-output-GitHub.copilot-#1-GitHub Copilot Log (Code References)
 // - workbench.action.output.show.extension-output-hoovercj.vscode-settings-cycler-#1-Settings Cycler
 // - workbench.action.output.show.extension-output-matangover.mypy-#1-Mypy
 // - workbench.action.output.show.exthost
 // - workbench.action.output.show.main
 // - workbench.action.output.show.ms-python.python.Python
+// - workbench.action.output.show.ms-python.python.Python Language Server
 // - workbench.action.output.show.ms-python.python.Python Locator
 // - workbench.action.output.show.ptyhost
 // - workbench.action.output.show.remoteTunnelService

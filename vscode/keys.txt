@@ -36,7 +36,7 @@ callStackWidget.goToFile
 cancelLinkedEditingInput                                                        escape          when LinkedEditingInputVisible && editorTextFocus
 cancelRenameInput                                                               escape          when editorFocus && renameInputVisible
 cancelSelection                                                                 escape          when editorHasSelection && textInputFocus
-changeEditorIndentation2
+changeEditorIndentation1
 chat.action.focus
 chat.configureToolSets
 chat.enablePremiumOverages
@@ -87,6 +87,7 @@ closeReferenceSearch                                                            
 closeReferenceSearchEditor
 closeReplaceInFilesWidget                                                       escape          when replaceInputBoxFocus && searchViewletVisible
 codelens.showLensesInCurrentLine
+codereferencing.showOutputPane
 codex-placeholder.focus
 codex-placeholder.resetViewLocation
 columnSelect
@@ -296,7 +297,7 @@ editor.action.diffReview.prev
 editor.action.dirtydiff.next
 editor.action.dirtydiff.previous
 editor.action.duplicateSelection
-editor.action.extensioneditor.findNext
+editor.action.extensioneditor.findNext                                          enter           when webviewFindWidgetFocused && !editorFocus && activeEditor == 'workbench.editor.extension'
 editor.action.extensioneditor.findPrevious
 editor.action.extensioneditor.showfind
 editor.action.findReferences
@@ -377,6 +378,7 @@ editor.action.nextCommentingRange
 editor.action.nextCommentThreadAction
 editor.action.nextMatchFindAction                                               cmd+g           when editorFocus
 editor.action.nextMatchFindAction                                               cmd+g           when editorFocus && findInputFocussed
+editor.action.nextMatchFindAction                                               enter           when editorFocus && findInputFocussed
 editor.action.nextSelectionMatchFindAction
 editor.action.openDeclarationToTheSide
 editor.action.openLink
@@ -409,6 +411,7 @@ editor.action.rename
 editor.action.replaceAll
 editor.action.replaceOne                                                        cmd+r           when editorFocus && findWidgetVisible
 editor.action.replaceOne                                                        cmd+r           when editorFocus && findWidgetVisible && replaceInputFocussed
+editor.action.replaceOne                                                        enter           when editorFocus && findWidgetVisible && replaceInputFocussed
 editor.action.resetSuggestSize
 editor.action.revealDeclaration
 editor.action.revealDefinition
@@ -468,7 +471,7 @@ editor.action.unicodeHighlight.disableHighlightingOfAmbiguousCharacters
 editor.action.unicodeHighlight.disableHighlightingOfInvisibleCharacters
 editor.action.unicodeHighlight.disableHighlightingOfNonBasicAsciiCharacters
 editor.action.unicodeHighlight.showExcludeOptions
-editor.action.webvieweditor.findNext
+editor.action.webvieweditor.findNext                                            enter           when webviewFindWidgetFocused && !editorFocus && activeEditor == 'WebviewEditor'
 editor.action.webvieweditor.findPrevious
 editor.action.webvieweditor.hideFind                                            escape          when webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'
 editor.action.webvieweditor.showFind                                            cmd+f           when webviewFindWidgetEnabled && !editorFocus && activeEditor == 'WebviewEditor'
@@ -1024,8 +1027,8 @@ inlineChat.toggleDiff
 inlineChat.unstash
 inlineChat.viewInChat
 inlineChat2.close                                                               escape          when chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && activeEditor != 'workbench.editor.notebook' || chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && activeEditor == 'workbench.editor.notebook' || editorFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.hasEditorModifications && activeEditor != 'workbench.editor.notebook' || editorFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.hasEditorModifications && activeEditor == 'workbench.editor.notebook'
-inlineChat2.keep                                                                enter           when chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && chatLocation == 'editor' && activeEditor != 'workbench.editor.notebook' || chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && activeEditor == 'workbench.editor.notebook' && chatLocation == 'editor'
-inlineChat2.keep                                                                enter           when chatEdits.hasEditorModifications && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && chatLocation == 'editor' && activeEditor != 'workbench.editor.notebook' || chatEdits.hasEditorModifications && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && activeEditor == 'workbench.editor.notebook' && chatLocation == 'editor'
+inlineChat2.keep                                                                enter           when chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && activeEditor != 'workbench.editor.notebook' || chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && activeEditor == 'workbench.editor.notebook'
+inlineChat2.keep                                                                enter           when chatEdits.hasEditorModifications && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && activeEditor != 'workbench.editor.notebook' || chatEdits.hasEditorModifications && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && activeEditor == 'workbench.editor.notebook'
 insertBestCompletion                                                            tab             when atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
 insertNextSuggestion                                                            tab             when hasOtherSuggestions && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
 insertPrevSuggestion
@@ -1426,35 +1429,59 @@ problems.action.showMultilineMessage
 problems.action.showQuickFixes
 problems.action.showSinglelineMessage
 pylance.addToExtraPaths
+pylance.changeSpelling
+pylance.completionAccepted
+pylance.convertImportFormat
+pylance.diagnosticRefactor
 pylance.dumpCachedTypes
 pylance.dumpCodeFlowGraph
 pylance.dumpNodes
 pylance.dumpTokens
 pylance.dumpTypes
+pylance.executedClientCommand
+pylance.extractMethod
 pylance.extractMethodWithRename
+pylance.extractVariable
 pylance.extractVariableWithRename
 pylance.findMatchingEnv
+pylance.fixAll
+pylance.fixupCopilotDocstringOutput
 pylance.foldDocstrings
+pylance.generateCopilotSummary
+pylance.generateDocstring
+pylance.getAllDocstringRanges
+pylance.getAutoImports
+pylance.getSourceFiles
 pylance.gotoOutputChannel
+pylance.implementAllAbstractClasses
+pylance.implementAllAbstractClassesWithCopilot
+pylance.implementUsingCopilot
 pylance.indexing.clearPersistedIndices
 pylance.installMissingPackages
 pylance.learnMoreAboutImportResolution
 pylance.logging.start
 pylance.logging.stop
+pylance.moveSymbol
 pylance.moveSymbolWithFileSelection
 pylance.openConfig
 pylance.openUri
 pylance.profiling.start
 pylance.profiling.stop
+pylance.pytest.addAllFixtureTypeAnnotations
+pylance.pytest.addFixtureTypeAnnotation
 pylance.reportIssue
 pylance.runCommands
 pylance.runCurrentFileInSandbox
 pylance.searchImports
+pylance.server.runCurrentFileInSandbox
 pylance.setAutoImportCompletions
 pylance.showTypeCheckingPicker
 pylance.triggerParameterHints
 pylance.troubleshootMissingImports
 pylance.unfoldDocstrings
+pyright.createtypestub
+pyright.dumpFileDebugInfo
+pyright.organizeimports
 python-envs.addPythonProject
 python-envs.addPythonProjectGivenResource
 python-envs.clearCache
@@ -1485,16 +1512,20 @@ python-envs.uninstallPackage
 python-projects.focus
 python-projects.resetViewLocation
 python._loadLanguageServerExtension
+python.addImport
+python.addOptionalForParam
 python.analysis.restartLanguageServer
 python.clearCacheAndReload
 python.clearWorkspaceInterpreter
 python.configureTests
+python.copilotSetupTests
 python.copyTestId
 python.createEnvironment
 python.createEnvironment-button
 python.createEnvironmentCheck
 python.createNewFile
 python.createTerminal
+python.createTypeStub
 python.debugInTerminal
 python.execInDedicatedTerminal
 python.execInInteractiveWindowEnter                                             enter           when isCompositeNotebook && !config.interactiveWindow.executeWithShiftEnter && !inlineChatFocused && !notebookCellListFocused && activeEditor == 'workbench.editor.interactive'
@@ -1504,13 +1535,18 @@ python.execInTerminal
 python.execInTerminal-icon
 python.execSelectionInDjangoShell
 python.execSelectionInTerminal
+python.getRecommendedEnvironment
 python.installJupyter
 python.installPython
 python.installPythonOnLinux
 python.installPythonOnMac
+python.intellicode.completionItemSelected
+python.intellicode.loadLanguageServerExtension
 python.interpreterPath
+python.orderImports
 python.pickLocalProcess
 python.reloadVSCode
+python.removeUnusedImport
 python.reportIssue
 python.setInterpreter
 python.startNativeREPL
@@ -2376,6 +2412,7 @@ workbench.action.output.activeOutputLogLevel.5
 workbench.action.output.activeOutputLogLevelDefault
 workbench.action.output.addCompoundLog
 workbench.action.output.remove
+workbench.action.output.show.extension-output-GitHub.copilot
 workbench.action.output.show.extension-output-hoovercj.vscode-settings-cycler
 workbench.action.output.show.extension-output-matangover.mypy
 workbench.action.output.show.exthost
