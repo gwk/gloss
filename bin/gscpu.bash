@@ -24,7 +24,7 @@ if git show-ref --verify --quiet refs/heads/"$branch"; then
 else
   # Create the new branch.
   set -x
-  git switch -c "$branch"
+  git switch --create "$branch"
 fi
 
-git push -u "$remote" "$branch"
+git push --set-upstream "$remote" "$branch"
