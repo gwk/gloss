@@ -83,17 +83,17 @@ def main() -> None:
 
     errSL('generating additional scripts…')
 
-    gen_dir       = path_join(src_dir, 'gen')
-    gen_cmd       = path_join(gen_dir, 'gen-bins.py')
-    bins_path     = path_join(gen_dir, 'bins.txt')
-    bins_os_path  = path_join(gen_dir, 'bins-{}.txt'.format(platform))
+    gen_dir = path_join(src_dir, 'gen')
+    gen_cmd = path_join(gen_dir, 'gen-bins.py')
+    bins_path = path_join(gen_dir, 'bins.txt')
+    bins_platform_path = path_join(gen_dir, f'bins-{platform}.txt')
 
     run([gen_cmd, bins_path, dst_bin_dir], check=True)
 
-    if path_exists(bins_os_path):
-      run([gen_cmd, bins_os_path, dst_bin_dir], check=True)
+    if path_exists(bins_platform_path):
+      run([gen_cmd, bins_platform_path, dst_bin_dir], check=True)
     else:
-      errSL('no platform specifics to generate found at:', bins_os_path)
+      errSL('no platform specifics to generate found at:', bins_platform_path)
 
     run(['chmod', '-R', '+rx', dst_bin_dir])
 
