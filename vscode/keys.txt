@@ -1,9 +1,3 @@
-~remote.forwardedPorts.focus
-~remote.forwardedPorts.removeView
-~remote.forwardedPorts.resetViewLocation
-~remote.forwardedPorts.toggleVisibility
-~remote.forwardedPortsContainer
-~remote.forwardedPortsContainer.resetViewContainerLocation
 acceptAlternativeSelectedSuggestion
 acceptRenameInput                                                               enter           when editorFocus && renameInputVisible && !isComposing
 acceptRenameInputWithPreview
@@ -48,7 +42,7 @@ callStackWidget.goToFile
 cancelLinkedEditingInput                                                        escape          when LinkedEditingInputVisible && editorTextFocus
 cancelRenameInput                                                               escape          when editorFocus && renameInputVisible
 cancelSelection                                                                 escape          when editorHasSelection && textInputFocus
-changeEditorIndentation1
+changeEditorIndentation5
 chat.action.focus
 chat.configureToolSets
 chat.enablePremiumOverages
@@ -59,7 +53,9 @@ chat.inlineSymbolAnchor.goToDefinition
 chat.inlineSymbolAnchor.goToImplementations
 chat.inlineSymbolAnchor.goToReferences
 chat.inlineSymbolAnchor.goToTypeDefinitions
-chat.installRecommendation.openai.chatgpt
+chat.installRecommendation.github.copilot-chat.cli
+chat.installRecommendation.github.copilot-chat.cloud
+chat.installRecommendation.openai.chatgpt.codex
 chat.internal.explain
 chat.internal.fix
 chat.internal.generateDocs
@@ -232,10 +228,7 @@ debug.toggleReplIgnoreFocus
 debugpy.clearCacheAndReload
 debugpy.debugInTerminal
 debugpy.debugUsingLaunchConfig
-debugpy.pickArgs
-debugpy.pickLocalProcess
 debugpy.reportIssue
-debugpy.SelectAndInsertDebugConfiguration
 debugpy.viewOutput
 decreaseSearchEditorContextLines
 default:compositionEnd
@@ -1061,7 +1054,6 @@ ipynb.cleanInvalidImageAttachment
 ipynb.newUntitledIpynb
 ipynb.openIpynbInNotebookEditor
 isort.restart
-isort.showLogs
 javascript.goToProjectConfig
 javascript.reloadProjects
 javascript.removeUnusedImports
@@ -1551,7 +1543,6 @@ python.execInTerminal
 python.execInTerminal-icon
 python.execSelectionInDjangoShell
 python.execSelectionInTerminal
-python.getDebugpyPackagePath
 python.getRecommendedEnvironment
 python.installJupyter
 python.installPython
@@ -2449,8 +2440,6 @@ workbench.action.output.show.extension-output-matangover.mypy
 workbench.action.output.show.exthost
 workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat:
 workbench.action.output.show.main
-workbench.action.output.show.ms-python.debugpy.Python Debugger:
-workbench.action.output.show.ms-python.isort.isort
 workbench.action.output.show.ms-python.python.Python
 workbench.action.output.show.ms-python.python.Python Locator:
 workbench.action.output.show.ptyhost
@@ -2459,7 +2448,6 @@ workbench.action.output.show.rendererLog
 workbench.action.output.show.shared
 workbench.action.output.show.tasks
 workbench.action.output.show.terminal
-workbench.action.output.show.textModelChanges
 workbench.action.output.show.userDataSync
 workbench.action.output.show.vscode.git.Git
 workbench.action.output.show.vscode.github-authentication.GitHub Authentication:
@@ -2529,15 +2517,6 @@ workbench.action.resetViewLocations
 workbench.action.restartExtensionHost
 workbench.action.restoreAuxiliaryBar
 workbench.action.restoreEditorsToMainWindow
-workbench.action.revealPathInFinder1
-workbench.action.revealPathInFinder2
-workbench.action.revealPathInFinder3
-workbench.action.revealPathInFinder4
-workbench.action.revealPathInFinder5
-workbench.action.revealPathInFinder6
-workbench.action.revealPathInFinder7
-workbench.action.revealPathInFinder8
-workbench.action.revealPathInFinder9
 workbench.action.revealUserDataFolder
 workbench.action.revertAndCloseActiveEditor
 workbench.action.saveActiveLogOutputAs
@@ -2852,11 +2831,15 @@ workbench.debug.action.toggleRepl                                               
 workbench.debug.breakPointsView.removeView
 workbench.debug.breakPointsView.resetViewLocation
 workbench.debug.breakPointsView.toggleVisibility
+workbench.debug.callStackView.removeView
 workbench.debug.callStackView.resetViewLocation
+workbench.debug.callStackView.toggleVisibility
 workbench.debug.loadedScriptsView.focus
 workbench.debug.loadedScriptsView.resetViewLocation
 workbench.debug.panel.action.clearReplAction
+workbench.debug.variablesView.removeView
 workbench.debug.variablesView.resetViewLocation
+workbench.debug.variablesView.toggleVisibility
 workbench.debug.viewlet.action.addDataBreakpointOnAddress
 workbench.debug.viewlet.action.addFunctionBreakpointAction
 workbench.debug.viewlet.action.addWatchExpression
@@ -2871,11 +2854,11 @@ workbench.debug.viewlet.action.removeAllWatchExpressions
 workbench.debug.viewlet.action.removeBreakpoint
 workbench.debug.viewlet.action.toggleBreakpointsActivatedAction
 workbench.debug.viewlet.action.viewMemory
+workbench.debug.watchExpressionsView.removeView
 workbench.debug.watchExpressionsView.resetViewLocation
+workbench.debug.watchExpressionsView.toggleVisibility
 workbench.debug.welcome.focus
-workbench.debug.welcome.removeView
 workbench.debug.welcome.resetViewLocation
-workbench.debug.welcome.toggleVisibility
 workbench.edit.chat.cancel                                                      escape          when chatSessionCurrentlyEditing && inChatInput && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible || chatSessionCurrentlyEditingInput && inChatInput && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible
 workbench.editSessions.actions.delete
 workbench.editSessions.actions.deleteAll
@@ -3222,32 +3205,5 @@ workbench.views.extensions.untrustedPartiallySupportedExtensions.focus
 workbench.views.extensions.untrustedPartiallySupportedExtensions.resetViewLocation
 workbench.views.extensions.untrustedUnsupportedExtensions.focus
 workbench.views.extensions.untrustedUnsupportedExtensions.resetViewLocation
+workbench.views.extensions.virtualPartiallySupportedExtens
 workbench.views.extensions.virtualPartiallySupportedExtensions.focus
-workbench.views.extensions.virtualPartiallySupportedExtensions.resetViewLocation
-workbench.views.extensions.virtualUnsupportedExtensions.focus
-workbench.views.extensions.virtualUnsupportedExtensions.resetViewLocation
-workbench.views.extensions.workspaceRecommendations.focus
-workbench.views.extensions.workspaceRecommendations.resetViewLocation
-workbench.views.mcp.default.marketplace.focus
-workbench.views.mcp.default.marketplace.resetViewLocation
-workbench.views.mcp.default.welcomeView.focus
-workbench.views.mcp.default.welcomeView.resetViewLocation
-workbench.views.mcp.installed.focus
-workbench.views.mcp.installed.resetViewLocation
-workbench.views.mcp.marketplace.focus
-workbench.views.mcp.marketplace.resetViewLocation
-workbench.views.mcp.welcomeView.focus
-workbench.views.mcp.welcomeView.resetViewLocation
-workbench.views.service.auxiliarybar.516f2017-d7b8-4011-889d-de48acd201a8.resetViewContainerLocation
-workbench.views.sync.conflicts.focus
-workbench.views.sync.conflicts.resetViewLocation
-workbench.views.sync.externalActivity.focus
-workbench.views.sync.externalActivity.resetViewLocation
-workbench.views.sync.localActivity.focus
-workbench.views.sync.localActivity.resetViewLocation
-workbench.views.sync.machines.focus
-workbench.views.sync.machines.resetViewLocation
-workbench.views.sync.remoteActivity.focus
-workbench.views.sync.remoteActivity.resetViewLocation
-workbench.views.sync.troubleshoot.focus
-workbench.views.sync.troubleshoot.resetViewLocation
