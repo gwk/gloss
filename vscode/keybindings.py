@@ -51,8 +51,6 @@ def main() -> None:
 
   all_cmds = set(b.cmd for b in defaults) | set(known_extension_cmds)
 
-  nullifications = [nullification_binding(b) for b in defaults if b.key]
-
   dflt_specials = defaultdict[str,list[str]](list) # Maps special key to commands bound to it. Use lists to preserve order.
   dflt_binding_whens = defaultdict[str,set[str]](set) # Maps command name to list of default 'when' clauses.
   all_when_words = set[str]()
@@ -96,9 +94,8 @@ def main() -> None:
   detect_unbound_cmds(all_cmds, ctx.bound_cmds, dflt_specials, bound_specials)
 
   # Output the custom bindings and reference files.
-
+  write_bindings_json(out_path, defaults, bindings)
   write_keys_txt(clean_out_path, bindings)
-  write_bindings_json(out_path, nullifications, bindings)
   write_keys_ref(keys_ref_out_path, bindings)
 
 
@@ -228,13 +225,15 @@ class Ctx:
     exit(1)
 
 
-def write_bindings_json(path:str, nullifications:list[JsonDict], bindings:list[Binding]) -> None:
+def write_bindings_json(path:str, defaults:list[Binding], bindings:list[Binding]) -> None:
   '''
   Write the bindings to a json file.
-  Note: we omit all tab bindings because of weird problems with Cursor.
+  Note: we omit all tab bindings because changing them breaks things.
   '''
-  output_bindings = [b.json() for b in bindings if b.key and b.key != 'tab']
-  with open(path, 'w') as f: write_json(f, output_bindings)
+  nullifications = [nullification_binding(db) for db in defaults if db.key and db.key != 'tab']
+  custom_bindings = [b.json() for b in bindings if b.key if b.key != 'tab']
+  all_bindings = nullifications + custom_bindings
+  with open(path, 'w') as f: write_json(f, all_bindings)
 
 
 def write_keys_ref(path:str, bindings:list[Binding]) -> None:
