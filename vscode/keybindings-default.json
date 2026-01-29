@@ -2323,9 +2323,12 @@
 // - debug.startFromConfig
 // - debug.toggleExceptionBreakpoints
 // - debug.toggleReplIgnoreFocus
+// - debugpy.SelectAndInsertDebugConfiguration
 // - debugpy.clearCacheAndReload
 // - debugpy.debugInTerminal
 // - debugpy.debugUsingLaunchConfig
+// - debugpy.pickArgs
+// - debugpy.pickLocalProcess
 // - debugpy.reportIssue
 // - debugpy.viewOutput
 // - default:compositionEnd
@@ -2897,6 +2900,7 @@
 // - ipynb.newUntitledIpynb
 // - ipynb.openIpynbInNotebookEditor
 // - isort.restart
+// - isort.showLogs
 // - javascript.goToProjectConfig
 // - javascript.reloadProjects
 // - javascript.removeUnusedImports
@@ -3089,15 +3093,20 @@
 // - notifications.toggleDoNotDisturbModeBySource
 // - notifications.toggleList
 // - npm.debugScript
+// - npm.debugScriptFromHover
 // - npm.focus
 // - npm.openScript
 // - npm.packageManager
 // - npm.refresh
+// - npm.removeView
 // - npm.resetViewLocation
 // - npm.runInstall
 // - npm.runScript
 // - npm.runScriptFromFolder
+// - npm.runScriptFromHover
 // - npm.runSelectedScript
+// - npm.scriptRunner
+// - npm.toggleVisibility
 // - openEditors.closeAll
 // - openEditors.newUntitledFile
 // - openInIntegratedTerminal
@@ -3248,6 +3257,7 @@
 // - python.execInTerminal
 // - python.execInTerminal-icon
 // - python.execSelectionInDjangoShell
+// - python.getDebugpyPackagePath
 // - python.getRecommendedEnvironment
 // - python.installJupyter
 // - python.installPython
@@ -3856,6 +3866,8 @@
 // - workbench.action.output.show.extension-output-matangover.mypy-#1-Mypy
 // - workbench.action.output.show.exthost
 // - workbench.action.output.show.main
+// - workbench.action.output.show.ms-python.debugpy.Python Debugger.log
+// - workbench.action.output.show.ms-python.isort.isort.log
 // - workbench.action.output.show.ms-python.python.Python Language Server.log
 // - workbench.action.output.show.ms-python.python.Python Locator.log
 // - workbench.action.output.show.ms-python.python.Python.log
@@ -3911,13 +3923,6 @@
 // - workbench.action.restartExtensionHost
 // - workbench.action.restoreAuxiliaryBar
 // - workbench.action.restoreEditorsToMainWindow
-// - workbench.action.revealPathInFinder1
-// - workbench.action.revealPathInFinder2
-// - workbench.action.revealPathInFinder3
-// - workbench.action.revealPathInFinder4
-// - workbench.action.revealPathInFinder5
-// - workbench.action.revealPathInFinder6
-// - workbench.action.revealPathInFinder7
 // - workbench.action.revealUserDataFolder
 // - workbench.action.revertAndCloseActiveEditor
 // - workbench.action.saveActiveLogOutputAs

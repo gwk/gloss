@@ -47,6 +47,8 @@ def main() -> None:
 
   defaults = parse_defaults_json(defaults_json_path)
 
+  for binding in defaults: validate_default_binding(binding)
+
   all_cmds = set(b.cmd for b in defaults) | set(known_extension_cmds)
 
   nullifications = [nullification_binding(b) for b in defaults if b.key]
@@ -158,12 +160,17 @@ def parse_defaults_json(defaults_path:str) -> list[Binding]:
   def clean_when(when:str) -> str: return ' '.join(when.split())
 
   defaults = [
-    Binding(cmd=d['command'], key=d['key'],when=clean_when(d.get('when', '')), args=d.get('args')) for d in defaults_json]
+    Binding(cmd=d['command'], key=d['key'], when=clean_when(d.get('when', '')), args=d.get('args')) for d in defaults_json]
 
   for cmd in other_cmds:
     defaults.append(Binding(cmd=cmd, key=''))
 
   return defaults
+
+
+def validate_default_binding(binding:Binding) -> None:
+  assert binding.cmd == binding.cmd.strip(), repr(binding.cmd) # No leading or trailing space.
+  assert '=' not in binding.cmd, repr(binding.cmd) # Check to make sure our delimiter is not ambiguous; see `parse_binding`.
 
 
 def nullification_binding(binding:Binding) -> JsonDict:
@@ -178,8 +185,7 @@ def fmt_key_line(binding:Binding) -> str:
   key = binding.key
   when = binding.when
   args = binding.args
-  assert not re.search(r':( |$)', cmd), cmd # Check to make sure our delimiter is not ambiguous; see `parse_binding`.
-  if ' ' in cmd: cmd += ':' # Add a trailing colon delimiter to disambiguate commands with spaces.
+  if ' ' in cmd: cmd += ' =' # Add a trailing equals delimiter to disambiguate commands with spaces. See `parse_binding`.
   when_clause = fmt_when(when)
   args_clause = f' {args}' if args else ''
   return f'{cmd:<79} {key:15} {when_clause}{args_clause}'.rstrip()
@@ -266,9 +272,9 @@ def parse_binding(ctx:Ctx, line_num:int, line:str) -> Binding|None:
   line = line.rstrip()
 
   # Find the command name at the start of the line.
-  # Some command names have spaces in them so we delimit them with a colon.
-  if m := re.search(r':( |$)', line):
-    cmd = line[:m.start()]
+  # Some command names have spaces in them so we delimit them with an equals sign.
+  if m := re.match(r'([-\w._ ]+) =', line):
+    cmd = m[1]
     words = [cmd] + line[m.end():].split()
   else:
     words = line.split()
