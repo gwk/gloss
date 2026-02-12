@@ -1,3 +1,4 @@
+
 ~remote.forwardedPorts.focus
 ~remote.forwardedPorts.removeView
 ~remote.forwardedPorts.resetViewLocation
@@ -18,17 +19,19 @@ actions.findWithSelection
 addCursorsAtSearchResults
 addRootFolder
 agentSession.archive
-agentSession.copilot-cloud-agent.openChanges
-agentSession.copilotcli.openChanges
 agentSession.delete
+agentSession.enterAgentSessionProjection
+agentSession.exitAgentSessionProjection                                         escape          when chatInAgentSessionProjection && chatIsEnabled
 agentSession.markRead
 agentSession.markUnread
-agentSession.rename                                                             enter           when agentSessionsViewerFocused && chatSessionType == 'local'
+agentSession.rename                                                             enter           when agentSessionsViewerFocused && !agentSessionHasMultipleSelected && chatSessionType == 'local'
 agentSession.unarchive
 agentSessions.hideAgentSessionsSidebar
 agentSessions.showAgentSessionsSidebar
 agentSessions.toggleAgentSessionsSidebar
 agentSessionSection.archive
+agentSessionSection.markRead
+agentSessionSection.unarchive
 agentSessionsViewer.find
 agentSessionsViewer.refresh
 breadcrumbs.copyPath
@@ -51,7 +54,7 @@ callStackWidget.goToFile
 cancelLinkedEditingInput                                                        escape          when LinkedEditingInputVisible && editorTextFocus
 cancelRenameInput                                                               escape          when editorFocus && renameInputVisible
 cancelSelection                                                                 escape          when editorHasSelection && textInputFocus
-changeEditorIndentation3
+changeEditorIndentation6
 chat.action.focus
 chat.configureToolSets
 chat.enablePremiumOverages
@@ -80,7 +83,9 @@ chatEditing.discardAllFiles
 chatEditing.discardFile
 chatEditing.multidiff.acceptAllFiles
 chatEditing.multidiff.discardAllFiles
+chatEditing.multidiff.explain
 chatEditing.openFileInDiff
+chatEditing.toggleExplanationWidget
 chatEditing.viewAllSessionChanges
 chatEditing.viewChanges
 chatEditing.viewPreviousEdits
@@ -105,7 +110,6 @@ closeReferenceSearch                                                            
 closeReferenceSearchEditor
 closeReplaceInFilesWidget                                                       escape          when replaceInputBoxFocus && searchViewletVisible
 codelens.showLensesInCurrentLine
-codereferencing.showOutputPane2
 columnSelect
 comments.collapse
 comments.expand
@@ -122,6 +126,9 @@ context-inspector.focus
 context-inspector.resetViewLocation
 copilot-chat.focus
 copilot-chat.resetViewLocation
+copilot.claude.agents
+copilot.claude.hooks
+copilot.claude.memory
 copyFilePath
 copyRelativeFilePath
 createCursor
@@ -233,10 +240,7 @@ debug.toggleReplIgnoreFocus
 debugpy.clearCacheAndReload
 debugpy.debugInTerminal
 debugpy.debugUsingLaunchConfig
-debugpy.pickArgs
-debugpy.pickLocalProcess
 debugpy.reportIssue
-debugpy.SelectAndInsertDebugConfiguration
 debugpy.viewOutput
 decreaseSearchEditorContextLines
 default:compositionEnd
@@ -315,8 +319,8 @@ editor.action.diffReview.prev
 editor.action.dirtydiff.next
 editor.action.dirtydiff.previous
 editor.action.duplicateSelection
-editor.action.extensioneditor.findNext                                          enter           when webviewFindWidgetFocused && !editorFocus && activeEditor == 'workbench.editor.extension'
-editor.action.extensioneditor.findPrevious
+editor.action.extensioneditor.findNext                                          cmd+g           when webviewFindWidgetFocused && !editorFocus && activeEditor == 'workbench.editor.extension'
+editor.action.extensioneditor.findPrevious                                      shift+cmd+g     when webviewFindWidgetFocused && !editorFocus && activeEditor == 'workbench.editor.extension'
 editor.action.extensioneditor.showfind
 editor.action.findReferences
 editor.action.fixAll
@@ -397,7 +401,6 @@ editor.action.nextCommentingRange
 editor.action.nextCommentThreadAction
 editor.action.nextMatchFindAction                                               cmd+g           when editorFocus
 editor.action.nextMatchFindAction                                               cmd+g           when editorFocus && findInputFocussed
-editor.action.nextMatchFindAction                                               enter           when editorFocus && findInputFocussed
 editor.action.nextSelectionMatchFindAction
 editor.action.openDeclarationToTheSide
 editor.action.openLink
@@ -429,8 +432,7 @@ editor.action.removeDuplicateLines
 editor.action.rename
 editor.action.replaceAll
 editor.action.replaceOne                                                        cmd+r           when editorFocus && findWidgetVisible
-editor.action.replaceOne                                                        cmd+r           when editorFocus && findWidgetVisible && replaceInputFocussed
-editor.action.replaceOne                                                        enter           when editorFocus && findWidgetVisible && replaceInputFocussed
+editor.action.replaceOne                                                        cmd+r           when editorFocus && findWidgetVisible && replaceInputFocussed && !isComposing
 editor.action.resetSuggestSize
 editor.action.revealDeclaration
 editor.action.revealDefinition
@@ -490,8 +492,8 @@ editor.action.unicodeHighlight.disableHighlightingOfAmbiguousCharacters
 editor.action.unicodeHighlight.disableHighlightingOfInvisibleCharacters
 editor.action.unicodeHighlight.disableHighlightingOfNonBasicAsciiCharacters
 editor.action.unicodeHighlight.showExcludeOptions
-editor.action.webvieweditor.findNext                                            enter           when webviewFindWidgetFocused && !editorFocus && activeEditor == 'WebviewEditor'
-editor.action.webvieweditor.findPrevious
+editor.action.webvieweditor.findNext                                            cmd+g           when webviewFindWidgetFocused && !editorFocus && activeEditor == 'WebviewEditor'
+editor.action.webvieweditor.findPrevious                                        shift+cmd+g     when webviewFindWidgetFocused && !editorFocus && activeEditor == 'WebviewEditor'
 editor.action.webvieweditor.hideFind                                            escape          when webviewFindWidgetVisible && !editorFocus && activeEditor == 'WebviewEditor'
 editor.action.webvieweditor.showFind                                            cmd+f           when webviewFindWidgetEnabled && !editorFocus && activeEditor == 'WebviewEditor'
 editor.action.wordHighlight.next
@@ -730,6 +732,7 @@ git.copyCommitMessage
 git.copyContentToClipboard
 git.createTag
 git.createWorktree
+git.delete
 git.deleteBranch
 git.deleteRemoteBranch
 git.deleteRemoteTag
@@ -862,7 +865,10 @@ github.copilot.chat.applyCopilotCLIAgentSessionChanges
 github.copilot.chat.applyCopilotCLIAgentSessionChanges.apply
 github.copilot.chat.attachFile
 github.copilot.chat.attachSelection
+github.copilot.chat.checkoutPullRequestReroute
 github.copilot.chat.clearTemporalContext
+github.copilot.chat.cloudSessions.clearCaches
+github.copilot.chat.cloudSessions.openRepository
 github.copilot.chat.completions.disable
 github.copilot.chat.completions.enable
 github.copilot.chat.completions.toggle
@@ -887,8 +893,6 @@ github.copilot.chat.generate
 github.copilot.chat.generateAltText
 github.copilot.chat.generateDocs
 github.copilot.chat.generateTests
-github.copilot.chat.manageBYOK
-github.copilot.chat.manageBYOKAPIKey
 github.copilot.chat.mcp.setup.check
 github.copilot.chat.mcp.setup.flow
 github.copilot.chat.mcp.setup.validatePackage
@@ -928,6 +932,9 @@ github.copilot.chat.toggleStatusMenu
 github.copilot.chat.tools.memory.openFolder
 github.copilot.chat.triggerPermissiveSignIn
 github.copilot.cli.sessions.delete
+github.copilot.cli.sessions.openRepository
+github.copilot.cli.sessions.openWorktreeInNewWindow
+github.copilot.cli.sessions.openWorktreeInTerminal
 github.copilot.cli.sessions.resumeInTerminal
 github.copilot.cloud.resetWorkspaceConfirmations
 github.copilot.cloud.sessions.installPRExtension
@@ -940,6 +947,7 @@ github.copilot.createFile
 github.copilot.createLaunchJsonFileWithContents
 github.copilot.createProject
 github.copilot.debug.collectDiagnostics
+github.copilot.debug.collectDiagnostics.internal
 github.copilot.debug.collectWorkspaceIndexDiagnostics
 github.copilot.debug.generateInlineEditTests
 github.copilot.debug.generateSTest
@@ -952,8 +960,10 @@ github.copilot.debug.resetVirtualToolGroups
 github.copilot.debug.showChatLogView
 github.copilot.debug.showContextInspectorView
 github.copilot.debug.showOutputChannel
+github.copilot.debug.showOutputChannel.internal
 github.copilot.debug.validateNesRename
 github.copilot.debug.workbenchState
+github.copilot.deleteExternalIngestWorkspaceIndex
 github.copilot.devcontainer.generateDevContainerConfig
 github.copilot.executeSearch
 github.copilot.generate
@@ -961,6 +971,11 @@ github.copilot.git.generateCommitMessage
 github.copilot.git.resolveMergeConflicts
 github.copilot.interactiveSession.feedback
 github.copilot.mcp.viewContext7
+github.copilot.nes.captureExpected.abort                                        escape          when copilotNesCaptureMode && editorTextFocus
+github.copilot.nes.captureExpected.confirm
+github.copilot.nes.captureExpected.start
+github.copilot.nes.captureExpected.submit
+github.copilot.nes.postRename
 github.copilot.nes.prepareRename
 github.copilot.nextPanelSolution
 github.copilot.open.walkthrough
@@ -1024,25 +1039,14 @@ imagePreview.zoomOut
 increaseSearchEditorContextLines
 inlayHints.startReadingLineWithHint
 inlayHints.stopReadingLineWithHint                                              escape          when isReadingLineWithInlayHints
-inlineChat.acceptChanges
-inlineChat.arrowOutDown
-inlineChat.arrowOutUp
-inlineChat.close                                                                escape          when inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook'
-inlineChat.configure
-inlineChat.discardHunkChange                                                    escape          when inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook' && inlineChatResponseType == 'messagesAndEdits'
 inlineChat.focus
 inlineChat.holdForSpeech
-inlineChat.moveToNextHunk
-inlineChat.moveToPreviousHunk
-inlineChat.regenerate
 inlineChat.resetMoveToPanelChatChoice
 inlineChat.start
-inlineChat.toggleDiff
-inlineChat.unstash
-inlineChat.viewInChat
-inlineChat2.close                                                               escape          when chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible || chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && activeEditor == 'workbench.editor.notebook' || editorFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.hasEditorModifications || editorFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.hasEditorModifications && activeEditor == 'workbench.editor.notebook'
+inlineChat2.close                                                               escape          when chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && config.inlineChat.renderMode != 'hover' || chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && activeEditor == 'workbench.editor.notebook' && config.inlineChat.renderMode != 'hover' || editorFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.hasEditorModifications && config.inlineChat.renderMode != 'hover' || editorFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.hasEditorModifications && activeEditor == 'workbench.editor.notebook' && config.inlineChat.renderMode != 'hover'
 inlineChat2.keep                                                                enter           when chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText || chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && activeEditor == 'workbench.editor.notebook'
 inlineChat2.keep                                                                enter           when chatEdits.hasEditorModifications && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress || chatEdits.hasEditorModifications && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && activeEditor == 'workbench.editor.notebook'
+inlineChat2.undo                                                                escape          when chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && config.inlineChat.renderMode == 'hover' || chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && activeEditor == 'workbench.editor.notebook' && config.inlineChat.renderMode == 'hover' || editorFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.hasEditorModifications && config.inlineChat.renderMode == 'hover' || editorFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.hasEditorModifications && activeEditor == 'workbench.editor.notebook' && config.inlineChat.renderMode == 'hover'
 insertBestCompletion                                                            tab             when atEndOfWord && textInputFocus && !hasOtherSuggestions && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
 insertNextSuggestion                                                            tab             when hasOtherSuggestions && textInputFocus && !inSnippetMode && !suggestWidgetVisible && config.editor.tabCompletion == 'on'
 insertPrevSuggestion
@@ -1063,7 +1067,6 @@ ipynb.cleanInvalidImageAttachment
 ipynb.newUntitledIpynb
 ipynb.openIpynbInNotebookEditor
 isort.restart
-isort.showLogs
 javascript.goToProjectConfig
 javascript.reloadProjects
 javascript.removeUnusedImports
@@ -1076,7 +1079,6 @@ jsExcludedCallers.focus
 jsExcludedCallers.resetViewLocation
 json.clearCache
 json.sort
-json.validate
 jumpToNextSnippetPlaceholder                                                    tab             when hasNextTabstop && inSnippetMode && textInputFocus
 jumpToPrevSnippetPlaceholder
 keybindings.editor.acceptWhenExpression                                         enter           when inKeybindings && whenFocus && !suggestWidgetVisible
@@ -1163,6 +1165,8 @@ lldb-dap.modules.copyProperty
 lldb-dap.modules.focus
 lldb-dap.modules.resetViewLocation
 lldb-dap.modules.showSymbols
+lm.addLanguageModelsProviderGroup
+lm.migrateLanguageModelsProviderGroup
 loadedScripts.collapse
 markdown.editor.insertImageFromWorkspace
 markdown.editor.insertLinkFromWorkspace
@@ -1383,20 +1387,15 @@ notifications.toggleDoNotDisturbMode
 notifications.toggleDoNotDisturbModeBySource
 notifications.toggleList
 npm.debugScript
-npm.debugScriptFromHover
 npm.focus
 npm.openScript
 npm.packageManager
 npm.refresh
-npm.removeView
 npm.resetViewLocation
 npm.runInstall
 npm.runScript
 npm.runScriptFromFolder
-npm.runScriptFromHover
 npm.runSelectedScript
-npm.scriptRunner
-npm.toggleVisibility
 openEditors.closeAll
 openEditors.newUntitledFile
 openInIntegratedTerminal
@@ -1562,7 +1561,6 @@ python.execInTerminal
 python.execInTerminal-icon
 python.execSelectionInDjangoShell
 python.execSelectionInTerminal
-python.getDebugpyPackagePath
 python.getRecommendedEnvironment
 python.installJupyter
 python.installPython
@@ -1682,7 +1680,8 @@ saveAll                                                                         
 scad-lsp.cheatsheet
 scad-lsp.preview
 scm.acceptInput
-scm.clearInput                                                                  escape          when scmRepository && !editorHasSelection && !suggestWidgetVisible
+scm.clearInput                                                                  escape          when scmRepository && !editorHasSelection && !inlineSuggestionVisible && !scmInputHasValidationMessage && !suggestWidgetVisible
+scm.clearValidation                                                             escape          when scmInputHasValidationMessage && scmRepository
 scm.editor.triggerSetup
 scm.forceViewNextCommit
 scm.forceViewPreviousCommit
@@ -1879,14 +1878,11 @@ testing.unhideTest
 testing.viewAsList
 testing.viewAsTree
 timeline.focus
-timeline.refresh
 timeline.removeView
 timeline.resetViewLocation
-timeline.toggleExcludeSource:git-history
-timeline.toggleExcludeSource:timeline.localHistory
-timeline.toggleFollowActiveEditor
 timeline.toggleVisibility
-toggle.chat.commandCenter.enabled
+toggle.chat.agentsControl.enabled
+toggle.chat.unifiedAgentsBar.enabled
 toggle.diff.ignoreTrimWhitespace
 toggle.diff.renderSideBySide
 toggle.toggleCustomTitleBar
@@ -1928,7 +1924,6 @@ typescript.removeUnusedImports
 typescript.restartTsServer
 typescript.selectTypeScriptVersion
 typescript.sortImports
-typescript.tsserverRequest
 undo                                                                            cmd+z
 update.check
 update.checkForUpdate
@@ -1975,6 +1970,26 @@ workbench.action.alternativeAcceptSelectedQuickOpenItem
 workbench.action.askVScode
 workbench.action.blur
 workbench.action.browseColorThemesInMarketplace
+workbench.action.browser.addElementToChat                                       escape          when browserElementSelectionActive && chatIsEnabled && config.chat.sendElementsToChat.enabled && activeEditor == 'workbench.editor.browser'
+workbench.action.browser.addElementToChat                                       escape          when chatIsEnabled && config.chat.sendElementsToChat.enabled && activeEditor == 'workbench.editor.browser'
+workbench.action.browser.clearEphemeralStorage
+workbench.action.browser.clearGlobalStorage
+workbench.action.browser.clearWorkspaceStorage
+workbench.action.browser.findNext                                               cmd+g           when browserFindWidgetFocused && activeEditor == 'workbench.editor.browser'
+workbench.action.browser.findNext                                               cmd+g           when browserFindWidgetVisible && activeEditor == 'workbench.editor.browser'
+workbench.action.browser.findPrevious                                           shift+cmd+g     when browserFindWidgetFocused && activeEditor == 'workbench.editor.browser'
+workbench.action.browser.findPrevious                                           shift+cmd+g     when browserFindWidgetVisible && activeEditor == 'workbench.editor.browser'
+workbench.action.browser.focusUrlInput
+workbench.action.browser.goBack
+workbench.action.browser.goForward
+workbench.action.browser.hideFind                                               escape          when browserFindWidgetVisible && activeEditor == 'workbench.editor.browser'
+workbench.action.browser.newTab
+workbench.action.browser.open
+workbench.action.browser.openExternal
+workbench.action.browser.openSettings
+workbench.action.browser.reload
+workbench.action.browser.showFind
+workbench.action.browser.toggleDevTools
 workbench.action.chat.acceptElicitation
 workbench.action.chat.acceptTool
 workbench.action.chat.addDynamicVariable
@@ -1986,6 +2001,7 @@ workbench.action.chat.assignSelectedAgent
 workbench.action.chat.attachContext
 workbench.action.chat.attachFile
 workbench.action.chat.attachFolder
+workbench.action.chat.attachPinnedEditors
 workbench.action.chat.attachSelection
 workbench.action.chat.cancel
 workbench.action.chat.changeModel
@@ -1996,19 +2012,20 @@ workbench.action.chat.configure.customagents
 workbench.action.chat.configure.customagents.disabled
 workbench.action.chat.configure.instructions
 workbench.action.chat.configure.prompts
+workbench.action.chat.configure.skills
 workbench.action.chat.configureCodeCompletions
 workbench.action.chat.configureTools
-workbench.action.chat.continueChatInSession
 workbench.action.chat.copyAll
 workbench.action.chat.copyCodeBlock
 workbench.action.chat.copyItem
 workbench.action.chat.copyKatexMathSource
 workbench.action.chat.copyLink
-workbench.action.chat.delegateToEditSession                                     enter           when inChatInput && withinEditSessionDiff
+workbench.action.chat.diagnostics
 workbench.action.chat.discardCompareEdits
 workbench.action.chat.editRequests                                              enter           when inChat && !textInputFocus
 workbench.action.chat.editToolApproval
 workbench.action.chat.export
+workbench.action.chat.exportAsZip
 workbench.action.chat.focusAgentSessionsViewer
 workbench.action.chat.focusConfirmation
 workbench.action.chat.focusInput
@@ -2029,16 +2046,19 @@ workbench.action.chat.manage
 workbench.action.chat.manageLanguageModelAuthentication
 workbench.action.chat.manageOverages
 workbench.action.chat.manageSettings
+workbench.action.chat.markAllAgentSessionsRead
 workbench.action.chat.markHelpful
 workbench.action.chat.markUnhelpful
 workbench.action.chat.newChat
 workbench.action.chat.newEditSession
+workbench.action.chat.newLocalChat
 workbench.action.chat.nextCodeBlock
 workbench.action.chat.nextFileTree
 workbench.action.chat.nextUserPrompt
 workbench.action.chat.open
 workbench.action.chat.openagent
 workbench.action.chat.openask
+workbench.action.chat.openDelegationPicker
 workbench.action.chat.openedit
 workbench.action.chat.openFeatureSettings
 workbench.action.chat.openInEditor
@@ -2046,8 +2066,14 @@ workbench.action.chat.openInNewWindow
 workbench.action.chat.openInSidebar
 workbench.action.chat.openModelPicker
 workbench.action.chat.openModePicker
+workbench.action.chat.openNewChatSessionInPlace.claude-code
+workbench.action.chat.openNewChatSessionInPlace.copilot-cloud-agent
+workbench.action.chat.openNewChatSessionInPlace.copilotcli
+workbench.action.chat.openNewChatSessionInPlace.local
+workbench.action.chat.openNewSessionEditor.claude-code
 workbench.action.chat.openNewSessionEditor.copilot-cloud-agent
 workbench.action.chat.openNewSessionEditor.copilotcli
+workbench.action.chat.openNewSessionSidebar.claude-code
 workbench.action.chat.openNewSessionSidebar.copilot-cloud-agent
 workbench.action.chat.openNewSessionSidebar.copilotcli
 workbench.action.chat.openPlan
@@ -2055,9 +2081,12 @@ workbench.action.chat.openQuotaExceededDialog
 workbench.action.chat.openSessionInEditorGroup
 workbench.action.chat.openSessionInNewEditorGroup
 workbench.action.chat.openSessionInNewWindow
+workbench.action.chat.openSessionTargetPicker
+workbench.action.chat.openSessionWithPrompt.claude-code
 workbench.action.chat.openSessionWithPrompt.copilot-cloud-agent
 workbench.action.chat.openSessionWithPrompt.copilotcli
 workbench.action.chat.openStorageFolder
+workbench.action.chat.openWorkspacePicker
 workbench.action.chat.picker.customagents
 workbench.action.chat.picker.customagents.disabled
 workbench.action.chat.previousCodeBlock
@@ -2072,6 +2101,7 @@ workbench.action.chat.resetTrustedTools
 workbench.action.chat.restoreCheckpoint
 workbench.action.chat.restoreLastCheckpoint
 workbench.action.chat.retry
+workbench.action.chat.retrySetup
 workbench.action.chat.run-in-new-chat.prompt.current
 workbench.action.chat.run.prompt
 workbench.action.chat.run.prompt.current
@@ -2089,16 +2119,14 @@ workbench.action.chat.startVoiceChat
 workbench.action.chat.stopListening                                             escape          when voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || voiceChatInProgress && scopedVoiceChatInProgress == 'view'
 workbench.action.chat.stopListeningAndSubmit
 workbench.action.chat.stopReadChatItemAloud                                     escape          when scopedChatSynthesisInProgress
-workbench.action.chat.submit                                                    enter           when chatInputHasText && inChatInput && !chatSessionRequestInProgress && !withinEditSessionDiff
+workbench.action.chat.submit                                                    enter           when chatInputHasText && chatSessionOptionsValid && inChatInput && !chatSessionRequestInProgress && !withinEditSessionDiff
 workbench.action.chat.submitWithCodebase
 workbench.action.chat.submitWithoutDispatching
 workbench.action.chat.switchToNextModel
 workbench.action.chat.toggle
 workbench.action.chat.toggleAgentMode
-workbench.action.chat.toggleChatViewSessions
-workbench.action.chat.toggleChatViewTitle
-workbench.action.chat.toggleChatViewWelcome
 workbench.action.chat.toggleDefaultVisibility
+workbench.action.chat.toggleShowAgentSessions
 workbench.action.chat.triggerSetup
 workbench.action.chat.triggerSetupAnonymousWithoutDialog
 workbench.action.chat.triggerSetupForceSignIn
@@ -2183,6 +2211,8 @@ workbench.action.debug.stepOut                                                  
 workbench.action.debug.stepOver                                                 cmd+right       when debugState == 'stopped'
 workbench.action.debug.stop                                                     cmd+d           when inDebugMode && !focusedSessionIsAttach
 workbench.action.debug.terminateThread
+workbench.action.debugExtensionHostAndRenderer
+workbench.action.debugRenderer
 workbench.action.decreaseViewHeight
 workbench.action.decreaseViewSize
 workbench.action.decreaseViewWidth
@@ -2287,6 +2317,7 @@ workbench.action.gotoLine                                                       
 workbench.action.gotoOffset
 workbench.action.gotoSymbol                                                     alt+g           when !accessibilityHelpIsShown && !accessibleViewIsShown
 workbench.action.hideComment                                                    escape          when commentEditorFocused || commentFocused
+workbench.action.hideComment                                                    escape          when commentWidgetVisible && editorFocus
 workbench.action.hideEditorActions
 workbench.action.hideEditorTabs
 workbench.action.holdLockedScrolling
@@ -2390,6 +2421,8 @@ workbench.action.nextSideBarView
 workbench.action.openAccessibilitySettings
 workbench.action.openActiveLogOutputFile
 workbench.action.openActiveLogOutputFileInNewWindow
+workbench.action.openAgentSessionsWelcome
+workbench.action.openAgentSessionsWindow
 workbench.action.openApplicationSettingsJson
 workbench.action.openChat
 workbench.action.openDefaultKeybindingsFile
@@ -2411,6 +2444,7 @@ workbench.action.openGlobalKeybindings
 workbench.action.openGlobalKeybindingsFile
 workbench.action.openGlobalSettings                                             cmd+,
 workbench.action.openIssueReporter
+workbench.action.openLanguageModelsJson
 workbench.action.openLicenseUrl
 workbench.action.openLogFile
 workbench.action.openLogsFolder
@@ -2453,14 +2487,12 @@ workbench.action.output.activeOutputLogLevel.5
 workbench.action.output.activeOutputLogLevelDefault
 workbench.action.output.addCompoundLog
 workbench.action.output.remove
-workbench.action.output.show.extension-output-GitHub.copilot-chat
+workbench.action.output.show.agentSessionsOutput
 workbench.action.output.show.extension-output-hoovercj.vscode-settings-cycler
 workbench.action.output.show.extension-output-matangover.mypy
 workbench.action.output.show.exthost
 workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log =
 workbench.action.output.show.main
-workbench.action.output.show.ms-python.debugpy.Python Debugger.log =
-workbench.action.output.show.ms-python.isort.isort.log
 workbench.action.output.show.ms-python.python.Python Language Server.log =
 workbench.action.output.show.ms-python.python.Python Locator.log =
 workbench.action.output.show.ms-python.python.Python.log
@@ -2475,7 +2507,6 @@ workbench.action.output.show.userDataSync
 workbench.action.output.show.vscode.git.Git.log
 workbench.action.output.show.vscode.github-authentication.GitHub Authentication.log =
 workbench.action.output.show.vscode.github.GitHub.log
-workbench.action.output.show.vscode.json-language-features.JSON Language Server.log =
 workbench.action.output.show.vscode.microsoft-authentication.Microsoft Authentication.log =
 workbench.action.output.toggleOutput
 workbench.action.pauseSocketWriting
@@ -2541,6 +2572,13 @@ workbench.action.resetViewLocations
 workbench.action.restartExtensionHost
 workbench.action.restoreAuxiliaryBar
 workbench.action.restoreEditorsToMainWindow
+workbench.action.revealPathInFinder1
+workbench.action.revealPathInFinder2
+workbench.action.revealPathInFinder3
+workbench.action.revealPathInFinder4
+workbench.action.revealPathInFinder5
+workbench.action.revealPathInFinder6
+workbench.action.revealPathInFinder7
 workbench.action.revealUserDataFolder
 workbench.action.revertAndCloseActiveEditor
 workbench.action.saveActiveLogOutputAs
@@ -2552,10 +2590,12 @@ workbench.action.selectTheme
 workbench.action.setDefaultLogLevel
 workbench.action.setLogLevel
 workbench.action.showAboutDialog
+workbench.action.showAgentSessionsQuickAccess
 workbench.action.showAllEditors
 workbench.action.showAllEditorsByMostRecentlyUsed
 workbench.action.showAllSymbols
 workbench.action.showCommands                                                   cmd+p
+workbench.action.showCommandsQuickAccess
 workbench.action.showContentTracing
 workbench.action.showEditorActions
 workbench.action.showEditorsInActiveGroup
@@ -2563,6 +2603,7 @@ workbench.action.showEditorsInGroup
 workbench.action.showEditorTab
 workbench.action.showEmmetCommands
 workbench.action.showErrorsWarnings
+workbench.action.showFilesQuickAccess
 workbench.action.showGPUInfo
 workbench.action.showHover
 workbench.action.showInteractivePlayground
@@ -2592,6 +2633,8 @@ workbench.action.splitEditorToPreviousGroup
 workbench.action.splitEditorToRightGroup
 workbench.action.splitEditorUp
 workbench.action.stopTracing
+workbench.action.switchToAgentSessionsMode
+workbench.action.switchToNormalMode
 workbench.action.switchWindow
 workbench.action.tasks.build                                                    cmd+b           when taskCommandsRegistered
 workbench.action.tasks.configureDefaultBuildTask
@@ -2610,9 +2653,9 @@ workbench.action.tasks.showTasks
 workbench.action.tasks.terminate
 workbench.action.tasks.test                                                     cmd+t
 workbench.action.tasks.toggleProblems
+workbench.action.terminal.acceptSelectedSuggestion                              enter           when simpleSuggestWidgetExplicitlyInvoked && simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetExplicitlyInvoked && simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial' || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial'
 workbench.action.terminal.acceptSelectedSuggestion                              enter           when simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible
-workbench.action.terminal.acceptSelectedSuggestion                              tab             when simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial' || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial'
-workbench.action.terminal.acceptSelectedSuggestion                              tab             when simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible
+workbench.action.terminal.acceptSelectedSuggestion                              tab             when simpleSuggestWidgetExplicitlyInvoked && simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetExplicitlyInvoked && simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial' || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial'
 workbench.action.terminal.acceptSelectedSuggestionEnter                         enter           when terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.runOnEnter != 'never' || terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.runOnEnter != 'never'
 workbench.action.terminal.accessibleBufferGoToNextCommand
 workbench.action.terminal.accessibleBufferGoToPreviousCommand
@@ -2650,8 +2693,9 @@ workbench.action.terminal.copySelection
 workbench.action.terminal.copySelectionAsHtml
 workbench.action.terminal.detachSession
 workbench.action.terminal.doNotShowSuggestOnType
-workbench.action.terminal.findNext
-workbench.action.terminal.findPrevious                                          cmd+g           when terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported
+workbench.action.terminal.findNext                                              cmd+g           when terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported
+workbench.action.terminal.findNext                                              cmd+g           when terminalFindInputFocused && terminalHasBeenCreated || terminalFindInputFocused && terminalProcessSupported
+workbench.action.terminal.findPrevious                                          shift+cmd+g     when terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported
 workbench.action.terminal.findPrevious                                          shift+cmd+g     when terminalFindInputFocused && terminalHasBeenCreated || terminalFindInputFocused && terminalProcessSupported
 workbench.action.terminal.focus
 workbench.action.terminal.focusAccessibleBuffer
@@ -2796,6 +2840,7 @@ workbench.action.toggleZenMode
 workbench.action.triggerReconnect
 workbench.action.troubleshootIssue.start
 workbench.action.troubleshootIssue.stop
+workbench.action.unifiedQuickAccess
 workbench.action.uninstallCommandLine
 workbench.action.unlockEditorGroup
 workbench.action.unpinEditor
@@ -2808,7 +2853,6 @@ workbench.action.zenShowMultipleEditorTabs
 workbench.action.zoomIn                                                         cmd+=
 workbench.action.zoomOut                                                        cmd+-
 workbench.action.zoomReset                                                      cmd+/
-workbench.actions.accounts.signIn
 workbench.actions.sync.editMachineName
 workbench.actions.sync.loadActivity
 workbench.actions.sync.turnOffSyncOnMachine
@@ -2833,7 +2877,7 @@ workbench.actions.workbench.panel.markers.view.toggleErrors
 workbench.actions.workbench.panel.markers.view.toggleExcludedFiles
 workbench.actions.workbench.panel.markers.view.toggleInfos
 workbench.actions.workbench.panel.markers.view.toggleWarnings
-workbench.actions.workbench.panel.output.clearFilterText
+workbench.actions.workbench.panel.output.clearFilterText                        escape          when outputFilterFocus
 workbench.actions.workbench.panel.output.toggle.debug
 workbench.actions.workbench.panel.output.toggle.error
 workbench.actions.workbench.panel.output.toggle.info
@@ -2846,6 +2890,7 @@ workbench.chat.action.focusLastFocused
 workbench.command.new.agent
 workbench.command.new.instructions
 workbench.command.new.prompt
+workbench.command.new.skill
 workbench.command.new.untitled.prompt
 workbench.debug.action.addScopeToChat
 workbench.debug.action.addVariableToChat
@@ -3004,6 +3049,7 @@ workbench.mcp.browseResources
 workbench.mcp.browseServers
 workbench.mcp.configureSamplingModels
 workbench.mcp.editStoredInput
+workbench.mcp.installFromManifest
 workbench.mcp.listServer
 workbench.mcp.openRemoteUserMcpJson
 workbench.mcp.openUserMcpJson
@@ -3075,6 +3121,7 @@ workbench.remoteTunnel.actions.manage
 workbench.remoteTunnel.actions.showLog
 workbench.remoteTunnel.actions.turnOff
 workbench.remoteTunnel.actions.turnOn
+workbench.scm.action.collapseAll
 workbench.scm.action.collapseAllRepositories
 workbench.scm.action.expandAllRepositories
 workbench.scm.action.focusNextInput

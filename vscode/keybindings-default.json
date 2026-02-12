@@ -116,10 +116,6 @@
 { "key": "cmd+v",                 "command": "execPaste" },
 { "key": "cmd+l",                 "command": "expandLineSelection",
                                      "when": "textInputFocus" },
-{ "key": "cmd+down",              "command": "inlineChat.arrowOutDown",
-                                     "when": "inlineChatFocused && inlineChatHasNotebookInline && inlineChatInnerCursorLast && !accessibilityModeEnabled && !isEmbeddedDiffEditor && activeEditor == 'workbench.editor.notebook'" },
-{ "key": "cmd+up",                "command": "inlineChat.arrowOutUp",
-                                     "when": "inlineChatFocused && inlineChatHasNotebookInline && inlineChatInnerCursorFirst && !accessibilityModeEnabled && !isEmbeddedDiffEditor && activeEditor == 'workbench.editor.notebook'" },
 { "key": "ctrl+o",                "command": "lineBreakInsert",
                                      "when": "textInputFocus && !editorReadonly" },
 { "key": "shift+tab",             "command": "outdent",
@@ -513,8 +509,6 @@
                                      "when": "editorTextFocus && foldingEnabled" },
 { "key": "escape",                "command": "inlayHints.stopReadingLineWithHint",
                                      "when": "isReadingLineWithInlayHints" },
-{ "key": "escape",                "command": "inlineChat.discardHunkChange",
-                                     "when": "inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook' && inlineChatResponseType == 'messagesAndEdits'" },
 { "key": "tab",                   "command": "insertSnippet",
                                      "when": "editorTextFocus && hasSnippetCompletions && !editorTabMovesFocus && !inSnippetMode" },
 { "key": "cmd+enter",             "command": "interactive.execute",
@@ -597,16 +591,24 @@
                                      "when": "inWelcome && activeEditor == 'gettingStartedPage'" },
 { "key": "cmd+k alt+cmd+c",       "command": "workbench.action.addComment",
                                      "when": "activeCursorHasCommentingRange" },
+{ "key": "enter",                 "command": "workbench.action.browser.findNext",
+                                     "when": "browserFindWidgetFocused && activeEditor == 'workbench.editor.browser'" },
+{ "key": "cmd+g",                 "command": "workbench.action.browser.findNext",
+                                     "when": "browserFindWidgetVisible && activeEditor == 'workbench.editor.browser'" },
+{ "key": "shift+enter",           "command": "workbench.action.browser.findPrevious",
+                                     "when": "browserFindWidgetFocused && activeEditor == 'workbench.editor.browser'" },
+{ "key": "shift+cmd+g",           "command": "workbench.action.browser.findPrevious",
+                                     "when": "browserFindWidgetVisible && activeEditor == 'workbench.editor.browser'" },
+{ "key": "cmd+f",                 "command": "workbench.action.browser.showFind",
+                                     "when": "activeEditor == 'workbench.editor.browser'" },
 { "key": "cmd+/",                 "command": "workbench.action.chat.attachContext",
                                      "when": "inChatInput && chatLocation == 'panel'" },
-{ "key": "enter",                 "command": "workbench.action.chat.delegateToEditSession",
-                                     "when": "inChatInput && withinEditSessionDiff" },
 { "key": "cmd+.",                 "command": "workbench.action.chat.openModePicker",
                                      "when": "chatIsEnabled && inChatInput && chatLocation == 'panel'" },
 { "key": "ctrl+alt+enter",        "command": "workbench.action.chat.runInTerminal",
                                      "when": "accessibleViewInCodeBlock && chatIsEnabled || chatIsEnabled && inChat" },
 { "key": "enter",                 "command": "workbench.action.chat.submit",
-                                     "when": "chatInputHasText && inChatInput && !chatSessionRequestInProgress && !withinEditSessionDiff" },
+                                     "when": "chatInputHasText && chatSessionOptionsValid && inChatInput && !chatSessionRequestInProgress && !withinEditSessionDiff" },
 { "key": "cmd+enter",             "command": "workbench.action.chat.submitWithCodebase",
                                      "when": "chatInputHasText && inChatInput && !chatSessionRequestInProgress" },
 { "key": "shift+alt+enter",       "command": "workbench.action.chat.submitWithoutDispatching",
@@ -619,10 +621,10 @@
                                      "when": "commentEditorFocused || commentFocused" },
 { "key": "escape",                "command": "workbench.action.hideComment",
                                      "when": "commentEditorFocused || commentFocused" },
+{ "key": "cmd+escape",            "command": "workbench.action.hideComment",
+                                     "when": "commentWidgetVisible && editorFocus" },
 { "key": "cmd+right",             "command": "editor.action.inlineSuggest.acceptNextWord",
                                      "when": "cursorBeforeGhostText && inlineSuggestionVisible && !accessibilityModeEnabled && !editorReadonly" },
-{ "key": "escape",                "command": "inlineChat.close",
-                                     "when": "inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook'" },
 { "key": "alt+f8",                "command": "testing.goToNextMessage",
                                      "when": "editorFocus && testing.isPeekVisible" },
 { "key": "shift+alt+f8",          "command": "testing.goToPreviousMessage",
@@ -642,7 +644,7 @@
 { "key": "shift+cmd+1",           "command": "editor.action.replaceOne",
                                      "when": "editorFocus && findWidgetVisible" },
 { "key": "enter",                 "command": "editor.action.replaceOne",
-                                     "when": "editorFocus && findWidgetVisible && replaceInputFocussed" },
+                                     "when": "editorFocus && findWidgetVisible && replaceInputFocussed && !isComposing" },
 { "key": "alt+enter",             "command": "editor.action.selectAllMatches",
                                      "when": "editorFocus && findWidgetVisible" },
 { "key": "escape",                "command": "notebook.hideFind",
@@ -657,6 +659,8 @@
                                      "when": "editorFocus" },
 { "key": "alt+cmd+p",             "command": "togglePreserveCase",
                                      "when": "editorFocus" },
+{ "key": "escape",                "command": "workbench.action.browser.hideFind",
+                                     "when": "browserFindWidgetVisible && activeEditor == 'workbench.editor.browser'" },
 { "key": "tab",                   "command": "jumpToNextSnippetPlaceholder",
                                      "when": "hasNextTabstop && inSnippetMode && textInputFocus" },
 { "key": "shift+tab",             "command": "jumpToPrevSnippetPlaceholder",
@@ -761,6 +765,8 @@
                                      "when": "renameInputVisible" },
 { "key": "shift+cmd+l",           "command": "addCursorsAtSearchResults",
                                      "when": "fileMatchOrMatchFocus && searchViewletVisible" },
+{ "key": "escape",                "command": "agentSession.exitAgentSessionProjection",
+                                     "when": "chatInAgentSessionProjection && chatIsEnabled" },
 { "key": "shift+cmd+;",           "command": "breadcrumbs.focus",
                                      "when": "breadcrumbsPossible && breadcrumbsVisible" },
 { "key": "shift+cmd+.",           "command": "breadcrumbs.focusAndSelect",
@@ -911,18 +917,8 @@
                                      "when": "inSearchEditor" },
 { "key": "cmd+i",                 "command": "inlineChat.holdForSpeech",
                                      "when": "hasSpeechProvider && inlineChatVisible && textInputFocus" },
-{ "key": "f7",                    "command": "inlineChat.moveToNextHunk",
-                                     "when": "inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook'" },
-{ "key": "shift+f7",              "command": "inlineChat.moveToPreviousHunk",
-                                     "when": "inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook'" },
-{ "key": "cmd+r",                 "command": "inlineChat.regenerate",
-                                     "when": "inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook'" },
 { "key": "cmd+i",                 "command": "inlineChat.start",
                                      "when": "editorFocus && inlineChatHasEditsAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput || editorFocus && inlineChatHasNotebookAgent && inlineChatPossible && !editorReadonly && !editorSimpleInput && activeEditor == 'workbench.editor.notebook' || editorFocus && inlineChatHasNotebookInline && inlineChatPossible && !editorReadonly && !editorSimpleInput && activeEditor == 'workbench.editor.notebook'" },
-{ "key": "cmd+z",                 "command": "inlineChat.unstash",
-                                     "when": "inlineChatHasStashedSession && !editorReadonly" },
-{ "key": "cmd+down",              "command": "inlineChat.viewInChat",
-                                     "when": "inChatInput && inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook'" },
 { "key": "enter",                 "command": "inlineChat2.keep",
                                      "when": "chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText || chatEdits.hasEditorModifications && chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && !chatInputHasText && activeEditor == 'workbench.editor.notebook'" },
 { "key": "cmd+up",                "command": "interactive.history.focus",
@@ -1282,7 +1278,9 @@
 { "key": "cmd+enter",             "command": "scm.acceptInput",
                                      "when": "scmRepository" },
 { "key": "escape",                "command": "scm.clearInput",
-                                     "when": "scmRepository && !editorHasSelection && !suggestWidgetVisible" },
+                                     "when": "scmRepository && !editorHasSelection && !inlineSuggestionVisible && !scmInputHasValidationMessage && !suggestWidgetVisible" },
+{ "key": "escape",                "command": "scm.clearValidation",
+                                     "when": "scmInputHasValidationMessage && scmRepository" },
 { "key": "alt+down",              "command": "scm.forceViewNextCommit",
                                      "when": "scmRepository" },
 { "key": "alt+up",                "command": "scm.forceViewPreviousCommit",
@@ -1400,7 +1398,14 @@
                                      "when": "inputFocus && navigableContainerFocused || navigableContainerFocused && treestickyScrollFocused || navigableContainerFocused && !listFocus || navigableContainerFocused && listScrollAtBoundary == 'both' || navigableContainerFocused && listScrollAtBoundary == 'bottom'" },
 { "key": "cmd+up",                "command": "widgetNavigation.focusPrevious",
                                      "when": "inputFocus && navigableContainerFocused || navigableContainerFocused && treestickyScrollFocused || navigableContainerFocused && !listFocus || navigableContainerFocused && listScrollAtBoundary == 'both' || navigableContainerFocused && listScrollAtBoundary == 'top'" },
-{ "key": "cmd+escape",            "command": "workbench.action.chat.cancel" },
+{ "key": "escape",                "command": "workbench.action.browser.addElementToChat",
+                                     "when": "browserElementSelectionActive && chatIsEnabled && config.chat.sendElementsToChat.enabled && activeEditor == 'workbench.editor.browser'" },
+{ "key": "cmd+l",                 "command": "workbench.action.browser.focusUrlInput",
+                                     "when": "activeEditor == 'workbench.editor.browser'" },
+{ "key": "f12",                   "command": "workbench.action.browser.toggleDevTools",
+                                     "when": "activeEditor == 'workbench.editor.browser'" },
+{ "key": "cmd+escape",            "command": "workbench.action.chat.cancel",
+                                     "when": "chatSessionRequestInProgress && !chatRemoteJobCreating" },
 { "key": "enter",                 "command": "workbench.action.chat.editRequests",
                                      "when": "inChat && !textInputFocus" },
 { "key": "shift+cmd+a",           "command": "workbench.action.chat.focusConfirmation",
@@ -1728,19 +1733,19 @@
 { "key": "shift+cmd+up",          "command": "workbench.action.terminal.selectToPreviousCommand",
                                      "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported" },
 { "key": "ctrl+space",            "command": "workbench.action.terminal.sendSequence",
-                                     "when": "terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'",
+                                     "when": "config.terminal.integrated.enableWin32InputMode && terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'",
                                      "args": {"text":"\u001b[24~a"} },
 { "key": "alt+space",             "command": "workbench.action.terminal.sendSequence",
-                                     "when": "terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'",
+                                     "when": "config.terminal.integrated.enableWin32InputMode && terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'",
                                      "args": {"text":"\u001b[24~b"} },
 { "key": "shift+enter",           "command": "workbench.action.terminal.sendSequence",
-                                     "when": "terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'",
+                                     "when": "config.terminal.integrated.enableWin32InputMode && terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'",
                                      "args": {"text":"\u001b[24~c"} },
 { "key": "shift+cmd+right",       "command": "workbench.action.terminal.sendSequence",
-                                     "when": "terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'",
+                                     "when": "config.terminal.integrated.enableWin32InputMode && terminalFocus && terminalShellIntegrationEnabled && !accessibilityModeEnabled && terminalShellType == 'pwsh'",
                                      "args": {"text":"\u001b[24~d"} },
 { "key": "shift+cmd+left",        "command": "workbench.action.terminal.sendSequence",
-                                     "when": "terminalFocus && terminalShellType == 'pwsh'",
+                                     "when": "config.terminal.integrated.enableWin32InputMode && terminalFocus && terminalShellType == 'pwsh'",
                                      "args": {"text":"\u001b[1;2H"} },
 { "key": "alt+up",                "command": "workbench.action.terminal.sendSequence",
                                      "when": "terminalFocus",
@@ -1824,6 +1829,8 @@
 { "key": "cmd+numpad0",           "command": "workbench.action.zoomReset" },
 { "key": "shift+cmd+m",           "command": "workbench.actions.view.problems",
                                      "when": "workbench.panel.markers.view.active" },
+{ "key": "escape",                "command": "workbench.actions.workbench.panel.output.clearFilterText",
+                                     "when": "outputFilterFocus" },
 { "key": "escape",                "command": "workbench.banner.focusBanner",
                                      "when": "bannerFocused" },
 { "key": "down",                  "command": "workbench.banner.focusNextAction",
@@ -1871,7 +1878,7 @@
 { "key": "cmd+backspace",         "command": "agentSession.archive",
                                      "when": "agentSessionsViewerFocused && !agentSessionIsArchived" },
 { "key": "enter",                 "command": "agentSession.rename",
-                                     "when": "agentSessionsViewerFocused && chatSessionType == 'local'" },
+                                     "when": "agentSessionsViewerFocused && !agentSessionHasMultipleSelected && chatSessionType == 'local'" },
 { "key": "shift+cmd+backspace",   "command": "agentSession.unarchive",
                                      "when": "agentSessionIsArchived && agentSessionsViewerFocused" },
 { "key": "alt+right",             "command": "breadcrumbs.focusNextWithPicker",
@@ -1887,7 +1894,9 @@
 { "key": "tab",                   "command": "editor.action.inlineSuggest.jump",
                                      "when": "inlineEditIsVisible && tabShouldJumpToInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible" },
 { "key": "escape",                "command": "inlineChat2.close",
-                                     "when": "chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible || chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && activeEditor == 'workbench.editor.notebook' || editorFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.hasEditorModifications || editorFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.hasEditorModifications && activeEditor == 'workbench.editor.notebook'" },
+                                     "when": "chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && config.inlineChat.renderMode != 'hover' || chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && activeEditor == 'workbench.editor.notebook' && config.inlineChat.renderMode != 'hover' || editorFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.hasEditorModifications && config.inlineChat.renderMode != 'hover' || editorFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.hasEditorModifications && activeEditor == 'workbench.editor.notebook' && config.inlineChat.renderMode != 'hover'" },
+{ "key": "escape",                "command": "inlineChat2.undo",
+                                     "when": "chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible && config.inlineChat.renderMode == 'hover' || chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && activeEditor == 'workbench.editor.notebook' && config.inlineChat.renderMode == 'hover' || editorFocus && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.hasEditorModifications && config.inlineChat.renderMode == 'hover' || editorFocus && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.hasEditorModifications && activeEditor == 'workbench.editor.notebook' && config.inlineChat.renderMode == 'hover'" },
 { "key": "f3",                    "command": "list.find.replInputFocus",
                                      "when": "view == 'workbench.panel.repl.view'" },
 { "key": "alt+cmd+f",             "command": "list.find.replInputFocus",
@@ -1941,7 +1950,7 @@
 { "key": "shift+cmd+[",           "command": "workbench.action.debug.prevConsole",
                                      "when": "inDebugRepl" },
 { "key": "enter",                 "command": "workbench.action.terminal.acceptSelectedSuggestion",
-                                     "when": "simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial' || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial'" },
+                                     "when": "simpleSuggestWidgetExplicitlyInvoked && simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetExplicitlyInvoked && simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && simpleSuggestWidgetHasNavigated && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial' || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && !simpleSuggestWidgetFirstSuggestionFocused || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.selectionMode != 'partial'" },
 { "key": "enter",                 "command": "workbench.action.terminal.acceptSelectedSuggestionEnter",
                                      "when": "terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.runOnEnter != 'never' || terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible && config.terminal.integrated.suggest.runOnEnter != 'never'" },
 { "key": "cmd+k",                 "command": "workbench.action.terminal.clear",
@@ -2005,11 +2014,11 @@
 { "key": "cmd+v",                 "command": "filesExplorer.paste",
                                      "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus" },
 { "key": "shift+cmd+y",           "command": "chatEditor.action.accept",
-                                     "when": "chatEdits.hasEditorModifications && chatEdits.isGlobalEditingSession && editorFocus && !chatEdits.isCurrentlyBeingModified || chatEdits.hasEditorModifications && chatEdits.isGlobalEditingSession && notebookEditorFocused && !chatEdits.isCurrentlyBeingModified" },
+                                     "when": "chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified || chatEdits.hasEditorModifications && notebookEditorFocused && !chatEdits.isCurrentlyBeingModified" },
 { "key": "alt+cmd+y",             "command": "chatEditor.action.acceptAllEdits",
                                      "when": "chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified || chatEdits.hasEditorModifications && notebookEditorFocused && !chatEdits.isCurrentlyBeingModified" },
 { "key": "shift+cmd+n",           "command": "chatEditor.action.reject",
-                                     "when": "chatEdits.hasEditorModifications && chatEdits.isGlobalEditingSession && editorFocus && !chatEdits.isCurrentlyBeingModified || chatEdits.hasEditorModifications && chatEdits.isGlobalEditingSession && notebookEditorFocused && !chatEdits.isCurrentlyBeingModified" },
+                                     "when": "chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified || chatEdits.hasEditorModifications && notebookEditorFocused && !chatEdits.isCurrentlyBeingModified" },
 { "key": "alt+cmd+backspace",     "command": "deleteFile",
                                      "when": "filesExplorerFocus && foldersViewVisible && !inputFocus" },
 { "key": "cmd+backspace",         "command": "deleteFile",
@@ -2039,8 +2048,6 @@
                                      "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus" },
 { "key": "home",                  "command": "firstCompressedFolder",
                                      "when": "explorerViewletCompressedFocus && filesExplorerFocus && foldersViewVisible && !explorerViewletCompressedFirstFocus && !inputFocus" },
-{ "key": "cmd+enter",             "command": "inlineChat.acceptChanges",
-                                     "when": "inlineChatHasNotebookInline && inlineChatVisible && activeEditor == 'workbench.editor.notebook'" },
 { "key": "cmd+enter",             "command": "inlineChat2.keep",
                                      "when": "chatEdits.hasEditorModifications && inlineChatHasEditsAgent && inlineChatVisible && !chatEdits.isRequestInProgress || chatEdits.hasEditorModifications && inlineChatHasNotebookAgent && inlineChatVisible && !chatEdits.isRequestInProgress && activeEditor == 'workbench.editor.notebook'" },
 { "key": "end",                   "command": "lastCompressedFolder",
@@ -2101,6 +2108,22 @@
                                      "when": "cursorAtEndOfQuickInputBox && inQuickInput && quickInputType == 'quickPick' || inQuickInput && !inputFocus && quickInputType == 'quickPick'" },
 { "key": "right",                 "command": "quickInput.acceptInBackground",
                                      "when": "cursorAtEndOfQuickInputBox && inQuickInput && quickInputType == 'quickPick' || inQuickInput && !inputFocus && quickInputType == 'quickPick'" },
+{ "key": "shift+cmd+c",           "command": "workbench.action.browser.addElementToChat",
+                                     "when": "chatIsEnabled && config.chat.sendElementsToChat.enabled && activeEditor == 'workbench.editor.browser'" },
+{ "key": "cmd+left",              "command": "workbench.action.browser.goBack",
+                                     "when": "browserCanGoBack && activeEditor == 'workbench.editor.browser'" },
+{ "key": "browserback",           "command": "workbench.action.browser.goBack",
+                                     "when": "browserCanGoBack && activeEditor == 'workbench.editor.browser'" },
+{ "key": "cmd+[",                 "command": "workbench.action.browser.goBack",
+                                     "when": "browserCanGoBack && activeEditor == 'workbench.editor.browser'" },
+{ "key": "cmd+right",             "command": "workbench.action.browser.goForward",
+                                     "when": "browserCanGoForward && activeEditor == 'workbench.editor.browser'" },
+{ "key": "browserforward",        "command": "workbench.action.browser.goForward",
+                                     "when": "browserCanGoForward && activeEditor == 'workbench.editor.browser'" },
+{ "key": "cmd+]",                 "command": "workbench.action.browser.goForward",
+                                     "when": "browserCanGoForward && activeEditor == 'workbench.editor.browser'" },
+{ "key": "cmd+t",                 "command": "workbench.action.browser.newTab",
+                                     "when": "activeEditor == 'workbench.editor.browser'" },
 { "key": "ctrl+-",                "command": "workbench.action.quickInputBack",
                                      "when": "inQuickOpen" },
 { "key": "ctrl+tab",              "command": "workbench.action.quickOpenNavigateNextInEditorPicker",
@@ -2129,6 +2152,8 @@
                                      "when": "terminalFocus && terminalProcessSupported && terminalTextSelected" },
 { "key": "alt+cmd+i",             "command": "workbench.action.toggleDevTools",
                                      "when": "isDevelopment" },
+{ "key": "cmd+r",                 "command": "workbench.action.browser.reload",
+                                     "when": "browserFocused" },
 { "key": "escape",                "command": "notifications.hideToasts",
                                      "when": "notificationFocus && notificationToastsVisible" },
 { "key": "escape",                "command": "workbench.action.chat.stopListening",
@@ -2146,7 +2171,7 @@
 { "key": "cmd+k alt+cmd+s",       "command": "git.stageSelectedRanges",
                                      "when": "editorTextFocus && !operationInProgress && resourceScheme == 'file'" },
 { "key": "shift+cmd+v",           "command": "markdown.showPreview",
-                                     "when": "!notebookEditorFocused && editorLangId =~ /^(markdown|prompt|instructions|chatagent)$/" },
+                                     "when": "!notebookEditorFocused && editorLangId =~ /^(markdown|prompt|instructions|chatagent|skill)$/" },
 { "key": "shift+alt+f12",         "command": "references-view.findReferences",
                                      "when": "editorHasReferenceProvider" },
 { "key": "f11",                   "command": "extension.node-debug.startWithStopOnEntry",
@@ -2154,7 +2179,7 @@
 { "key": "cmd+k cmd+n",           "command": "git.unstageSelectedRanges",
                                      "when": "editorTextFocus && isInDiffEditor && isInDiffRightEditor && !operationInProgress && resourceScheme == 'git'" },
 { "key": "cmd+k v",               "command": "markdown.showPreviewToSide",
-                                     "when": "!notebookEditorFocused && editorLangId =~ /^(markdown|prompt|instructions|chatagent)$/" },
+                                     "when": "!notebookEditorFocused && editorLangId =~ /^(markdown|prompt|instructions|chatagent|skill)$/" },
 { "key": "f4",                    "command": "references-view.next",
                                      "when": "reference-list.hasResult && references-view.canNavigate" },
 { "key": "cmd+k cmd+r",           "command": "git.revertSelectedRanges",
@@ -2179,6 +2204,8 @@
                                      "when": "chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || chatIsEnabled && terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported" },
 { "key": "ctrl+enter",            "command": "chat.inlineResourceAnchor.openToSide",
                                      "when": "chatAttachmentResource" },
+{ "key": "cmd+k cmd+r",           "command": "github.copilot.nes.captureExpected.start",
+                                     "when": "editorTextFocus && github.copilot.inlineEditsEnabled" },
 { "key": "ctrl+alt+c",            "command": "hexEditor.copyAs",
                                      "when": "activeCustomEditorId == 'hexEditor.hexedit'" },
 { "key": "shift+enter",           "command": "python.execInREPL",
@@ -2187,10 +2214,14 @@
                                      "when": "simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible" },
 { "key": "ctrl+space",            "command": "workbench.action.terminal.suggestToggleDetails",
                                      "when": "simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalHasBeenCreated && terminalIsOpen && terminalSuggestWidgetVisible || simpleSuggestWidgetHasFocusedSuggestion && terminalFocus && terminalIsOpen && terminalProcessSupported && terminalSuggestWidgetVisible" },
+{ "key": "cmd+enter",             "command": "github.copilot.nes.captureExpected.confirm",
+                                     "when": "copilotNesCaptureMode && editorTextFocus" },
 { "key": "insert",                "command": "hexEditor.switchEditMode",
                                      "when": "hexEditor:isActive" },
 { "key": "enter",                 "command": "python.execInREPLEnter",
                                      "when": "isCompositeNotebook && !config.interactiveWindow.executeWithShiftEnter && !inlineChatFocused && !notebookCellListFocused && activeEditor == 'workbench.editor.repl'" },
+{ "key": "escape",                "command": "github.copilot.nes.captureExpected.abort",
+                                     "when": "copilotNesCaptureMode && editorTextFocus" },
 { "key": "enter",                 "command": "python.execInInteractiveWindowEnter",
                                      "when": "isCompositeNotebook && !config.interactiveWindow.executeWithShiftEnter && !inlineChatFocused && !notebookCellListFocused && activeEditor == 'workbench.editor.interactive'" },
 { "key": "cmd+.",                 "command": "acceptSelectedCodeAction",
@@ -2225,12 +2256,13 @@
 // - acceptSnippet
 // - accessibility.announcement.help
 // - addRootFolder
-// - agentSession.copilot-cloud-agent.openChanges
-// - agentSession.copilotcli.openChanges
 // - agentSession.delete
+// - agentSession.enterAgentSessionProjection
 // - agentSession.markRead
 // - agentSession.markUnread
 // - agentSessionSection.archive
+// - agentSessionSection.markRead
+// - agentSessionSection.unarchive
 // - agentSessions.hideAgentSessionsSidebar
 // - agentSessions.showAgentSessionsSidebar
 // - agentSessions.toggleAgentSessionsSidebar
@@ -2241,7 +2273,7 @@
 // - breadcrumbs.toggleFromEditorTitle
 // - callStack.collapse
 // - callStackWidget.goToFile
-// - changeEditorIndentation3
+// - changeEditorIndentation6
 // - chat.configureToolSets
 // - chat.enablePremiumOverages
 // - chat.inlineResourceAnchor.addFileToChat
@@ -2264,7 +2296,9 @@
 // - chatEditing.discardFile
 // - chatEditing.multidiff.acceptAllFiles
 // - chatEditing.multidiff.discardAllFiles
+// - chatEditing.multidiff.explain
 // - chatEditing.openFileInDiff
+// - chatEditing.toggleExplanationWidget
 // - chatEditing.viewAllSessionChanges
 // - chatEditing.viewChanges
 // - chatEditing.viewPreviousEdits
@@ -2272,7 +2306,6 @@
 // - cleanSearchEditorState
 // - closeReferenceSearchEditor
 // - codelens.showLensesInCurrentLine
-// - codereferencing.showOutputPane2
 // - columnSelect
 // - comments.collapse
 // - comments.expand
@@ -2286,6 +2319,9 @@
 // - context-inspector.resetViewLocation
 // - copilot-chat.focus
 // - copilot-chat.resetViewLocation
+// - copilot.claude.agents
+// - copilot.claude.hooks
+// - copilot.claude.memory
 // - createCursor
 // - cursorRedo
 // - cursorWordEndLeft
@@ -2323,12 +2359,9 @@
 // - debug.startFromConfig
 // - debug.toggleExceptionBreakpoints
 // - debug.toggleReplIgnoreFocus
-// - debugpy.SelectAndInsertDebugConfiguration
 // - debugpy.clearCacheAndReload
 // - debugpy.debugInTerminal
 // - debugpy.debugUsingLaunchConfig
-// - debugpy.pickArgs
-// - debugpy.pickLocalProcess
 // - debugpy.reportIssue
 // - debugpy.viewOutput
 // - default:compositionEnd
@@ -2615,6 +2648,7 @@
 // - git.copyContentToClipboard
 // - git.createTag
 // - git.createWorktree
+// - git.delete
 // - git.deleteBranch
 // - git.deleteRemoteBranch
 // - git.deleteRemoteTag
@@ -2744,7 +2778,10 @@
 // - github.copilot.chat.applyCopilotCLIAgentSessionChanges.apply
 // - github.copilot.chat.attachFile
 // - github.copilot.chat.attachSelection
+// - github.copilot.chat.checkoutPullRequestReroute
 // - github.copilot.chat.clearTemporalContext
+// - github.copilot.chat.cloudSessions.clearCaches
+// - github.copilot.chat.cloudSessions.openRepository
 // - github.copilot.chat.completions.disable
 // - github.copilot.chat.completions.enable
 // - github.copilot.chat.completions.toggle
@@ -2769,8 +2806,6 @@
 // - github.copilot.chat.generateAltText
 // - github.copilot.chat.generateDocs
 // - github.copilot.chat.generateTests
-// - github.copilot.chat.manageBYOK
-// - github.copilot.chat.manageBYOKAPIKey
 // - github.copilot.chat.mcp.setup.check
 // - github.copilot.chat.mcp.setup.flow
 // - github.copilot.chat.mcp.setup.validatePackage
@@ -2809,6 +2844,9 @@
 // - github.copilot.chat.tools.memory.openFolder
 // - github.copilot.chat.triggerPermissiveSignIn
 // - github.copilot.cli.sessions.delete
+// - github.copilot.cli.sessions.openRepository
+// - github.copilot.cli.sessions.openWorktreeInNewWindow
+// - github.copilot.cli.sessions.openWorktreeInTerminal
 // - github.copilot.cli.sessions.resumeInTerminal
 // - github.copilot.cloud.resetWorkspaceConfirmations
 // - github.copilot.cloud.sessions.installPRExtension
@@ -2821,6 +2859,7 @@
 // - github.copilot.createLaunchJsonFileWithContents
 // - github.copilot.createProject
 // - github.copilot.debug.collectDiagnostics
+// - github.copilot.debug.collectDiagnostics.internal
 // - github.copilot.debug.collectWorkspaceIndexDiagnostics
 // - github.copilot.debug.generateInlineEditTests
 // - github.copilot.debug.generateSTest
@@ -2833,8 +2872,10 @@
 // - github.copilot.debug.showChatLogView
 // - github.copilot.debug.showContextInspectorView
 // - github.copilot.debug.showOutputChannel
+// - github.copilot.debug.showOutputChannel.internal
 // - github.copilot.debug.validateNesRename
 // - github.copilot.debug.workbenchState
+// - github.copilot.deleteExternalIngestWorkspaceIndex
 // - github.copilot.devcontainer.generateDevContainerConfig
 // - github.copilot.executeSearch
 // - github.copilot.generate
@@ -2842,6 +2883,8 @@
 // - github.copilot.git.resolveMergeConflicts
 // - github.copilot.interactiveSession.feedback
 // - github.copilot.mcp.viewContext7
+// - github.copilot.nes.captureExpected.submit
+// - github.copilot.nes.postRename
 // - github.copilot.nes.prepareRename
 // - github.copilot.nextPanelSolution
 // - github.copilot.open.walkthrough
@@ -2889,9 +2932,7 @@
 // - imagePreview.zoomIn
 // - imagePreview.zoomOut
 // - inlayHints.startReadingLineWithHint
-// - inlineChat.configure
 // - inlineChat.resetMoveToPanelChatChoice
-// - inlineChat.toggleDiff
 // - interactive.acceptChanges
 // - interactive.input.clear
 // - interactive.input.focus
@@ -2900,7 +2941,6 @@
 // - ipynb.newUntitledIpynb
 // - ipynb.openIpynbInNotebookEditor
 // - isort.restart
-// - isort.showLogs
 // - javascript.goToProjectConfig
 // - javascript.reloadProjects
 // - javascript.removeUnusedImports
@@ -2913,7 +2953,6 @@
 // - jsExcludedCallers.resetViewLocation
 // - json.clearCache
 // - json.sort
-// - json.validate
 // - keybindings.editor.clearSearchHistory
 // - keybindings.editor.copyCommandKeybindingEntry
 // - keybindings.editor.copyCommandTitle
@@ -2953,6 +2992,8 @@
 // - lldb-dap.modules.focus
 // - lldb-dap.modules.resetViewLocation
 // - lldb-dap.modules.showSymbols
+// - lm.addLanguageModelsProviderGroup
+// - lm.migrateLanguageModelsProviderGroup
 // - loadedScripts.collapse
 // - markdown.editor.insertImageFromWorkspace
 // - markdown.editor.insertLinkFromWorkspace
@@ -3093,20 +3134,15 @@
 // - notifications.toggleDoNotDisturbModeBySource
 // - notifications.toggleList
 // - npm.debugScript
-// - npm.debugScriptFromHover
 // - npm.focus
 // - npm.openScript
 // - npm.packageManager
 // - npm.refresh
-// - npm.removeView
 // - npm.resetViewLocation
 // - npm.runInstall
 // - npm.runScript
 // - npm.runScriptFromFolder
-// - npm.runScriptFromHover
 // - npm.runSelectedScript
-// - npm.scriptRunner
-// - npm.toggleVisibility
 // - openEditors.closeAll
 // - openEditors.newUntitledFile
 // - openInIntegratedTerminal
@@ -3257,7 +3293,6 @@
 // - python.execInTerminal
 // - python.execInTerminal-icon
 // - python.execSelectionInDjangoShell
-// - python.getDebugpyPackagePath
 // - python.getRecommendedEnvironment
 // - python.installJupyter
 // - python.installPython
@@ -3452,14 +3487,11 @@
 // - testing.viewAsList
 // - testing.viewAsTree
 // - timeline.focus
-// - timeline.refresh
 // - timeline.removeView
 // - timeline.resetViewLocation
-// - timeline.toggleExcludeSource:git-history
-// - timeline.toggleExcludeSource:timeline.localHistory
-// - timeline.toggleFollowActiveEditor
 // - timeline.toggleVisibility
-// - toggle.chat.commandCenter.enabled
+// - toggle.chat.agentsControl.enabled
+// - toggle.chat.unifiedAgentsBar.enabled
 // - toggle.diff.ignoreTrimWhitespace
 // - toggle.diff.renderSideBySide
 // - toggle.toggleCustomTitleBar
@@ -3484,7 +3516,6 @@
 // - typescript.restartTsServer
 // - typescript.selectTypeScriptVersion
 // - typescript.sortImports
-// - typescript.tsserverRequest
 // - update.check
 // - update.checkForUpdate
 // - update.checking
@@ -3521,6 +3552,12 @@
 // - workbench.action.askVScode
 // - workbench.action.blur
 // - workbench.action.browseColorThemesInMarketplace
+// - workbench.action.browser.clearEphemeralStorage
+// - workbench.action.browser.clearGlobalStorage
+// - workbench.action.browser.clearWorkspaceStorage
+// - workbench.action.browser.open
+// - workbench.action.browser.openExternal
+// - workbench.action.browser.openSettings
 // - workbench.action.chat.addDynamicVariable
 // - workbench.action.chat.addToChatAction
 // - workbench.action.chat.applyCompareEdits
@@ -3528,6 +3565,7 @@
 // - workbench.action.chat.assignSelectedAgent
 // - workbench.action.chat.attachFile
 // - workbench.action.chat.attachFolder
+// - workbench.action.chat.attachPinnedEditors
 // - workbench.action.chat.attachSelection
 // - workbench.action.chat.changeModel
 // - workbench.action.chat.chatSessionPrimaryPicker
@@ -3537,17 +3575,19 @@
 // - workbench.action.chat.configure.customagents.disabled
 // - workbench.action.chat.configure.instructions
 // - workbench.action.chat.configure.prompts
+// - workbench.action.chat.configure.skills
 // - workbench.action.chat.configureCodeCompletions
 // - workbench.action.chat.configureTools
-// - workbench.action.chat.continueChatInSession
 // - workbench.action.chat.copyAll
 // - workbench.action.chat.copyCodeBlock
 // - workbench.action.chat.copyItem
 // - workbench.action.chat.copyKatexMathSource
 // - workbench.action.chat.copyLink
+// - workbench.action.chat.diagnostics
 // - workbench.action.chat.discardCompareEdits
 // - workbench.action.chat.editToolApproval
 // - workbench.action.chat.export
+// - workbench.action.chat.exportAsZip
 // - workbench.action.chat.focusAgentSessionsViewer
 // - workbench.action.chat.generateInstructions
 // - workbench.action.chat.hideSetup
@@ -3564,23 +3604,35 @@
 // - workbench.action.chat.manageLanguageModelAuthentication
 // - workbench.action.chat.manageOverages
 // - workbench.action.chat.manageSettings
+// - workbench.action.chat.markAllAgentSessionsRead
 // - workbench.action.chat.markHelpful
 // - workbench.action.chat.markUnhelpful
 // - workbench.action.chat.newEditSession
+// - workbench.action.chat.newLocalChat
+// - workbench.action.chat.openDelegationPicker
 // - workbench.action.chat.openFeatureSettings
 // - workbench.action.chat.openInEditor
 // - workbench.action.chat.openInNewWindow
 // - workbench.action.chat.openInSidebar
+// - workbench.action.chat.openNewChatSessionInPlace.claude-code
+// - workbench.action.chat.openNewChatSessionInPlace.copilot-cloud-agent
+// - workbench.action.chat.openNewChatSessionInPlace.copilotcli
+// - workbench.action.chat.openNewChatSessionInPlace.local
+// - workbench.action.chat.openNewSessionEditor.claude-code
 // - workbench.action.chat.openNewSessionEditor.copilot-cloud-agent
 // - workbench.action.chat.openNewSessionEditor.copilotcli
+// - workbench.action.chat.openNewSessionSidebar.claude-code
 // - workbench.action.chat.openNewSessionSidebar.copilot-cloud-agent
 // - workbench.action.chat.openNewSessionSidebar.copilotcli
 // - workbench.action.chat.openPlan
 // - workbench.action.chat.openQuotaExceededDialog
 // - workbench.action.chat.openSessionInNewWindow
+// - workbench.action.chat.openSessionTargetPicker
+// - workbench.action.chat.openSessionWithPrompt.claude-code
 // - workbench.action.chat.openSessionWithPrompt.copilot-cloud-agent
 // - workbench.action.chat.openSessionWithPrompt.copilotcli
 // - workbench.action.chat.openStorageFolder
+// - workbench.action.chat.openWorkspacePicker
 // - workbench.action.chat.openask
 // - workbench.action.chat.openedit
 // - workbench.action.chat.picker.customagents
@@ -3593,6 +3645,7 @@
 // - workbench.action.chat.resetTrustedTools
 // - workbench.action.chat.restoreLastCheckpoint
 // - workbench.action.chat.retry
+// - workbench.action.chat.retrySetup
 // - workbench.action.chat.save-as-agent
 // - workbench.action.chat.save-as-instructions
 // - workbench.action.chat.save-as-prompt
@@ -3603,10 +3656,8 @@
 // - workbench.action.chat.switchToNextModel
 // - workbench.action.chat.toggle
 // - workbench.action.chat.toggleAgentMode
-// - workbench.action.chat.toggleChatViewSessions
-// - workbench.action.chat.toggleChatViewTitle
-// - workbench.action.chat.toggleChatViewWelcome
 // - workbench.action.chat.toggleDefaultVisibility
+// - workbench.action.chat.toggleShowAgentSessions
 // - workbench.action.chat.triggerSetup
 // - workbench.action.chat.triggerSetupAnonymousWithoutDialog
 // - workbench.action.chat.triggerSetupForceSignIn
@@ -3663,6 +3714,8 @@
 // - workbench.action.debug.showLoadedScripts
 // - workbench.action.debug.stepBack
 // - workbench.action.debug.terminateThread
+// - workbench.action.debugExtensionHostAndRenderer
+// - workbench.action.debugRenderer
 // - workbench.action.decreaseViewHeight
 // - workbench.action.decreaseViewSize
 // - workbench.action.decreaseViewWidth
@@ -3810,6 +3863,8 @@
 // - workbench.action.openAccessibilitySettings
 // - workbench.action.openActiveLogOutputFile
 // - workbench.action.openActiveLogOutputFileInNewWindow
+// - workbench.action.openAgentSessionsWelcome
+// - workbench.action.openAgentSessionsWindow
 // - workbench.action.openApplicationSettingsJson
 // - workbench.action.openDefaultKeybindingsFile
 // - workbench.action.openDocumentationUrl
@@ -3820,6 +3875,7 @@
 // - workbench.action.openGlobalKeybindingsFile
 // - workbench.action.openGlobalSettings
 // - workbench.action.openIssueReporter
+// - workbench.action.openLanguageModelsJson
 // - workbench.action.openLicenseUrl
 // - workbench.action.openLogFile
 // - workbench.action.openLogsFolder
@@ -3861,13 +3917,11 @@
 // - workbench.action.output.addCompoundLog
 // - workbench.action.output.remove
 // - workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log
-// - workbench.action.output.show.extension-output-GitHub.copilot-chat-#1-GitHub Copilot Log (Code References)
+// - workbench.action.output.show.agentSessionsOutput
 // - workbench.action.output.show.extension-output-hoovercj.vscode-settings-cycler-#1-Settings Cycler
 // - workbench.action.output.show.extension-output-matangover.mypy-#1-Mypy
 // - workbench.action.output.show.exthost
 // - workbench.action.output.show.main
-// - workbench.action.output.show.ms-python.debugpy.Python Debugger.log
-// - workbench.action.output.show.ms-python.isort.isort.log
 // - workbench.action.output.show.ms-python.python.Python Language Server.log
 // - workbench.action.output.show.ms-python.python.Python Locator.log
 // - workbench.action.output.show.ms-python.python.Python.log
@@ -3882,7 +3936,6 @@
 // - workbench.action.output.show.vscode.git.Git.log
 // - workbench.action.output.show.vscode.github-authentication.GitHub Authentication.log
 // - workbench.action.output.show.vscode.github.GitHub.log
-// - workbench.action.output.show.vscode.json-language-features.JSON Language Server.log
 // - workbench.action.output.show.vscode.microsoft-authentication.Microsoft Authentication.log
 // - workbench.action.pauseSocketWriting
 // - workbench.action.populateFileFromSnippet
@@ -3923,6 +3976,13 @@
 // - workbench.action.restartExtensionHost
 // - workbench.action.restoreAuxiliaryBar
 // - workbench.action.restoreEditorsToMainWindow
+// - workbench.action.revealPathInFinder1
+// - workbench.action.revealPathInFinder2
+// - workbench.action.revealPathInFinder3
+// - workbench.action.revealPathInFinder4
+// - workbench.action.revealPathInFinder5
+// - workbench.action.revealPathInFinder6
+// - workbench.action.revealPathInFinder7
 // - workbench.action.revealUserDataFolder
 // - workbench.action.revertAndCloseActiveEditor
 // - workbench.action.saveActiveLogOutputAs
@@ -3932,7 +3992,9 @@
 // - workbench.action.setDefaultLogLevel
 // - workbench.action.setLogLevel
 // - workbench.action.showAboutDialog
+// - workbench.action.showAgentSessionsQuickAccess
 // - workbench.action.showAllEditorsByMostRecentlyUsed
+// - workbench.action.showCommandsQuickAccess
 // - workbench.action.showContentTracing
 // - workbench.action.showEditorActions
 // - workbench.action.showEditorTab
@@ -3940,6 +4002,7 @@
 // - workbench.action.showEditorsInGroup
 // - workbench.action.showEmmetCommands
 // - workbench.action.showErrorsWarnings
+// - workbench.action.showFilesQuickAccess
 // - workbench.action.showGPUInfo
 // - workbench.action.showInteractivePlayground
 // - workbench.action.showLogs
@@ -3960,6 +4023,8 @@
 // - workbench.action.splitEditorToPreviousGroup
 // - workbench.action.splitEditorToRightGroup
 // - workbench.action.stopTracing
+// - workbench.action.switchToAgentSessionsMode
+// - workbench.action.switchToNormalMode
 // - workbench.action.tasks.configureDefaultBuildTask
 // - workbench.action.tasks.configureDefaultTestTask
 // - workbench.action.tasks.configureTaskRunner
@@ -4075,6 +4140,7 @@
 // - workbench.action.triggerReconnect
 // - workbench.action.troubleshootIssue.start
 // - workbench.action.troubleshootIssue.stop
+// - workbench.action.unifiedQuickAccess
 // - workbench.action.uninstallCommandLine
 // - workbench.action.unlockEditorGroup
 // - workbench.action.url.openUrl
@@ -4083,7 +4149,6 @@
 // - workbench.action.zenHideEditorTabs
 // - workbench.action.zenShowEditorTab
 // - workbench.action.zenShowMultipleEditorTabs
-// - workbench.actions.accounts.signIn
 // - workbench.actions.sync.editMachineName
 // - workbench.actions.sync.loadActivity
 // - workbench.actions.sync.turnOffSyncOnMachine
@@ -4107,7 +4172,6 @@
 // - workbench.actions.workbench.panel.markers.view.toggleExcludedFiles
 // - workbench.actions.workbench.panel.markers.view.toggleInfos
 // - workbench.actions.workbench.panel.markers.view.toggleWarnings
-// - workbench.actions.workbench.panel.output.clearFilterText
 // - workbench.actions.workbench.panel.output.toggle.debug
 // - workbench.actions.workbench.panel.output.toggle.error
 // - workbench.actions.workbench.panel.output.toggle.info
@@ -4116,6 +4180,7 @@
 // - workbench.command.new.agent
 // - workbench.command.new.instructions
 // - workbench.command.new.prompt
+// - workbench.command.new.skill
 // - workbench.command.new.untitled.prompt
 // - workbench.debug.action.addScopeToChat
 // - workbench.debug.action.addVariableToChat
@@ -4267,6 +4332,7 @@
 // - workbench.mcp.browseServers
 // - workbench.mcp.configureSamplingModels
 // - workbench.mcp.editStoredInput
+// - workbench.mcp.installFromManifest
 // - workbench.mcp.listServer
 // - workbench.mcp.openRemoteUserMcpJson
 // - workbench.mcp.openUserMcpJson
@@ -4337,6 +4403,7 @@
 // - workbench.remoteTunnel.actions.showLog
 // - workbench.remoteTunnel.actions.turnOff
 // - workbench.remoteTunnel.actions.turnOn
+// - workbench.scm.action.collapseAll
 // - workbench.scm.action.collapseAllRepositories
 // - workbench.scm.action.expandAllRepositories
 // - workbench.scm.action.focusNextInput
