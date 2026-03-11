@@ -6,5 +6,7 @@
   "mypy.targets": ["bin"],
   "files.associations": {
     "keybindings-default.json": "jsonc"
-  }
+  },
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python-envs.pythonProjects": []
 }
