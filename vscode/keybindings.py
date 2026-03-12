@@ -395,7 +395,6 @@ known_when_alterations:dict[str,dict[str,str]] = {
 
 
 known_extension_cmds = {
-  'settings.cycle.trimTrailingWhitespace',
 }
 
 
