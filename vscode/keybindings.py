@@ -385,7 +385,7 @@ key_validator = re.compile(r'''(?x)
 
 
 known_when_words = {
-  'inlineChatShowingHint',
+
 }
 
 
@@ -398,13 +398,19 @@ known_extension_cmds = {
 }
 
 
-ignored_commands = {
-  'workbench.action.output.show.ms-python.python.Python Language Server'
-}
+ignored_commands = set({
+  #'workbench.action.output.show.ms-python.python.Python Language Server'
+})
 
 ignored_special_commands = {
   'enter': {
     'workbench.action.terminal.findPrevious',
+    'editor.action.extensioneditor.findNext',
+    'editor.action.nextMatchFindAction',
+    'editor.action.replaceOne',
+    'editor.action.webvieweditor.findNext',
+    'workbench.action.browser.findNext',
+    'workbench.action.chat.queueMessage',
   }
 }
 
