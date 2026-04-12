@@ -13,6 +13,7 @@ import operator
 import os
 import re
 import sys
+import textwrap
 import time
 import typing
 import zoneinfo
@@ -36,6 +37,7 @@ from math import *
 from operator import *
 from os import environ, uname
 from sys import argv, stderr, stdout
+from textwrap import indent, dedent
 from time import *
 from zoneinfo import *
 
