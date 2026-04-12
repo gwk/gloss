@@ -365,7 +365,7 @@ editor.action.indentLines
 editor.action.indentUsingSpaces
 editor.action.indentUsingTabs
 editor.action.inlineSuggest.acceptNextLine
-editor.action.inlineSuggest.acceptNextWord
+editor.action.inlineSuggest.acceptNextWord                                      alt+tab         when cursorBeforeGhostText && inlineSuggestionVisible && !accessibilityModeEnabled && !editorReadonly
 editor.action.inlineSuggest.cancelSnooze
 editor.action.inlineSuggest.commit                                              tab             when inInlineEditsPreviewEditor
 editor.action.inlineSuggest.commit                                              tab             when inlineEditIsVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionVisible && tabShouldAcceptInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editor.hasSelection && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible || inlineEditIsVisible && inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editor.hasSelection && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible
