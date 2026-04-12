@@ -57,12 +57,15 @@ gmffo: git merge --ff-only "$@"
 
 gpull: git pull "$@"
 gpush: git push "$@"
+gpu: git push -u "$@"
 
 gr:    git rebase "$@"
 gra:   git rebase --abort
 gri:   git rebase --interactive "$@"
 grc:   git rebase --continue
 grscp: git rebase --show-current-patch
+
+gsc: git switch --create "$@"
 
 gsh:  git show "$@"
 gshw: git show --color-words "$@"
