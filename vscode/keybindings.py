@@ -324,7 +324,6 @@ def validate_whens_list(ctx:Ctx, cmd:str, bindings:list[Binding]) -> None:
   if not any(b.key for b in bindings): return # No bound keys.
 
   dflt_whens_unaltered = ctx.dflt_binding_whens.get(cmd, set())
-  #if not dflt_whens_unaltered: return # No default whens to compare against.
 
   when_alterations = known_when_alterations.get(cmd, {})
   dflt_whens = {when_alterations.get(w, w) for w in dflt_whens_unaltered}
@@ -343,11 +342,12 @@ def validate_whens_list(ctx:Ctx, cmd:str, bindings:list[Binding]) -> None:
     else:
       covered_whens.add(b.when)
 
-  if missing_whens := dflt_whens - covered_whens:
-    ctx.warn(bindings[-1].line_num, f'missing whens for command: {cmd}',
-      *[f'{TXT_G}{fmt_key_line(replace(bindings[0], when=dw))}{RST}' for dw in missing_whens],
-      sep='\n')
-    has_problem = True
+  if not has_problem:
+    if missing_whens := dflt_whens - covered_whens:
+      ctx.warn(bindings[-1].line_num, f'missing whens for command: {cmd}',
+        *[f'{TXT_G}{fmt_key_line(replace(bindings[0], when=dw))}{RST}' for dw in missing_whens],
+        sep='\n')
+      has_problem = True
 
   if has_problem: errL()
 
