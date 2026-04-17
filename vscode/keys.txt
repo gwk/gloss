@@ -38,6 +38,7 @@ agentSessionsViewer.find
 agentSessionsViewer.refresh
 aiCustomization.generateDebugReport
 aiCustomization.openManagementEditor
+aiCustomization.openMarketplace
 aiCustomizationManagement.copyPath
 aiCustomizationManagement.delete
 aiCustomizationManagement.disableItem
@@ -67,7 +68,7 @@ callStackWidget.goToFile
 cancelLinkedEditingInput                                                        escape          when LinkedEditingInputVisible && editorTextFocus
 cancelRenameInput                                                               escape          when editorFocus && renameInputVisible
 cancelSelection                                                                 escape          when editorHasSelection && textInputFocus
-changeEditorIndentation11
+changeEditorIndentation2
 chat.action.focus
 chat.configureToolSets
 chat.enablePremiumOverages
@@ -98,7 +99,6 @@ chatEditing.multidiff.discardAllFiles
 chatEditing.multidiff.explain
 chatEditing.openFileInDiff
 chatEditing.toggleExplanationWidget
-chatEditing.viewAllSessionChanges
 chatEditing.viewChanges
 chatEditing.viewPreviousEdits
 chatEditor.action.accept
@@ -379,7 +379,8 @@ editor.action.inlineSuggest.commit                                              
 editor.action.inlineSuggest.commitAlternativeAction
 editor.action.inlineSuggest.dev.extractRepro
 editor.action.inlineSuggest.hide                                                escape          when inInlineEditsPreviewEditor
-editor.action.inlineSuggest.hide                                                escape          when inlineEditIsVisible || inlineSuggestionVisible
+editor.action.inlineSuggest.hide                                                escape          when inInlineEditsPreviewEditor
+editor.action.inlineSuggest.hide                                                escape          when editorTextFocus && inlineEditIsVisible || editorTextFocus && inlineSuggestionVisible
 editor.action.inlineSuggest.jump                                                tab             when inlineEditIsVisible && tabShouldJumpToInlineEdit && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible
 editor.action.inlineSuggest.showNext                                            alt+]           when inlineSuggestionVisible && !editorReadonly
 editor.action.inlineSuggest.showPrevious                                        alt+[           when inlineSuggestionVisible && !editorReadonly
@@ -939,7 +940,6 @@ github.copilot.chat.mergeCopilotCLIAgentSessionChanges.mergeAndSync
 github.copilot.chat.notebook.disableFollowCellExecution
 github.copilot.chat.notebook.enableFollowCellExecution
 github.copilot.chat.openModelPicker
-github.copilot.chat.openPullRequestCopilotCLIAgentSession.openPR
 github.copilot.chat.openPullRequestReroute
 github.copilot.chat.openSuggestionsPanel
 github.copilot.chat.openUserPreferences
@@ -970,6 +970,7 @@ github.copilot.chat.sendCompletionFeedback
 github.copilot.chat.startCopilotDebugCommand
 github.copilot.chat.toggleStatusMenu
 github.copilot.chat.tools.memory.clearMemories
+github.copilot.chat.tools.memory.resolveMemoryFileUri
 github.copilot.chat.tools.memory.showMemories
 github.copilot.chat.triggerPermissiveSignIn
 github.copilot.chat.updateCopilotCLIAgentSessionChanges.update
@@ -1011,7 +1012,6 @@ github.copilot.debug.inlineEdit.reportNotebookNESIssue
 github.copilot.debug.resetVirtualToolGroups
 github.copilot.debug.showChatLogView
 github.copilot.debug.showContextInspectorView
-github.copilot.debug.showNodeSystemCertificatesErrors
 github.copilot.debug.showOutputChannel
 github.copilot.debug.showOutputChannel.internal
 github.copilot.debug.togglePowerSaveBlocker
@@ -1107,7 +1107,6 @@ inlineChat.fixDiagnostics
 inlineChat.focus
 inlineChat.hideInput                                                            escape          when inlineChatHasEditsAgent && inlineChatInputWidgetFocused || inlineChatHasNotebookAgent && inlineChatInputWidgetFocused && activeEditor == 'workbench.editor.notebook'
 inlineChat.queueInChat                                                          enter           when config.inlineChat.askInChat && inlineChatFileBelongsToChat && inlineChatHasEditsAgent && inlineChatInputHasText && inlineChatInputWidgetFocused || config.inlineChat.askInChat && inlineChatFileBelongsToChat && inlineChatHasNotebookAgent && inlineChatInputHasText && inlineChatInputWidgetFocused && activeEditor == 'workbench.editor.notebook'
-inlineChat.resetMoveToPanelChatChoice
 inlineChat.start
 inlineChat.submitInput                                                          enter           when inlineChatHasEditsAgent && inlineChatInputHasText && inlineChatInputWidgetFocused && !config.inlineChat.askInChat || inlineChatHasEditsAgent && inlineChatInputHasText && inlineChatInputWidgetFocused && !inlineChatFileBelongsToChat || inlineChatHasEditsAgent && inlineChatInputHasText && inlineChatInputWidgetFocused && !config.inlineChat.askInChat && !inlineChatFileBelongsToChat || inlineChatHasNotebookAgent && inlineChatInputHasText && inlineChatInputWidgetFocused && !config.inlineChat.askInChat && activeEditor == 'workbench.editor.notebook' || inlineChatHasNotebookAgent && inlineChatInputHasText && inlineChatInputWidgetFocused && !inlineChatFileBelongsToChat && activeEditor == 'workbench.editor.notebook' || inlineChatHasNotebookAgent && inlineChatInputHasText && inlineChatInputWidgetFocused && !config.inlineChat.askInChat && !inlineChatFileBelongsToChat && activeEditor == 'workbench.editor.notebook'
 inlineChat2.cancel                                                              escape          when chatEdits.isRequestInProgress && chatInputHasFocus && inlineChatHasEditsAgent && inlineChatVisible || chatEdits.isRequestInProgress && editorFocus && inlineChatHasEditsAgent && inlineChatVisible || chatEdits.isRequestInProgress && chatInputHasFocus && inlineChatHasNotebookAgent && inlineChatVisible && activeEditor == 'workbench.editor.notebook' || chatEdits.isRequestInProgress && editorFocus && inlineChatHasNotebookAgent && inlineChatVisible && activeEditor == 'workbench.editor.notebook'
@@ -1291,6 +1290,8 @@ multiDiffEditor.expandAll
 multiDiffEditor.goToFile
 multiDiffEditor.goToNextChange
 multiDiffEditor.goToPreviousChange
+mypy.recheckWorkspace
+mypy.restartAndRecheckWorkspace
 nextCompressedFolder
 noop
 notebook.action.changeTabDisplaySize
@@ -2060,6 +2061,7 @@ workbench.action.browser.hideFind                                               
 workbench.action.browser.newTab
 workbench.action.browser.open
 workbench.action.browser.openExternal
+workbench.action.browser.openFromViewMenu
 workbench.action.browser.openSettings
 workbench.action.browser.quickOpen
 workbench.action.browser.reload
@@ -2244,8 +2246,8 @@ workbench.action.chat.skipTool
 workbench.action.chat.startOver
 workbench.action.chat.startParameterizedPrompt
 workbench.action.chat.startVoiceChat
-workbench.action.chat.steerWithMessage                                          enter           when chatInputHasText && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatSessionRequestInProgress && inChatInput && config.chat.requestQueuing.defaultAction == 'steer' && chatInputHasText && chatSessionRequestInProgress && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's'
-workbench.action.chat.steerWithMessage                                          enter           when chatSessionRequestInProgress && inChatInput && chatInputHasText && chatSessionRequestInProgress && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st' && config.chat.requestQueuing.defaultAction != 'steer' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's'
+workbench.action.chat.steerWithMessage                                          enter           when chatInputHasText && inChatInput && chatEditingSentRequest == 'q' || chatInputHasText && inChatInput && chatEditingSentRequest != 'q' && chatEditingSentRequest != 'st' && config.chat.requestQueuing.defaultAction != 'steer'
+workbench.action.chat.steerWithMessage                                          enter           when chatInputHasText && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && inChatInput && chatEditingSentRequest == 'q' && chatEditingSentRequest == 'st' && chatEditingSentRequest != 's' || chatInputHasText && chatSessionRequestInProgress && inChatInput && config.chat.requestQueuing.defaultAction == 'steer' && chatEditingSentRequest != 'q' && chatEditingSentRequest != 's' && chatEditingSentRequest != 'st'
 workbench.action.chat.stopListening                                             escape          when voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || voiceChatInProgress && scopedVoiceChatInProgress == 'view'
 workbench.action.chat.stopListeningAndSubmit
 workbench.action.chat.stopReadChatItemAloud                                     escape          when scopedChatSynthesisInProgress
@@ -2634,6 +2636,7 @@ workbench.action.output.addCompoundLog
 workbench.action.output.remove
 workbench.action.output.show.agentSessionsOutput
 workbench.action.output.show.extension-output-GitHub.copilot-chat
+workbench.action.output.show.extension-output-matangover.mypy
 workbench.action.output.show.exthost
 workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log =
 workbench.action.output.show.main
@@ -2808,9 +2811,13 @@ workbench.action.terminal.changeSelectionModeNever
 workbench.action.terminal.changeSelectionModePartial
 workbench.action.terminal.chat.addTerminalSelection
 workbench.action.terminal.chat.close                                            escape          when chatIsEnabled && terminalChatFocus && terminalChatVisible || chatIsEnabled && terminalChatVisible && terminalFocus
+workbench.action.terminal.chat.continueInBackground
 workbench.action.terminal.chat.disableSessionAutoApproval
+workbench.action.terminal.chat.focusChatInstance
 workbench.action.terminal.chat.focusMostRecentChatTerminal
 workbench.action.terminal.chat.focusMostRecentChatTerminalOutput
+workbench.action.terminal.chat.focusTerminalByExecutionId
+workbench.action.terminal.chat.focusTerminalById
 workbench.action.terminal.chat.insertCommand
 workbench.action.terminal.chat.insertFirstCommand
 workbench.action.terminal.chat.openTerminalSettingsLink
@@ -2818,6 +2825,7 @@ workbench.action.terminal.chat.rerunRequest
 workbench.action.terminal.chat.runCommand
 workbench.action.terminal.chat.runFirstCommand
 workbench.action.terminal.chat.start
+workbench.action.terminal.chat.toggleChatTerminalOutput
 workbench.action.terminal.chat.viewHiddenChatTerminals
 workbench.action.terminal.chat.viewInChat
 workbench.action.terminal.clear                                                 cmd+k           when terminalFocus && terminalHasBeenCreated && !accessibilityModeEnabled || terminalFocus && terminalProcessSupported && !accessibilityModeEnabled || accessibilityModeEnabled && accessibleViewIsShown && terminalHasBeenCreated && accessibleViewCurrentProviderId == 'terminal' || accessibilityModeEnabled && accessibleViewIsShown && terminalProcessSupported && accessibleViewCurrentProviderId == 'terminal'
@@ -2878,7 +2886,7 @@ workbench.action.terminal.newWithCwd
 workbench.action.terminal.newWithProfile
 workbench.action.terminal.openDetectedLink
 workbench.action.terminal.openFileLink
-workbench.action.terminal.openNativeConsole                                     shift+cmd+c     when !terminalFocus
+workbench.action.terminal.openNativeConsole                                     shift+cmd+c     when !isSessionsWindow && !terminalFocus
 workbench.action.terminal.openSettings
 workbench.action.terminal.openUrlLink
 workbench.action.terminal.paste
@@ -2989,6 +2997,7 @@ workbench.action.unpinEditor
 workbench.action.url.openUrl
 workbench.action.webview.openDeveloperTools
 workbench.action.webview.reloadWebviewAction
+workbench.action.welcomeOnboarding2026
 workbench.action.zenHideEditorTabs
 workbench.action.zenShowEditorTab
 workbench.action.zenShowMultipleEditorTabs
