@@ -1,3 +1,4 @@
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 import collections
 import collections.abc
@@ -19,13 +20,14 @@ import typing
 import zoneinfo
 
 # Import typing first so that other imports take precedence, particularly the collections and collections.abc types.
-from typing import *
+from typing import (Literal, TypeGuard, overload, TypeVar, Any, Callable, Iterator, Iterable, Sequence, Mapping, MutableMapping,
+  Union, Optional, overload, Protocol, runtime_checkable)
 from collections import *
 from collections.abc import *
 
 # Import copy symbols after dataclasses so that copy.replace is used.
-from dataclasses import *
-from copy import *
+from dataclasses import dataclass, field, fields
+from copy import copy, deepcopy, replace
 
 from enum import *
 from functools import *
@@ -38,7 +40,7 @@ from operator import *
 from os import environ, uname
 from sys import argv, stderr, stdout
 from textwrap import indent, dedent
-from time import *
+from time import monotonic, perf_counter, process_time, sleep
 from zoneinfo import *
 
 
@@ -49,7 +51,6 @@ except ImportError:
   print('note: pithy package not found; skipping imports.', file=stderr)
 else:
   import pithy.ansi
-  import pithy.buffer
   import pithy.clock
   import pithy.collection
   import pithy.csv
@@ -57,21 +58,16 @@ else:
   import pithy.default
   import pithy.desc
   import pithy.dict
-  import pithy.format
   import pithy.fs
-  import pithy.graph
   import pithy.io
   import pithy.iterable
   import pithy.json
   import pithy.loader
   import pithy.path
-  import pithy.path_encode
   import pithy.range
   import pithy.reprs
-  import pithy.schema
   import pithy.sequence
-  import pithy.string
-  import pithy.svg
+  import pithy.strings
   import pithy.task
   import pithy.type_utils
   import pithy.typing_utils
@@ -79,7 +75,6 @@ else:
   import pithy.url
   import pithy.util
   from pithy.ansi import *
-  from pithy.buffer import *
   from pithy.clock import *
   from pithy.collection import *
   from pithy.csv import *
@@ -87,21 +82,16 @@ else:
   from pithy.default import *
   from pithy.desc import *
   from pithy.dict import *
-  from pithy.format import *
   from pithy.fs import *
-  from pithy.graph import *
   from pithy.io import *
   from pithy.iterable import *
   from pithy.json import *
   from pithy.loader import *
   from pithy.path import *
-  from pithy.path_encode import *
   from pithy.range import *
   from pithy.reprs import *
-  from pithy.schema import *
   from pithy.sequence import *
-  from pithy.string import *
-  from pithy.svg import *
+  from pithy.strings import *
   from pithy.task import *
   from pithy.type_utils import *
   from pithy.typing_utils import *
