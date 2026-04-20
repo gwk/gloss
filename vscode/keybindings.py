@@ -156,6 +156,7 @@ def parse_defaults_json(defaults_path:str) -> list[Binding]:
 
   def clean_when(when:str) -> str: return ' '.join(when.split())
 
+  assert isinstance(defaults_json, list)
   defaults = [
     Binding(cmd=d['command'], key=d['key'], when=clean_when(d.get('when', '')), args=d.get('args')) for d in defaults_json]
 
