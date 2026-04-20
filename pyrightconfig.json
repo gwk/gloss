@@ -15,6 +15,11 @@
   "reportUnusedCallResult": false,
   "reportAttributeAccessIssue": false,
   "reportReturnType": false,
-  "exclude": ["_misc/**"],
+  "exclude": [
+     "**/.*",
+    "_misc/**",
+    "**/__pycache__",
+    "**/node_modules",
+  ],
   "reportWildcardImportFromLibrary": false
 }
