@@ -73,6 +73,6 @@ _build/vscode/keybindings.json: vscode/keybindings.py vscode/keybindings-default
 	./$^ $@
 
 
-_build/zed/keymap.json: zed/keymap.py zed/keymap-default.json zed/keymap.json
+_build/zed/keymap.json: zed/keymap.py zed/keymap-default.jsonc zed/keymap.jsonc
 	mkdir -p _build
 	./$^ $@
