@@ -78,7 +78,7 @@ list-functions() { print -c ${(ko)functions} }
 # Command prompt customization.
 
 # The user can override these at any time.
-export GLOSS_PROMPT_SYMBOL='$'
+export GLOSS_PROMPT_SYMBOL='❯' # Heavy Right-Pointing Angle Quotation Mark Ornament.
 export GLOSS_PROMPT_SSH_SYMBOL='§'
 export GLOSS_PROMPT_PREFIX_STYLE=$TXT_Y
 export GLOSS_PROMPT_PATH_STYLE=$BOLD$TXT_B
