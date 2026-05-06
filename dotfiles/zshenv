@@ -3,3 +3,5 @@
 #setopt SOURCE_TRACE # This will print a message every time a file is sourced.
 
 [[ -z $GLOSS_ENV ]] && source /usr/local/gloss/zsh/env.zsh
+
+umask 027
