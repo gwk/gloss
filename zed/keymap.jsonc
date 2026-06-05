@@ -5,7 +5,7 @@
     "bindings": {
       "f4": "debugger::Start",
       "shift-f5": "debugger::Stop",
-      "shift-cmd-f5": "debugger::RerunSession",
+      "cmd-shift-f5": "debugger::RerunSession",
       "f6": "debugger::Pause",
       "f7": "debugger::StepOver",
       "ctrl-f11": "debugger::StepInto",
@@ -25,7 +25,6 @@
       "ctrl-p": "menu::SelectPrevious",
       "up": "menu::SelectPrevious",
       "enter": "menu::Confirm",
-      "ctrl-enter": "menu::SecondaryConfirm",
       "cmd-enter": "menu::SecondaryConfirm",
       "cmd-escape": "menu::Cancel",
       "ctrl-escape": "menu::Cancel",
@@ -132,10 +131,8 @@
       "cmd-right": ["editor::MoveToEndOfLine", { "stop_at_soft_wraps": true }],
       "ctrl-e": ["editor::MoveToEndOfLine", { "stop_at_soft_wraps": false }],
       "end": ["editor::MoveToEndOfLine", { "stop_at_soft_wraps": true }],
-      "cmd-up": "editor::MoveToBeginning",
-      "cmd-down": "editor::MoveToEnd",
-      "cmd-home": "editor::MoveToBeginning", // Typed via `cmd-fn-left`
-      "cmd-end": "editor::MoveToEnd", // Typed via `cmd-fn-right`
+      "home": "editor::MoveToBeginning", // Typed via `cmd-fn-left`
+      "end": "editor::MoveToEnd", // Typed via `cmd-fn-right`
       "shift-up": "editor::SelectUp",
       "ctrl-shift-p": "editor::SelectUp",
       "shift-down": "editor::SelectDown",
@@ -158,25 +155,22 @@
         "editor::SelectToBeginningOfLine",
         { "stop_at_soft_wraps": true, "stop_at_indent": true },
       ],
-      "shift-home": [
-        "editor::SelectToBeginningOfLine",
-        { "stop_at_soft_wraps": true, "stop_at_indent": true },
-      ],
       "ctrl-shift-a": [
         "editor::SelectToBeginningOfLine",
-        { "stop_at_soft_wraps": true, "stop_at_indent": true },
+        {
+          "stop_at_soft_wraps": false,
+          "stop_at_indent": true,
+        },
       ],
       "cmd-shift-right": [
         "editor::SelectToEndOfLine",
         { "stop_at_soft_wraps": true },
       ],
-      "shift-end": [
-        "editor::SelectToEndOfLine",
-        { "stop_at_soft_wraps": true },
-      ],
       "ctrl-shift-e": [
         "editor::SelectToEndOfLine",
-        { "stop_at_soft_wraps": true },
+        {
+          "stop_at_soft_wraps": false,
+        },
       ],
       "ctrl-v": ["editor::MovePageDown", { "center_cursor": true }],
       "ctrl-shift-v": ["editor::MovePageUp", { "center_cursor": true }],
@@ -481,7 +475,6 @@
     "use_key_equivalents": true,
     "bindings": {
       "cmd-n": "rules_library::NewRule",
-      "cmd-shift-s": "rules_library::ToggleDefaultRule",
       "cmd-w": "workspace::CloseWindow",
     },
   },
@@ -505,8 +498,7 @@
     "context": "BufferSearchBar && in_replace > Editor",
     "use_key_equivalents": true,
     "bindings": {
-      "enter": "search::ReplaceNext",
-      "cmd-enter": "search::ReplaceAll",
+      "cmd-r": "search::ReplaceNext",
     },
   },
   {
@@ -548,8 +540,7 @@
     "context": "ProjectSearchBar && in_replace > Editor",
     "use_key_equivalents": true,
     "bindings": {
-      "enter": "search::ReplaceNext",
-      "cmd-enter": "search::ReplaceAll",
+      "cmd-r": "search::ReplaceNext",
     },
   },
   {
@@ -613,8 +604,8 @@
       "cmd-ctrl-n": ["editor::AddSelectionBelow", { "skip_soft_wrap": false }], // Insert cursor below
       "cmd-alt-down": ["editor::AddSelectionBelow", { "skip_soft_wrap": true }],
       "cmd-shift-k": "editor::DeleteLine",
-      "alt-up": "editor::MoveLineUp",
-      "alt-down": "editor::MoveLineDown",
+      "cmd-up": "editor::MoveLineUp",
+      "cmd-down": "editor::MoveLineDown",
       "alt-shift-up": "editor::DuplicateLineUp",
       "alt-shift-down": "editor::DuplicateLineDown",
       "cmd-ctrl-left": "editor::SelectSmallerSyntaxNode", // Shrink selection
@@ -679,7 +670,8 @@
       "ctrl-shift-space": "editor::ShowWordCompletions",
       "cmd-.": "editor::ToggleCodeActions",
       "cmd-k r": "editor::RevealInFileManager",
-      "cmd-\\": "pane::SplitRight",
+      "cmd-k p": "editor::CopyPath",
+      "cmd-shift-s": "pane::SplitRight",
     },
   },
   {
@@ -749,8 +741,6 @@
       "cmd-s": "workspace::Save",
       "cmd-k s": "workspace::SaveWithoutFormat",
       "alt-shift-enter": "toast::RunAction",
-      "cmd-shift-s": "workspace::SaveAs",
-      "cmd-shift-n": "workspace::NewWindow",
       "ctrl-`": "terminal_panel::Toggle",
       "cmd-1": ["workspace::ActivatePane", 0],
       "cmd-2": ["workspace::ActivatePane", 1],
@@ -777,6 +767,7 @@
       "cmd-shift-f": "pane::DeploySearch",
       "cmd-shift-h": ["pane::DeploySearch", { "replace_enabled": true }],
       //"": "pane::ReopenClosedItem",
+      "cmd-shift-n": "task::Spawn",
       "cmd-k cmd-s": "zed::OpenKeymap",
       "cmd-k cmd-t": "theme_selector::Toggle",
       "cmd-k cmd-shift-t": "theme::ToggleMode",
@@ -815,7 +806,6 @@
     "use_key_equivalents": true,
     "bindings": {
       "cmd-n": "workspace::NewFile",
-      "cmd-shift-r": "task::Spawn",
       // All task parameters are captured and unchanged between reruns by default.
       // Use the `"reevaluate_context"` parameter to control this.
       "cmd-alt-r": ["task::Rerun", { "reevaluate_context": false }],
@@ -981,7 +971,6 @@
       "down": "editor::SignatureHelpNext",
     },
   },
-  // Custom bindings
   {
     "use_key_equivalents": true,
     "bindings": {
@@ -1002,7 +991,6 @@
       "cmd-shift-e": "pane::RevealInProjectPanel",
       "cmd-f8": "editor::GoToHunk",
       "cmd-shift-f8": "editor::GoToPreviousHunk",
-      "ctrl-enter": "assistant::InlineAssist",
       "ctrl-:": "editor::ToggleInlayHints",
     },
   },
@@ -1326,7 +1314,6 @@
       "cmd-a": "editor::SelectAll",
       "cmd-k": "terminal::Clear",
       "cmd-n": "workspace::NewTerminal",
-      "ctrl-enter": "assistant::InlineAssist",
       "ctrl-_": null, // emacs undo
       // Some nice conveniences
       "cmd-backspace": ["terminal::SendKeystroke", "ctrl-u"], // clear line
@@ -1556,7 +1543,6 @@
       "cmd-f": "search::FocusSearch",
       "cmd-,": "settings_editor::OpenCurrentFile",
       "left": "settings_editor::ToggleFocusNav",
-      "cmd-shift-e": "settings_editor::ToggleFocusNav",
       // todo(settings_ui): cut this down based on the max files and overflow UI
       "ctrl-1": ["settings_editor::FocusFile", 0],
       "ctrl-2": ["settings_editor::FocusFile", 1],
@@ -1657,7 +1643,6 @@
       "alt-down": "notebook::MoveCellDown",
       "cmd-m": "notebook::AddCodeBlock",
       "cmd-shift-m": "notebook::AddMarkdownBlock",
-      "cmd-shift-r": "notebook::RestartKernel",
       "cmd-c": "notebook::InterruptKernel",
     },
   },
@@ -1680,7 +1665,6 @@
       "alt-down": "notebook::MoveCellDown",
       "cmd-m": "notebook::AddCodeBlock",
       "cmd-shift-m": "notebook::AddMarkdownBlock",
-      "cmd-shift-r": "notebook::RestartKernel",
       "cmd-c": "notebook::InterruptKernel",
       "escape": "notebook::EnterCommandMode",
     },
