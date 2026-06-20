@@ -4,18 +4,8 @@
 ansi-to-rtf-clip: ansi-to-html "$@" | textutil -stdin -convert rtf -stdout | pbcopy
 
 # python
-py: PYTHONSTARTUP=$GLOSS_DIR/pythonstartup.py python3 -q "$@"
-pdb: python3 -m pdb "$@" # run a python file using pdb
 py-help: python3 -c "import $1; help($1);"
-py-dir: python3 -c "import $1; print(*sorted(dir($1.$2)), sep='\n');"
-py-dir-module: python3 -c "import $1; print(*sorted(dir($1)), sep='\n');"
 
-# clang
-clang-parse:  clang -fsyntax-only -Weverything "$@"
-clang-pp:     clang "$@" -o - -E
-clang-as:     clang "$@" -o - -S
-clang-ir:     clang "$@" -o - -S -emit-llvm
-clang-ast-dump: clang -cc1 -ast-dump "$@"
 clang-show-defines: echo | clang -dM -E "$@" -
 
 # diff files using git and same-same.
@@ -23,65 +13,9 @@ d: git diff --no-index --no-prefix --no-renames --no-color --exit-code "$@" | sa
 
 # git
 
-ga: git add "$@"
-
 gca:  git commit --amend -m "$(git log -1 --pretty=%B)" "$@" && git show --stat
 gcam: git commit --amend -m "$@" && git show --stat
 gcm:  git commit -m "$@" && git show --stat
-
-gd:  git diff "$@"
-gds: git diff --staged "$@"
-
-# git log format notes
-# C: color function
-# h: abbreviated commit hash
-# cd: committer date
-# d: ref names
-# s: subject
-
-gl:  git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso "$@"
-gl1: git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso -1 "$@"
-
-glm:  git log "$@"
-glm1: git log -1 "$@"
-
-# Note: -m flag "makes the merge commits show the full diff like regular commits"; documented in git-log "Diff Formatting".
-glv:  git log --name-status --format=fuller -m "$@"
-glv1: git log --name-status --format=fuller -m -1 "$@"
-
-gls: git ls-files "$@"
-
-gm: git merge "$@"
-gms: git merge --squash "$@"
-gmffo: git merge --ff-only "$@"
-
-gpull: git pull "$@"
-gpush: git push "$@"
-gpu: git push -u "$@"
-
-gr:    git rebase "$@"
-gra:   git rebase --abort
-gri:   git rebase --interactive "$@"
-grc:   git rebase --continue
-grscp: git rebase --show-current-patch
-
-gsc: git switch --create "$@"
-
-gsh:  git show "$@"
-gshw: git show --color-words "$@"
-gst:  git status --short --branch "$@"
-
-gtags:  git tag -l "$@"
-
-# file hashes.
-sha1:   openssl dgst -sha1 "$@"
-sha224: openssl dgst -sha224 "$@"
-sha256: openssl dgst -sha256 "$@"
-sha384: openssl dgst -sha384 "$@"
-sha512: openssl dgst -sha512 "$@"
-
-# SQLite.
-sqlite-wal: for path in "$@"; do sqlite3 "$path" 'PRAGMA journal_mode=WAL;'; done
 
 # translate
 tr-to-lc: tr '[:upper:]' '[:lower:]' # translate to lower case
