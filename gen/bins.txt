@@ -25,9 +25,9 @@ d: git diff --no-index --no-prefix --no-renames --no-color --exit-code "$@" | sa
 
 ga: git add "$@"
 
-gca:  git commit --amend -m "$(git log -1 --pretty=%B)" "$@" && gsh --stat
-gcam: git commit --amend -m "$@" && gsh --stat
-gcm:  git commit -m "$@" && gsh --stat
+gca:  git commit --amend -m "$(git log -1 --pretty=%B)" "$@" && git show --stat
+gcam: git commit --amend -m "$@" && git show --stat
+gcm:  git commit -m "$@" && git show --stat
 
 gd:  git diff "$@"
 gds: git diff --staged "$@"
