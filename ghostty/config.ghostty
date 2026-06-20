@@ -1,0 +1,12 @@
+background = 000000
+foreground = ffffff
+
+auto-update = check
+auto-update-channel = tip
+
+macos-icon = holographic
+
+# Note: these are flipped from what I would expect.
+keybind = super+g=navigate_search:previous
+keybind = cmd+shift+g=navigate_search:next
+keybind = cmd+f=search:toggle
