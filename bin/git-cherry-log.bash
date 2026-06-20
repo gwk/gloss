@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
-git cherry "$1" "$2" | text-search -pattern '\+ (\w+)' -format '{0}' | xargs -L1 gl1
+git cherry "$1" "$2" | text-search -pattern '\+ (\w+)' -format '{0}' \
+| xargs -L1 git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso -1
