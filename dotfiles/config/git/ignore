@@ -1,7 +1,0 @@
-_misc/
-todo.md
-todo.txt
-*.timesheet
-.DS_Store
-
-**/.claude/settings.local.json
