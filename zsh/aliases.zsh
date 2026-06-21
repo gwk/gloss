@@ -57,6 +57,7 @@ alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias gri='git rebase --interactive'
 alias grscp='git rebase --show-current-patch'
+alias grm='git rebase main'
 
 alias gsc='git switch --create'
 
