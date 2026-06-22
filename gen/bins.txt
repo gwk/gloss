@@ -15,8 +15,8 @@ d: git diff --no-index --no-prefix --no-renames --no-color --exit-code "$@" | sa
 
 gca:  git commit --amend -m "$(git log -1 --pretty=%B)" "$@" && git show --stat
 gcam: git commit --amend -m "$@" && git show --stat
+gcf: git commit --fixup "$@" && git show --stat
 gcm:  git commit -m "$@" && git show --stat
-
 # translate
 tr-to-lc: tr '[:upper:]' '[:lower:]' # translate to lower case
 tr-to-uc: tr '[:lower:]' '[:upper:]' # translate to upper case
