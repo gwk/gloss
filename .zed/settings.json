@@ -1,10 +1,16 @@
 // See: https://zed.dev/docs/configuring-zed#settings-files
 {
-  "project_name": "gloss",
-  "file_scan_exclusions": [],
+  "file_scan_exclusions": ["**/.DS_Store"],
+  "file_scan_inclusions": ["_plan.md", "_prompt.md", "_todo.md"],
   "tab_size": 2,
   "languages": {
     "CSS": {
+      "format_on_save": "off",
+    },
+    "JSON": {
+      "format_on_save": "off",
+    },
+    "JSONC": {
       "format_on_save": "off",
     },
     "Just": {
@@ -21,5 +27,8 @@
     "TOML": {
       "format_on_save": "off",
     },
+  },
+  "edit_predictions": {
+    "disabled_globs": ["**/creds/**", "**/creds*/**"],
   },
 }

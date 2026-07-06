@@ -11,3 +11,6 @@ __pycache__/
 _build/
 _misc/
 gh-pages/
+_plan.md
+_prompt.md
+_todo.md
