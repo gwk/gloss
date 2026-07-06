@@ -279,7 +279,6 @@
       "shift-alt-escape": "agent::ExpandMessageEditor",
       "cmd->": "agent::AddSelectionToThread",
       "cmd-shift-e": "project_panel::ToggleFocus",
-      "cmd-shift-enter": "agent::ContinueThread",
       "cmd-y": "agent::AllowOnce",
       "cmd-alt-a": "agent::OpenPermissionDropdown",
       "cmd-alt-z": "agent::RejectOnce",
@@ -294,7 +293,6 @@
   { "context": "AgentPanel && acp_thread",
     "use_key_equivalents": true,
     "bindings": {
-      "cmd-n": "agent::NewExternalAgentThread",
       "cmd-alt-t": "agent::NewThread" }},
   { "context": "AgentFeedbackMessageEditor > Editor",
     "use_key_equivalents": true,
@@ -659,7 +657,6 @@
         "projects::OpenRemote",
         { "from_existing_connection": true,
           "create_new_window": false }],
-      "cmd-ctrl-b": "branches::OpenRecent",
       "cmd-ctrl-w": "git::Worktree",
       "ctrl-~": "workspace::NewTerminal",
       "cmd-s": "workspace::Save",
@@ -1481,8 +1478,7 @@
       "alt-up": "notebook::MoveCellUp",
       "alt-down": "notebook::MoveCellDown",
       "cmd-m": "notebook::AddCodeBlock",
-      "cmd-shift-m": "notebook::AddMarkdownBlock",
-      "cmd-c": "notebook::InterruptKernel" }},
+      "cmd-shift-m": "notebook::AddMarkdownBlock" }},
   { "context": "NotebookEditor && notebook_mode == command",
     "bindings": {
       "enter": "notebook::EnterEditMode",
@@ -1497,6 +1493,4 @@
       "alt-up": "notebook::MoveCellUp",
       "alt-down": "notebook::MoveCellDown",
       "cmd-m": "notebook::AddCodeBlock",
-      "cmd-shift-m": "notebook::AddMarkdownBlock",
-      "cmd-c": "notebook::InterruptKernel",
-      "escape": "notebook::EnterCommandMode" }}]
+      "cmd-shift-m": "notebook::AddMarkdownBlock" }}]

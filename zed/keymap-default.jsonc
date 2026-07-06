@@ -278,21 +278,9 @@
     "bindings": {
       "cmd-n": "agent::NewThread",
       "cmd-alt-c": "agent::OpenSettings",
-      "cmd-alt-l": "agent::OpenRulesLibrary",
-      "cmd-alt-p": "agent::ManageProfiles",
-      "cmd-i": "agent::ToggleProfileSelector",
-      "shift-tab": "agent::CycleModeSelector",
-      "cmd-alt-/": "agent::ToggleModelSelector",
-      "alt-tab": "agent::CycleFavoriteModels",
       "cmd-alt-m": "agent::ToggleOptionsMenu",
       "cmd-alt-shift-n": "agent::ToggleNewThreadMenu",
-      "shift-alt-escape": "agent::ExpandMessageEditor",
-      "cmd->": "agent::AddSelectionToThread",
       "cmd-shift-e": "project_panel::ToggleFocus",
-      "cmd-shift-enter": "agent::ContinueThread",
-      "cmd-y": "agent::AllowOnce",
-      "cmd-alt-a": "agent::OpenPermissionDropdown",
-      "cmd-alt-z": "agent::RejectOnce",
       "ctrl-tab": "agents_sidebar::ToggleThreadSwitcher",
       "ctrl-shift-tab": [
         "agents_sidebar::ToggleThreadSwitcher",
@@ -301,11 +289,6 @@
     "use_key_equivalents": true,
     "bindings": {
       "cmd-c": "markdown::CopyAsMarkdown" }},
-  { "context": "AgentPanel && acp_thread",
-    "use_key_equivalents": true,
-    "bindings": {
-      "cmd-n": "agent::NewExternalAgentThread",
-      "cmd-alt-t": "agent::NewThread" }},
   { "context": "AgentFeedbackMessageEditor > Editor",
     "use_key_equivalents": true,
     "bindings": {
@@ -319,8 +302,22 @@
     "bindings": {
       "cmd-enter": "menu::Confirm" }},
   { "context": "AcpThread",
+    "use_key_equivalents": true,
     "bindings": {
+      "cmd-n": "agent::NewThread",
       "ctrl--": "pane::GoBack",
+      "cmd-alt-l": "agent::ManageSkills",
+      "cmd-alt-p": "agent::ManageProfiles",
+      "cmd-i": "agent::ToggleProfileSelector",
+      "shift-tab": "agent::CycleModeSelector",
+      "cmd-alt-/": "agent::ToggleModelSelector",
+      "alt-tab": "agent::CycleFavoriteModels",
+      "shift-alt-escape": "agent::ExpandMessageEditor",
+      "cmd->": "agent::AddSelectionToThread",
+      "cmd-alt-y": "agent::AllowAlways",
+      "cmd-y": "agent::AllowOnce",
+      "cmd-alt-a": "agent::OpenPermissionDropdown",
+      "cmd-alt-z": "agent::RejectOnce",
       "pageup": "agent::ScrollOutputPageUp",
       "pagedown": "agent::ScrollOutputPageDown",
       "home": "agent::ScrollOutputToTop",
@@ -336,7 +333,24 @@
       "ctrl-alt-up": "agent::ScrollOutputLineUp",
       "ctrl-alt-down": "agent::ScrollOutputLineDown",
       "ctrl-alt-pageup": "agent::ScrollOutputToPreviousMessage",
-      "ctrl-alt-pagedown": "agent::ScrollOutputToNextMessage" }},
+      "ctrl-alt-pagedown": "agent::ScrollOutputToNextMessage",
+      "cmd-f": "agent::ToggleSearch",
+      "cmd-g": "agent::SelectNextThreadMatch",
+      "cmd-shift-g": "agent::SelectPreviousThreadMatch",
+      "alt-cmd-c": "search::ToggleCaseSensitive",
+      "alt-cmd-w": "search::ToggleWholeWord",
+      "alt-cmd-x": "search::ToggleRegex" }},
+  { "context": "AcpThreadSearchBar",
+    "use_key_equivalents": true,
+    "bindings": {
+      "escape": "agent::DismissThreadSearch",
+      "enter": "agent::SelectNextThreadMatch",
+      "shift-enter": "agent::SelectPreviousThreadMatch",
+      "cmd-f": "search::FocusSearch" }},
+  { "context": "AcpThreadSearchBar > Editor",
+    "use_key_equivalents": true,
+    "bindings": {
+      "shift-enter": "agent::SelectPreviousThreadMatch" }},
   { "context": "AcpThread > Editor",
     "use_key_equivalents": true,
     "bindings": {
@@ -402,12 +416,6 @@
   { "context": "ThreadsArchiveView",
     "bindings": {
       "backspace": "agent::ArchiveSelectedThread" }},
-  { "context": "RulesLibrary",
-    "use_key_equivalents": true,
-    "bindings": {
-      "cmd-n": "rules_library::NewRule",
-      "cmd-shift-s": "rules_library::ToggleDefaultRule",
-      "cmd-w": "workspace::CloseWindow" }},
   { "context": "BufferSearchBar",
     "use_key_equivalents": true,
     "bindings": {
@@ -435,6 +443,10 @@
     "bindings": {
       "up": "search::PreviousHistoryQuery",
       "down": "search::NextHistoryQuery" }},
+  { "context": "BufferSearchBar || ProjectSearchBar",
+    "use_key_equivalents": true,
+    "bindings": {
+      "ctrl-enter": "editor::Newline" }},
   { "context": "ProjectSearchBar",
     "use_key_equivalents": true,
     "bindings": {
@@ -444,7 +456,8 @@
       "cmd-shift-f": "search::FocusSearch",
       "cmd-shift-h": "search::ToggleReplace",
       "alt-cmd-g": "search::ToggleRegex",
-      "alt-cmd-x": "search::ToggleRegex" }},
+      "alt-cmd-x": "search::ToggleRegex",
+      "alt-cmd-f": "project_search::OpenTextFinder" }},
   { "context": "ProjectSearchBar > Editor",
     "bindings": {
       "up": "search::PreviousHistoryQuery",
@@ -465,7 +478,8 @@
       "cmd-shift-enter": "project_search::ToggleAllSearchResults",
       "cmd-shift-h": "search::ToggleReplace",
       "alt-cmd-g": "search::ToggleRegex",
-      "alt-cmd-x": "search::ToggleRegex" }},
+      "alt-cmd-x": "search::ToggleRegex",
+      "alt-cmd-f": "project_search::OpenTextFinder" }},
   { "context": "Pane",
     "use_key_equivalents": true,
     "bindings": {
@@ -658,20 +672,14 @@
     "bindings": {
       // Change the default action on `menu::Confirm` by setting the parameter
       // "alt-cmd-o": ["projects::OpenRecent", {"create_new_window": true }],
-      "alt-cmd-o": [
-        "projects::OpenRecent",
-        { "create_new_window": false }],
-      "ctrl-r": [
-        "projects::OpenRecent",
-        { "create_new_window": false }],
+      "alt-cmd-o": "projects::OpenRecent",
+      "ctrl-r": "projects::OpenRecent",
       "ctrl-cmd-o": [
         "projects::OpenRemote",
-        { "from_existing_connection": false,
-          "create_new_window": false }],
+        { "from_existing_connection": false }],
       "ctrl-cmd-shift-o": [
         "projects::OpenRemote",
-        { "from_existing_connection": true,
-          "create_new_window": false }],
+        { "from_existing_connection": true }],
       "cmd-ctrl-b": "branches::OpenRecent",
       "cmd-ctrl-w": "git::Worktree",
       "ctrl-~": "workspace::NewTerminal",
@@ -804,7 +812,8 @@
   { "context": "ThreadsSidebar && not_searching",
     "use_key_equivalents": true,
     "bindings": {
-      "space": "menu::Confirm" }},
+      "space": "menu::Confirm",
+      "shift-r": "agent::RenameSelectedThread" }},
   { "context": "ThreadSwitcher",
     "bindings": {
       "ctrl-tab": "agents_sidebar::ToggleThreadSwitcher",
@@ -1001,6 +1010,10 @@
       "delete": "variable_list::RemoveWatch",
       "backspace": "variable_list::RemoveWatch",
       "alt-enter": "variable_list::AddWatch" }},
+  { "context": "GitPanel",
+    "bindings": {
+      "cmd-1": "git_panel::ActivateChangesTab",
+      "cmd-2": "git_panel::ActivateHistoryTab" }},
   { "context": "GitPanel && ChangesList && !GitBranchSelector",
     "use_key_equivalents": true,
     "bindings": {
@@ -1071,7 +1084,7 @@
       "cmd-ctrl-shift-y": "git::UnstageAll",
       "cmd-enter": "git::Commit",
       "cmd-shift-enter": "git::Amend" }},
-  { "context": "GitCommit > Editor",
+  { "context": "GitCommit > Editor && mode == auto_height",
     "use_key_equivalents": true,
     "bindings": {
       "enter": "editor::Newline",
@@ -1122,7 +1135,12 @@
         { "secondary": false }],
       "cmd-alt-enter": [
         "picker::ConfirmInput",
-        { "secondary": true }]}},
+        { "secondary": true }],
+      // Picker bindings (TogglePreview, SetPreviewRight/Below/Hidden,
+      // ToggleActionsMenu) live in keymaps/specific-overrides-macos.json, which
+      // is loaded after the base keymap so they win over conflicting base-keymap
+      // Editor bindings.
+}},
   { "context": "ChannelModal > Picker > Editor",
     "use_key_equivalents": true,
     "bindings": {
@@ -1134,16 +1152,7 @@
   { "context": "FileFinder || (FileFinder > Picker > Editor)",
     "use_key_equivalents": true,
     "bindings": {
-      "cmd-shift-a": "file_finder::ToggleSplitMenu",
-      "cmd-shift-i": "file_finder::ToggleFilterMenu" }},
-  { "context": "FileFinder || (FileFinder > Picker > Editor) || (FileFinder > Picker > menu)",
-    "use_key_equivalents": true,
-    "bindings": {
-      "cmd-shift-p": "file_finder::SelectPrevious",
-      "cmd-j": "pane::SplitDown",
-      "cmd-k": "pane::SplitUp",
-      "cmd-h": "pane::SplitLeft",
-      "cmd-l": "pane::SplitRight" }},
+      "cmd-shift-i": "search::ToggleIncludeIgnored" }},
   { "context": "RecentProjects || (RecentProjects > Picker > Editor)",
     "use_key_equivalents": true,
     "bindings": {
@@ -1257,6 +1266,10 @@
       "cmd-d": "pane::SplitRight",
       "cmd-alt-r": "terminal::RerunTask",
       "cmd->": "agent::AddSelectionToThread" }},
+  { "context": "AgentPanel > Terminal",
+    "use_key_equivalents": true,
+    "bindings": {
+      "cmd-n": "agent::NewThread" }},
   { "context": "RatePredictionsModal",
     "use_key_equivalents": true,
     "bindings": {
@@ -1473,6 +1486,7 @@
     "use_key_equivalents": true,
     "bindings": {
       "cmd-shift-backspace": "branch_picker::DeleteBranch",
+      "cmd-alt-shift-backspace": "branch_picker::ForceDeleteBranch",
       "cmd-shift-i": "branch_picker::FilterRemotes" }},
   { "context": "ImageViewer",
     "use_key_equivalents": true,
@@ -1482,6 +1496,7 @@
       "cmd--": "image_viewer::ZoomOut",
       "cmd-0": "image_viewer::ResetZoom",
       "cmd-1": "image_viewer::ZoomToActualSize",
+      "cmd-k r": "editor::RevealInFileManager",
       "cmd-shift-0": "image_viewer::FitToView" }},
   { "context": "RunModal",
     "bindings": {
@@ -1496,7 +1511,8 @@
   { "context": "WorktreePicker || (WorktreePicker > Picker > Editor)",
     "use_key_equivalents": true,
     "bindings": {
-      "cmd-shift-backspace": "worktree_picker::DeleteWorktree" }},
+      "cmd-shift-backspace": "worktree_picker::DeleteWorktree",
+      "cmd-alt-shift-backspace": "worktree_picker::ForceDeleteWorktree" }},
   { "context": "NotebookEditor",
     "bindings": {
       "shift-enter": "notebook::RunAndAdvance",
@@ -1524,7 +1540,6 @@
       "cmd-m": "notebook::AddCodeBlock",
       "cmd-shift-m": "notebook::AddMarkdownBlock",
       "cmd-shift-r": "notebook::RestartKernel",
-      "cmd-c": "notebook::InterruptKernel",
       "escape": "notebook::EnterCommandMode" }},
   { "context": "GitGraph",
     "bindings": {
@@ -1533,4 +1548,18 @@
   { "context": "GitGraphSearchBar > Editor",
     "bindings": {
       "tab": "git_graph::FocusNextTabStop",
-      "shift-tab": "git_graph::FocusPreviousTabStop" }}]
+      "shift-tab": "git_graph::FocusPreviousTabStop" }},
+  { "context": "SkillCreator",
+    "use_key_equivalents": true,
+    "bindings": {
+      "cmd-w": "workspace::CloseWindow",
+      "cmd-enter": "skill_creator::SaveSkill",
+      "tab": "skill_creator::FocusNextField",
+      "shift-tab": "skill_creator::FocusPreviousField" }},
+  { "context": "SkillCreator > Editor",
+    "use_key_equivalents": true,
+    "bindings": {
+      "cmd-w": "workspace::CloseWindow",
+      "cmd-enter": "skill_creator::SaveSkill",
+      "tab": "skill_creator::FocusNextField",
+      "shift-tab": "skill_creator::FocusPreviousField" }}]
