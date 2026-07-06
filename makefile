@@ -61,18 +61,10 @@ vscode-keys-diff: vscode
 	d _build/vscode/keys-default.txt vscode/keys.txt
 
 
-zed-keys: _build/zed/keymap.json
-
-
 _build/vscode/gloss-black.json: gloss-black.py
 	mkdir -p _build
 	./$^ $@
 
 _build/vscode/keybindings.json: vscode/keybindings.py vscode/keybindings-default.json vscode/keys.txt
-	mkdir -p _build
-	./$^ $@
-
-
-_build/zed/keymap.json: zed/keymap.py zed/keymap-default.jsonc zed/keymap.jsonc
 	mkdir -p _build
 	./$^ $@

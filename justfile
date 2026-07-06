@@ -4,3 +4,4 @@
 # (obtained via the "zed: open default keymap" command palette action).
 zed-keymap:
 	json-fmt-in-place -fix -comments zed/keymap-default.jsonc zed/keymap.jsonc
+	python zed/keymap.py zed/keymap-default.jsonc zed/keymap.jsonc
