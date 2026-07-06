@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "defaultMode": "auto",
+    "allow": [
+      "Edit",
+      "Monitor",
+      "WebSearch",
+      "Write"
+    ],
+    "deny": [
+      "Skill(code-review)"
+    ],
+    "additionalDirectories": [
+      "../../pithy"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "failIfUnavailable": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "fileSystem": {
+      "allowRead": [
+        "../../pithy"
+      ]
+    },
+    "network": {
+      "allowLocalBinding": false
+    }
+  }
+}
