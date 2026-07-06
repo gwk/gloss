@@ -117,6 +117,8 @@
       "ctrl-l": "editor::ScrollCursorCenter",
       "alt-left": "editor::MoveToPreviousWordStart",
       "alt-right": "editor::MoveToNextWordEnd",
+      "alt-b": "editor::MoveToPreviousWordStart",
+      "alt-f": "editor::MoveToNextWordEnd",
       "cmd-left": [
         "editor::MoveToBeginningOfLine",
         { "stop_at_soft_wraps": true,
@@ -150,6 +152,8 @@
       "ctrl-shift-f": "editor::SelectRight",
       "alt-shift-left": "editor::SelectToPreviousWordStart", // cursorWordLeftSelect
       "alt-shift-right": "editor::SelectToNextWordEnd", // cursorWordRightSelect
+      "alt-shift-b": "editor::SelectToPreviousWordStart",
+      "alt-shift-f": "editor::SelectToNextWordEnd",
       "ctrl-shift-up": "editor::SelectToStartOfParagraph",
       "ctrl-shift-down": "editor::SelectToEndOfParagraph",
       "cmd-shift-up": "editor::SelectToBeginning",
