@@ -1,1 +1,8 @@
-# .zprofile is sourced for login shells.
+# .zprofile is sourced for login shells, after .zshenv and before .zshrc.
+# macOS terminal shells are login shells, but graphical linux terminal shells are not.
+# Similarly, non-interactive SSH commands run non-login shells.
+# Therefore .zprofile is not guaranteed to run in every case.
+# Gloss uses it because on macOS /etc/zprofile runs path_helper, which reorders PATH.
+# profile.zsh runs after that and restores the intended ordering.
+
+source /usr/local/gloss/zsh/profile.zsh

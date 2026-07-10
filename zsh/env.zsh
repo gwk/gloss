@@ -2,7 +2,7 @@
 
 # .zshenv is loaded every time, prior to zprofile or zshrc.
 # Source this file from your .zshenv with the following command:
-#   source /usr/local/gloss/zsh/env.zsh
+#   [[ -z $GLOSS_ENV ]] && source /usr/local/gloss/zsh/env.zsh
 
 export GLOSS_ENV=GLOSS_ENV
 
@@ -31,6 +31,7 @@ errFL() { >&2 printf - $@ }
 [[ -d "$GLOSS_DIR" ]] || errSL 'WARNING: bad GLOSS_DIR:' $GLOSS_DIR
 
 [[ -n "$PATH" ]] || errSL 'WARNING: PATH is empty when gloss env.zsh is sourced.'
+
 export PATH="$PATH:$GLOSS_DIR/bin"
 
 # Get gloss platform string.
@@ -41,18 +42,27 @@ export EDITOR=nano
 export PAGER=less
 export HELPDIR=/usr/share/zsh/5.8/help
 
+# Custom rustup installation location; paths.zsh adds /opt/rust/cargo/bin to PATH.
+# NOTE: do not set CARGO_HOME; facility expects this to be unset so that agent user has its own cargo cache.
+if [[ -d /opt/rust ]]; then
+  export RUSTUP_HOME=/opt/rust/rustup
+fi
+
 case $GLOSS_OS in
   linux)
     ;;
   mac)
-    # Standard homebrew configuration.
-    export HOMEBREW_PREFIX="/opt/homebrew"
-    export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
-    export HOMEBREW_REPOSITORY="/opt/homebrew"
-    export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
-    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
     ;;
 esac
+
+# Standard homebrew configuration; let brew emit the environment itself.
+# Both mac and linux are assumed to install to the /opt/homebrew prefix.
+[[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Establish the path ordering now for non-login shells.
+# Login shells source paths.zsh from profile.zsh instead,
+# because on macOS path_helper (run from /etc/zprofile, after this file) reorders PATH.
+[[ -o login ]] || source $GLOSS_DIR/zsh/paths.zsh
 
 
 # ANSI select graphic rendition (SGR) control sequences.

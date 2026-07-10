@@ -38,9 +38,14 @@ Download and install the following:
 
 # PATH configuration
 
-Apple's /usr/libexec/path_helper enforces a basic PATH ordering.
-It first adds every line listed in /etc/paths, followed by every line listed in each file in /etc/paths.d/*.
-path_helper is called in /etc/zprofile, which is sourced after ~/.zshenv.
-Note that files in /etc/paths.d should begin with a two digit ordering number; three digits fails as of macOS 12.6.
+Gloss establishes a consistent PATH ordering in `zsh/paths.zsh`.
 
-Gloss currently does not alter PATH apart from adding its own `$GLOSS_DIR/bin` in `env.zsh`.
+Apple's `/usr/libexec/path_helper` reorders PATH and MANPATH to force system paths first.
+This happens after .zshenv but before .zprofile.
+It first adds every line listed in `/etc/paths`, followed by every line listed in each file in `/etc/paths.d/*`,
+and then appends any remaining preexisting entries.
+`/etc/zprofile` sources `~/.zshenv` and `~/.zprofile` for login shells, after path_helper has run.
+Therefore `/etc/paths.d` cannot express the desired ordering, so gloss does not use it.
+Instead, `paths.zsh` is sourced from `env.zsh` (i.e. ~/.zshenv) for non-login shells,
+and from `profile.zsh` (i.e. ~/.zprofile) for login shells, after path_helper has run.
+Both cases source it exactly once, after any reordering, so all shells end up with the same PATH.
