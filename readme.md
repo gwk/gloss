@@ -49,3 +49,6 @@ Therefore `/etc/paths.d` cannot express the desired ordering, so gloss does not 
 Instead, `paths.zsh` is sourced from `env.zsh` (i.e. ~/.zshenv) for non-login shells,
 and from `profile.zsh` (i.e. ~/.zprofile) for login shells, after path_helper has run.
 Both cases source it exactly once, after any reordering, so all shells end up with the same PATH.
+
+`gloss-install-sys.py` also writes /etc/sudoers.d/gloss-secure-path, setting the sudoers `secure_path`
+to the same ordering restricted to root-owned, non-group/other-writable directories.

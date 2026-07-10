@@ -3,10 +3,11 @@
 
 # Usage: gloss_sys_install.py [custom_dst_dir]
 
-from os import (chmod, listdir as list_dir, makedirs as make_dirs, mkdir as make_dir, remove as remove_file,
+from os import (listdir as list_dir, makedirs as make_dirs, mkdir as make_dir, remove as remove_file, replace as replace_file,
   scandir as scan_dir, stat, umask)
 from os.path import exists as path_exists, isdir as is_dir, join as path_join, splitext as split_ext
 from shutil import copyfile, copytree, rmtree as remove_tree
+from stat import S_ISDIR
 from subprocess import run
 
 from _gloss_install_common import distro, dst_dir, errSL, platform, src_dir  # Parses arguments, etc.
@@ -97,18 +98,53 @@ def main() -> None:
 
     run(['chmod', '-R', '+rx', dst_bin_dir])
 
-    if platform == 'mac':
-      errSL('installing /etc/paths.d...')
-      paths_src_dir = path_join(src_dir, 'paths')
-      paths_src_names = list_dir(paths_src_dir)
-      for src_name in paths_src_names:
-        src_path = path_join(paths_src_dir, src_name)
-        dst_path = path_join('/etc/paths.d', path_stem(src_name))
-        install_file(src_path, dst_path)
+    install_sudoers_secure_path(dst_bin_dir)
 
   except OSError as e: # Usually a permissions problem.
     errSL(e)
     exit(1)
+
+
+def install_sudoers_secure_path(dst_bin_dir:str) -> None:
+  '''
+  Configure the sudoers `secure_path` to contain only root-owned directories that are not group/other-writable.
+  This excludes user-owned locations (e.g. /opt/homebrew, /usr/local/py, /opt/rust)
+  so that sudo never resolves commands from user-writable directories.
+  The candidate ordering mirrors the PATH ordering established by zsh/paths.zsh.
+  '''
+  sudoers_dir = '/etc/sudoers.d'
+  if not is_dir(sudoers_dir):
+    errSL('warning: no sudoers.d directory; skipping secure_path configuration:', sudoers_dir)
+    return
+  candidates = [
+    '/usr/local/bin',
+    '/usr/bin',
+    '/bin',
+    '/usr/sbin',
+    '/sbin',
+    dst_bin_dir,
+  ]
+  secure_dirs = [p for p in candidates if is_root_secure_dir(p)]
+  errSL('sudoers secure_path:', *secure_dirs)
+  content = 'Defaults secure_path="{}"\n'.format(':'.join(secure_dirs))
+  dst_path = path_join(sudoers_dir, 'gloss-secure-path')
+  tmp_path = dst_path + '.tmp' # sudo ignores file names containing a dot, so a partial or invalid write is never active.
+  with open(tmp_path, 'w') as f:
+    f.write(content)
+  run(['chmod', '0440', tmp_path], check=True)
+  res = run(['visudo', '-cf', tmp_path])
+  if res.returncode != 0:
+    remove_file(tmp_path)
+    errSL('error: generated secure_path sudoers file failed visudo check; not installed.')
+    exit(1)
+  replace_file(tmp_path, dst_path)
+
+
+def is_root_secure_dir(path:str) -> bool:
+  'Return True if `path` is a directory owned by root and not writable by group or other.'
+  try: st = stat(path) # Follows symlinks.
+  except OSError: return False
+  return S_ISDIR(st.st_mode) and st.st_uid == 0 and not (st.st_mode & 0o022)
 
 
 def install_file(src:str, dst:str) -> None:
