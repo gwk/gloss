@@ -108,7 +108,7 @@ def main() -> None:
 def install_sudoers_secure_path(dst_bin_dir:str) -> None:
   '''
   Configure the sudoers `secure_path` to contain only root-owned directories that are not group/other-writable.
-  This excludes user-owned locations (e.g. /opt/homebrew, /usr/local/py, /opt/rust)
+  This excludes user-owned locations (e.g. /opt/homebrew, /opt/py, /opt/rust)
   so that sudo never resolves commands from user-writable directories.
   The candidate ordering mirrors the PATH ordering established by zsh/paths.zsh.
   '''
