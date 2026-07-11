@@ -5,4 +5,4 @@
 # Gloss uses it because on macOS /etc/zprofile runs path_helper, which reorders PATH.
 # profile.zsh runs after that and restores the intended ordering.
 
-source /usr/local/gloss/zsh/profile.zsh
+source /opt/gloss/zsh/profile.zsh

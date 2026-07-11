@@ -24,9 +24,11 @@ path=(
 # appending a directory that is already present anywhere in $path has no effect;
 # the entry would remain at its inherited position, possibly near the front.
 # Therefore first delete any existing occurrence (${array:#pattern} filters matching elements), then append.
+poth=(${path:#/opt/gloss/bin})
 path=(${path:#$HOME/.local/bin})
 path=(${path:#$HOME/.cargo/bin})
 path+=(
+  /opt/gloss/bin(N-/)
   ~/.local/bin(N-/) # `pip install --user` and similar per-user installs.
   ~/.cargo/bin(N-/) # Custom rustup/cargo location; see RUSTUP_HOME in env.zsh.
 )

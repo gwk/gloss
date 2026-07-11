@@ -2,7 +2,7 @@
 
 # .zshenv is loaded every time, prior to zprofile or zshrc.
 # Source this file from your .zshenv with the following command:
-#   [[ -z $GLOSS_ENV ]] && source /usr/local/gloss/zsh/env.zsh
+#   [[ -z $GLOSS_ENV ]] && source /opt/gloss/zsh/env.zsh
 
 export GLOSS_ENV=GLOSS_ENV
 
@@ -27,12 +27,10 @@ errFL() { >&2 printf - $@ }
 [[ -f ~/.config/gloss.env ]] && source ~/.config/gloss.env
 
 # Default to system-wide installation.
-[[ -z "$GLOSS_DIR" ]] && export GLOSS_DIR=/usr/local/gloss
+[[ -z "$GLOSS_DIR" ]] && export GLOSS_DIR=/opt/gloss
 [[ -d "$GLOSS_DIR" ]] || errSL 'WARNING: bad GLOSS_DIR:' $GLOSS_DIR
 
 [[ -n "$PATH" ]] || errSL 'WARNING: PATH is empty when gloss env.zsh is sourced.'
-
-export PATH="$PATH:$GLOSS_DIR/bin"
 
 # Get gloss platform string.
 export GLOSS_OS=$(cut -f1 $GLOSS_DIR/platform.txt)

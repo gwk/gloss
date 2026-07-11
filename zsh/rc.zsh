@@ -2,7 +2,7 @@
 
 # .zshrc is sourced for interactive shells.
 # Source this file from your .zshrc with the following command:
-#   source /usr/local/gloss/zsh/rc.zsh
+#   source /opt/gloss/zsh/rc.zsh
 
 # Various zsh options.
 

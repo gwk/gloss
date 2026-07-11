@@ -17,7 +17,7 @@ supported_platforms = ['mac', 'linux']
 # gloss uses a single system installation directory for all files, to ease removal and upgrade.
 # a custom installation directory can be speficied as an argument to the installation scripts.
 # please note that custom directories are not well tested.
-install_prefix = '/usr/local'
+install_prefix = '/opt'
 
 # parse arguments.
 if len(argv) > 2:
