@@ -15,8 +15,7 @@ It currently targets modern macOS and Fedora Linux.
 * Run `sudo make install-sys` or `sudo install/gloss-install-sys.py`
 * Run `make install-user` or `install/gloss-install-user.py`
 * Run `make install-vscode` or `install/gloss-install-vscode.sh`
-* Adjust your `.zprofile`, `.zshenv`, `.zshrc` as necessary.
-* TODO: explain those adjustments in more detail.
+* Adjust your `.zprofile`, `.zshenv`, `.zshrc` as necessary; see `dotfiles/` for the minimal examples of what to source.
 
 
 # PATH configuration
