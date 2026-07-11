@@ -24,7 +24,7 @@ Download and install the following:
 * Run `sudo make install-sys` or `sudo install/gloss-install-sys.py`
 * Run `make install-user` or `install/gloss-install-user.py`
 * Run `make install-vscode` or `install/gloss-install-vscode.sh`
-* Adjust your `.bash_profile`, `.bashrc`, `.zprofile`, `.zshenv`, `.zshrc` as necessary.
+* Adjust your `.zprofile`, `.zshenv`, `.zshrc` as necessary.
 * TODO: explain those adjustments in more detail.
 
 
