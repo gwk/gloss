@@ -97,3 +97,6 @@ export BG_W=$'\e[47m' # White.
 export RST_BG=$'\e[49m'
 
 export RST=$'\e[0m' # Reset everything.
+
+# ls coloring (LSCOLORS for BSD ls, LS_COLORS for GNU ls).
+source $GLOSS_DIR/zsh/ls.zsh
