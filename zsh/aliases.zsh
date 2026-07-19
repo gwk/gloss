@@ -78,3 +78,6 @@ alias sha224='openssl dgst -sha224'
 alias sha256='openssl dgst -sha256'
 alias sha384='openssl dgst -sha384'
 alias sha512='openssl dgst -sha512'
+
+# facility.
+alias fac=facility
