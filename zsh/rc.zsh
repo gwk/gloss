@@ -51,7 +51,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # Homebrew completion.
-if [[ -n "$HOMEBREW_PREFIX" ]]; then
+if [[ -n "${HOMEBREW_PREFIX-}" ]]; then
   fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 fi
 
@@ -86,7 +86,7 @@ export GLOSS_PROMPT_VENV_STYLE=$BOLD$TXT_C
 export GLOSS_PROMPT_GIT_STYLE=$BOLD$TXT_M
 
 # Save the starting shell level.
-[[ -z $GLOSS_SHLVL ]] && export GLOSS_SHLVL=$SHLVL
+[[ -z ${GLOSS_SHLVL-} ]] && export GLOSS_SHLVL=$SHLVL
 
 # shell level prefix.
 export GLOSS_PROMPT_PREFIX_LVL=''
@@ -96,12 +96,12 @@ fi
 
 # Prompt sudo prefix.
 export GLOSS_PROMPT_PREFIX_SUDO=''
-if [[ -n "$SUDO_USER" ]]; then
+if [[ -n "${SUDO_USER-}" ]]; then
   export GLOSS_PROMPT_PREFIX_SUDO="$SUDO_USER "
 fi
 
 # Prompt user color.
-if [[ "$USER" == root ]]; then
+if [[ "${USER-}" == root ]]; then
   export GLOSS_PROMPT_USER_STYLE=$TXT_R
 else
   export GLOSS_PROMPT_USER_STYLE=$TXT_G
@@ -118,13 +118,13 @@ update_terminal_prompt() {
   fi
 
   local ssh=''
-  if [[ -n "$SSH_TTY" ]]; then
+  if [[ -n "${SSH_TTY-}" ]]; then
     local _ssh_hostname=$(hostname -s)
     local ssh="$GLOSS_PROMPT_SSH_SYMBOL$_ssh_hostname "
   fi
 
   local venv=''
-  [[ -n $VIRTUAL_ENV ]] && local venv="$(basename $(dirname $VIRTUAL_ENV)) "
+  [[ -n ${VIRTUAL_ENV-} ]] && local venv="$(basename $(dirname $VIRTUAL_ENV)) "
 
   local _git=$(git-prompt 2>/dev/null)
   local _git_escaped=${_git/\%/%%} # Double any percent symbols, as that is the escape character for prompt expansion.
@@ -139,7 +139,7 @@ update_terminal_prompt() {
 $ssh\
 $GLOSS_PROMPT_PREFIX_LVL\
 $GLOSS_PROMPT_PREFIX_SUDO\
-%{$GLOSS_PROMPT_USER_STYLE%}$USERNAME \
+%{$GLOSS_PROMPT_USER_STYLE%}${USERNAME-} \
 %{$GLOSS_PROMPT_PATH_STYLE%}%~ \
 %{$GLOSS_PROMPT_VENV_STYLE%}$venv\
 %{$GLOSS_PROMPT_GIT_STYLE%}$_git_escaped\

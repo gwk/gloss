@@ -27,10 +27,10 @@ errFL() { >&2 printf - $@ }
 [[ -f ~/.config/gloss.env ]] && source ~/.config/gloss.env
 
 # Default to system-wide installation.
-[[ -z "$GLOSS_DIR" ]] && export GLOSS_DIR=/opt/gloss
+[[ -z "${GLOSS_DIR-}" ]] && export GLOSS_DIR=/opt/gloss
 [[ -d "$GLOSS_DIR" ]] || errSL 'WARNING: bad GLOSS_DIR:' $GLOSS_DIR
 
-[[ -n "$PATH" ]] || errSL 'WARNING: PATH is empty when gloss env.zsh is sourced.'
+[[ -n "${PATH-}" ]] || errSL 'WARNING: PATH is empty when gloss env.zsh is sourced.'
 
 # Get gloss platform string.
 export GLOSS_OS=$(cut -f1 $GLOSS_DIR/platform.txt)
