@@ -25,6 +25,9 @@ alias ga='git add'
 alias gd='git diff'
 alias gds='git diff --staged'
 
+alias ghr='git history reword'
+alias ghs='git history split'
+
 # git log format notes
 # C: color function
 # h: abbreviated commit hash
