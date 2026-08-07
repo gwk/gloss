@@ -71,9 +71,13 @@ alias gst='git status --short --branch'
 alias gtags='git tag -l'
 
 # python.
+alias py='PYTHONSTARTUP=$GLOSS_DIR/pythonstartup.py python -q'
 alias pym='python -m' # run python module.
-alias py='PYTHONSTARTUP=$GLOSS_DIR/pythonstartup.py python3 -q'
-alias pdb='python3 -m pdb' # run a python file using pdb.
+alias pdb='python -m pdb' # run a python file using pdb.
+
+# uv.
+alias uvpy='PYTHONSTARTUP=$GLOSS_DIR/pythonstartup.py uv run python -q'
+alias uvpym='uv run -m'
 
 # file hashes.
 alias sha1='openssl dgst -sha1'
