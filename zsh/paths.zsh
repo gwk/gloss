@@ -29,8 +29,8 @@ path=(${path:#$HOME/.local/bin})
 path=(${path:#$HOME/.cargo/bin})
 path+=(
   /opt/gloss/bin(N-/)
+  /opt/rust/cargo/bin(N-/)
   ~/.local/bin(N-/) # `pip install --user` and similar per-user installs.
-  ~/.cargo/bin(N-/) # Custom rustup/cargo location; see RUSTUP_HOME in env.zsh.
 )
 
 # Man pages for the custom installations above.
