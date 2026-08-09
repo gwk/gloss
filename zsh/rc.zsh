@@ -57,6 +57,8 @@ fi
 
 # Environment variables for various other tools.
 
+export COLORTERM=truecolor
+
 export LESS=FRX
 export CLICOLOR=1 # Enable colors in ls.
 
