@@ -11,13 +11,12 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # Dock.
 defaults write com.apple.dock autohide -bool true
-#defaults write com.apple.Dock autohide-delay -float 0
-defaults write com.apple.dock autohide-time-modifier -float 0.4
-defaults write com.apple.dock expose-animation-duration -float 0.1 # Mission Control animation speed.
-defaults write com.apple.dock expose-group-by-app -bool true
-defaults write com.apple.dock show-recents -bool false
-defaults write com.apple.Dock showhidden -bool true # Hidden apps rendered as translucent in dock.
-defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
+#defaults write com.apple.dock autohide-time-modifier -float 0.4
+#defaults write com.apple.dock expose-animation-duration -float 0.1 # Mission Control animation speed.
+#defaults write com.apple.dock expose-group-by-app -bool true
+#defaults write com.apple.dock show-recents -bool false
+#defaults write com.apple.Dock showhidden -bool true # Hidden apps rendered as translucent in dock.
+#defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 killall Dock
 
 #Finder.
@@ -45,29 +44,26 @@ defaults write com.apple.screencapture location ~/Pictures/screenshots
 
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1 # Check for updates daily.
+#defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1 # Check for updates daily.
 
 defaults write com.apple.TextEdit RichText -int 0
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
-#sudo defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-#sudo defaults write com.apple.universalaccess closeViewScrollWheelModifiersInt -int 1835008
-
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool true
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool true
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+#defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 #defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
