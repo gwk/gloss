@@ -6,7 +6,7 @@ from copy import replace
 from dataclasses import dataclass, field
 from json import JSONDecodeError
 from sys import argv
-from typing import Any, Iterable
+from typing import Any, Iterable, NoReturn, cast
 
 from pithy.ansi import RST, TXT_C, TXT_G, TXT_R
 from pithy.fs import make_dirs
@@ -157,8 +157,18 @@ def parse_defaults_json(defaults_path:str) -> list[Binding]:
   def clean_when(when:str) -> str: return ' '.join(when.split())
 
   assert isinstance(defaults_json, list)
-  defaults = [
-    Binding(cmd=d['command'], key=d['key'], when=clean_when(d.get('when', '')), args=d.get('args')) for d in defaults_json]
+  defaults = []
+  for d in defaults_json:
+    assert isinstance(d, dict), d
+    cmd_val = d['command']
+    key_val = d['key']
+    when_val = d.get('when', '')
+    assert isinstance(cmd_val, str), cmd_val
+    assert isinstance(key_val, str), key_val
+    assert isinstance(when_val, str), when_val
+    # `args` is arbitrary json in the input; `Binding` declares the narrower shape that this script formats and re-emits.
+    args_val = cast(dict[str,str]|None, d.get('args'))
+    defaults.append(Binding(cmd=cmd_val, key=key_val, when=clean_when(when_val), args=args_val))
 
   for cmd in other_cmds:
     defaults.append(Binding(cmd=cmd, key=''))
@@ -215,13 +225,13 @@ class Ctx:
   all_when_words: set[str]
   bound_cmds: set[str] = field(default_factory=set)
 
-  def _msg(self, line:int, severity:str, item:Any, *items:Any, sep=' '):
+  def _msg(self, line:int, severity:str, item:Any, *items:Any, sep:str=' ') -> None:
     errL(f'{TXT_C}{self.bindings_path}:{line}{RST}: {severity}: {item}', *items, sep=sep)
 
-  def warn(self, line:int, item:Any, *items:Any, sep=' '):
+  def warn(self, line:int, item:Any, *items:Any, sep:str=' ') -> None:
     self._msg(line, 'warning', item, *items, sep=sep)
 
-  def error(self, line:int, item:Any, *items:Any, sep=' '):
+  def error(self, line:int, item:Any, *items:Any, sep:str=' ') -> NoReturn:
     self._msg(line, 'error', item, *items, sep=sep)
     exit(1)
 
@@ -308,7 +318,7 @@ def validate_cmd(ctx:Ctx, line_num:int, cmd:str) -> bool:
   return True
 
 
-def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]):
+def validate_keys(ctx:Ctx, line_num:int, keys:Iterable[str]) -> None:
   for word in keys:
     for el in word.split('+'):
       if not key_validator.fullmatch(el):
@@ -385,9 +395,7 @@ key_validator = re.compile(r'''(?x)
 ''')
 
 
-known_when_words = {
-
-}
+known_when_words = set[str]()
 
 
 known_when_alterations:dict[str,dict[str,str]] = {
@@ -395,13 +403,11 @@ known_when_alterations:dict[str,dict[str,str]] = {
 }
 
 
-known_extension_cmds = {
-}
+known_extension_cmds = set[str]()
 
 
-ignored_commands = set({
-  #'workbench.action.output.show.ms-python.python.Python Language Server'
-})
+ignored_commands = set[str]()
+#^ e.g. 'workbench.action.output.show.ms-python.python.Python Language Server'.
 
 ignored_special_commands = {
   'enter': {
