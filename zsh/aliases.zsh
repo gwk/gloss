@@ -25,6 +25,7 @@ alias ga='git add'
 alias gd='git diff'
 alias gds='git diff --staged'
 
+alias ghf='git history fixup'
 alias ghr='git history reword'
 alias ghs='git history split'
 
