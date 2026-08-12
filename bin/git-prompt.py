@@ -53,16 +53,17 @@ signal.alarm(time_limit)
 
 
 def worktree_prompt() -> None:
-  c, gd_raw = runCO('git rev-parse --git-dir')
+  # rev-parse emits one line per query option, in the order the options appear.
+  c, rev_parse_out = runCO('git rev-parse --git-dir --is-inside-git-dir --is-bare-repository')
   if c != 0: exit() # Not a git dir. do not print anything.
 
-  gd = gd_raw.strip()
+  gd, is_inside_git_dir, is_bare_repository = rev_parse_out.splitlines()
 
   # Test bare first: a bare repo is entirely a git dir, so the is-inside-git-dir test would always shadow it.
-  if runO('git rev-parse --is-bare-repository') == 'true\n':
+  if is_bare_repository == 'true':
     prompt('bare')
 
-  if runO('git rev-parse --is-inside-git-dir') == 'true\n':
+  if is_inside_git_dir == 'true':
     prompt('.GIT')
 
   status_out = runO('git status --porcelain=v2 --branch --show-stash')
