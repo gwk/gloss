@@ -3,10 +3,10 @@
 
 # Usage: gloss_sys_install.py [custom_dst_dir]
 
-from os import (listdir as list_dir, makedirs as make_dirs, mkdir as make_dir, remove as remove_file, replace as replace_file,
+from os import (makedirs as make_dirs, mkdir as make_dir, remove as remove_file, replace as replace_file,
   scandir as scan_dir, stat, umask)
 from os.path import exists as path_exists, isdir as is_dir, join as path_join, splitext as split_ext
-from shutil import copyfile, copytree, rmtree as remove_tree
+from shutil import copyfile, copytree, ignore_patterns, rmtree as remove_tree
 from stat import S_ISDIR
 from subprocess import run
 
@@ -60,12 +60,15 @@ def main() -> None:
     def install_bin_dir(bin_dir:str) -> None:
       errSL('install_bin_dir:', bin_dir)
 
-      for src in list_dir(bin_dir):
-        name = path_stem(src)
+      for entry in sorted(scan_dir(bin_dir), key=lambda e: e.name):
+        name = path_stem(entry.name)
         if not name or name.startswith('.'):
-          errSL('skipping', name)
+          errSL('skipping', entry.name)
           continue
-        src_path = path_join(bin_dir, src)
+        if not entry.is_file(): # E.g. the `__pycache__` directory.
+          errSL('skipping non-file:', entry.name)
+          continue
+        src_path = entry.path
         dst_path = path_join(dst_bin_dir, name)
         res = run(['which', name], capture_output=True)
         if res.returncode == 0:
@@ -161,7 +164,7 @@ def install_tree(src:str, dst:str) -> None:
   Copy a directory tree and then set a+rX permissions on eveyrthing in the copied tree.
   '''
   errSL(src, '=>', dst)
-  copytree(src, dst, dirs_exist_ok=True)
+  copytree(src, dst, dirs_exist_ok=True, ignore=ignore_patterns('__pycache__', '.DS_Store'))
   run(['chmod', '-R', 'a+rX', dst], check=True)
 
 
