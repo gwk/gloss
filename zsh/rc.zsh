@@ -129,7 +129,7 @@ update_terminal_prompt() {
   [[ -n ${VIRTUAL_ENV-} ]] && local venv="$(basename $(dirname $VIRTUAL_ENV)) "
 
   local _git=$(git-prompt 2>/dev/null)
-  local _git_escaped=${_git/\%/%%} # Double any percent symbols, as that is the escape character for prompt expansion.
+  local _git_escaped=${_git//\%/%%} # Double every percent symbol, as that is the escape character for prompt expansion.
   # git-prompt emits a bare fragment; append the separating space only when it is nonempty.
   if [[ -n $_git_escaped ]]; then
     _git_escaped+=' '
