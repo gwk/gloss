@@ -65,8 +65,8 @@ class Bindings:
     return sorted((key, cmd.id, cmd.arg, self.context) for key, cmd in self.bindings.items())
 
 
-# Lax, matching the behavior before pithy.transtruct gained this flag; tolerates keys that Zed may add to the default keymap.
-transtructor = Transtructor(strict=False)
+# Strict: fail loudly if Zed adds a key to the default keymap that `Bindings` does not model.
+transtructor = Transtructor(strict=True)
 
 @transtructor.prefigure(Cmd)
 def prefigure_Cmd(class_:TypeForm[Any], input:Input, ctx:Ctx) -> Input:
