@@ -30,7 +30,7 @@ def main() -> None:
     exit(str(e))
 
 
-def append_line_if_missing(path, line) -> None:
+def append_line_if_missing(path:str, line:str) -> None:
   assert line.endswith('\n')
   if is_file(path):
     for l in open(path):

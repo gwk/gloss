@@ -3,9 +3,10 @@
 
 from sys import argv
 from json import JSONDecoder
+from typing import Any
 
 
-def object_pairs_hook(pairs):
+def object_pairs_hook(pairs:list[tuple[str,Any]]) -> dict[str,Any]:
   keys = set()
   for k, v in pairs:
     if k in keys:

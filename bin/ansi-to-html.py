@@ -12,6 +12,7 @@ http://en.wikipedia.org/wiki/ANSI_escape_code.
 import html
 import re
 from sys import stderr, argv, stdin
+from typing import TextIO
 
 
 # scan for control sequence terminated by SGR, capturing semicolon-separated numeric codes
@@ -85,7 +86,7 @@ print('''\
 # a list of all the open span classes
 class_stack:list[str] = []
 
-def open_span(class_) -> None:
+def open_span(class_:str) -> None:
   print('<span class="ansi-{}">'.format(class_), end='')
 
 def close_span() -> None:
@@ -155,7 +156,7 @@ def scan_section(line:str, pos:int) -> int:
   return m.end()
 
 
-def scan_file(f) -> None:
+def scan_file(f:TextIO) -> None:
   print('<pre>')
   for line in f:
     pos = 0

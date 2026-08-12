@@ -2,6 +2,7 @@
 # Dedicated to the public dom  under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 from sys import argv, stdin
+from typing import IO
 
 
 def main() -> None:
@@ -15,12 +16,12 @@ def main() -> None:
   exit(1 if errors else 0)
 
 
-def check_file(f) -> bool:
+def check_file(f:IO[bytes]) -> bool:
   errors = False
   for num, line_bytes in enumerate(f, 1):
     try: line_bytes.decode()
     except UnicodeError as e:
-      print(f'{f.name}:{num}: error: {e}.\n  {line_bytes}')
+      print(f'{f.name}:{num}: error: {e}.\n  {line_bytes!r}')
       errors = True
   return errors
 
