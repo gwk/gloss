@@ -58,11 +58,12 @@ def worktree_prompt() -> None:
 
   gd = gd_raw.strip()
 
-  if runO('git rev-parse --is-inside-git-dir') == 'true\n':
-    prompt('.GIT')
-
+  # Test bare first: a bare repo is entirely a git dir, so the is-inside-git-dir test would always shadow it.
   if runO('git rev-parse --is-bare-repository') == 'true\n':
     prompt('bare')
+
+  if runO('git rev-parse --is-inside-git-dir') == 'true\n':
+    prompt('.GIT')
 
   status_out = runO('git status --porcelain=v2 --branch --show-stash')
 
