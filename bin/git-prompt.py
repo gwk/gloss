@@ -34,7 +34,7 @@ def runO(cmd:str, exp:int=0) -> str:
 
 def prompt(*items:Any) -> NoReturn:
   'Print the prompt string and exit.'
-  print(*items, sep='', end=' ')
+  print(*items, sep='')
   exit(0)
 
 
@@ -175,5 +175,5 @@ def worktree_prompt() -> None:
 try:
   worktree_prompt()
 except Exception:
-  print(' GIT ERROR', end='')
+  print('GIT ERROR')
   raise

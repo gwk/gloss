@@ -130,6 +130,10 @@ update_terminal_prompt() {
 
   local _git=$(git-prompt 2>/dev/null)
   local _git_escaped=${_git/\%/%%} # Double any percent symbols, as that is the escape character for prompt expansion.
+  # git-prompt emits a bare fragment; append the separating space only when it is nonempty.
+  if [[ -n $_git_escaped ]]; then
+    _git_escaped+=' '
+  fi
 
   # For prompt styling, we mostly eschew the ZSH specific escapes in favor of ANSI escape codes.
   # %{ escapes to allow arbitary escape sequences in the prompt; these must not contain visible text that advances the position.
