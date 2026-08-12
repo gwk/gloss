@@ -7,7 +7,8 @@ from sys import argv
 from typing import Any, Callable, Iterator
 
 from pithy.json import load_json
-from pithy.transtruct import Transtructor
+from pithy.transtruct import Ctx, Input, Transtructor
+from typing_extensions import TypeForm
 
 
 '''
@@ -24,7 +25,7 @@ def main() -> None:
   defaults = parse_zed_keymap(defaults_json_path)
 
   #outM(defaults)
-  binding_descs = []
+  binding_descs:list[str] = []
   for bindings in defaults:
     binding_descs.extend(bindings.fmt_bindings(by_key=True))
 
@@ -44,7 +45,7 @@ class Bindings:
   use_key_equivalents: bool = False
   bindings: dict[str,Cmd]
 
-  def __post_init__(self):
+  def __post_init__(self) -> None:
     self.bindings = {rectify_keybinding(k): v for k, v in self.bindings.items()}
 
 
@@ -64,10 +65,11 @@ class Bindings:
     return sorted((key, cmd.id, cmd.arg, self.context) for key, cmd in self.bindings.items())
 
 
-transtructor = Transtructor()
+# Lax, matching the behavior before pithy.transtruct gained this flag; tolerates keys that Zed may add to the default keymap.
+transtructor = Transtructor(strict=False)
 
 @transtructor.prefigure(Cmd)
-def prefigure_Cmd(class_:type, input:Any, ctx:None) -> tuple[str,Any]:
+def prefigure_Cmd(class_:TypeForm[Any], input:Input, ctx:Ctx) -> Input:
   if input is None: return ('', None)
   if isinstance(input, str): return (input, None)
   if isinstance(input, list):
