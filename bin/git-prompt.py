@@ -42,7 +42,7 @@ def prefix(prefix:str, *items:str) -> str:
   return (prefix + joined) if joined else ''
 
 # Because a long prompt calculation is debilitating, set a single global timeout for the process.
-time_limit = 1
+time_limit = 2
 
 def alarm_handler(signum, current_stack_frame):
   prompt('<TIMEOUT>')
