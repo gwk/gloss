@@ -5,6 +5,7 @@ import shlex
 import signal
 from os.path import isdir as is_dir, isfile as is_file
 from subprocess import PIPE, Popen
+from types import FrameType
 from typing import Any, NoReturn
 
 
@@ -25,7 +26,7 @@ def runCO(cmd:str) -> tuple[int,str]:
   return c, o
 
 
-def runO(cmd:str, exp=0) -> str:
+def runO(cmd:str, exp:int=0) -> str:
   'Run a command and return std out.'
   c, o, _e = run(cmd=cmd, exp=exp)
   return o
@@ -44,7 +45,7 @@ def prefix(prefix:str, *items:str) -> str:
 # Because a long prompt calculation is debilitating, set a single global timeout for the process.
 time_limit = 2
 
-def alarm_handler(signum, current_stack_frame):
+def alarm_handler(signum:int, current_stack_frame:FrameType|None) -> NoReturn:
   prompt('<TIMEOUT>')
 
 signal.signal(signal.SIGALRM, alarm_handler)
@@ -117,10 +118,10 @@ def worktree_prompt() -> None:
   untracked = ''
   stash = f'${stash_count}' if stash_count else ''
 
-  for line in status_lines:
-    match line[0]:
+  for status_line in status_lines:
+    match status_line[0]:
       case '1'|'2':
-        xy = line[1]
+        xy = status_line[1]
         x = xy[0]
         y = xy[1]
         if x != '.': index = '+'
@@ -130,7 +131,7 @@ def worktree_prompt() -> None:
       case '?':
         untracked = '?'
       case '!': pass
-      case _: raise ValueError(f'Unexpected line: {line}')
+      case _: raise ValueError(f'Unexpected line: {status_line}')
 
   if branch_head == '(detached)':
     c2, desc = runCO('git describe --contains --all HEAD')
