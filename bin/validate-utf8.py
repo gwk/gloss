@@ -10,9 +10,9 @@ def main() -> None:
   errors = False
   for path in args:
     with open(path, 'rb') as f:
-      errors = check_file(f) and errors
+      errors |= check_file(f)
   if not args:
-    errors = check_file(stdin.buffer) and errors
+    errors |= check_file(stdin.buffer)
   exit(1 if errors else 0)
 
 
