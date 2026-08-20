@@ -6,9 +6,7 @@
 
 # Various zsh options.
 
-bindkey '^[[Z' reverse-menu-complete # Bind shift-tab to reverse-step through completion options.
-
-bindkey -r '^J' # Unbind ctrl-J, which defaults to redundant accept-line (same as ctrl-m, which is also the Enter key).
+source $GLOSS_DIR/zsh/keybindings.zsh
 
 setopt interactive_comments # Allows typing or pasting a comment into the interactive shell.
 setopt noclobber # Do not allow file overwrites with regular io redirects.
@@ -111,6 +109,9 @@ fi
 
 update_terminal_prompt() {
   local _exit_status=$?
+
+  # Clear custom titles and progress indicators left behind by the previous command.
+  printf '\e]1;\a\e]2;\a\e]9;4;0\a'
 
   # Green prompt if last command exited cleanly (0); otherwise red.
   if [[ $_exit_status -eq 0 ]]; then
