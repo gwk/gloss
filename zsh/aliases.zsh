@@ -58,6 +58,7 @@ alias gpu='git push -u'
 
 alias gr='git rebase'
 alias gra='git rebase --abort'
+alias gram='git rebase --autosquash main'
 alias grc='git rebase --continue'
 alias gri='git rebase --interactive'
 alias grscp='git rebase --show-current-patch'
