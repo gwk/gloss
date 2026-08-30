@@ -1,5 +1,7 @@
 # Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
+# Add `@alias` before the colon when the body ends in `"$@"` and is equivalent to an alias without it.
+
 # convert terminal output to html, convert to rtf and copy to clipboard
 ansi-to-rtf-clip: ansi-to-html "$@" | textutil -stdin -convert rtf -stdout | pbcopy
 
@@ -23,7 +25,7 @@ tr-to-uc: tr '[:lower:]' '[:upper:]' # translate to upper case
 
 # misc
 ansi-to-html-view: ansi-to-html "$@" | html-view
-calc-size: du -sh "$@"
-calc-sizes: du -h -d 1 "$@"
+calc-size @alias: du -sh "$@"
+calc-sizes @alias: du -h -d 1 "$@"
 env-sort: env | sort | grep --color=never '=' | sed -e 's/\x1b\[[0-9;]*m//g' # Remove ANSI sgr codes.
 uuid4: python3 -c 'import uuid; print(uuid.uuid4())'

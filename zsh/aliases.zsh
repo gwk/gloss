@@ -90,3 +90,7 @@ alias sha512='openssl dgst -sha512'
 
 # facility.
 alias fac=facility
+
+# Aliases for generated bin scripts that are equivalent to simple commands.
+[[ -f $GLOSS_DIR/zsh/aliases-generated.zsh ]] && source $GLOSS_DIR/zsh/aliases-generated.zsh
+[[ -f $GLOSS_DIR/zsh/aliases-generated-platform.zsh ]] && source $GLOSS_DIR/zsh/aliases-generated-platform.zsh

@@ -92,10 +92,12 @@ def main() -> None:
     bins_path = path_join(gen_dir, 'bins.txt')
     bins_platform_path = path_join(gen_dir, f'bins-{platform}.txt')
 
-    run([gen_cmd, bins_path, dst_bin_dir], check=True)
+    dst_zsh_dir = path_join(dst_dir, 'zsh')
+    run([gen_cmd, bins_path, dst_bin_dir, path_join(dst_zsh_dir, 'aliases-generated.zsh')], check=True)
 
     if path_exists(bins_platform_path):
-      run([gen_cmd, bins_platform_path, dst_bin_dir], check=True)
+      run([gen_cmd, bins_platform_path, dst_bin_dir,
+        path_join(dst_zsh_dir, 'aliases-generated-platform.zsh')], check=True)
     else:
       errSL('no platform specifics to generate found at:', bins_platform_path)
 
