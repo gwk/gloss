@@ -2,6 +2,70 @@
 
 # Add `@alias` before the colon when the body ends in `"$@"` and is equivalent to an alias without it.
 
+# command compatibility
+sqlite @alias: sqlite3 "$@"
+
+# clang
+clang-parse @alias: clang -fsyntax-only -Weverything "$@"
+clang-pp @alias: clang -o - -E "$@"
+clang-as @alias: clang -o - -S "$@"
+clang-ir @alias: clang -o - -S -emit-llvm "$@"
+clang-ast-dump @alias: clang -cc1 -ast-dump "$@"
+
+# git
+ga @alias: git add "$@"
+gd @alias: git diff "$@"
+gds @alias: git diff --staged "$@"
+ghf @alias: git history fixup "$@"
+ghr @alias: git history reword "$@"
+ghs @alias: git history split "$@"
+# Log format fields: h is abbreviated hash, cd is committer date, d is ref names, and s is subject.
+gl @alias: git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso "$@"
+gl1 @alias: git log --format="%C(cyan)%ad %C(blue)%cd %C(yellow)%h %C(cyan)%an %C(auto)%d %s" --date=iso -1 "$@"
+glm @alias: git log "$@"
+glm1 @alias: git log -1 "$@"
+# -m makes merge commits show the full diff like regular commits; see git-log's "Diff Formatting".
+glv @alias: git log --name-status --format=fuller -m "$@"
+glv1 @alias: git log --name-status --format=fuller -m -1 "$@"
+gls @alias: git ls-files "$@"
+gm @alias: git merge "$@"
+gms @alias: git merge --squash "$@"
+gmffo @alias: git merge --ff-only "$@"
+gpull @alias: git pull "$@"
+gpush @alias: git push "$@"
+gpu @alias: git push -u "$@"
+gr @alias: git rebase "$@"
+gra @alias: git rebase --abort "$@"
+gram @alias: git rebase --autosquash main "$@"
+grc @alias: git rebase --continue "$@"
+gri @alias: git rebase --interactive "$@"
+grscp @alias: git rebase --show-current-patch "$@"
+grm @alias: git rebase main "$@"
+gsc @alias: git switch --create "$@"
+gsh @alias: git show "$@"
+gshw @alias: git show --color-words "$@"
+gst @alias: git status --short --branch "$@"
+gtags @alias: git tag -l "$@"
+
+# python
+py @alias: PYTHONSTARTUP=$GLOSS_DIR/pythonstartup.py python -q "$@"
+pym @alias: python -m "$@"
+pdb @alias: python -m pdb "$@"
+
+# uv
+uvpy @alias: PYTHONSTARTUP=$GLOSS_DIR/pythonstartup.py uv run python -q "$@"
+uvpym @alias: uv run -m "$@"
+
+# file hashes
+sha1 @alias: openssl dgst -sha1 "$@"
+sha224 @alias: openssl dgst -sha224 "$@"
+sha256 @alias: openssl dgst -sha256 "$@"
+sha384 @alias: openssl dgst -sha384 "$@"
+sha512 @alias: openssl dgst -sha512 "$@"
+
+# facility
+fac @alias: facility "$@"
+
 # convert terminal output to html, convert to rtf and copy to clipboard
 ansi-to-rtf-clip: ansi-to-html "$@" | textutil -stdin -convert rtf -stdout | pbcopy
 
