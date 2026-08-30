@@ -40,6 +40,8 @@ export EDITOR=nano
 export PAGER=less
 export HELPDIR=/usr/share/zsh/5.8/help
 
+export PYTHONSAFEPATH=1
+
 # Custom rustup installation location; paths.zsh adds /opt/rust/cargo/bin to PATH.
 # NOTE: do not set CARGO_HOME; facility expects this to be unset so that agent user has its own cargo cache.
 if [[ -d /opt/rust ]]; then
