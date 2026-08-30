@@ -6,6 +6,6 @@ if [[ -o interactive ]]; then # Guard this to prevent Claude Code from getting t
   alias rm='rm -i' # confirm deletes interactively; encourages use of `del`.
 fi
 
-# Aliases for generated bin scripts that are equivalent to simple commands.
+# Aliases for generated commands that are equivalent to simple commands.
 [[ -f $GLOSS_DIR/zsh/aliases-generated.zsh ]] && source $GLOSS_DIR/zsh/aliases-generated.zsh
 [[ -f $GLOSS_DIR/zsh/aliases-generated-platform.zsh ]] && source $GLOSS_DIR/zsh/aliases-generated-platform.zsh

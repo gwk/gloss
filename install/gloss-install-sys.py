@@ -85,21 +85,21 @@ def main() -> None:
     if is_dir(os_bin_dir):
       install_bin_dir(os_bin_dir)
 
-    errSL('generating additional scripts…')
+    errSL('generating additional commands…')
 
     gen_dir = path_join(src_dir, 'gen')
-    gen_cmd = path_join(gen_dir, 'gen-bins.py')
-    bins_path = path_join(gen_dir, 'bins.txt')
-    bins_platform_path = path_join(gen_dir, f'bins-{platform}.txt')
+    gen_cmd = path_join(gen_dir, 'gen-commands.py')
+    commands_path = path_join(gen_dir, 'commands.txt')
+    commands_platform_path = path_join(gen_dir, f'commands-{platform}.txt')
 
     dst_zsh_dir = path_join(dst_dir, 'zsh')
-    run([gen_cmd, bins_path, dst_bin_dir, path_join(dst_zsh_dir, 'aliases-generated.zsh')], check=True)
+    run([gen_cmd, commands_path, dst_bin_dir, path_join(dst_zsh_dir, 'aliases-generated.zsh')], check=True)
 
-    if path_exists(bins_platform_path):
-      run([gen_cmd, bins_platform_path, dst_bin_dir,
+    if path_exists(commands_platform_path):
+      run([gen_cmd, commands_platform_path, dst_bin_dir,
         path_join(dst_zsh_dir, 'aliases-generated-platform.zsh')], check=True)
     else:
-      errSL('no platform specifics to generate found at:', bins_platform_path)
+      errSL('no platform-specific commands found at:', commands_platform_path)
 
     run(['chmod', '-R', '+rx', dst_bin_dir])
 
