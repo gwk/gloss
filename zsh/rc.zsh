@@ -53,6 +53,18 @@ if [[ -n "${HOMEBREW_PREFIX-}" ]]; then
   fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 fi
 
+# Personal functions and completions; these come after Homebrew to allow for overrides.
+fpath=(~/.zfunc $fpath)
+
+# Listing colors are controlled by the complist module's `list-colors` zstyle, which matches display strings.
+# The `(#b)` activates backreferences; the first `=0` styles the whole match and `=2` (faint) styles the group.
+zstyle ':completion:*' group-name '' # List each group separately instead of merging.
+zstyle ':completion:*:descriptions' format '%B%F{8}# %d%f%b'  # Bold gray heading; 8 is "bright black". Try 242 for mid-gray.
+zstyle ':completion:*:commands' list-colors '=(#b)([^ ]##)( : *)=0=33=2' '=*=33'  # Yellow names, dim descriptions.
+zstyle ':completion:*:options'  list-colors '=(#b)([^ ]##)( : *)=0=36=2' '=*=36'  # Cyan flags, dim descriptions.
+
+# Do not run compinit here; users may extend fpath after sourcing this file.
+
 # Environment variables for various other tools.
 
 export COLORTERM=truecolor

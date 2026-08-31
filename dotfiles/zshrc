@@ -3,6 +3,5 @@
 source /opt/gloss/zsh/rc.zsh
 source /opt/gloss/zsh/aliases.zsh
 
-# zstyle commands must come before the completion system is initialized.
-# Therefore gloss relies on the end user to call autoload for themselves.
+# Run compinit after all fpath customization so it discovers and caches every completion function.
 autoload -Uz compinit && compinit
