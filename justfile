@@ -24,6 +24,14 @@ clean:
 cov:
   iotest -fail-fast -coverage
 
+# Generate agent context files from CTX.md.
+ctx:
+  craft-context .
+
+# Configure local dependency symlinks.
+deps:
+  craft-deps
+
 # Run tests.
 test:
   iotest -fail-fast

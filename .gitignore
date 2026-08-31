@@ -7,6 +7,16 @@
 __pycache__/
 *.egg-info/
 
+# Context.
+AGENTS.md
+CLAUDE.md
+.agents/skills
+.claude/skills
+
+# Deps.
+/deps/
+/_deps.local.json
+
 # Project.
 _build/
 _misc/
