@@ -4,4 +4,11 @@ source /opt/gloss/zsh/rc.zsh
 source /opt/gloss/zsh/aliases.zsh
 
 # Run compinit after all fpath customization so it discovers and caches every completion function.
-autoload -Uz compinit && compinit
+# Keep the dump in a dedicated directory so Facility can grant access without exposing home or history.
+mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+autoload -Uz compinit && compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+
+# Register modules after compinit; add other cmdparse-based modules here as needed.
+if (( $+functions[pithy_cmdparse_module_completion] )); then
+  pithy_cmdparse_module_completion utest iotest
+fi

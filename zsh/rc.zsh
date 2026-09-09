@@ -56,6 +56,9 @@ fi
 # Personal functions and completions; these come after Homebrew to allow for overrides.
 fpath=(~/.zfunc $fpath)
 
+# Shared completion support installed with pithy; register Python modules after compinit.
+source "$GLOSS_DIR/zsh/pithy.zsh"
+
 # Listing colors are controlled by the complist module's `list-colors` zstyle, which matches display strings.
 # The `(#b)` activates backreferences; the first `=0` styles the whole match and `=2` (faint) styles the group.
 zstyle ':completion:*' group-name '' # List each group separately instead of merging.
