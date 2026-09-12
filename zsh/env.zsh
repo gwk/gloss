@@ -42,6 +42,11 @@ export HELPDIR=/usr/share/zsh/5.8/help
 
 export PYTHONSAFEPATH=1
 
+# Run background jobs at normal priority. zsh lowers their priority by default, a holdover from timesharing systems.
+# Facility's command sandbox denies that priority change, and zsh then warns "nice(5) failed" for every background job.
+# For simplicity we simply unset it for both principal and agent users.
+unsetopt bgnice
+
 # Custom rustup installation location; paths.zsh adds /opt/rust/cargo/bin to PATH.
 # NOTE: do not set CARGO_HOME; facility expects this to be unset so that agent user has its own cargo cache.
 if [[ -d /opt/rust ]]; then
