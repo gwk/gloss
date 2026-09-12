@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
+# Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
+
+# Install all files from dotfiles/ as copies under $HOME, prefixing each top-level name with a dot.
+# Run from the repository root via the justfile.
 
 set -e
+
+export BOLD=$'\e[1m'
+export RST_BOLD=$'\e[22m'
 
 fail() { echo "error: $@" >&2; exit 1; }
 
@@ -19,17 +26,19 @@ matches_committed_version() {
   return 1
 }
 
+# Make directories.
 for dir in $(find $dotfiles_dir/* -type d); do
   dot_dir="$HOME/.${dir#$dotfiles_dir/}"
   echo "creating: $dot_dir"
   mkdir -p $dot_dir
 done
 
+# Check and copy files.
 for path in $(find $dotfiles_dir -type f); do
   dot_path="$HOME/.${path#$dotfiles_dir/}"
   if [[ -L "$dot_path" ]]; then # A legacy symlink installation; -L is true even when the link target is missing, unlike -e.
     if [[ -e "$dot_path" ]] && ! cmp -s "$path" "$dot_path" && ! matches_committed_version "$path" "$dot_path"; then
-      echo "customized symlink; skipping: $dot_path"
+      printf '%scustomized symlink; skipping: %s%s\n' "$BOLD" "$dot_path" "$RST_BOLD"
       continue
     fi
     echo "replacing symlink with copy: $dot_path"
@@ -42,7 +51,7 @@ for path in $(find $dotfiles_dir -type f); do
       echo "updating: $dot_path"
       cp "$path" "$dot_path"
     else
-      echo "customized; skipping: $dot_path"
+      printf '%scustomized; skipping: %s%s\n' "$BOLD" "$dot_path" "$RST_BOLD"
     fi
   else
     echo "copying: $dot_path"

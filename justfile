@@ -44,13 +44,9 @@ typecheck:
 install-sys:
   sudo install/gloss-install-sys.py
 
-# Install the user configuration.
-install-user:
-  install/gloss-install-user.py
-
-# Install the dotfile aliases.
-install-dotfiles:
-  install/gloss-install-dotfile-aliases.sh
+# Install user dotfiles.
+install-user-dotfiles:
+  install/gloss-install-dotfiles.sh
 
 xcode_keys_src := "keybindings/gloss-xcode.idebindings"
 xcode_keys_dst := "~/Library/Developer/Xcode/UserData/KeyBindings/gloss-xcode.idekeybindings"
