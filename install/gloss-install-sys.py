@@ -1,19 +1,67 @@
 #!/usr/bin/env python3
 # Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
-# Usage: gloss_sys_install.py [custom_dst_dir]
+# Usage: gloss-install-sys.py [custom_install_prefix]
 
+import re
 from os import (makedirs as make_dirs, mkdir as make_dir, remove as remove_file, replace as replace_file,
-  scandir as scan_dir, stat, umask)
-from os.path import exists as path_exists, isdir as is_dir, join as path_join, splitext as split_ext
+  scandir as scan_dir, stat, umask, uname as os_uname)
+from os.path import (abspath as abs_path, dirname as path_dir, exists as path_exists, isdir as is_dir,
+  join as path_join, splitext as split_ext)
 from shutil import copyfile, copytree, ignore_patterns, rmtree as remove_tree
 from stat import S_ISDIR
 from subprocess import run
-
-from _gloss_install_common import distro, dst_dir, errSL, platform, src_dir  # Parses arguments, etc.
+from sys import argv, stderr
+from typing import Any
 
 
 def main() -> None:
+  supported_platforms = ['mac', 'linux']
+
+  # Gloss uses a single system installation directory for all files, to ease removal and upgrade.
+  # A custom installation prefix can be specified as an argument.
+  # Please note that custom directories are not well tested.
+  install_prefix = '/opt'
+
+  # Parse arguments.
+  if len(argv) > 2:
+    exit('usage: optionally specify a custom installation prefix.')
+  if len(argv) == 2:
+    install_prefix = argv[1]
+
+  if ' ' in install_prefix: exit('installation prefix contains space.')
+
+  # Determine the gloss source directory.
+  src_dir = abs_path(path_join(path_dir(argv[0]), '..'))
+  if not is_dir(src_dir): exit('bad source directory: ' + src_dir)
+
+  dst_dir = path_join(install_prefix, 'gloss')
+
+  platform = 'unknown'
+  distro = ''
+  uname_info = os_uname()
+  sysname = uname_info.sysname.lower()
+  if sysname == 'darwin':
+    platform = 'mac'
+  elif sysname == 'linux':
+    platform = 'linux'
+    if re.search(r'\.fc\d+\.', uname_info.release):
+      distro = 'fedora'
+    elif 'amzn2022' in uname_info.release:
+      distro = 'amzn2022'
+    else:
+      distro = 'unknown'
+      errSL('warning: unknown linux distro:', uname_info.release)
+  else:
+    platform = sysname
+
+  errSL('src_dir:', src_dir)
+  errSL('dst_dir:', dst_dir)
+  errSL('platform:', platform)
+
+  if platform not in supported_platforms:
+    errSL('warning: unsupported platform;\n  expected one of', supported_platforms)
+
   umask(0o022) # Ensure created files are world-readable and executable.
 
   try:
@@ -108,6 +156,9 @@ def main() -> None:
   except OSError as e: # Usually a permissions problem.
     errSL(e)
     exit(1)
+
+
+def errSL(*items:Any) -> None: print(*items, file=stderr)
 
 
 def install_sudoers_secure_path(dst_bin_dir:str) -> None:
