@@ -30,7 +30,6 @@
   interHunkCOntext = 0
   noprefix = true
   wsErrorHighlight = none # Intraline coloring creates trouble for same-same.
-  tool = vscode
 
 
 [diff "swift"]
@@ -40,10 +39,6 @@
 
 [difftool]
   prompt = false
-
-[difftool "vscode"]
-  cmd = code --wait --diff $LOCAL $REMOTE
-  trustExitCode = true
 
 [init]
   defaultBranch = main

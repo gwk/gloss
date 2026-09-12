@@ -14,7 +14,6 @@ It currently targets modern macOS and Fedora Linux.
 ## Installation
 * Run `just install-sys`.
 * Run `just install-user-dotfiles` to install all supplied dotfiles. Customized files are skipped; integrate those manually.
-* Run `make install-vscode`.
 * Adjust your `.zprofile`, `.zshenv`, `.zshrc` as necessary; see `dotfiles/` for the minimal examples of what to source.
 
 

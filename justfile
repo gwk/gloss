@@ -56,10 +56,6 @@ install-xcode-keybindings:
   [[ ! -f {{xcode_keys_dst}} ]] || diff -u {{xcode_keys_src}} {{xcode_keys_dst}} || true
   cp -i {{xcode_keys_src}} {{xcode_keys_dst}}
 
-# Uninstall the VSCode extension.
-uninstall-vscode:
-  rm -rf ~/.vscode/extensions/gloss
-
 # Install the Python dependencies.
 py-deps:
   pip3 install keyring msgpack mypy-extensions toml twine typing-extensions zstandard
