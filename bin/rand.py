@@ -6,7 +6,7 @@ Generate random numeric strings.
 '''
 
 from argparse import ArgumentParser, Namespace
-from random import randint, seed as seed_prng
+from random import seed as seed_prng
 from secrets import randbelow
 from typing import Any
 

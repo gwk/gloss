@@ -4,7 +4,7 @@ import re
 from dataclasses import dataclass
 from json import JSONDecodeError
 from sys import argv
-from typing import Any, Callable, Iterator
+from typing import Any, Iterator
 
 from pithy.json import load_json
 from pithy.transtruct import Ctx, Input, Transtructor
@@ -82,7 +82,6 @@ def parse_zed_keymap(path:str) -> list[Bindings]:
   with open(path) as f:
     try: defaults = load_json(f, syntax='jsonc')
     except JSONDecodeError as e:
-      idx = e.lineno - 1
       exit(f'{path}:{e.lineno}: error: {e}')
 
   return transtructor.transtruct(list[Bindings], defaults)

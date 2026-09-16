@@ -2,7 +2,6 @@
 # Dedicated to the public domain under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
 
 import json
-import sys
 from argparse import ArgumentParser, FileType
 from ast import literal_eval
 

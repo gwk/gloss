@@ -3,7 +3,6 @@
 
 from argparse import ArgumentParser, FileType
 from itertools import chain
-from os import write
 from sys import stderr, stdin, stdout
 
 

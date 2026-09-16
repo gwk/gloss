@@ -13,7 +13,7 @@ def cat_file(bf:BinaryIO) -> None:
     try:
       text = line.decode('utf8')
       print(text, end='')
-    except UnicodeDecodeError as e:
+    except UnicodeDecodeError:
       print(f'!INVALID-UTF8:{i}:', repr(line))
 
 
