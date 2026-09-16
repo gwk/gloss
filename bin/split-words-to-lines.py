@@ -3,5 +3,6 @@
 
 import sys
 
+
 for line in sys.stdin:
   print(*line.split(' '), sep='\n', end='\n\n')

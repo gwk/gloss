@@ -6,6 +6,7 @@
 
 from sys import argv
 
+
 if len(argv) < 2:
   exit('last_word error: no arguments')
 

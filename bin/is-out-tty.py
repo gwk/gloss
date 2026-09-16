@@ -3,4 +3,5 @@
 
 from sys import stdout
 
+
 exit(0 if stdout.isatty() else 1)

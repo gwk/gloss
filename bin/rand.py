@@ -5,9 +5,9 @@
 Generate random numeric strings.
 '''
 
-from secrets import randbelow
-from random import randint, seed as seed_prng
 from argparse import ArgumentParser, Namespace
+from random import randint, seed as seed_prng
+from secrets import randbelow
 from typing import Any
 
 

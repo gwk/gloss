@@ -6,6 +6,7 @@ from csv import reader
 from sys import stderr
 from typing import Any, Sequence
 
+
 def main() -> None:
   parser = ArgumentParser(description='Read csv and output formatted columns.')
   parser.add_argument('-number-lines', action='store_true', help='prefix output with row number')

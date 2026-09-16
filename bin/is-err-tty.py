@@ -3,4 +3,5 @@
 
 from sys import stderr
 
+
 exit(0 if stderr.isatty() else 1)

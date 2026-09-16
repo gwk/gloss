@@ -5,7 +5,6 @@
 
 
 from sys import argv, stdin
-
 from xml.dom import minidom
 
 

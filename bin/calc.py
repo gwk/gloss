@@ -3,11 +3,12 @@
 
 # print the results of evaluating each argument as a python expression.
 
-import sys
 import math
-import random
 import pprint
+import random
+import sys
 from typing import Any
+
 
 env:dict[str,Any] = {}
 

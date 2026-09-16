@@ -3,8 +3,8 @@
 
 # get the path minus the file extension.
 
-import sys
 import os.path
+import sys
 
 
 if len(sys.argv) != 2:

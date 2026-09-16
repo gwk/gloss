@@ -11,7 +11,7 @@ http://en.wikipedia.org/wiki/ANSI_escape_code.
 
 import html
 import re
-from sys import stderr, argv, stdin
+from sys import argv, stderr, stdin
 from typing import TextIO
 
 

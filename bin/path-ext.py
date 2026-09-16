@@ -3,8 +3,9 @@
 
 # get the extension from a file path.
 
-import sys
 import os.path
+import sys
+
 
 if len(sys.argv) != 2:
   print('path_ext error: path_ext requires 1 argument', file=sys.stderr)

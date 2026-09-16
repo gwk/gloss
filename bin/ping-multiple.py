@@ -3,8 +3,8 @@
 
 # ping multiple hosts simultaneously.
 
-import sys
 import subprocess
+import sys
 import time
 
 

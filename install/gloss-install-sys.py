@@ -4,10 +4,10 @@
 # Usage: gloss-install-sys.py [custom_install_prefix]
 
 import re
-from os import (makedirs as make_dirs, mkdir as make_dir, remove as remove_file, replace as replace_file,
-  scandir as scan_dir, stat, umask, uname as os_uname)
-from os.path import (abspath as abs_path, dirname as path_dir, exists as path_exists, isdir as is_dir,
-  join as path_join, splitext as split_ext)
+from os import (makedirs as make_dirs, mkdir as make_dir, remove as remove_file, replace as replace_file, scandir as scan_dir,
+  stat, umask, uname as os_uname)
+from os.path import (abspath as abs_path, dirname as path_dir, exists as path_exists, isdir as is_dir, join as path_join,
+  splitext as split_ext)
 from shutil import copyfile, copytree, ignore_patterns, rmtree as remove_tree
 from stat import S_ISDIR
 from subprocess import run

@@ -3,8 +3,8 @@
 
 # generate a random alphanumeric string.
 
-import sys
 import random
+import sys
 
 
 if len(sys.argv) != 2:

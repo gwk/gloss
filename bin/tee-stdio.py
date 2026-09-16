@@ -3,8 +3,9 @@
 
 from argparse import ArgumentParser, FileType
 from itertools import chain
-from sys import stdin, stdout, stderr
 from os import write
+from sys import stderr, stdin, stdout
+
 
 parser = ArgumentParser(description='Write lines of stdin to both stdout and stderr.')
 parser.add_argument('-label', action='store_true',
