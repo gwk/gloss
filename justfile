@@ -5,6 +5,17 @@
 list-recipes:
   @just --list --unsorted
 
+# Format imports, lint, and typecheck.
+check: isort lint typecheck
+
+# Format Python imports.
+isort:
+  isort bin gen install keybindings zed
+
+# Lint Python sources.
+lint:
+  pyflakes bin gen install keybindings zed
+
 link-claude-md:
   find . -name 'AGENTS.md' -print0 | xargs -0 -I {} sh -c 'ln -sf "$(basename {})" "$(dirname {})/CLAUDE.md"'
 
