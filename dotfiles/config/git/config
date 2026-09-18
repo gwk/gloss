@@ -18,7 +18,12 @@
   diff = true
 
 [core]
-  pager = same-same | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
+  pager = less --RAW-CONTROL-CHARS
+
+[pager]
+  diff = same-same | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
+  show = same-same | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
+  log = same-same | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
 
 [interactive]
   diffFilter = same-same -interactive | LESSANSIENDCHARS=mK less --RAW-CONTROL-CHARS
