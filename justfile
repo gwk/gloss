@@ -37,7 +37,7 @@ cov:
 
 # Generate agent context files from CTX.md.
 ctx:
-  craft-context .
+  craft-context all .
 
 # Configure local dependency symlinks.
 deps:
