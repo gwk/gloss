@@ -19,6 +19,9 @@ path=(
   $path
 )
 
+# An active python venv takes precedence over everything above; otherwise /opt/py/bin would shadow its python.
+[[ -n ${VIRTUAL_ENV-} ]] && path=($VIRTUAL_ENV/bin(N-/) $path)
+
 # Append low-precedence directories.
 # Because typeset -U keeps only the first occurrence of a duplicate,
 # appending a directory that is already present anywhere in $path has no effect;
