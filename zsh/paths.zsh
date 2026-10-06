@@ -13,7 +13,7 @@ typeset -U path PATH manpath MANPATH
 # The (N-/) glob qualifier drops any entry that is not an existing directory (following symlinks).
 path=(
   /usr/local/bin(N-/) # From-source installs take precedence over homebrew.
-  /opt/py/bin(N-/) # Custom python framework location.
+  /opt/py/bin(N-/) # Custom Python installation.
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
   $path
@@ -39,7 +39,7 @@ path+=(
 # Man pages for the custom installations above.
 # Homebrew man pages are configured by `brew shellenv` in env.zsh; system defaults come from man itself.
 manpath=(
-  /opt/py/Python.framework/Versions/Current/share/man(N-/)
+  /opt/py/share/man(N-/)
   /opt/rust/rustup/toolchains/*/share/man(N-/)
   $manpath
   '' # An empty final component (trailing colon) causes man to append its default search paths.
