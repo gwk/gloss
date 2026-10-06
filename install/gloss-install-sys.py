@@ -18,7 +18,8 @@ from typing import Any
 def main() -> None:
   supported_platforms = ['mac', 'linux']
 
-  # Gloss uses a single system installation directory for all files, to ease removal and upgrade.
+  # Gloss keeps its tools and shell configuration in a single directory, to ease removal and upgrade.
+  # System-wide configuration is installed separately under /etc.
   # A custom installation prefix can be specified as an argument.
   # Please note that custom directories are not well tested.
   install_prefix = '/opt'
@@ -152,6 +153,9 @@ def main() -> None:
     run(['chmod', '-R', '+rx', dst_bin_dir])
 
     install_sudoers_secure_path(dst_bin_dir)
+
+    make_dirs('/etc/uv', mode=0o755, exist_ok=True)
+    install_file(path_join(src_dir, 'etc', 'uv', 'uv.toml'), '/etc/uv/uv.toml')
 
   except OSError as e: # Usually a permissions problem.
     errSL(e)

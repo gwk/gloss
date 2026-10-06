@@ -16,6 +16,9 @@ It currently targets modern macOS and Fedora Linux.
 * Run `just install-user-dotfiles` to install all supplied dotfiles. Customized files are skipped; integrate those manually.
 * Adjust your `.zprofile`, `.zshenv`, `.zshrc` as necessary; see `dotfiles/` for the minimal examples of what to source.
 
+`just install-sys` also installs `etc/uv/uv.toml` to `/etc/uv/uv.toml`, replacing any existing file.
+This supplies the system-wide uv defaults for Python downloads and interpreter selection.
+
 
 # PATH configuration
 
