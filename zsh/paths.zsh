@@ -36,6 +36,16 @@ path+=(
   ~/.local/bin(N-/) # `pip install --user` and similar per-user installs.
 )
 
+# Directories named by GLOSS_PATH_OVERRIDES take precedence over everything else, including an active venv.
+# A parent process sets it to choose what its child shells resolve first; this file otherwise resets the ordering.
+# The value is a colon-separated list in decreasing precedence.
+# Only absolute paths are honored, because an empty or relative PATH entry names the current directory.
+# This comes last so that the low-precedence handling above cannot demote an override.
+() {
+  local -a overrides=(${(M)${(s.:.)GLOSS_PATH_OVERRIDES-}:#/*})
+  path=($^overrides(N-/) $path)
+}
+
 # Man pages for the custom installations above.
 # Homebrew man pages are configured by `brew shellenv` in env.zsh; system defaults come from man itself.
 manpath=(

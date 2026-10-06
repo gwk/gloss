@@ -31,5 +31,10 @@ Instead, `paths.zsh` is sourced from `env.zsh` (i.e. ~/.zshenv) for non-login sh
 and from `profile.zsh` (i.e. ~/.zprofile) for login shells, after path_helper has run.
 Both cases source it exactly once, after any reordering, so all shells end up with the same PATH.
 
+Because every shell resets the ordering, a parent process cannot simply prepend to PATH for its children.
+Two environment variables are honored instead:
+* `VIRTUAL_ENV`: the `bin` directory of an active Python venv is placed ahead of the standard directories.
+* `GLOSS_PATH_OVERRIDES`: a colon-separated list of absolute directories, placed ahead of everything else.
+
 `gloss-install-sys.py` also writes /etc/sudoers.d/gloss-secure-path, setting the sudoers `secure_path`
 to the same ordering restricted to root-owned, non-group/other-writable directories.
