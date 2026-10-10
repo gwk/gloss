@@ -9,3 +9,6 @@ fi
 # Aliases for generated commands that are equivalent to simple commands.
 [[ -f $GLOSS_DIR/zsh/aliases-generated.zsh ]] && source $GLOSS_DIR/zsh/aliases-generated.zsh
 [[ -f $GLOSS_DIR/zsh/aliases-generated-platform.zsh ]] && source $GLOSS_DIR/zsh/aliases-generated-platform.zsh
+
+
+alias venv-activate='source .venv/bin/activate'
