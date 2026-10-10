@@ -14,6 +14,7 @@ typeset -U path PATH manpath MANPATH
 path=(
   /usr/local/bin(N-/) # From-source installs take precedence over homebrew.
   /opt/py/bin(N-/) # Custom Python installation.
+  /opt/uv/bin/(N-/)
   /opt/homebrew/bin(N-/)
   /opt/homebrew/sbin(N-/)
   $path
