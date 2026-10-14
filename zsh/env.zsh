@@ -53,6 +53,12 @@ if [[ -d /opt/rust ]]; then
   export RUSTUP_HOME=/opt/rust/rustup
 fi
 
+# Per-user cargo build directory, overriding any project `target-dir`.
+# Principal and agent must not share one: each user has its own crate registry, and cargo fingerprints registry
+# crates by their absolute source path, so every build by one user invalidates the other's.
+# Build scripts and proc-macros also run from here, so a user's cargo must only run what that user built.
+export CARGO_TARGET_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/cargo/target"
+
 case $GLOSS_OS in
   linux)
     ;;
